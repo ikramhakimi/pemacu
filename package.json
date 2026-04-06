@@ -1,0 +1,14 @@
+{
+  "name": "bookingpro-themes",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  },
+  "dependencies": {
+    "remixicon": "^4.9.1"
+  }
+}

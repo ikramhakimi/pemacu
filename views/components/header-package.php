@@ -1,0 +1,49 @@
+<?php
+/*
+CSS Anatomy: header-package
+
+.header.header--package
+|_ .header__title
+|_ .header__topic
+|  |_ .header__price
+|  |_ .header__feature
+|_ .header__subtitle
+*/
+
+$header_title          = 'Header For Package';
+$header_price          = 'RM 100';
+$header_feature_one    = '2 Photographers';
+$header_feature_two    = 'Up to 10 people';
+$header_feature_three  = '30 minutes';
+$header_subtitle       = 'Ideal package solution for all ranges of issues during the festive season.';
+$header_container_class = $header_container_class ?? 'container max-w-6xl mx-auto w-full px-4';
+$header_title_class    = 'header__title tracking-tight max-w-2xl font-bold text-4xl text-brand-900';
+$header_topic_class    = 'header__topic mt-2 inline-flex items-center space-x-3 divide-x divide-brand-300 text-sm leading-none text-brand-500';
+$header_price_class    = 'header__price text-lg font-semibold text-emerald-600';
+$header_feature_class  = 'header__feature pl-3';
+$header_subtitle_class = 'header__subtitle mt-3 max-w-3xl text-base text-brand-700';
+?>
+<section class="header header--package">
+  <div class="<?= $header_container_class; ?>">
+    <h1 class="<?= $header_title_class; ?>">
+      <?= htmlspecialchars($header_title, ENT_QUOTES, 'UTF-8'); ?>
+    </h1>
+    <p class="<?= $header_topic_class; ?>">
+      <span class="<?= $header_price_class; ?>">
+        <?= htmlspecialchars($header_price, ENT_QUOTES, 'UTF-8'); ?>
+      </span>
+      <span class="<?= $header_feature_class; ?>">
+        <?= htmlspecialchars($header_feature_one, ENT_QUOTES, 'UTF-8'); ?>
+      </span>
+      <span class="<?= $header_feature_class; ?>">
+        <?= htmlspecialchars($header_feature_two, ENT_QUOTES, 'UTF-8'); ?>
+      </span>
+      <span class="<?= $header_feature_class; ?>">
+        <?= htmlspecialchars($header_feature_three, ENT_QUOTES, 'UTF-8'); ?>
+      </span>
+    </p>
+    <p class="<?= $header_subtitle_class; ?>">
+      <?= htmlspecialchars($header_subtitle, ENT_QUOTES, 'UTF-8'); ?>
+    </p>
+  </div>
+</section>

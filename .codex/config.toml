@@ -1,0 +1,33 @@
+[project]
+name = "bookingpro-themes"
+description = "PHP templating + Tailwind modular UI system"
+
+[defaults]
+model = "gpt-5-codex"
+reasoning_effort = "medium"
+
+[context]
+rules = [
+  "Follow existing project structure strictly",
+  "Do not create new folders unless explicitly asked",
+  "Do not rename files unless explicitly asked",
+  "Do not invent new helpers or abstractions",
+  "Prefer consistency over creativity",
+  "Keep implementations simple and maintainable",
+  "No inline styles",
+  "Use accessible HTML semantics"
+]
+
+[style]
+php_variables = "snake_case"
+component_naming = "BEM based on filename"
+approach = "modular, reusable, predictable"
+
+[constraints]
+no_scope_creep = true
+no_overengineering = true
+reuse_existing_patterns = true
+
+[output]
+format = "code_only"
+explanations = "minimal"

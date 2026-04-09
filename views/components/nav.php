@@ -1,26 +1,31 @@
-<nav class="nav nav--layout-1 border-b border-brand-200 bg-white hidden md:block" aria-label="Site navigation">
-  <div class="nav__inner mx-auto max-w-6xl px-4 py-5">
-    <div class="nav__bar grid items-center grid-cols-[auto_1fr]">
+<nav class="nav nav--layout-1 border-b border-brand-200 hidden md:block" aria-label="Site navigation">
+  <div class="nav__inner mx-auto max-w-7xl px-4 py-5">
+    <div class="nav__bar grid items-center grid-cols-[1fr_auto_1fr] gap-4">
       <div class="nav__zone nav__zone--left flex items-center col-start-1 justify-start text-left">
-        <a class="nav__logo text-lg font-semibold tracking-tight text-brand-900" href="/">
-          Booking Pro
+        <a class="nav__logo text-xl font-semibold tracking-tight text-brand-900" href="<?= e(path('/')); ?>">
+          Business Name
         </a>
       </div>
-      <div class="nav__zone nav__zone--right flex items-center col-start-2 justify-end">
-        <ul class="nav__list flex items-center">
+      <div class="nav__zone nav__zone--center flex items-center col-start-2 justify-center text-base">
+        <ul class="nav__list flex items-center space-x-4">
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/">Home</a>
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/')); ?>">Home</a>
           </li>
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/canvas/components">Canvas</a>
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/canvas/components')); ?>">Canvas</a>
           </li>
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/packages">Packages</a>
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/portfolio')); ?>">Portfolio</a>
+          </li>
+          <li class="nav__item">
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/package')); ?>">Package</a>
           </li>
         </ul>
+      </div>
+      <div class="nav__zone nav__zone--right flex items-center col-start-3 justify-end text-base">
         <ul class="nav__list flex items-center">
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/contact">Contact</a>
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/contact')); ?>">Contact</a>
           </li>
         </ul>
       </div>
@@ -30,7 +35,7 @@
 
 <div class="nav nav--mobile border-b border-brand-200 bg-white md:hidden" data-nav-mobile>
   <div class="nav-mobile__bar flex items-center justify-between px-4 py-4">
-    <a class="nav-mobile__logo inline-flex text-base font-semibold text-brand-900" href="/">
+    <a class="nav-mobile__logo inline-flex text-base font-semibold text-brand-900" href="<?= e(path('/')); ?>">
       Booking Pro
     </a>
     <button
@@ -77,20 +82,23 @@
         <div class="nav-mobile__main">
           <ul class="nav-mobile__list">
             <li class="nav-mobile__item">
-              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/">Home</a>
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/')); ?>">Home</a>
             </li>
             <li class="nav-mobile__item">
-              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/canvas/components">Canvas</a>
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/canvas/components')); ?>">Canvas</a>
             </li>
             <li class="nav-mobile__item">
-              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/packages">Packages</a>
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/portfolio')); ?>">Portfolio</a>
+            </li>
+            <li class="nav-mobile__item">
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/package')); ?>">Packages</a>
             </li>
           </ul>
         </div>
         <div class="nav-mobile__extra">
           <ul class="nav-mobile__list">
             <li class="nav-mobile__item">
-              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="/contact">Contact</a>
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/contact')); ?>">Contact</a>
             </li>
           </ul>
         </div>

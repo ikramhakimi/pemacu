@@ -5,6 +5,10 @@ declare(strict_types=1);
 $resolved_page_title   = isset($page_title) ? (string) $page_title : 'Booking Pro';
 $resolved_page_current = isset($page_current) ? (string) $page_current : '';
 $hide_nav              = isset($hide_nav) ? (bool) $hide_nav : false;
+$app_css_path          = __DIR__ . '/../../assets/build/app.css';
+$app_css_href          = path('/assets/build/app.css');
+$app_css_version       = is_file($app_css_path) ? (string) filemtime($app_css_path) : '';
+$app_css_url           = $app_css_version !== '' ? $app_css_href . '?v=' . $app_css_version : $app_css_href;
 ?>
 <!doctype html>
 <html lang="en">
@@ -12,73 +16,14 @@ $hide_nav              = isset($hide_nav) ? (bool) $hide_nav : false;
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= e($resolved_page_title); ?> | Booking Pro</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: {
-              50: '#eff6ff',
-              100: '#dbeafe',
-              200: '#bfdbfe',
-              300: '#93c5fd',
-              400: '#60a5fa',
-              500: '#3b82f6',
-              600: '#2563eb',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#1e3a8a',
-              950: '#172554',
-            },
-            brand: {
-              50: '#fafafa',
-              100: '#f4f4f5',
-              200: '#e4e4e7',
-              300: '#d4d4d8',
-              400: '#a1a1aa',
-              500: '#71717a',
-              600: '#52525b',
-              700: '#3f3f46',
-              800: '#27272a',
-              900: '#18181b',
-              950: '#09090b',
-            },
-            positive: {
-              50: '#f0fdf4',
-              100: '#dcfce7',
-              200: '#bbf7d0',
-              300: '#86efac',
-              400: '#4ade80',
-              500: '#22c55e',
-              600: '#16a34a',
-              700: '#15803d',
-              800: '#166534',
-              900: '#14532d',
-              950: '#052e16',
-            },
-            negative: {
-              50: '#fff1f2',
-              100: '#ffe4e6',
-              200: '#fecdd3',
-              300: '#fda4af',
-              400: '#fb7185',
-              500: '#f43f5e',
-              600: '#e11d48',
-              700: '#be123c',
-              800: '#9f1239',
-              900: '#881337',
-              950: '#4c0519',
-            },
-          },
-        },
-      },
-    };
-  </script>
-  <link rel="stylesheet" href="<?= e(path('assets/build/app.css')); ?>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="<?= e($app_css_url); ?>">
 </head>
-<body class="bg-brand-100 text-[14px] text-brand-700">
+<body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed">
+  <main id="root">
   <?php if (!$hide_nav): ?>
     <?php component('nav'); ?>
   <?php endif; ?>
-  <main id="root">
+  

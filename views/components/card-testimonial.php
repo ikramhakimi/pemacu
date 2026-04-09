@@ -24,8 +24,8 @@ $card_name_class        = 'card__name text-sm font-semibold text-brand-900';
 $card_role_class        = 'card__role text-xs text-brand-500';
 ?>
 <article class="card card--testimonial block bg-white border border-brand-200 rounded-lg overflow-hidden">
-  <div class="card__content p-5">
-    <div class="card__ratings ratings ratings--stars mb-4 flex items-center gap-1" aria-label="<?= htmlspecialchars($rating_label, ENT_QUOTES, 'UTF-8'); ?>">
+  <div class="card__content p-6">
+    <div class="card__ratings ratings ratings--stars mb-4 flex items-center gap-1 -mt-2" aria-label="<?= htmlspecialchars($rating_label, ENT_QUOTES, 'UTF-8'); ?>">
       <svg class="sr-only" width="0" height="0" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="testimonial-rating-star-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -63,11 +63,11 @@ $card_role_class        = 'card__role text-xs text-brand-500';
       </span>
     </div>
 
-    <p class="<?= $card_quote_class; ?>">
+    <p class="<?= $card_quote_class; ?> text-base">
       <?= htmlspecialchars($testimonial_quote, ENT_QUOTES, 'UTF-8'); ?>
     </p>
 
-    <div class="card__media mt-4 flex items-center space-x-2">
+    <div class="card__media mt-8 flex items-center space-x-2">
       <div class="card__avatar flex h-10 w-10 items-center justify-center rounded-lg bg-brand-300"></div>
       <div class="card__actor">
         <h6 class="<?= $card_name_class; ?>">

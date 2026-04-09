@@ -4,14 +4,7 @@ declare(strict_types=1);
 
 $page_title            = 'Canvas Patterns';
 $page_current          = 'canvas-patterns';
-$canvas_pattern_links  = [
-  ['href' => '#overview', 'label' => 'Overview'],
-  ['href' => '#hero', 'label' => 'Hero'],
-  ['href' => '#packages', 'label' => 'Packages'],
-  ['href' => '#testimonials', 'label' => 'Testimonials'],
-  ['href' => '#faq', 'label' => 'FAQ'],
-  ['href' => '#cta', 'label' => 'CTA'],
-];
+$canvas_pattern_links  = canvas_links('patterns');
 
 layout('canvas-start', [
   'page_title'     => $page_title,

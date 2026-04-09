@@ -4,11 +4,7 @@ declare(strict_types=1);
 
 $page_title           = 'Canvas Components - Headers';
 $page_current         = 'canvas-components';
-$component_page_links = [
-  ['href' => '/canvas/components', 'label' => 'Overview'],
-  ['href' => '/canvas/components/buttons', 'label' => 'Buttons'],
-  ['href' => '/canvas/components/headers', 'label' => 'Headers'],
-];
+$component_page_links = canvas_links('components');
 
 layout('canvas-start', [
   'page_title'         => $page_title,
@@ -41,7 +37,7 @@ layout('canvas-start', [
   <div>
     <h3 class="text-xl font-bold text-brand-900">Header Hero</h3>
     <p class="mt-2 max-w-3xl text-brand-600">Use for top-level landing areas with primary actions.</p>
-    <div class="mt-4 rounded-md bg-white p-5">
+    <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
       <?php component('header-hero'); ?>
     </div>
   </div>
@@ -49,7 +45,7 @@ layout('canvas-start', [
   <div>
     <h3 class="text-xl font-bold text-brand-900">Header Page</h3>
     <p class="mt-2 max-w-3xl text-brand-600">Use for page introductions and main content context.</p>
-    <div class="mt-4 rounded-md bg-white p-5">
+    <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-3">
       <?php component('header-page', [
         'header_topic'           => 'Components',
         'header_title'           => 'Page Header',
@@ -62,7 +58,7 @@ layout('canvas-start', [
   <div>
     <h3 class="text-xl font-bold text-brand-900">Header Package</h3>
     <p class="mt-2 max-w-3xl text-brand-600">Use for package summaries that combine title, pricing, and key specs.</p>
-    <div class="mt-4 rounded-md bg-white p-5">
+    <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-3">
       <?php component('header-package', [
         'header_container_class' => 'w-full',
       ]); ?>
@@ -72,7 +68,7 @@ layout('canvas-start', [
   <div>
     <h3 class="text-xl font-bold text-brand-900">Header Section</h3>
     <p class="mt-2 max-w-3xl text-brand-600">Use inside pages to separate related content blocks.</p>
-    <div class="mt-4 rounded-md bg-white p-5">
+    <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
       <?php component('header-section', [
         'header_topic'           => 'Section',
         'header_title'           => 'Content Group Header',

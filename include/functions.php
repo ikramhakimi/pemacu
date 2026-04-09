@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+if (!function_exists('str_contains')) {
+  function str_contains(string $haystack, string $needle): bool
+  {
+    if ($needle === '') {
+      return true;
+    }
+
+    return strpos($haystack, $needle) !== false;
+  }
+}
+
 function e($value): string
 {
   return htmlspecialchars((string) $value, ENT_QUOTES, 'UTF-8');
@@ -35,9 +46,353 @@ function path(string $uri): string
   return $base === '' ? $uri : $base . $uri;
 }
 
+function canvas_links(string $canvas_primary): array
+{
+  if ($canvas_primary === 'patterns') {
+    return [
+      ['href' => '#overview', 'label' => 'Overview'],
+      ['href' => '#hero', 'label' => 'Hero'],
+      ['href' => '#packages', 'label' => 'Packages'],
+      ['href' => '#testimonials', 'label' => 'Testimonials'],
+      ['href' => '#faq', 'label' => 'FAQ'],
+      ['href' => '#cta', 'label' => 'CTA'],
+    ];
+  }
+
+  return [
+    ['href' => '/canvas/components', 'label' => 'Overview'],
+    ['href' => '/canvas/components/accordion', 'label' => 'Accordion'],
+    ['href' => '/canvas/components/alert', 'label' => 'Alert'],
+    ['href' => '/canvas/components/avatar', 'label' => 'Avatar'],
+    ['href' => '/canvas/components/badge', 'label' => 'Badge'],
+    ['href' => '/canvas/components/buttons', 'label' => 'Buttons'],
+    ['href' => '/canvas/components/breadcrumb', 'label' => 'Breadcrumb'],
+    ['href' => '/canvas/components/cards', 'label' => 'Cards'],
+    ['href' => '/canvas/components/dropdown', 'label' => 'Dropdown'],
+    ['href' => '/canvas/components/fields', 'label' => 'Fields'],
+    ['href' => '/canvas/components/forms', 'label' => 'Forms'],
+    ['href' => '/canvas/components/pick-date', 'label' => 'Pick Date'],
+    ['href' => '/canvas/components/pick-time', 'label' => 'Pick Time'],
+    ['href' => '/canvas/components/pagination', 'label' => 'Pagination'],
+    ['href' => '/canvas/components/tabs', 'label' => 'Tabs'],
+    ['href' => '/canvas/components/grids', 'label' => 'Grids'],
+    ['href' => '/canvas/components/headers', 'label' => 'Headers'],
+    ['href' => '/canvas/components/icons', 'label' => 'Icons'],
+    ['href' => '/canvas/components/modal', 'label' => 'Modal'],
+  ];
+}
+
+function canvas_component_variants(string $component_name): array
+{
+  if ($component_name === 'buttons') {
+    return [
+      [
+        'id'          => 'default',
+        'title'       => 'Default',
+        'description' => 'Use for low-priority actions inside dense layouts.',
+        'component'   => 'buttons-default',
+        'panel_class' => 'flex items-center gap-4',
+      ],
+      [
+        'id'          => 'primary',
+        'title'       => 'Primary',
+        'description' => 'Use for the main action on the current screen.',
+        'component'   => 'buttons-primary',
+        'panel_class' => 'flex items-center gap-4',
+      ],
+      [
+        'id'          => 'secondary',
+        'title'       => 'Secondary',
+        'description' => 'Use for supporting actions that sit next to the primary action.',
+        'component'   => 'buttons-secondary',
+        'panel_class' => 'flex items-center gap-4',
+      ],
+      [
+        'id'          => 'positive',
+        'title'       => 'Positive',
+        'description' => 'Use to confirm successful or safe completion actions.',
+        'component'   => 'buttons-positive',
+        'panel_class' => 'flex items-center gap-4',
+      ],
+      [
+        'id'          => 'negative',
+        'title'       => 'Negative',
+        'description' => 'Use only for destructive or irreversible actions.',
+        'component'   => 'buttons-negative',
+        'panel_class' => 'flex items-center gap-4',
+      ],
+      [
+        'id'          => 'icon-only',
+        'title'       => 'Icon Only',
+        'description' => 'Use for compact actions when context is clear and nearby labels already exist.',
+        'component'   => 'buttons-icon-only',
+        'panel_class' => 'flex flex-wrap items-center gap-4',
+      ],
+      [
+        'id'          => 'with-icons',
+        'title'       => 'With Icons (Left/Right)',
+        'description' => 'Use leading icons for action intent and trailing icons for directional flow cues.',
+        'component'   => 'buttons-with-icons',
+        'panel_class' => 'flex flex-wrap items-center gap-4',
+      ],
+    ];
+  }
+
+  return [];
+}
+
+function button_class(array $options = []): string
+{
+  $tone      = isset($options['tone']) ? (string) $options['tone'] : 'default';
+  $size      = isset($options['size']) ? (string) $options['size'] : 'md';
+  $gradient  = isset($options['gradient']) ? (bool) $options['gradient'] : false;
+  $disabled  = isset($options['disabled']) ? (bool) $options['disabled'] : false;
+  $icon_only = isset($options['icon_only']) ? (bool) $options['icon_only'] : false;
+  $extra     = isset($options['extra']) ? trim((string) $options['extra']) : '';
+
+  $allowed_tones = ['default', 'primary', 'secondary', 'positive', 'negative'];
+  $allowed_sizes = ['sm', 'md', 'lg'];
+
+  if (!in_array($tone, $allowed_tones, true)) {
+    $tone = 'default';
+  }
+
+  if (!in_array($size, $allowed_sizes, true)) {
+    $size = 'md';
+  }
+
+  $size_tokens = [
+    'sm' => [
+      'height'  => 'h-[var(--ui-h-sm)]',
+      'leading' => 'leading-[var(--ui-h-sm)]',
+      'padding' => 'px-[var(--ui-px-sm)]',
+      'text'    => 'text-sm',
+      'width'   => 'w-[var(--ui-h-sm)]',
+    ],
+    'md' => [
+      'height'  => 'h-[var(--ui-h-md)]',
+      'leading' => 'leading-[var(--ui-h-md)]',
+      'padding' => 'px-[var(--ui-px-md)]',
+      'text'    => '',
+      'width'   => 'w-[var(--ui-h-md)]',
+    ],
+    'lg' => [
+      'height'  => 'h-[var(--ui-h-lg)]',
+      'leading' => 'leading-[var(--ui-h-lg)]',
+      'padding' => 'px-[var(--ui-px-lg)]',
+      'text'    => 'text-base',
+      'width'   => 'w-[var(--ui-h-lg)]',
+    ],
+  ];
+
+  $tone_tokens = [
+    'default' => [
+      'base'     => 'border-transparent bg-brand-900 text-white',
+      'disabled' => 'border-transparent bg-brand-400 text-white',
+      'gradient' => 'border-brand-900 bg-gradient-to-b from-brand-600 to-brand-800 text-white',
+    ],
+    'primary' => [
+      'base'     => 'border-transparent bg-primary-600 text-white',
+      'disabled' => 'border-transparent bg-primary-400 text-white',
+      'gradient' => 'border-primary-700 bg-gradient-to-b from-primary-500 to-primary-700 text-white',
+    ],
+    'secondary' => [
+      'base'     => 'border-transparent bg-brand-200 text-brand-900',
+      'disabled' => 'border-transparent bg-brand-200 text-brand-400',
+      'gradient' => 'border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900',
+    ],
+    'positive' => [
+      'base'     => 'border-transparent bg-positive-600 text-white',
+      'disabled' => 'border-transparent bg-positive-300 text-white',
+      'gradient' => 'border-positive-600 bg-gradient-to-b from-positive-500 to-positive-600 text-white',
+    ],
+    'negative' => [
+      'base'     => 'border-transparent bg-negative-600 text-white',
+      'disabled' => 'border-transparent bg-negative-300 text-white',
+      'gradient' => 'border-negative-600 bg-gradient-to-b from-negative-500 to-negative-600 text-white',
+    ],
+  ];
+
+  $tone_state = $disabled
+    ? $tone_tokens[$tone]['disabled']
+    : ($gradient ? $tone_tokens[$tone]['gradient'] : $tone_tokens[$tone]['base']);
+
+  $classes = [
+    'inline-flex',
+    'items-center',
+    'justify-center',
+    'rounded-md',
+    'border',
+    $size_tokens[$size]['height'],
+    $size_tokens[$size]['leading'],
+    'font-medium',
+    $tone_state,
+  ];
+
+  if ($icon_only) {
+    $classes[] = $size_tokens[$size]['width'];
+  } else {
+    $classes[] = $size_tokens[$size]['padding'];
+
+    if ($size_tokens[$size]['text'] !== '') {
+      $classes[] = $size_tokens[$size]['text'];
+    }
+  }
+
+  if ($extra !== '') {
+    $classes[] = $extra;
+  }
+
+  return implode(' ', array_filter($classes));
+}
+
+function capture_button(array $options = []): string
+{
+  ob_start();
+  component('button', $options);
+  return (string) ob_get_clean();
+}
+
+function button_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_button($options);
+  };
+}
+
+function capture_checkbox(array $options = []): string
+{
+  ob_start();
+  component('form/checkbox', $options);
+  return (string) ob_get_clean();
+}
+
+function checkbox_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_checkbox($options);
+  };
+}
+
+function capture_input(array $options = []): string
+{
+  ob_start();
+  component('form/input', $options);
+  return (string) ob_get_clean();
+}
+
+function input_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_input($options);
+  };
+}
+
+function capture_input_group(array $options = []): string
+{
+  ob_start();
+  component('form/input-group', $options);
+  return (string) ob_get_clean();
+}
+
+function input_group_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_input_group($options);
+  };
+}
+
+function capture_otp_input(array $options = []): string
+{
+  ob_start();
+  component('form/otp-input', $options);
+  return (string) ob_get_clean();
+}
+
+function otp_input_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_otp_input($options);
+  };
+}
+
+function capture_radio(array $options = []): string
+{
+  ob_start();
+  component('form/radio', $options);
+  return (string) ob_get_clean();
+}
+
+function radio_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_radio($options);
+  };
+}
+
+function capture_rating(array $options = []): string
+{
+  ob_start();
+  component('form/rating', $options);
+  return (string) ob_get_clean();
+}
+
+function rating_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_rating($options);
+  };
+}
+
+function capture_select(array $options = []): string
+{
+  ob_start();
+  component('form/select', $options);
+  return (string) ob_get_clean();
+}
+
+function select_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_select($options);
+  };
+}
+
+function capture_textarea(array $options = []): string
+{
+  ob_start();
+  component('form/textarea', $options);
+  return (string) ob_get_clean();
+}
+
+function textarea_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_textarea($options);
+  };
+}
+
+function capture_texarea(array $options = []): string
+{
+  return capture_textarea($options);
+}
+
+function texarea_capture(): callable
+{
+  return static function (array $options = []): string {
+    return capture_textarea($options);
+  };
+}
+
 function build_component_class(string $component_name, array $states = []): string
 {
-  $segments = explode('-', $component_name, 2);
+  $component_key = $component_name;
+
+  if (str_contains($component_key, '/')) {
+    $component_key = basename($component_key);
+  }
+
+  $segments = explode('-', $component_key, 2);
   $block    = $segments[0] ?: 'component';
   $modifier = $segments[1] ?? null;
 
@@ -58,14 +413,38 @@ function build_component_class(string $component_name, array $states = []): stri
 
 function component(string $component_name, array $data = []): void
 {
-  $component_path = __DIR__ . '/../views/components/' . $component_name . '.php';
+  $components_root = __DIR__ . '/../views/components';
+  $component_key   = trim(str_replace('\\', '/', $component_name), '/');
 
-  if (!is_file($component_path)) {
+  if ($component_key === '' || str_contains($component_key, '..')) {
+    throw new RuntimeException('Component not found: ' . $component_name);
+  }
+
+  $component_candidates = [];
+
+  if (str_contains($component_key, '/')) {
+    $component_candidates[] = $components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $components_root . '/' . basename($component_key) . '.php';
+  } else {
+    $component_candidates[] = $components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $components_root . '/form/' . $component_key . '.php';
+  }
+
+  $component_path = '';
+
+  foreach ($component_candidates as $component_candidate) {
+    if (is_file($component_candidate)) {
+      $component_path = $component_candidate;
+      break;
+    }
+  }
+
+  if ($component_path === '') {
     throw new RuntimeException('Component not found: ' . $component_name);
   }
 
   $states          = isset($data['states']) && is_array($data['states']) ? $data['states'] : [];
-  $component_class = build_component_class($component_name, $states);
+  $component_class = build_component_class($component_key, $states);
 
   extract($data, EXTR_SKIP);
   require $component_path;

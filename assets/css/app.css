@@ -5,8 +5,8 @@
 :root {
   /* Control height tokens */
   --ui-h-sm: 32px;
-  --ui-h-md: 40px;
-  --ui-h-lg: 48px;
+  --ui-h-md: 44px;
+  --ui-h-lg: 56px;
 
   /* Control horizontal padding tokens */
   --ui-px-sm: 12px;
@@ -97,4 +97,5 @@
   .rating:not([data-rating-disabled="true"]) .rating__star--control:hover {
     transform: translateY(-1px);
   }
+
 }

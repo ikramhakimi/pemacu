@@ -16,7 +16,7 @@ $header_topic_class    = $header_topic_class ?? 'header__topic text-sm font-semi
 $header_title_class    = $header_title_class ?? 'header__title mt-4 max-w-2xl font-bold text-5xl text-brand-900';
 $header_subtitle_class = $header_subtitle_class ?? 'header__subtitle mt-4 max-w-3xl text-xl text-brand-600';
 ?>
-<section class="header header--page">
+<header class="header header--page py-12">
   <div class="<?= $header_container_class; ?>">
     <h1 class="<?= $header_topic_class; ?>">
       <?= htmlspecialchars($header_topic, ENT_QUOTES, 'UTF-8'); ?>
@@ -28,4 +28,4 @@ $header_subtitle_class = $header_subtitle_class ?? 'header__subtitle mt-4 max-w-
       <?= htmlspecialchars($header_subtitle, ENT_QUOTES, 'UTF-8'); ?>
     </p>
   </div>
-</section>
+</header>

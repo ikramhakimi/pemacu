@@ -74,17 +74,7 @@ $resolve_package_href        = static function (string $href): string {
 
 ob_start();
 ?>
-<div class="intro max-w-4xl">
-  <h2 class="intro__topic text text--overline text-xs font-semibold uppercase tracking-[0.14em] text-brand-600">
-    Our Services
-  </h2>
-  <p class="intro__headline title title--2 text-3xl font-bold text-brand-900">
-    Flexible photography for every need.
-  </p>
-  <p class="intro__subheadline max-w-2xl text text--body text-base text-brand-700">
-    A complete range of photography services—designed to work individually or together, tailored to your story and goals.
-  </p>
-</div>
+
 
 <div class="section-packages__grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
   <?php foreach (array_slice($section_packages_list, 0, 4) as $package): ?>
@@ -148,10 +138,19 @@ ob_start();
 <?php
 $section_packages_content = trim((string) ob_get_clean());
 ?>
-<section class="<?= e($section_packages_classes); ?>">
-  <div class="container mx-auto max-w-6xl px-4 pb-12">
-    <div class="section-packages__stack flex flex-col">
-      <?= $section_packages_content; ?>
+<section class="<?= e($section_packages_classes); ?> lg:px-10 py-12">
+  <div class="container mx-auto max-w-6xl px-4">
+    <?php component('header-section', [
+      'header_topic'           => 'Packages',
+      'header_title'           => 'Flexible services for every need.',
+      'header_subtitle'        => 'A complete range of solution services—designed to work individually or together, tailored to your story and goals.',
+      'header_container_class' => 'w-full',
+    ]); ?>
+    <div class="section-packages__stack grid grid-cols-3 gap-4">
+      <?php component('card-package'); ?>
+      <?php component('card-package'); ?>
+      <?php component('card-package'); ?>
     </div>
   </div>
+  
 </section>

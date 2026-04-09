@@ -2,73 +2,114 @@
 
 declare(strict_types=1);
 
-$section_faq_class      = isset($section_class)
+$section_faq_class          = isset($section_class)
   ? (string) $section_class
   : build_component_class('section-faq', $states ?? []);
-$section_faq_class_name = isset($class_name) ? trim((string) $class_name) : '';
-$section_faq_title      = isset($title) ? (string) $title : 'Frequently asked questions';
-$section_faq_lead       = isset($lead) ? (string) $lead : 'Everything you need before booking.';
-$section_faq_items      = isset($items) && is_array($items) && !empty($items)
+$section_faq_class_name     = isset($class_name) ? trim((string) $class_name) : '';
+$section_faq_header_topic   = isset($topic) ? trim((string) $topic) : 'Common Questions';
+$section_faq_header_title   = isset($title) ? trim((string) $title) : 'Answers to your most asked questions.';
+$section_faq_header_lead    = isset($lead) ? trim((string) $lead) : 'Everything you need to know about our photography services, packages, and policies—clearly explained.';
+$section_faq_chevron_background_class = isset($chevron_background_class) ? trim((string) $chevron_background_class) : '';
+$section_faq_chevron_radius_class     = isset($chevron_radius_class) ? trim((string) $chevron_radius_class) : '';
+$section_faq_default_items  = [
+  [
+    'question' => 'What’s included in your service?',
+    'answer'   => 'We provide a complete end-to-end experience, from initial consultation to final delivery. This includes planning, creative direction, execution, and post-production — ensuring everything is handled seamlessly so you can focus on the outcome, not the process.',
+  ],
+  [
+    'question' => 'How long does the process usually take?',
+    'answer'   => 'Timelines vary depending on the scope of the project, but most engagements are completed within 1–3 weeks. We’ll always provide a clear timeline upfront and keep you updated at every stage to avoid delays or surprises.',
+  ],
+  [
+    'question' => 'Can I request revisions after delivery?',
+    'answer'   => 'Yes, we include a revision phase to ensure the final result meets your expectations. Minor adjustments are typically covered, while larger changes can be scoped separately if needed.',
+  ],
+  [
+    'question' => 'How do we get started?',
+    'answer'   => 'Getting started is simple — share your requirements, timeline, and goals. From there, we’ll guide you through the next steps, including recommendations, scope alignment, and confirmation before we begin.',
+  ],
+  [
+    'question' => 'Do you offer custom solutions or fixed packages?',
+    'answer'   => 'We offer both. You can choose from predefined packages for faster turnaround, or opt for a fully custom solution tailored to your specific needs and objectives.',
+  ],
+  [
+    'question' => 'What happens after the project is completed?',
+    'answer'   => 'After delivery, we provide all final assets in an organized format. If needed, we can also support ongoing updates, additional requests, or future enhancements as your needs evolve.',
+  ],
+  [
+    'question' => 'What makes your approach different?',
+    'answer'   => 'We focus on clarity, quality, and intentional execution. Every step is designed to eliminate guesswork, reduce friction, and deliver results that feel considered — not rushed or templated.',
+  ],
+];
+$section_faq_source_items    = isset($items) && is_array($items) && !empty($items)
   ? array_values($items)
-  : [
-    [
-      'question' => 'How far in advance should I book?',
-      'answer'   => 'Most clients book two to four weeks earlier to secure preferred dates.',
-    ],
-    [
-      'question' => 'Do you provide edited photos?',
-      'answer'   => 'Yes. Every package includes edited high-resolution files with online delivery.',
-    ],
-    [
-      'question' => 'Can I customize a package?',
-      'answer'   => 'Absolutely. We can combine services based on your goals, location, and timeline.',
-    ],
-  ];
+  : $section_faq_default_items;
+$section_faq_items           = array_values(array_filter(array_map(
+  static function ($item): array {
+    $item_question = is_array($item) && isset($item['question']) ? trim((string) $item['question']) : '';
+    $item_answer   = is_array($item) && isset($item['answer']) ? trim((string) $item['answer']) : '';
+    $item_open     = is_array($item) && isset($item['open']) ? (bool) $item['open'] : false;
+
+    return [
+      'question' => $item_question,
+      'answer'   => $item_answer,
+      'open'     => $item_open,
+    ];
+  },
+  $section_faq_source_items,
+), static function (array $item): bool {
+  return $item['question'] !== '' && $item['answer'] !== '';
+}));
+
+if ($section_faq_items !== []) {
+  $section_faq_items[0]['open'] = true;
+}
 $section_faq_classes    = trim(
   implode(
     ' ',
     array_filter([
       $section_faq_class,
-      'section-faq',
       $section_faq_class_name,
     ]),
   ),
 );
-
-ob_start();
-?>
-<h2 class="section-faq__title title title--2 text-3xl font-bold text-brand-900">
-  <?= e($section_faq_title); ?>
-</h2>
-<p class="section-faq__lead text text--caption text-sm text-brand-600">
-  <?= e($section_faq_lead); ?>
-</p>
-<div class="section-faq__list flex flex-col gap-3">
-  <?php foreach ($section_faq_items as $item): ?>
-    <?php
-    $item_question = isset($item['question']) ? (string) $item['question'] : '';
-    $item_answer   = isset($item['answer']) ? (string) $item['answer'] : '';
-    ?>
-    <?php if ($item_question === '' || $item_answer === ''): ?>
-      <?php continue; ?>
-    <?php endif; ?>
-    <details class="section-faq__item rounded-xl border border-brand-200 bg-white p-4">
-      <summary class="section-faq__question cursor-pointer list-none text-base font-semibold text-brand-900">
-        <?= e($item_question); ?>
-      </summary>
-      <p class="section-faq__answer text text--body text-base text-brand-700">
-        <?= e($item_answer); ?>
-      </p>
-    </details>
-  <?php endforeach; ?>
-</div>
-<?php
-$section_faq_content = trim((string) ob_get_clean());
 ?>
 <section class="<?= e($section_faq_classes); ?>">
-  <div class="container mx-auto max-w-6xl px-4 pb-12">
-    <div class="section-faq__stack flex flex-col gap-4">
-      <?= $section_faq_content; ?>
+  <div class="container mx-auto max-w-6xl px-4 py-12">
+    <?php component('header-section', [
+      'header_topic'           => $section_faq_header_topic,
+      'header_title'           => $section_faq_header_title,
+      'header_subtitle'        => $section_faq_header_lead,
+      'header_container_class' => 'w-full',
+    ]); ?>
+
+    <div class="grid grid-cols-9 gap-4">
+      <div class="col-span-6">
+    <?php component('accordion', [
+      'items'                   => $section_faq_items,
+      'variant'                 => 'line_divided',
+      'chevron_position'        => 'start',
+      'chevron_background_class' => 'bg-brand-200',
+      'chevron_radius_class'     => $section_faq_chevron_radius_class,
+      'class_name'              => 'section-faq__accordion',
+    ]); ?>
+      </div>
+      <div class="lg:col-span-3 lg:col-start-7">
+        <article class="card card--process block bg-white border border-brand-200 rounded-lg overflow-hidden">
+          <div class="card__content p-6">
+            <div class="w-[120px] h-[120px] rounded-lg bg-brand-300 mb-6 flex items-center justify-center"></div>
+            <p class="text-3xl mb-6">Book a 15-min<br>intro call </p>
+            <a href="#" class="btn btn--default btn--lg inline-flex items-center justify-center rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium border border-brand-900 bg-gradient-to-b from-brand-700 to-brand-900 shadow-lg shadow-brand-400 text-white px-[var(--ui-px-lg)] text-base w-full"><span class="button__label">Book a Call</span></a>
+            <div class="flex items-center gap-4 mt-6">
+              <div class="w-12 h-12 shrink-0 bg-brand-200 rounded-lg flex items-center justify-center">
+                <?php icon('calendar-line', ['icon_size' => '20', 'icon_class' => 'text-brand-600']); ?>
+              </div>
+              <p class="text-sm text-brand-500">Our team will reach out within 24 hours to schedule your intro call.</p>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
+    
   </div>
 </section>

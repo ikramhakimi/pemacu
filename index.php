@@ -59,7 +59,41 @@ if ($page === '') {
 }
 
 ob_start();
-require $page;
-$content = ob_get_clean();
+
+try {
+  require $page;
+  $content = (string) ob_get_clean();
+} catch (Throwable $exception) {
+  if (ob_get_level() > 0) {
+    ob_end_clean();
+  }
+
+  http_response_code(500);
+
+  error_log(sprintf(
+    'Render error for route "%s": %s in %s:%d',
+    $uri,
+    $exception->getMessage(),
+    $exception->getFile(),
+    $exception->getLine(),
+  ));
+
+  $error_message = htmlspecialchars($exception->getMessage(), ENT_QUOTES, 'UTF-8');
+  $error_origin  = htmlspecialchars(
+    basename($exception->getFile()) . ':' . (string) $exception->getLine(),
+    ENT_QUOTES,
+    'UTF-8'
+  );
+
+  $content = sprintf(
+    '<section class="mx-auto max-w-3xl rounded-lg border border-negative-300 bg-white p-6 text-negative-800">' .
+    '<h1 class="text-xl font-semibold text-negative-900">Something went wrong while loading this page.</h1>' .
+    '<p class="mt-2 text-sm">%s</p>' .
+    '<p class="mt-1 text-xs text-negative-700">%s</p>' .
+    '</section>',
+    $error_message,
+    $error_origin,
+  );
+}
 
 require __DIR__ . '/layout.php';

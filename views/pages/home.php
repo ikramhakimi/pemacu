@@ -7,8 +7,10 @@ layout('layout-start', ['page_title' => 'Home', 'page_current' => 'home']);
 <?php section('section-hero'); ?>
 
 <?php section('section-process'); ?>
+<?php section('section-features'); ?>
 <?php section('section-packages'); ?>
 <?php section('section-testimonials'); ?>
+<?php section('section-features-accordion'); ?>
 <?php section('section-faq'); ?>
 <?php section('section-cta'); ?>
 <?php section('section-footer'); ?>

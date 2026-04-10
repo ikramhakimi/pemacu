@@ -15,6 +15,7 @@ declare(strict_types=1);
  * - $helper_text (string): Supporting helper or validation message.
  * - $state (string): default|disabled|positive|negative|info.
  * - $label_tag (string): label|p|span|div (default: label).
+ * - $hide_label (bool): When true, omit rendering the label element.
  * - $label_for (string): Optional explicit value for label for="" when label_tag is label.
  * - $input_component (string): Form component key under views/components/form (default: input).
  * - $input_props (array): Props passed into the selected form component.
@@ -27,6 +28,7 @@ $label            = isset($label) ? (string) $label : 'Label';
 $helper_text      = isset($helper_text) ? (string) $helper_text : '';
 $state            = isset($state) ? (string) $state : 'default';
 $label_tag        = isset($label_tag) ? (string) $label_tag : 'label';
+$hide_label       = !empty($hide_label);
 $label_for        = isset($label_for) ? (string) $label_for : '';
 $input_component  = isset($input_component) ? (string) $input_component : 'input';
 $input_props      = isset($input_props) && is_array($input_props) ? $input_props : [];
@@ -84,10 +86,12 @@ if ($class !== '') {
 }
 ?>
 <div class="<?= e($field_class); ?>">
-  <<?= e($label_tag); ?>
-    class="<?= e($label_class); ?>"
-    <?php if ($label_tag === 'label' && $label_for !== ''): ?>for="<?= e($label_for); ?>"<?php endif; ?>
-  ><?= e($label); ?></<?= e($label_tag); ?>>
+  <?php if (!$hide_label): ?>
+    <<?= e($label_tag); ?>
+      class="<?= e($label_class); ?>"
+      <?php if ($label_tag === 'label' && $label_for !== ''): ?>for="<?= e($label_for); ?>"<?php endif; ?>
+    ><?= e($label); ?></<?= e($label_tag); ?>>
+  <?php endif; ?>
   <div class="field__input">
     <?php component('form/' . $input_component, $input_props); ?>
   </div>

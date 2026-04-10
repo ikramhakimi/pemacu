@@ -88,7 +88,9 @@ $period_slots = [
   'night'     => [],
 ];
 
-$selected_period = 'morning';
+$selected_period    = 'morning';
+$tab_active_class   = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-brand-900 text-white';
+$tab_inactive_class = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-brand-700 hover:bg-brand-100';
 ?>
 <?php for ($slot_minutes = $start_minutes; $slot_minutes <= $end_minutes; $slot_minutes += $step_minutes): ?>
   <?php
@@ -111,14 +113,20 @@ $selected_period = 'morning';
   ];
   ?>
 <?php endfor; ?>
-<div class="picktime <?= e($class); ?>" data-picktime-grid data-picktime-grid-active="<?= e($selected_period); ?>">
-  <div class="picktime__tabs mb-4 grid max-w-xl grid-cols-3">
+<div
+  class="picktime <?= e($class); ?>"
+  data-picktime-grid
+  data-picktime-grid-active="<?= e($selected_period); ?>"
+  data-picktime-grid-tab-active-class="<?= e($tab_active_class); ?>"
+  data-picktime-grid-tab-inactive-class="<?= e($tab_inactive_class); ?>"
+>
+  <div class="picktime__tabs tabs__list mb-4 grid w-full grid-cols-3 gap-1 rounded-lg border border-brand-200 bg-white p-1">
     <?php foreach (['morning' => 'Morning', 'afternoon' => 'Afternoon', 'night' => 'Night'] as $period_key => $period_label): ?>
       <button
         type="button"
         class="<?= e($period_key === $selected_period
-          ? 'picktime__tab btn btn--md -ml-px first:ml-0 rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-md)] leading-[var(--ui-h-md)] px-[var(--ui-px-md)] text-xs font-semibold tracking-[0.06em] relative z-10 btn--primary btn--gradient border-primary-700 bg-gradient-to-b from-primary-700 to-primary-500 text-white'
-          : 'picktime__tab btn btn--md -ml-px first:ml-0 rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-md)] leading-[var(--ui-h-md)] px-[var(--ui-px-md)] text-xs font-semibold tracking-[0.06em] z-0 btn--secondary btn--gradient border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900'); ?>"
+          ? $tab_active_class
+          : $tab_inactive_class); ?>"
         data-picktime-grid-tab="<?= e($period_key); ?>"
       >
         <?= e($period_label); ?>

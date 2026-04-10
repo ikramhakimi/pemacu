@@ -94,6 +94,45 @@ layout('canvas-start', [
         </div>
       </div>
     </div>
+
+    <div>
+      <h3 class="text-xl font-bold text-brand-900">Intro Call Card (API-driven)</h3>
+      <p class="mt-2 max-w-3xl text-brand-600">Use for short booking prompts where content comes from API payloads.</p>
+      <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
+        <div class="grid gap-4 md:grid-cols-3">
+          <?php component('card-intro-call', [
+            'card_intro_call' => [
+              'icon_name'      => 'calendar-line',
+              'title'          => "Book a 15-min\nintro call",
+              'action_label'   => 'Book a Call',
+              'action_href'    => '#',
+              'note_icon_name' => 'calendar-line',
+              'note_text'      => 'Our team will reach out within 24 hours to schedule your intro call.',
+            ],
+          ]); ?>
+          <?php component('card-intro-call', [
+            'card_intro_call' => [
+              'icon_name'      => 'message-line',
+              'title'          => "Request a\nproject consult",
+              'action_label'   => 'Request Consult',
+              'action_href'    => '#',
+              'note_icon_name' => 'message-line',
+              'note_text'      => 'Share your goals and we will send a recommended plan by the next business day.',
+            ],
+          ]); ?>
+          <?php component('card-intro-call', [
+            'card_intro_call' => [
+              'icon_name'      => 'phone-line',
+              'title'          => "Need a quick\npricing call?",
+              'action_label'   => 'Talk to Sales',
+              'action_href'    => '#',
+              'note_icon_name' => 'phone-line',
+              'note_text'      => 'A specialist will confirm scope and pricing options in under 24 hours.',
+            ],
+          ]); ?>
+        </div>
+      </div>
+    </div>
   </section>
 </section>
 <?php layout('canvas-end'); ?>

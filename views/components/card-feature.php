@@ -26,10 +26,10 @@ $card_action_class      = 'card__action mt-4 border-t border-brand-200 pt-5';
 $card_link_class        = 'text-brand-700 hover:underline';
 ?>
 <article class="card card--feature overflow-hidden rounded-lg border border-brand-200 bg-white">
-  <div class="card__media m-5 mb-0 flex items-center justify-between">
+  <div class="card__media m-6 mb-0 flex items-center justify-between">
     <div class="card__icon flex h-16 w-16 items-center justify-center rounded-lg bg-brand-300"></div>
   </div>
-  <div class="card__content p-5">
+  <div class="card__content p-6 pt-4">
     <h3 class="<?= $card_title_class; ?>">
       <?= htmlspecialchars($card_title, ENT_QUOTES, 'UTF-8'); ?>
     </h3>

@@ -14,8 +14,9 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
 <section class="section pb-20">
   <div class="container max-w-6xl mx-auto w-full px-4">
     <section class="mb-8">
-      <div class="grid grid-cols-4 gap-2">
+      <div class="grid grid-cols-5 gap-2">
         <div class="bg-brand-300 rounded-md col-span-2"></div>
+        <div class="aspect-square bg-brand-300 rounded-md col-span-1"></div>
         <div class="aspect-square bg-brand-300 rounded-md col-span-1"></div>
         <div class="aspect-square bg-brand-300 rounded-md col-span-1"></div>
       </div>
@@ -128,40 +129,58 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
         <div class="col-span-3 lg:col-span-2">
           <form class="space-y-3" action="#" method="post">
-            <div>
-              <label class="mb-1 block text-sm font-medium text-brand-700" for="booking-contact-name">Name</label>
-              <input
-                id="booking-contact-name"
-                name="name"
-                type="text"
-                autocomplete="name"
-                placeholder="Enter your name"
-                class="input h-[var(--ui-h-md)] w-full rounded-md bg-white px-[var(--ui-px-md)] text-brand-900 ring-1 ring-brand-300 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
-              >
-            </div>
+            <?php component('form/field', [
+              'label'           => 'Name',
+              'hide_label'      => true,
+              'input_component' => 'input-group',
+              'input_props'     => [
+                'id'          => 'booking-contact-name',
+                'name'        => 'name',
+                'type'        => 'text',
+                'size'        => 'md',
+                'icon_name'   => 'user-line',
+                'icon_size'   => '20',
+                'placeholder' => 'Enter your name',
+                'attributes'  => [
+                  'autocomplete' => 'name',
+                ],
+              ],
+            ]); ?>
             <div class="grid gap-3 md:grid-cols-2">
-              <div>
-                <label class="mb-1 block text-sm font-medium text-brand-700" for="booking-contact-phone">Phone</label>
-                <input
-                  id="booking-contact-phone"
-                  name="phone"
-                  type="tel"
-                  autocomplete="tel"
-                  placeholder="Enter your phone number"
-                  class="input h-[var(--ui-h-md)] w-full rounded-md bg-white px-[var(--ui-px-md)] text-brand-900 ring-1 ring-brand-300 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                >
-              </div>
-              <div>
-                <label class="mb-1 block text-sm font-medium text-brand-700" for="booking-contact-email">Email</label>
-                <input
-                  id="booking-contact-email"
-                  name="email"
-                  type="email"
-                  autocomplete="email"
-                  placeholder="Enter your email"
-                  class="input h-[var(--ui-h-md)] w-full rounded-md bg-white px-[var(--ui-px-md)] text-brand-900 ring-1 ring-brand-300 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500"
-                >
-              </div>
+              <?php component('form/field', [
+                'label'           => 'Phone',
+                'hide_label'      => true,
+                'input_component' => 'input-group',
+                'input_props'     => [
+                  'id'          => 'booking-contact-phone',
+                  'name'        => 'phone',
+                  'type'        => 'tel',
+                  'size'        => 'md',
+                  'icon_name'   => 'phone-line',
+                  'icon_size'   => '20',
+                  'placeholder' => 'Enter your phone number',
+                  'attributes'  => [
+                    'autocomplete' => 'tel',
+                  ],
+                ],
+              ]); ?>
+              <?php component('form/field', [
+                'label'           => 'Email',
+                'hide_label'      => true,
+                'input_component' => 'input-group',
+                'input_props'     => [
+                  'id'          => 'booking-contact-email',
+                  'name'        => 'email',
+                  'type'        => 'email',
+                  'size'        => 'md',
+                  'icon_name'   => 'mail-line',
+                  'icon_size'   => '20',
+                  'placeholder' => 'Enter your email',
+                  'attributes'  => [
+                    'autocomplete' => 'email',
+                  ],
+                ],
+              ]); ?>
             </div>
           </form>
         </div>
@@ -182,7 +201,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
           </div>
 
           <!-- booking summary -->
-          <div class="rounded-md border border-brand-200 bg-white p-6">
+          <div class="rounded-lg border border-brand-200 bg-brand-50 p-6">
             <p class="text-xs font-semibold uppercase text-brand-500">Booking Summary</p>
 
             <div class="mt-5 space-y-3 text-brand-700">
@@ -209,11 +228,10 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
           </div>
 
           <!-- CTA -->
-          <button type="button" class="mt-4 w-full btn btn--primary btn--lg inline-flex items-center justify-center gap-2 rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium text-white px-[var(--ui-px-lg)] text-lg bg-gradient-to-b from-primary-500 to-primary-600 border-primary-700 bg-primary-600 shadow-lg shadow-brand-400">
+          <a href="package-confirm" class="mt-4 w-full btn btn--primary btn--lg inline-flex items-center justify-center gap-2 rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium text-white px-[var(--ui-px-lg)] text-base bg-gradient-to-b from-primary-500 to-primary-600 border-primary-700 bg-primary-600 shadow-lg shadow-brand-400">
             <span class="button__label">Continue Booking</span>
             <?php icon('arrow-right-line', ['icon_size' => '20', 'icon_class' => 'text-white']); ?>
-            
-          </button>
+          </a>
 
           <!-- reassurance -->
           <p class="mt-3 text-sm text-brand-500">

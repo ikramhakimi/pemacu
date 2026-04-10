@@ -9,7 +9,7 @@ declare(strict_types=1);
  *   - .input-group__icon
  *   - .input-group__input
  * Data Contract:
- * - type, id, name, value, placeholder, size, state, icon_name, icon_position, class, disabled, attributes
+ * - type, id, name, value, placeholder, size, state, icon_name, icon_size, icon_position, class, disabled, attributes
  */
 
 $type          = isset($type) ? (string) $type : 'text';
@@ -20,6 +20,7 @@ $placeholder   = isset($placeholder) ? (string) $placeholder : '';
 $size          = isset($size) ? (string) $size : 'md';
 $state         = isset($state) ? (string) $state : 'default';
 $icon_name     = isset($icon_name) ? (string) $icon_name : 'search-line';
+$icon_size     = isset($icon_size) ? (string) $icon_size : '';
 $icon_position = isset($icon_position) ? (string) $icon_position : 'left';
 $class         = isset($class) ? trim((string) $class) : '';
 $disabled      = !empty($disabled);
@@ -58,6 +59,10 @@ if (!isset($size_map[$size])) {
 
 if ($icon_position !== 'right') {
   $icon_position = 'left';
+}
+
+if ($icon_size !== '' && !in_array($icon_size, ['12', '16', '20', '24', '32', '40'], true)) {
+  $icon_size = '';
 }
 
 if ($disabled) {
@@ -143,7 +148,7 @@ if ($disabled) {
 ?>
 <div class="input-group relative">
   <span class="<?= e($icon_classes); ?>">
-    <?php icon($icon_name, ['icon_size' => $size_map[$size]['icon_size']]); ?>
+    <?php icon($icon_name, ['icon_size' => $icon_size !== '' ? $icon_size : $size_map[$size]['icon_size']]); ?>
   </span>
   <input<?= $render_attributes($input_attributes); ?>>
 </div>

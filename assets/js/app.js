@@ -228,8 +228,10 @@
 
     let active_period = grid_node.getAttribute('data-picktime-grid-active') || 'morning';
 
-    const tab_active_class = 'picktime__tab btn btn--md -ml-px first:ml-0 rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-md)] leading-[var(--ui-h-md)] px-[var(--ui-px-md)] text-xs font-semibold uppercase tracking-[0.06em] relative z-10 btn--primary btn--gradient border-primary-700 bg-gradient-to-b from-primary-700 to-primary-500 text-white';
-    const tab_inactive_class = 'picktime__tab btn btn--md -ml-px first:ml-0 rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-md)] leading-[var(--ui-h-md)] px-[var(--ui-px-md)] text-xs font-semibold uppercase tracking-[0.06em] z-0 btn--secondary btn--gradient border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900';
+    const tab_active_class = grid_node.getAttribute('data-picktime-grid-tab-active-class')
+      || 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-brand-900 text-white';
+    const tab_inactive_class = grid_node.getAttribute('data-picktime-grid-tab-inactive-class')
+      || 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-brand-700 hover:bg-brand-100';
 
     const switch_period = (period_key) => {
       active_period = period_key;

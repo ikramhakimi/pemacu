@@ -19,6 +19,7 @@ declare(strict_types=1);
  * - `chevron_position` (string, optional): chevron placement (`end` or `start`).
  * - `chevron_background_class` (string, optional): chevron background utility classes.
  * - `chevron_radius_class` (string, optional): chevron border radius utility classes.
+ * - `group_name` (string, optional): when set, limits open state to one item per group.
  * - `class_name` (string, optional): additional wrapper classes.
  */
 
@@ -31,6 +32,7 @@ $variant                  = isset($variant) ? trim((string) $variant) : 'cards';
 $chevron_position         = isset($chevron_position) ? trim((string) $chevron_position) : 'end';
 $chevron_background_class = isset($chevron_background_class) ? trim((string) $chevron_background_class) : '';
 $chevron_radius_class     = isset($chevron_radius_class) ? trim((string) $chevron_radius_class) : '';
+$group_name               = isset($group_name) ? trim((string) $group_name) : '';
 $chevron_at_start         = $chevron_position === 'start';
 $is_line_divided          = $variant === 'line_divided';
 
@@ -82,15 +84,19 @@ if ($items === []) {
     <?php if ($summary === '' || $content === ''): ?>
       <?php continue; ?>
     <?php endif; ?>
-    <details class="<?= e($is_line_divided ? 'group' : 'group overflow-hidden rounded-lg border border-brand-200 bg-white'); ?>" <?= $is_open ? 'open' : ''; ?>>
+    <details
+      class="<?= e($is_line_divided ? 'group' : 'group overflow-hidden rounded-lg border border-brand-200 bg-white'); ?>"
+      <?= $is_open ? 'open' : ''; ?>
+      <?= $group_name !== '' ? 'name="' . e($group_name) . '"' : ''; ?>
+    >
       <summary class="<?= e($is_line_divided ? 'flex cursor-pointer list-none items-center gap-3 py-4' : 'flex cursor-pointer list-none items-center gap-3 px-6 py-5'); ?>">
         <?php if ($chevron_at_start): ?>
           <span class="<?= e($chevron_class); ?>">
             <?php icon('arrow-right-s-line', ['icon_size' => '16']); ?>
           </span>
-          <span class="font-medium text-lg text-brand-900"><?= e($summary); ?></span>
+          <span class="font-medium text-base md:text-lg text-brand-900"><?= e($summary); ?></span>
         <?php else: ?>
-          <span class="font-medium text-lg text-brand-900 flex-1"><?= e($summary); ?></span>
+          <span class="font-medium text-base md:text-lg text-brand-900 flex-1"><?= e($summary); ?></span>
           <span class="<?= e($chevron_class); ?>">
             <?php icon('arrow-right-s-line', ['icon_size' => '16']); ?>
           </span>

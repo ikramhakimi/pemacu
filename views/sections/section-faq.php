@@ -83,8 +83,8 @@ $section_faq_classes    = trim(
       'header_container_class' => 'w-full',
     ]); ?>
 
-    <div class="grid grid-cols-9 gap-4">
-      <div class="col-span-6">
+    <div class="md:grid grid-cols-9 gap-4">
+      <div class="col-span-6 lg:pr-10">
     <?php component('accordion', [
       'items'                   => $section_faq_items,
       'variant'                 => 'line_divided',
@@ -94,20 +94,8 @@ $section_faq_classes    = trim(
       'class_name'              => 'section-faq__accordion',
     ]); ?>
       </div>
-      <div class="lg:col-span-3 lg:col-start-7">
-        <article class="card card--process block bg-white border border-brand-200 rounded-lg overflow-hidden">
-          <div class="card__content p-6">
-            <div class="w-[120px] h-[120px] rounded-lg bg-brand-300 mb-6 flex items-center justify-center"></div>
-            <p class="text-3xl mb-6">Book a 15-min<br>intro call </p>
-            <a href="#" class="btn btn--default btn--lg inline-flex items-center justify-center rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium border border-brand-900 bg-gradient-to-b from-brand-700 to-brand-900 shadow-lg shadow-brand-400 text-white px-[var(--ui-px-lg)] text-base w-full"><span class="button__label">Book a Call</span></a>
-            <div class="flex items-center gap-4 mt-6">
-              <div class="w-12 h-12 shrink-0 bg-brand-200 rounded-lg flex items-center justify-center">
-                <?php icon('calendar-line', ['icon_size' => '20', 'icon_class' => 'text-brand-600']); ?>
-              </div>
-              <p class="text-sm text-brand-500">Our team will reach out within 24 hours to schedule your intro call.</p>
-            </div>
-          </div>
-        </article>
+      <div class="col-span-3 mt-10 md:mt-0">
+        <?php component('card-intro-call'); ?>
       </div>
     </div>
     

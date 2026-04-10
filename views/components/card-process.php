@@ -15,7 +15,7 @@ $card_description       = $card_description ?? "Share your date, location, and g
 $card_count_class       = 'card__count mb-8 text-5xl font-light text-brand-300';
 $card_title_class       = 'card__title mb-4 text-lg font-semibold text-brand-900';
 ?>
-<article class="card card--process block bg-white border border-brand-200 rounded-lg overflow-hidden">
+<article class="card card--process block bg-brand-50 border border-brand-200 rounded-lg overflow-hidden">
   <div class="card__content p-6">
     <div class="<?= $card_count_class; ?>">
       <?= htmlspecialchars($card_count, ENT_QUOTES, 'UTF-8'); ?>

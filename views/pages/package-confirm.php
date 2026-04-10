@@ -26,7 +26,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
         <div class="col-span-3 lg:col-span-2">
           <!-- booking summary -->
-          <div class="rounded-md border border-brand-200 bg-white p-6">
+          <div class="rounded-lg border border-brand-200 bg-white p-6">
             <p class="text-xs font-semibold uppercase text-brand-500">Booking Summary</p>
 
             <div class="mt-5 space-y-3 text-brand-700">

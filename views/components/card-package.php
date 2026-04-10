@@ -29,14 +29,14 @@ $card_description_class = 'card__description mt-2 text-base text-brand-700';
 $card_features_class    = 'card__features mt-2 list-inside list-disc leading-relaxed text-brand-500';
 $card_action_class      = 'card__action mt-4 flex gap-1';
 ?>
-<article class="card card--package block ">
-  <div class="card__photo aspect-[5/4] bg-brand-300 overflow-hidden mb-1 rounded-lg rounded-b-md">
+<article class="card card--package block bg-brand-50 border border-brand-200 rounded-lg overflow-hidden hover:border-brand-300 hover:shadow-xl hover:bg-white  transition-all duration-300 ease-in-out">
+  <div class="card__photo aspect-[5/4] bg-brand-300 overflow-hidden mb-1 rounded-md m-2">
     <div class="flex h-full items-center justify-center text-sm text-brand-500">
       <?= htmlspecialchars($card_photo_placeholder, ENT_QUOTES, 'UTF-8'); ?>
     </div>
   </div>
 
-  <div class="card__content p-6 bg-white border border-brand-200 rounded-lg  rounded-t-md overflow-hidden">
+  <div class="card__content p-6 pt-3">
     <h3 class="<?= $card_title_class; ?>">
       <?= htmlspecialchars($card_title, ENT_QUOTES, 'UTF-8'); ?>
     </h3>
@@ -57,7 +57,7 @@ $card_action_class      = 'card__action mt-4 flex gap-1';
         'href'    => $card_action_href,
         'variant' => 'default',
         'size'    => 'md',
-        'class'   => 'w-full',
+        'class'   => 'w-full border-brand-900 bg-gradient-to-b from-brand-700 to-brand-900 shadow-lg shadow-brand-400',
       ]); ?>
     </div>
   </div>

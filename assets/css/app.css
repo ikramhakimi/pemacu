@@ -5,8 +5,8 @@
 :root {
   /* Control height tokens */
   --ui-h-sm: 32px;
-  --ui-h-md: 44px;
-  --ui-h-lg: 56px;
+  --ui-h-md: 40px;
+  --ui-h-lg: 48px;
 
   /* Control horizontal padding tokens */
   --ui-px-sm: 12px;
@@ -28,6 +28,14 @@
 }
 
 @layer components {
+  .btn.btn--gradient {
+    box-shadow:
+      var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000),
+      inset 0 1px 1px rgb(255 255 255 / 0.2),
+      var(--tw-shadow, 0 0 #0000);
+  }
+
   .field__helper {
     font-size: 0.75rem;
     line-height: 1rem;
@@ -98,4 +106,40 @@
     transform: translateY(-1px);
   }
 
+  .marquee-photos {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .marquee-photos__track {
+    display: flex;
+    width: max-content;
+    animation: marquee-photos-scroll 90s linear infinite;
+    will-change: transform;
+  }
+
+  .marquee-photos__group {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.75rem;
+    flex-shrink: 0;
+    padding-right: 0.75rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-photos__track {
+      animation: none;
+    }
+  }
+
+}
+
+@keyframes marquee-photos-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
 }

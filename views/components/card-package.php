@@ -22,18 +22,21 @@ $card_feature_two       = '30 minutes coverage';
 $card_feature_three     = 'Up to 10 people';
 $card_action_label      = 'Book Package';
 $card_action_href       = '/bookingpro-themes/services/wedding-storytelling';
-$card_photo_placeholder = 'No photo';
-$card_title_class       = 'card__title text-xl font-semibold text-brand-900';
-$card_price_class       = 'card__price text text--price text-base font-semibold text-emerald-600';
-$card_description_class = 'card__description mt-2 text-base text-brand-700';
+$card_title_class       = 'card__title text-xl font-medium text-brand-800';
+$card_price_class       = 'card__price text text--price text-base font-medium text-emerald-600';
+$card_description_class = 'card__description mt-2 text-base text-brand-600';
 $card_features_class    = 'card__features mt-2 list-inside list-disc leading-relaxed text-brand-500';
 $card_action_class      = 'card__action mt-4 flex gap-1';
 ?>
-<article class="card card--package block bg-brand-50 border border-brand-200 rounded-lg overflow-hidden hover:border-brand-300 hover:shadow-xl hover:bg-white  transition-all duration-300 ease-in-out">
-  <div class="card__photo aspect-[5/4] bg-brand-300 overflow-hidden mb-1 rounded-md m-2">
-    <div class="flex h-full items-center justify-center text-sm text-brand-500">
-      <?= htmlspecialchars($card_photo_placeholder, ENT_QUOTES, 'UTF-8'); ?>
-    </div>
+<article class="<?php card('card--package block bg-brand-50 overflow-hidden hover:border-brand-300 hover:shadow-xl hover:bg-white transition-all duration-300 ease-in-out') ?>">
+  <div class="card__photo rounded-lg overflow-hidden m-2 mb-1">
+  <?php component('placeholder-image', [
+    'aspect-ratio'     => 'aspect-[5/4]',
+    'background-class' => 'bg-brand-300',
+    'icon-name'        => 'image-2-line',
+    'icon-size'        => '24',
+    'icon-color'       => 'text-brand-500',
+  ]); ?>
   </div>
 
   <div class="card__content p-6 pt-3">
@@ -43,9 +46,11 @@ $card_action_class      = 'card__action mt-4 flex gap-1';
     <p class="<?= $card_price_class; ?>">
       <?= htmlspecialchars($card_price, ENT_QUOTES, 'UTF-8'); ?>
     </p>
+    <?php if($card_description) {?>
     <p class="<?= $card_description_class; ?>">
       <?= htmlspecialchars($card_description, ENT_QUOTES, 'UTF-8'); ?>
     </p>
+    <?php } ?>
     <ul class="<?= $card_features_class; ?>">
       <li class="card__feature-item"><?= htmlspecialchars($card_feature_one, ENT_QUOTES, 'UTF-8'); ?></li>
       <li class="card__feature-item"><?= htmlspecialchars($card_feature_two, ENT_QUOTES, 'UTF-8'); ?></li>
@@ -53,11 +58,12 @@ $card_action_class      = 'card__action mt-4 flex gap-1';
     </ul>
     <div class="<?= $card_action_class; ?>">
       <?php component('button', [
-        'label'   => $card_action_label,
-        'href'    => $card_action_href,
-        'variant' => 'default',
-        'size'    => 'md',
-        'class'   => 'w-full border-brand-900 bg-gradient-to-b from-brand-700 to-brand-900 shadow-lg shadow-brand-400',
+        'label'    => $card_action_label,
+        'href'     => $card_action_href,
+        'variant'  => 'default',
+        'size'     => 'md',
+        'gradient' => true,
+        'class'    => 'w-full shadow-lg shadow-brand-400',
       ]); ?>
     </div>
   </div>

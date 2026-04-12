@@ -34,17 +34,24 @@ $card_note_text         = isset($card_intro_call['note_text']) && is_string($car
   ? $card_intro_call['note_text']
   : 'Our team will reach out within 24 hours to schedule your intro call.';
 ?>
-<article class="card card--intro-call block p-6 bg-brand-50 border border-brand-200 rounded-lg overflow-hidden">
-  <div class="card__media w-[120px] h-[120px] rounded-lg bg-brand-300 mb-6 flex items-center justify-center">
-    <?php icon($card_icon_name, ['icon_size' => '24', 'icon_class' => 'card__icon text-brand-600']); ?>
+<article class="<?php card('card--intro-call block p-6 bg-brand-50 overflow-hidden md:flex flex-col justify-between space-y-6') ?>">
+  <div class="card__media w-[120px] h-[120px] rounded-lg overflow-hidden">
+    <?php component('placeholder-image', ['aspect-ratio' => 'aspect-[1/1] w-full']); ?>
   </div>
   <div class="card__content">
     <p class="card__title text-3xl mb-6">
       <?= nl2br(htmlspecialchars($card_title, ENT_QUOTES, 'UTF-8'), false); ?>
     </p>
-    <a href="<?= htmlspecialchars($card_action_href, ENT_QUOTES, 'UTF-8'); ?>" class="card__action btn btn--default btn--lg inline-flex items-center justify-center rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium border border-brand-900 bg-gradient-to-b from-brand-700 to-brand-900 shadow-lg shadow-brand-400 text-white px-[var(--ui-px-lg)] text-base w-full"><span class="button__label"><?= htmlspecialchars($card_action_label, ENT_QUOTES, 'UTF-8'); ?></span></a>
+    <?php component('button', [
+      'label'    => $card_action_label,
+      'href'     => $card_action_href,
+      'variant'  => 'default',
+      'size'     => 'lg',
+      'gradient' => true,
+      'class'    => 'card__action w-full shadow-lg shadow-brand-400',
+    ]); ?>
   </div>
-  <div class="card__note flex items-center gap-4 mt-6">
+  <div class="card__note flex items-center gap-4">
     <div class="card__note-icon w-12 h-12 shrink-0 bg-brand-200 rounded-lg flex items-center justify-center">
       <?php icon($card_note_icon_name, ['icon_size' => '24', 'icon_class' => 'text-brand-600']); ?>
     </div>

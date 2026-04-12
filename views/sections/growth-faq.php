@@ -75,7 +75,7 @@ $section_faq_classes    = trim(
 );
 ?>
 <section class="<?= e($section_faq_classes); ?>">
-  <div class="container mx-auto max-w-6xl px-4 py-12">
+  <div class="<?php container('py-12') ?>">
     <?php component('header-section', [
       'header_topic'           => $section_faq_header_topic,
       'header_title'           => $section_faq_header_title,

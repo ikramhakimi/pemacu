@@ -1,5 +1,5 @@
 <section class="section section--process">
-  <div class="container max-w-6xl mx-auto w-full px-4 py-12">
+  <div class="<?php container('w-full py-12') ?>">
     <?php component('header-section', [
       'header_topic'           => 'Process',
       'header_title'           => 'A seamless process from start to finish.',

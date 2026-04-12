@@ -46,6 +46,24 @@ function path(string $uri): string
   return $base === '' ? $uri : $base . $uri;
 }
 
+function container(string $extra_class = ''): void
+{
+  $base_class  = 'container mx-auto max-w-6xl px-4';
+  $extra_class = trim($extra_class);
+  $class_name  = $extra_class === '' ? $base_class : $base_class . ' ' . $extra_class;
+
+  echo e($class_name);
+}
+
+function card(string $extra_class = ''): void
+{
+  $base_class  = 'card rounded-lg border border-brand-200';
+  $extra_class = trim($extra_class);
+  $class_name  = $extra_class === '' ? $base_class : $base_class . ' ' . $extra_class;
+
+  echo e($class_name);
+}
+
 function canvas_links(string $canvas_primary): array
 {
   if ($canvas_primary === 'patterns') {
@@ -79,6 +97,16 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/headers', 'label' => 'Headers'],
     ['href' => '/canvas/components/icons', 'label' => 'Icons'],
     ['href' => '/canvas/components/modal', 'label' => 'Modal'],
+  ];
+}
+
+function dashboard_links(): array
+{
+  return [
+    ['label' => 'Overview',  'href' => path('/dashboard'),         'icon_name' => 'home-6-line'],
+    ['label' => 'Bookings',  'href' => path('/package-book-call'), 'icon_name' => 'calendar-2-line'],
+    ['label' => 'Packages',  'href' => path('/package'),           'icon_name' => 'price-tag-3-line'],
+    ['label' => 'Portfolio', 'href' => path('/portfolio'),         'icon_name' => 'image-line'],
   ];
 }
 

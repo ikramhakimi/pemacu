@@ -9,16 +9,38 @@
       <div class="nav__zone nav__zone--center flex items-center col-start-2 justify-center text-base">
         <ul class="nav__list flex items-center space-x-4">
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/')); ?>">Home</a>
+            <?php component('dropdown-navigation', [
+              'dropdown_id'     => 'nav-home',
+              'dropdown_label'  => 'Home',
+              'dropdown_align'  => 'left',
+              'trigger_class'   => 'dropdown__trigger inline-flex items-center gap-1 font-medium text-brand-700 hover:text-brand-900',
+              'dropdown_links'  => [
+                ['label' => 'Home', 'href' => path('/')],
+                ['label' => 'Home Basic', 'href' => path('/home-basic')],
+                ['label' => 'Home Blog', 'href' => path('/home-blog')],
+              ],
+            ]); ?>
           </li>
           <li class="nav__item">
             <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/canvas/components')); ?>">Canvas</a>
           </li>
           <li class="nav__item">
+            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/dashboard')); ?>">Dashboard</a>
+          </li>
+          <li class="nav__item">
             <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/portfolio')); ?>">Portfolio</a>
           </li>
           <li class="nav__item">
-            <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/package')); ?>">Package</a>
+            <?php component('dropdown-navigation', [
+              'dropdown_id'     => 'nav-package',
+              'dropdown_label'  => 'Package',
+              'dropdown_align'  => 'left',
+              'trigger_class'   => 'dropdown__trigger inline-flex items-center gap-1 font-medium text-brand-700 hover:text-brand-900',
+              'dropdown_links'  => [
+                ['label' => 'Package', 'href' => path('/package')],
+                ['label' => 'Book a Call', 'href' => path('/package-book-call')],
+              ],
+            ]); ?>
           </li>
         </ul>
       </div>
@@ -85,13 +107,25 @@
               <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/')); ?>">Home</a>
             </li>
             <li class="nav-mobile__item">
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/home-basic')); ?>">Home Basic</a>
+            </li>
+            <li class="nav-mobile__item">
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/home-blog')); ?>">Home Blog</a>
+            </li>
+            <li class="nav-mobile__item">
               <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/canvas/components')); ?>">Canvas</a>
+            </li>
+            <li class="nav-mobile__item">
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/dashboard')); ?>">Dashboard</a>
             </li>
             <li class="nav-mobile__item">
               <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/portfolio')); ?>">Portfolio</a>
             </li>
             <li class="nav-mobile__item">
               <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/package')); ?>">Packages</a>
+            </li>
+            <li class="nav-mobile__item">
+              <a class="inline-flex font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/package-book-call')); ?>">Book a Call</a>
             </li>
           </ul>
         </div>

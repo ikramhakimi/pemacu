@@ -21,7 +21,7 @@ $app_css_url           = $app_css_version !== '' ? $app_css_href . '?v=' . $app_
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= e($app_css_url); ?>">
 </head>
-<body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed">
+<body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed" style="letter-spacing: -1%;">
   <main id="root">
   <?php if (!$hide_nav): ?>
     <?php component('nav'); ?>

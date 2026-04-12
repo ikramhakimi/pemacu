@@ -25,7 +25,7 @@ $card_features_class    = 'card__features mt-2 list-inside list-disc leading-rel
 $card_action_class      = 'card__action mt-4 border-t border-brand-200 pt-5';
 $card_link_class        = 'text-brand-700 hover:underline';
 ?>
-<article class="card card--feature overflow-hidden rounded-lg border border-brand-200 bg-white">
+<article class="<?php card('card--feature overflow-hidden bg-white') ?>">
   <div class="card__media m-6 mb-0 flex items-center justify-between">
     <div class="card__icon flex h-16 w-16 items-center justify-center rounded-lg bg-brand-300"></div>
   </div>

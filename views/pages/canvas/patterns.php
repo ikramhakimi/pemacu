@@ -24,22 +24,22 @@ layout('canvas-start', [
 </section>
 
 <div id="hero">
-  <?php section('section-hero'); ?>
+  <?php section('growth-hero'); ?>
 </div>
 
 <div id="packages">
-  <?php section('section-packages'); ?>
+  <?php section('growth-packages'); ?>
 </div>
 
 <div id="testimonials">
-  <?php section('section-testimonials'); ?>
+  <?php section('growth-testimonials'); ?>
 </div>
 
 <div id="faq">
-  <?php section('section-faq'); ?>
+  <?php section('growth-faq'); ?>
 </div>
 
 <div id="cta">
-  <?php section('section-cta'); ?>
+  <?php section('growth-cta'); ?>
 </div>
 <?php layout('canvas-end'); ?>

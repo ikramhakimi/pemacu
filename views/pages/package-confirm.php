@@ -12,7 +12,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
   'header_subtitle' => 'Capture festive moments with loved ones in a joyful and vibrant setting.',
 ]); ?>
 <section class="section pb-20">
-  <div class="container max-w-6xl mx-auto w-full px-4">
+  <div class="<?php container('w-full') ?>">
     <section class="pt-5 border-t border-dashed border-brand-200">
       <div class="md:grid grid-cols-4 gap-2">
         <div class="flex mb-4 gap-4 md:mb-0">
@@ -21,7 +21,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
           </div>
           <div>
             <h3 class="text-lg font-semibold text-brand-800">Booking Summary</h3>
-            <p>Enter your details for your booking</p>
+            <p>Summary & details for your booking</p>
           </div>
         </div>
         <div class="col-span-3 lg:col-span-2">
@@ -99,7 +99,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                 <span class="pointer-events-none absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-brand-300 bg-white text-brand-400 opacity-0 transition peer-checked:opacity-100 peer-checked:border-green-600 peer-checked:bg-green-600 peer-checked:text-white">
                   <?php icon('checkbox-circle-fill', ['icon_size' => '16']); ?>
                 </span>
-                <div class="rounded-lg border border-brand-300 bg-white p-6 transition peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-positive-500 peer-checked:ring-1 peer-checked:ring-positive-500 peer-checked:border-positive-500 peer-checked:bg-gradient-to-tr peer-checked:from-white peer-checked:via-positive-100 peer-checked:via-70% peer-checked:to-positive-300">
+                <div class="rounded-lg border border-brand-300 bg-white p-6 transition peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-positive-500 peer-checked:ring-1 peer-checked:ring-positive-500 peer-checked:border-positive-500 peer-checked:bg-[linear-gradient(to_top_right,#ffffff_0%,#ffffff_40%,#dcfce7_70%,#86efac_100%)]">
                   <h4 class="text-base font-semibold text-brand-900">Deposit</h4>
                   <div class="text-3xl mt-4 text-positive-700">RM 200</div>
                   <p class="mt-4 text-sm font-medium text-brand-600">50% now · 50% on session day.</p>
@@ -120,7 +120,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                 <span class="pointer-events-none absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full border border-brand-300 bg-white text-brand-400 opacity-0 transition peer-checked:opacity-100 peer-checked:border-green-600 peer-checked:bg-green-600 peer-checked:text-white">
                   <?php icon('checkbox-circle-fill', ['icon_size' => '16']); ?>
                 </span>
-                <div class="rounded-lg border border-brand-300 bg-white p-6 transition peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-positive-500 peer-checked:ring-1 peer-checked:ring-positive-500 peer-checked:border-positive-500 peer-checked:bg-gradient-to-tr peer-checked:from-white peer-checked:via-positive-100 peer-checked:via-70% peer-checked:to-positive-300">
+                <div class="rounded-lg border border-brand-300 bg-white p-6 transition peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-positive-500 peer-checked:ring-1 peer-checked:ring-positive-500 peer-checked:border-positive-500 peer-checked:bg-[linear-gradient(to_top_right,#ffffff_0%,#ffffff_40%,#dcfce7_70%,#86efac_100%)]">
                   <h4 class="text-base font-semibold text-brand-900">Full Payment</h4>
                   <div class="text-3xl mt-4 text-positive-700">RM 400</div>
                   <p class="mt-4 text-sm font-medium text-brand-600">Pay once, worry-free.</p>
@@ -134,19 +134,23 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
       </div>
     </section>
-
-    
     
     <section class="pt-5 mt-5 border-t border-brand-200">
       <div class="md:grid grid-cols-4 gap-2">
         <div class="col-span-3 col-start-2 lg:col-span-2 lg:col-start-2">
 
           <!-- CTA -->
-          <button type="button" class="mt-4 w-full btn btn--primary btn--lg inline-flex items-center justify-center gap-2 rounded-md border h-[var(--ui-h-lg)] leading-[var(--ui-h-lg)] font-medium text-white px-[var(--ui-px-lg)] text-lg bg-gradient-to-b from-primary-500 to-primary-600 border-primary-700 bg-primary-600 shadow-lg shadow-brand-400">
-            <span class="button__label">Continue Booking</span>
-            <?php icon('arrow-right-line', ['icon_size' => '20', 'icon_class' => 'text-white']); ?>
-            
-          </button>
+          <?php component('button', [
+            'label'         => 'Continue Booking',
+            'type'          => 'button',
+            'variant'       => 'primary',
+            'size'          => 'lg',
+            'gradient'      => true,
+            'icon_name'     => 'arrow-right-line',
+            'icon_position' => 'right',
+            'icon_class'    => 'text-white',
+            'class'         => 'mt-4 w-full shadow-lg shadow-brand-400',
+          ]); ?>
 
           <!-- reassurance -->
           <p class="mt-3 text-sm text-brand-500">
@@ -155,16 +159,11 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
       </div>
     </section>
-    </section>
-  
+  </div>
 </section>
 
-<?php section('section-faq'); ?>
-<?php section('section-testimonials'); ?>
-<?php // section('section-packages'); ?>
-<?php // section('section-cta'); ?>
-<?php section('section-footer'); ?>
-
-
+<?php section('growth-features-accordion'); ?>
+<?php section('growth-marquee-photos'); ?>
+<?php section('core-footer'); ?>
 
 <?php layout('layout-end'); ?>

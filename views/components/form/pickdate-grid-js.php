@@ -123,8 +123,8 @@ if ($forward_months < 1 || $forward_months > 36) {
     aria-label="Booking date options"
   ></div>
 
-  <div class="pickdate__selected-shell mt-4 flex items-center gap-3 rounded-md bg-brand-900 px-4 py-3 text-white">
-    <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-700 text-brand-300">
+  <div class="pickdate__selected-shell mt-4 flex items-center gap-3 rounded-md border border-dashed border-brand-300 bg-brand-50 px-4 py-3">
+    <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-200 text-brand-500">
       <?php icon('calendar-check-line', ['icon_size' => '16']); ?>
     </span>
     <p class="pickdate__selected-text text-sm font-medium" data-pickdate-grid-selected>
@@ -133,7 +133,7 @@ if ($forward_months < 1 || $forward_months > 36) {
   </div>
 
   <div
-    class="pickdate__promo-shell mt-2 rounded-md bg-white p-4"
+    class="pickdate__promo-shell mt-2 rounded-md border border-brand-200 bg-white p-4"
     data-pickdate-grid-promo-panel
     aria-live="polite"
     hidden

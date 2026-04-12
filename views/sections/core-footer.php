@@ -1,7 +1,7 @@
 <footer class="footer ">
   <!-- 
   <section class="border-t border-gray-200 text-gray-600">
-    <div class="container mx-auto max-w-6xl px-4 py-10 grid grid-cols-6 gap-4">
+    <div class="<?php container('py-10 grid grid-cols-6 gap-4') ?>">
       <div class="col-span-2">
         <div class="flex--items-start--justify-start--gap-4">
           <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-brand-300 mb-4 shrink-0"></div>
@@ -20,7 +20,7 @@
   </section> 
   -->
   <section class="border-t border-gray-200 text-gray-600">
-    <div class="container mx-auto max-w-6xl px-4 py-6">
+    <div class="<?php container('py-6') ?>">
       <div class="flex items-center justify-between">
         <div class="footer__logo">&copy; 2026 Business Name Ltd. All rights reserved.</div>
         <div class="footer__social flex items-center gap-4">

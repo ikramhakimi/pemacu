@@ -91,7 +91,7 @@ ob_start();
     $package_resolved_href = $resolve_package_href($package_action_url);
     $package_resolved_alt  = $package_photo_alt !== '' ? $package_photo_alt : $package_title;
     ?>
-    <article class="card card--package overflow-hidden border border-brand-200 bg-white shadow-sm rounded-2xl">
+    <article class="<?php card('card--package overflow-hidden bg-white shadow-sm rounded-2xl') ?>">
       <div class="card__photo aspect-[3/2] w-full bg-brand-100">
         <?php if ($package_photo !== ''): ?>
           <img
@@ -139,7 +139,7 @@ ob_start();
 $section_packages_content = trim((string) ob_get_clean());
 ?>
 <section class="<?= e($section_packages_classes); ?> lg:px-10 py-12">
-  <div class="container mx-auto max-w-6xl px-4">
+  <div class="<?php container() ?>">
     <?php component('header-section', [
       'header_topic'           => 'Packages',
       'header_title'           => 'Flexible services for every need.',

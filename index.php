@@ -3,7 +3,22 @@
 if (!defined('BASE_PATH')) {
   $script_name = $_SERVER['SCRIPT_NAME'] ?? '/';
   $script_dir  = dirname($script_name);
-  define('BASE_PATH', $script_dir === '/' || $script_dir === '.' ? '' : rtrim($script_dir, '/'));
+  $resolved_base_path = $script_dir === '/' || $script_dir === '.' ? '' : rtrim($script_dir, '/');
+
+  if ($resolved_base_path === '') {
+    $request_path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+    $request_path = is_string($request_path) ? $request_path : '/';
+    $project_slug = basename(__DIR__);
+
+    if ($project_slug !== '' && $project_slug !== '.' && $project_slug !== DIRECTORY_SEPARATOR) {
+      $project_prefix = '/' . trim($project_slug, '/');
+      if ($request_path === $project_prefix || strpos($request_path, $project_prefix . '/') === 0) {
+        $resolved_base_path = $project_prefix;
+      }
+    }
+  }
+
+  define('BASE_PATH', $resolved_base_path);
 }
 
 error_reporting(E_ALL);
@@ -35,7 +50,9 @@ if ($uri === '' || strtolower($uri) === 'index.php') {
 }
 
 $page = '';
-$pages_root = realpath(__DIR__ . '/views/pages');
+$pages_root     = realpath(__DIR__ . '/views/themes/core');
+$canvas_root    = realpath(__DIR__ . '/views/canvas');
+$dashboard_root = realpath(__DIR__ . '/views/dashboard');
 $is_valid_route = preg_match('/^[a-z0-9\/-]+$/i', $uri) === 1 && strpos($uri, '..') === false;
 
 if ($is_valid_route && $pages_root !== false) {
@@ -53,9 +70,63 @@ if ($is_valid_route && $pages_root !== false) {
   }
 }
 
+if (
+  $page === '' &&
+  $is_valid_route &&
+  $canvas_root !== false &&
+  ($uri === 'canvas' || strpos($uri, 'canvas/') === 0)
+) {
+  $canvas_uri = substr($uri, strlen('canvas'));
+  $canvas_uri = trim($canvas_uri, '/');
+
+  $canvas_candidates = [];
+
+  if ($canvas_uri === '') {
+    $canvas_candidates[] = realpath($canvas_root . '/index.php');
+  } else {
+    $canvas_candidates[] = realpath($canvas_root . '/' . $canvas_uri . '.php');
+    $canvas_candidates[] = realpath($canvas_root . '/' . $canvas_uri . '/index.php');
+  }
+
+  foreach ($canvas_candidates as $candidate) {
+    $is_in_canvas_directory = is_string($candidate) && strpos($candidate, $canvas_root . DIRECTORY_SEPARATOR) === 0;
+    if ($is_in_canvas_directory && is_file($candidate)) {
+      $page = $candidate;
+      break;
+    }
+  }
+}
+
+if (
+  $page === '' &&
+  $is_valid_route &&
+  $dashboard_root !== false &&
+  ($uri === 'dashboard' || strpos($uri, 'dashboard/') === 0)
+) {
+  $dashboard_uri = substr($uri, strlen('dashboard'));
+  $dashboard_uri = trim($dashboard_uri, '/');
+
+  $dashboard_candidates = [];
+
+  if ($dashboard_uri === '') {
+    $dashboard_candidates[] = realpath($dashboard_root . '/index.php');
+  } else {
+    $dashboard_candidates[] = realpath($dashboard_root . '/' . $dashboard_uri . '.php');
+    $dashboard_candidates[] = realpath($dashboard_root . '/' . $dashboard_uri . '/index.php');
+  }
+
+  foreach ($dashboard_candidates as $candidate) {
+    $is_in_dashboard_directory = is_string($candidate) && strpos($candidate, $dashboard_root . DIRECTORY_SEPARATOR) === 0;
+    if ($is_in_dashboard_directory && is_file($candidate)) {
+      $page = $candidate;
+      break;
+    }
+  }
+}
+
 if ($page === '') {
   http_response_code(404);
-  $page = __DIR__ . '/views/pages/404.php';
+  $page = __DIR__ . '/views/themes/core/404.php';
 }
 
 ob_start();

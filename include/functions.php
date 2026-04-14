@@ -274,6 +274,53 @@ function button_class(array $options = []): string
   return implode(' ', array_filter($classes));
 }
 
+function button(string $variant_size = 'md/default', string $extra_class = ''): void
+{
+  $resolved_size = 'md';
+  $resolved_tone = 'default';
+  $resolved_pair = trim($variant_size);
+
+  if ($resolved_pair !== '') {
+    if (str_contains($resolved_pair, '/')) {
+      [$raw_size, $raw_tone] = explode('/', $resolved_pair, 2);
+      $resolved_size = trim($raw_size) !== '' ? trim($raw_size) : 'md';
+      $resolved_tone = trim($raw_tone) !== '' ? trim($raw_tone) : 'default';
+    } else {
+      $resolved_size = $resolved_pair;
+    }
+  }
+
+  echo e(button_class([
+    'size'  => $resolved_size,
+    'tone'  => $resolved_tone,
+    'extra' => $extra_class,
+  ]));
+}
+
+function button_gradient(string $variant_size = 'md/default', string $extra_class = ''): void
+{
+  $resolved_size = 'md';
+  $resolved_tone = 'default';
+  $resolved_pair = trim($variant_size);
+
+  if ($resolved_pair !== '') {
+    if (str_contains($resolved_pair, '/')) {
+      [$raw_size, $raw_tone] = explode('/', $resolved_pair, 2);
+      $resolved_size = trim($raw_size) !== '' ? trim($raw_size) : 'md';
+      $resolved_tone = trim($raw_tone) !== '' ? trim($raw_tone) : 'default';
+    } else {
+      $resolved_size = $resolved_pair;
+    }
+  }
+
+  echo e(button_class([
+    'size'     => $resolved_size,
+    'tone'     => $resolved_tone,
+    'gradient' => true,
+    'extra'    => $extra_class,
+  ]));
+}
+
 function capture_button(array $options = []): string
 {
   ob_start();
@@ -441,8 +488,9 @@ function build_component_class(string $component_name, array $states = []): stri
 
 function component(string $component_name, array $data = []): void
 {
-  $components_root = __DIR__ . '/../views/components';
-  $component_key   = trim(str_replace('\\', '/', $component_name), '/');
+  $shared_components_root = __DIR__ . '/../views/shared/components';
+  $theme_components_root  = __DIR__ . '/../views/components';
+  $component_key          = trim(str_replace('\\', '/', $component_name), '/');
 
   if ($component_key === '' || str_contains($component_key, '..')) {
     throw new RuntimeException('Component not found: ' . $component_name);
@@ -451,11 +499,15 @@ function component(string $component_name, array $data = []): void
   $component_candidates = [];
 
   if (str_contains($component_key, '/')) {
-    $component_candidates[] = $components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $components_root . '/' . basename($component_key) . '.php';
+    $component_candidates[] = $shared_components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $shared_components_root . '/' . basename($component_key) . '.php';
+    $component_candidates[] = $theme_components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $theme_components_root . '/' . basename($component_key) . '.php';
   } else {
-    $component_candidates[] = $components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $components_root . '/form/' . $component_key . '.php';
+    $component_candidates[] = $shared_components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $shared_components_root . '/form/' . $component_key . '.php';
+    $component_candidates[] = $theme_components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $theme_components_root . '/form/' . $component_key . '.php';
   }
 
   $component_path = '';
@@ -480,9 +532,27 @@ function component(string $component_name, array $data = []): void
 
 function layout(string $layout_name, array $data = []): void
 {
-  $layout_path = __DIR__ . '/../views/layout/' . $layout_name . '.php';
+  $layout_key = trim(str_replace('\\', '/', $layout_name), '/');
 
-  if (!is_file($layout_path)) {
+  if ($layout_key === '' || str_contains($layout_key, '..')) {
+    throw new RuntimeException('Layout not found: ' . $layout_name);
+  }
+
+  $layout_candidates = [
+    __DIR__ . '/../views/' . $layout_key . '.php',
+    __DIR__ . '/../views/themes/core/layouts/' . $layout_key . '.php',
+    __DIR__ . '/../views/layout/' . $layout_key . '.php',
+  ];
+  $layout_path = '';
+
+  foreach ($layout_candidates as $layout_candidate) {
+    if (is_file($layout_candidate)) {
+      $layout_path = $layout_candidate;
+      break;
+    }
+  }
+
+  if ($layout_path === '') {
     throw new RuntimeException('Layout not found: ' . $layout_name);
   }
 
@@ -492,17 +562,63 @@ function layout(string $layout_name, array $data = []): void
 
 function section(string $section_name, array $data = []): void
 {
-  $section_path = __DIR__ . '/../views/sections/' . $section_name . '.php';
+  $section_key = trim(str_replace('\\', '/', $section_name), '/');
 
-  if (!is_file($section_path)) {
+  if ($section_key === '' || str_contains($section_key, '..')) {
+    throw new RuntimeException('Section not found: ' . $section_name);
+  }
+
+  $section_candidates = [
+    __DIR__ . '/../views/sections/' . $section_key . '.php',
+    __DIR__ . '/../views/themes/core/sections/' . $section_key . '.php',
+  ];
+  $section_path = '';
+
+  foreach ($section_candidates as $section_candidate) {
+    if (is_file($section_candidate)) {
+      $section_path = $section_candidate;
+      break;
+    }
+  }
+
+  if ($section_path === '') {
     throw new RuntimeException('Section not found: ' . $section_name);
   }
 
   $states        = isset($data['states']) && is_array($data['states']) ? $data['states'] : [];
-  $section_class = build_component_class($section_name, $states);
+  $section_class = build_component_class($section_key, $states);
 
   extract($data, EXTR_SKIP);
   require $section_path;
+}
+
+function partial(string $partial_name, array $data = []): void
+{
+  $partial_key = trim(str_replace('\\', '/', $partial_name), '/');
+
+  if ($partial_key === '' || str_contains($partial_key, '..')) {
+    throw new RuntimeException('Partial not found: ' . $partial_name);
+  }
+
+  $partial_candidates = [
+    __DIR__ . '/../views/themes/core/partials/' . $partial_key . '.php',
+    __DIR__ . '/../views/partials/' . $partial_key . '.php',
+  ];
+  $partial_path = '';
+
+  foreach ($partial_candidates as $partial_candidate) {
+    if (is_file($partial_candidate)) {
+      $partial_path = $partial_candidate;
+      break;
+    }
+  }
+
+  if ($partial_path === '') {
+    throw new RuntimeException('Partial not found: ' . $partial_name);
+  }
+
+  extract($data, EXTR_SKIP);
+  require $partial_path;
 }
 
 function icon(string $icon_name, array $data = []): void

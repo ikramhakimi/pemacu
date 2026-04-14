@@ -100,6 +100,15 @@ Only when explicitly requested:
 
 ---
 
+## JS Class Hooks (Non-Negotiable)
+- All JS-related class hooks must use this format:
+  - `.js-component-block-name`
+- JS hook classes must be placed at the end of the `class` attribute (not at the beginning or middle).
+- Exception:
+  - If the element has a single class only, the JS hook can be that single class.
+
+---
+
 ## Styling
 - Use Tailwind as default.
 - Prefer utility classes + existing components.

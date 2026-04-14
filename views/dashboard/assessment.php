@@ -79,6 +79,279 @@ layout('dashboard/partials/dashboard-start', [
   <section class="mt-8" aria-labelledby="assessment-summary-heading">
     <h2 id="assessment-summary-heading" class="sr-only">Assessment summary</h2>
 
+    <article class="assessment-project-info rounded-lg border border-brand-200 bg-white" aria-labelledby="assessment-project-info-heading">
+      <header class="mb-5">
+        <h2 id="assessment-project-info-heading" class="text-2xl font-semibold text-brand-900">Project Information</h2>
+        <p class="mt-1 text-sm text-brand-600">Fill in project and consultant details before proceeding with scoring.</p>
+      </header>
+
+      <form class="divide-y divide-brand-200" action="#" method="post">
+        <section class="grid grid-cols-6 p-6 gap-10 space-y-2">
+          <div class="col-span-2">
+            <p class="text-xl font-semibold text-brand-900">Project Overview</p>
+            <p class="mt-1 text-sm text-brand-500">Provide basic project information for record-keeping and reporting purposes.</p> 
+          </div>
+          <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <?php component('form/field', [
+              'label'       => 'Project Name',
+              'helper_text' => 'Use the official project title shown in submission documents.',
+              'class'           => 'md:col-span-2 space-y-2',
+              'input_props' => [
+                'name'        => 'project_name',
+                'placeholder' => 'Enter project name',
+                'required'    => true,
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Project Address',
+              'helper_text' => 'Include lot, street, and city for site verification.',
+              'class'           => 'md:col-span-2 space-y-2',
+              'input_props' => [
+                'name'        => 'project_address',
+                'placeholder' => 'Enter project address',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Postcode',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'postcode',
+                'placeholder' => 'e.g. 50450',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'           => 'State',
+              'input_component' => 'select',
+              'class'           => 'space-y-2',
+              'input_props'     => [
+                'name'    => 'state',
+                'options' => [
+                  ['label' => 'Select state', 'value' => '', 'selected' => true],
+                  ['label' => 'Johor', 'value' => 'johor'],
+                  ['label' => 'Kedah', 'value' => 'kedah'],
+                  ['label' => 'Kelantan', 'value' => 'kelantan'],
+                  ['label' => 'Kuala Lumpur', 'value' => 'kuala_lumpur'],
+                  ['label' => 'Labuan', 'value' => 'labuan'],
+                  ['label' => 'Melaka', 'value' => 'melaka'],
+                  ['label' => 'Negeri Sembilan', 'value' => 'negeri_sembilan'],
+                  ['label' => 'Pahang', 'value' => 'pahang'],
+                  ['label' => 'Penang', 'value' => 'penang'],
+                  ['label' => 'Perak', 'value' => 'perak'],
+                  ['label' => 'Perlis', 'value' => 'perlis'],
+                  ['label' => 'Putrajaya', 'value' => 'putrajaya'],
+                  ['label' => 'Sabah', 'value' => 'sabah'],
+                  ['label' => 'Sarawak', 'value' => 'sarawak'],
+                  ['label' => 'Selangor', 'value' => 'selangor'],
+                  ['label' => 'Terengganu', 'value' => 'terengganu'],
+                ],
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'           => 'Building Description',
+              'helper_text'     => 'Describe building type, use, and scope details.',
+              'input_component' => 'textarea',
+              'class'           => 'md:col-span-2 space-y-2',
+              'input_props'     => [
+                'name'        => 'building_description',
+                'rows'        => 5,
+                'placeholder' => 'Describe building type, use, and key details',
+              ],
+            ]); ?>
+          </div>
+        </section>
+
+        <section class="grid grid-cols-6 p-6 gap-10 space-y-2">
+          <div class="col-span-2">
+            <p class="text-xl font-semibold text-brand-900">Project Overview</p>
+            <p class="mt-1 text-sm text-brand-500">Provide basic project information for record-keeping and reporting purposes.</p> 
+          </div>
+          <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+          </div>
+        </section>
+
+
+
+
+
+
+
+        <section class="space-y-4">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500"></h3>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <?php component('form/field', [
+              'label'       => 'Applicant',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'applicant',
+                'placeholder' => 'Enter applicant name',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Contact Person',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'contact_person',
+                'placeholder' => 'Enter contact person name',
+              ],
+            ]); ?>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Project Team</h3>
+          <div class="space-y-4">
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Core Consultant</p>
+            <div class="grid grid-cols-1 gap-4">
+              <?php component('form/field', [
+                'label'       => 'Architect',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'architect',
+                  'placeholder' => 'Enter architect',
+                ],
+              ]); ?>
+            </div>
+
+            <div class="border-t border-dashed border-brand-300"></div>
+
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Engineers</p>
+            <div class="grid grid-cols-1 gap-4">
+              <?php component('form/field', [
+                'label'       => 'Civil Engineer',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'civil_engineer',
+                  'placeholder' => 'Enter civil engineer',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'       => 'Structural Engineer',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'structural_engineer',
+                  'placeholder' => 'Enter structural engineer',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'       => 'Mechanical Engineer',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'mechanical_engineer',
+                  'placeholder' => 'Enter mechanical engineer',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'       => 'Electrical Engineer',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'electrical_engineer',
+                  'placeholder' => 'Enter electrical engineer',
+                ],
+              ]); ?>
+            </div>
+
+            <div class="border-t border-dashed border-brand-300"></div>
+
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Surveyors & Specialists</p>
+            <div class="grid grid-cols-1 gap-4">
+              <?php component('form/field', [
+                'label'       => 'Quantity Surveyor',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'quantity_surveyor',
+                  'placeholder' => 'Enter quantity surveyor',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'       => 'Land Surveyor',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'land_surveyor',
+                  'placeholder' => 'Enter land surveyor',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'       => 'Landscape Consultant',
+                'class'       => 'space-y-2 md:max-w-[75%]',
+                'input_props' => [
+                  'name'        => 'landscape_consultant',
+                  'placeholder' => 'Enter landscape consultant',
+                ],
+              ]); ?>
+
+              <?php component('form/field', [
+                'label'           => 'Other Specialist Consultant(s)',
+                'input_component' => 'textarea',
+                'class'           => 'space-y-2 md:max-w-[75%]',
+                'input_props'     => [
+                  'name'        => 'other_specialist_consultants',
+                  'rows'        => 4,
+                  'placeholder' => 'List other specialist consultants',
+                ],
+              ]); ?>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Authority & Contractor</h3>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <?php component('form/field', [
+              'label'       => 'Local Authority',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'local_authority',
+                'placeholder' => 'Enter local authority',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Main Contractor',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'main_contractor',
+                'placeholder' => 'Enter main contractor',
+              ],
+            ]); ?>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Project Specifications</h3>
+          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <?php component('form/field', [
+              'label'       => 'Total Gross Floor Area',
+              'helper_text' => 'Use the latest approved GFA value for this submission.',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'total_gross_floor_area',
+                'placeholder' => 'e.g. 12500 m²',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Land Area (for landed property)',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'land_area_landed_property',
+                'placeholder' => 'e.g. 18000 m²',
+              ],
+            ]); ?>
+          </div>
+        </section>
+      </form>
+    </article>
+
     <article class="rounded-lg border border-brand-200 bg-white p-6">
       <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Total Score</p>
       <p class="mt-2 text-3xl font-semibold text-brand-900">67 / 100</p>
@@ -175,732 +448,44 @@ layout('dashboard/partials/dashboard-start', [
       Scores are based on documented sustainable practices and verified data inputs across each category.
     </div>
 
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--ee',
+      'assessment_category_id'               => 'assessment-category-heading',
+      'assessment_category_title'            => 'Energy Efficiency (EE)',
+      'assessment_category_subtitle'         => 'Design / Commissioning / Verification & Maintenance',
+      'assessment_category_header_icon_name' => 'flashlight-line',
+      'assessment_category_header_score'     => '26',
+      'assessment_category_header_max'       => '35',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-ee-rows.php',
+      'assessment_category_total_label'      => 'Total EE Score',
+      'assessment_category_meta_html'        => 'Updated by <span class="font-semibold">Ahmad Faris bin Mohd Zaki</span> on <span class="font-semibold">1 Jan 2024, 10:00 AM</span>',
+    ]); ?>
 
-    <section class="assessment-category assessment-category--ee rounded-lg bg-brand-900 overflow-hidden mt-10 pb-1 js-assessment-category" aria-labelledby="assessment-category-heading">
-      <header class="assessment-category__header flex items-center p-5 gap-5 text-brand-400">
-        <div class="assessment-category__badge flex items-center justify-center rounded-md bg-white text-brand-800">
-          <div class="px-4 py-6">
-            <?php component('icon', [
-              'icon_name'  => 'flashlight-line',
-              'icon_size'  => '24',
-              'icon_class' => 'text-current',
-            ]); ?>
-          </div>
-          <div class="text-brand-600 pr-3 text-center">
-            <div data-assessment-header-score>26</div>
-            <div class="mt-1 pt-1 border-t border-brand-400" data-assessment-header-max>35</div>
-          </div>
-        </div>
-        <div>
-          <h2 class="assessment-category__title text-2xl text-white">Energy Efficiency (EE)</h2>
-          <div class="assessment-category__subtitle mt-1">Design / Commissioning / Verification & Maintenance</div>
-        </div>
-      </header>
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--eq',
+      'assessment_category_id'               => 'assessment-category-eq-heading',
+      'assessment_category_title'            => 'Indoor Environmental QualitY (EQ)',
+      'assessment_category_subtitle'         => 'Air Quality | Thermal Comfort | Lighting, Visual & Acoustic Comfort | Verification',
+      'assessment_category_header_icon_name' => 'windy-line',
+      'assessment_category_header_score'     => '0',
+      'assessment_category_header_max'       => '0',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-eq-rows.php',
+      'assessment_category_total_label'      => 'Total EQ Score',
+      'assessment_category_meta_html'        => '',
+    ]); ?>
 
-      <article class="assessment-category__content bg-white mx-1 rounded-md overflow-hidden">
-        <table class="assessment-category__table assessment-table w-full border-collapse mb-5 border-b js-assessment-table">
-          <tbody>
-            <tr class="assessment-table__group-row bg-brand-100 cursor-pointer js-assessment-group-row" tabindex="0" role="button" aria-expanded="true">
-              <td colspan="5" class="p-4 border border-b-8 border-brand-300 text-brand-900 align-top font-bold text-base uppercase">
-                <div class="flex items-center justify-start gap-3">
-                  <?php component('icon', [
-                    'icon_name'  => 'arrow-right-s-line',
-                    'icon_size'  => '24',
-                    'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
-                  ]); ?>
-                  <div>Design</div>
-                </div>
-              </td>
-            </tr>
-            
-            <tr class="assessment-table__item-row" data-assessment-row data-assessment-points="1">
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE1</div>
-              </td>
-              <td class="assessment-table__item-content p-3 border border-brand-200 align-top">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">Minimum EE Performance</div>
-                <div>Establish minimum energy efficiency (EE) performance to reduce energy consumption in buildings, thus reducing CO2 emission to the atmosphere. Meet the following minimum EE requirements as stipulated inMS 1525:2007:</div>
-              </td>
-              <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                <div class="flex items-center justify-end">
-                  <?php component('form/checkbox', [
-                    'name'       => 'ee1_score',
-                    'label'      => '1',
-                    'checked'    => false,
-                    'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                    'attributes' => [
-                      'aria-label' => 'EE1 score',
-                    ],
-                  ]); ?>
-                </div>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee1',
-                  'name'        => 'assessment_remark_ee1',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE2</div>
-              </td>
-              <td class="assessment-table__item-content p-0 pt-3 pl-3 border border-brand-200 align-top" colspan="2">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">Lighting Zoning</div>
-                <div class="pb-3">
-                  Provide flexible lighting controls to optimise energy savings:
-                </div>
-
-                <table class="assessment-table__nested w-full border-collapse">
-                  <tbody>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-2" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        All individual or enclosed spaces to be individually switched; and the size of individually switched lighting zones shall not exceed 100m² for 90% of the NLA; with switching clearly labelled and easily accessible by building occupants.
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee2_1_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE2 row 1 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-2" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        Provide auto-sensor controlled lighting in conjunction with daylighting strategy for all perimeter zones and daylit areas, if any
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee2_2_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE2 row 2 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-2" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        Provide motion sensors or equivalent to complement lighting zoning for at least 25% NLA.
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee2_3_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE2 row 3 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-2">0 <span class="font-normal text-brand-500">/ 3</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top">
-                <?php component('form/textarea', [
-                  'id'    => 'assessment-remark-ee2',
-                  'name'  => 'assessment_remark_ee2',
-                  'rows'  => 5,
-                  'value' => 'This criterion rewards the implementation of flexible lighting controls that allow occupants to adjust lighting based on their needs and preferences, while also optimising energy savings. By providing individual switching for enclosed spaces and auto-sensor controls for perimeter zones, the building can significantly reduce energy consumption while maintaining occupant comfort.',
-                  'class' => 'text-sm',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr class="assessment-table__item-row" data-assessment-row data-assessment-points="1">
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE3</div>
-              </td>
-              <td class="assessment-table__item-content p-3 border border-brand-200 align-top">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">
-                  Electrical sub-metering &amp; Tenant sub-metering
-                </div>
-                <div>
-                  Monitor energy consumption of key building services as well as all tenancy areas:
-                </div>
-                <div>
-                  Provide sub-metering for all energy uses of ≥ 100kVA; with separate sub-metering for lighting and separately for power at each floor or tenancy, whichever is smaller.
-                </div>
-              </td>
-              <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                <div class="flex items-center justify-end">
-                  <?php component('form/checkbox', [
-                    'name'       => 'ee3_score',
-                    'label'      => '1',
-                    'checked'    => false,
-                    'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                    'attributes' => [
-                      'aria-label' => 'EE3 score',
-                    ],
-                  ]); ?>
-                </div>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee3',
-                  'name'        => 'assessment_remark_ee3',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE4</div>
-              </td>
-              <td class="assessment-table__item-content p-0 pt-3 pl-3 border border-brand-200 align-top" colspan="2">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">Renewable Energy</div>
-                <div class="pb-3">
-                  Encourage use of renewable energy:
-                </div>
-
-                <table class="assessment-table__nested w-full border-collapse">
-                  <tbody>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-4" data-assessment-exclusive-group="group-4" data-assessment-points="2">
-                      <td class="p-3 border border-brand-200">
-                        Where 0.5 % or 5 kWp whichever is the greater, of the total electricity consumption is generated by renewable energy, OR
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee4_1_score',
-                            'label'      => '2',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE4 row 1 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-4" data-assessment-exclusive-group="group-4" data-assessment-points="3">
-                      <td class="p-3 border border-brand-200">
-                        Where 1.0 % or 10 kWp whichever is the greater, of the total electricity consumption is generated by renewable energy, OR
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee4_2_score',
-                            'label'      => '3',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE4 row 2 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-4" data-assessment-exclusive-group="group-4" data-assessment-points="4">
-                      <td class="p-3 border border-brand-200">
-                        Where 1.5 % or 20 kWp whichever is the greater, of the total electricity consumption is generated by renewable energy, OR
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee4_3_score',
-                            'label'      => '4',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE4 row 3 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-4" data-assessment-exclusive-group="group-4" data-assessment-points="5">
-                      <td class="p-3 border border-brand-200">
-                        Where 2.0 % or 40 kWp whichever is the greater, of the total electricity consumption is generated by renewable energy
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee4_4_score',
-                            'label'      => '5',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE4 row 4 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-4" data-assessment-group-mode="max" data-assessment-group-max="5">0 <span class="font-normal text-brand-500">/ 5</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee4',
-                  'name'        => 'assessment_remark_ee4',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE5</div>
-              </td>
-              <td class="assessment-table__item-content p-0 pt-3 pl-3 border border-brand-200 align-top" colspan="2">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">Advanced EE Performance</div>
-
-                <table class="assessment-table__nested w-full border-collapse mt-3">
-                  <tbody>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="2">
-                      <td class="p-3 border border-brand-200">
-                        Exceed Energy Efficiency (EE) performance better than the baseline minimum to reduce energy consumption in the building. Achieve Building Energy Intensity (BEI) ≤ 150 kWh/m2 yr as defined under GBI reference (using BEIT Software or other GBI approved software(s)), OR
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_1_score',
-                            'label'      => '2',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 1 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="3">
-                      <td class="p-3 border border-brand-200">BEI ≤ 140, OR</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_2_score',
-                            'label'      => '3',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 2 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="5">
-                      <td class="p-3 border border-brand-200">BEI ≤ 130, OR</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_3_score',
-                            'label'      => '5',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 3 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="8">
-                      <td class="p-3 border border-brand-200">BEI ≤ 120, OR</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_4_score',
-                            'label'      => '8',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 4 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="10">
-                      <td class="p-3 border border-brand-200">BEI ≤ 110, OR</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_5_score',
-                            'label'      => '10',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 5 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="12">
-                      <td class="p-3 border border-brand-200">BEI ≤ 100, OR</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_6_score',
-                            'label'      => '12',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 6 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-5" data-assessment-exclusive-group="group-5" data-assessment-points="15">
-                      <td class="p-3 border border-brand-200">BEI ≤ 90</td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee5_7_score',
-                            'label'      => '15',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE5 row 7 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-5" data-assessment-group-mode="max" data-assessment-group-max="15">0 <span class="font-normal text-brand-500">/ 15</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee5',
-                  'name'        => 'assessment_remark_ee5',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr class="assessment-table__group-row bg-brand-100 cursor-pointer js-assessment-group-row" tabindex="0" role="button" aria-expanded="true">
-              <td colspan="5" class="p-4 border border-b-8 border-brand-300 text-brand-900 align-top font-bold text-base uppercase">
-                <div class="flex items-center justify-start gap-3">
-                  <?php component('icon', [
-                    'icon_name'  => 'arrow-right-s-line',
-                    'icon_size'  => '24',
-                    'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
-                  ]); ?>
-                  <div>Commissioning</div>
-                </div>
-              </td>
-            </tr>
-
-            <tr class="assessment-table__item-row" data-assessment-row data-assessment-points="3">
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE6</div>
-              </td>
-              <td class="assessment-table__item-content p-3 border border-brand-200 align-top">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">
-                  Enhanced Commissioning of Building Energy Systems
-                </div>
-                <div>
-                  Ensure building’s energy related systems are designed and installed to achieve proper commissioning
-                  so as to realise their full potential and intent. Appoint an independent GBI recognised Commissioning
-                  Specialist (CxS) at the onset of the design process to verify that comprehensive pre-commissioning and
-                  commissioning is performed for all the building's energy related systems in accordance with ASHRAE
-                  Commissioning Guideline or other GBI approved equivalent standard/s by:
-                </div>
-                <ol type="1" class="list-decimal pl-5 mt-3 space-y-2">
-                  <li>Conducting at least one commissioning design review during the detail design stage and back-check the review comments during the tender documentation stage.</li>
-                  <li>Developing and incorporating commissioning requirements into the tender documents.</li>
-                  <li>Developing and implementing a commissioning plan.</li>
-                  <li>Verifying the installation and performance of the systems to be commissioned.</li>
-                  <li>Reviewing contractor submittals applicable to systems being commissioned for compliance.</li>
-                  <li>Developing a systems manual that provides future operating staff the information needed to understand and optimally operate the commissioned systems.</li>
-                  <li>Verifying that the requirements for training operating personnel and building occupants are completed.</li>
-                </ol>
-              </td>
-              <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                <div class="flex items-center justify-end">
-                  <?php component('form/checkbox', [
-                    'name'       => 'ee6_score',
-                    'label'      => '3',
-                    'checked'    => false,
-                    'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                    'attributes' => [
-                      'aria-label' => 'EE6 score',
-                    ],
-                  ]); ?>
-                </div>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 3</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee6',
-                  'name'        => 'assessment_remark_ee6',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE7</div>
-              </td>
-              <td class="assessment-table__item-content p-0 pt-3 pl-3 border border-brand-200 align-top" colspan="2">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">
-                  Post Occupancy Commissioning
-                </div>
-                <div class="pb-3">
-                  Carry out post occupancy commissioning for all tenancy areas after fit-out changes are completed:
-                </div>
-
-                <table class="assessment-table__nested w-full border-collapse">
-                  <tbody>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-7" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        Design engineer shall review all tenancy fit-out plans to ensure original design intent is not compromised and upon completion of the fit-out works, verify and fine-tune the installations to suit.
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee7_1_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE7 row 1 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-7" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        Within 12 months of practical completion (or earlier if there is at least 50% occupancy), the CxS shall carry out a full post/re-commissioning of the building's energy related systems to verify that their performance is sustained in conjunction with the completed tenancy fit-outs.
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee7_2_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE7 row 2 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-7">0 <span class="font-normal text-brand-500">/ 2</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee7',
-                  'name'        => 'assessment_remark_ee7',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr class="assessment-table__group-row bg-brand-100 cursor-pointer js-assessment-group-row" tabindex="0" role="button" aria-expanded="true">
-              <td colspan="5" class="p-4 border border-b-8 border-brand-300 text-brand-900 align-top font-bold text-base uppercase">
-                <div class="flex items-center justify-start gap-3">
-                  <?php component('icon', [
-                    'icon_name'  => 'arrow-right-s-line',
-                    'icon_size'  => '24',
-                    'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
-                  ]); ?>
-                  <div>Verification & Maintenance</div>
-                </div>
-              </td>
-            </tr>
-
-            <tr class="assessment-table__item-row" data-assessment-row data-assessment-points="2">
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE8</div>
-              </td>
-              <td class="assessment-table__item-content p-3 border border-brand-200 align-top">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">
-                  EE Verification
-                </div>
-                <div>
-                  Verify predicted energy use of key building services:
-                </div>
-                <ol type="1" class="list-decimal pl-5 mt-3 space-y-2">
-                  <li>Use Energy Management System to monitor and analyse energy consumption including reading of submeters, AND</li>
-                  <li>Fully commission EMS including Maximum Demand Limiting programme within 12 months of practical completion (or earlier if there is at least 50% occupancy).</li>
-                </ol>
-              </td>
-              <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                <div class="flex items-center justify-end">
-                  <?php component('form/checkbox', [
-                    'name'       => 'ee8_score',
-                    'label'      => '2',
-                    'checked'    => false,
-                    'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                    'attributes' => [
-                      'aria-label' => 'EE8 score',
-                    ],
-                  ]); ?>
-                </div>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 2</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee8',
-                  'name'        => 'assessment_remark_ee8',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-
-            <tr>
-              <td class="p-3 border border-brand-200 align-top">
-                <div class="assessment-table__item-code h-[var(--ui-h-md)] flex items-center justify-start uppercase font-bold">EE9</div>
-              </td>
-              <td class="assessment-table__item-content p-0 pt-3 pl-3 border border-brand-200 align-top" colspan="2">
-                <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">
-                  Sustainable Maintenance
-                </div>
-                <div class="pb-3">
-                  Ensure the building’s energy related systems will continue to perform as intended beyond the 12 months Defects &amp; Liability Period:
-                </div>
-
-                <table class="assessment-table__nested w-full border-collapse">
-                  <tbody>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-9" data-assessment-points="1">
-                      <td class="p-3 border border-brand-200">
-                        <ol type="1" start="1" class="list-decimal pl-5">
-                          <li>At least 50% of permanent building maintenance team to be on-board one (1) to three (3) months before practical completion and to fully participate (to be specified in contract conditions) in the Testing &amp; Commissioning of all building energy services.</li>
-                        </ol>
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee9_1_score',
-                            'label'      => '1',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE9 row 1 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr class="assessment-table__item-row border-t border-brand-200" data-assessment-row data-assessment-group="group-9" data-assessment-points="2">
-                      <td class="p-3 border border-brand-200">
-                        <ol type="1" start="2" class="list-decimal pl-5 space-y-2">
-                          <li>Provide for a designated building maintenance office that is fully equipped with facilities (including tools and instrumentation) and inventory storage.</li>
-                          <li>Provide evidence of documented plan for at least 3-year facility maintenance and preventive maintenance budget (inclusive of staffing and outsourced contracts).</li>
-                        </ol>
-                      </td>
-                      <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
-                        <div class="flex items-center justify-end">
-                          <?php component('form/checkbox', [
-                            'name'       => 'ee9_2_score',
-                            'label'      => '2',
-                            'checked'    => false,
-                            'class'      => 'bg-white justify-center flex-row-reverse h-[var(--ui-h-md)] border border-brand-300 rounded-md gap-4 w-[80px]',
-                            'attributes' => [
-                              'aria-label' => 'EE9 row 2 score',
-                            ],
-                          ]); ?>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-9">0 <span class="font-normal text-brand-500">/ 3</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <?php component('form/textarea', [
-                  'id'          => 'assessment-remark-ee9',
-                  'name'        => 'assessment_remark_ee9',
-                  'rows'        => 5,
-                  'value'       => 'No remarks',
-                  'placeholder' => 'Add remarks...',
-                  'class'       => 'text-sm font-normal',
-                ]); ?>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr class="assessment-table__total-row">
-              <td colspan="3" class="p-0 border-0"></td>
-              <td class="assessment-table__item-score p-3 border border-brand-200 align-top text-right font-semibold" width="80">
-                <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-table-total>0 <span class="font-normal text-brand-500">/ 0</span></div>
-              </td>
-              <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-                <div class="min-h-[var(--ui-h-md)] flex items-center justify-start">
-                  Total EE Score
-                </div>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-        <div class="assessment-category__meta p-5 text-right">
-          Updated by <span class="font-semibold">Ahmad Faris bin Mohd Zaki</span> on <span class="font-semibold">1 Jan 2024, 10:00 AM</span> 
-        </div>
-      </article>
-    </section>
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--sm',
+      'assessment_category_id'               => 'assessment-category-sm-heading',
+      'assessment_category_title'            => 'Sustainable Site PLANNING & Management (SM)',
+      'assessment_category_subtitle'         => 'Site Planning / Construction Management / Transportation / Design',
+      'assessment_category_header_icon_name' => 'road-map-line',
+      'assessment_category_header_score'     => '0',
+      'assessment_category_header_max'       => '0',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-sm-rows.php',
+      'assessment_category_total_label'      => 'Total SM Score',
+      'assessment_category_meta_html'        => '',
+    ]); ?>
 
 
 

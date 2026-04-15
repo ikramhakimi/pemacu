@@ -18,7 +18,21 @@
   </td>
   <td class="assessment-table__item-content p-3 border border-brand-200 align-top">
     <div class="uppercase font-bold h-[var(--ui-h-md)] flex items-center justify-start">Minimum EE Performance</div>
-    <div>Establish minimum energy efficiency (EE) performance to reduce energy consumption in buildings, thus reducing CO2 emission to the atmosphere. Meet the following minimum EE requirements as stipulated inMS 1525:2007:</div>
+    <div>
+      Establish minimum energy efficiency (EE) performance to reduce energy consumption in buildings, thus
+      reducing CO2 emission to the atmosphere. Meet the following minimum EE requirements as stipulated in
+      MS 1525:2007:
+    </div>
+    <ol start="1" class="mt-2 list-decimal space-y-1 pl-5">
+      <li>
+        OTTV ≤ 50, RTTV ≤ 25. Submit calculations using the BEIT software or other GBI approved software(s),
+        <br>
+        <strong>AND</strong>
+      </li>
+      <li>
+        Provision of Energy Management Control system where Air-conditioned space ≥ 4000m2.
+      </li>
+    </ol>
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">

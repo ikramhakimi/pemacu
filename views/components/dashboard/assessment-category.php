@@ -40,7 +40,7 @@ if ($assessment_category_rows_partial === '' || !is_file($assessment_category_ro
 $assessment_category_section_class = trim(
   'assessment-category ' .
   $assessment_category_modifier .
-  ' bg-brand-900 overflow-hidden mt-10 pb-1 js-assessment-category'
+  ' bg-brand-800 ring-1 ring-brand-900 border-0 overflow-hidden mt-10 pb-1 js-assessment-category'
 );
 ?>
 <section class="<?php card($assessment_category_section_class); ?>" aria-labelledby="<?= e($assessment_category_id); ?>">

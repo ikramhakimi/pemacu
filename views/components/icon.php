@@ -34,7 +34,7 @@ if ($icon_name_class === '') {
   return;
 }
 
-$icons_root = dirname(__DIR__, 3) . '/node_modules/remixicon/icons';
+$icons_root = dirname(__DIR__, 2) . '/node_modules/remixicon/icons';
 
 if (!is_dir($icons_root)) {
   return;

@@ -7,6 +7,7 @@
         'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
       ]); ?>
       <div>Design</div>
+      <div class="font-normal text-primary-700" data-assessment-section-total>0 <span class="text-brand-500">/ 25</span></div>
     </div>
   </td>
 </tr>
@@ -425,6 +426,7 @@
         'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
       ]); ?>
       <div>Commissioning</div>
+      <div class="font-normal text-primary-700" data-assessment-section-total>0 <span class="text-brand-500">/ 5</span></div>
     </div>
   </td>
 </tr>
@@ -559,6 +561,7 @@
         'icon_class' => 'text-current opacity-60 inline-block transition-transform duration-200 js-assessment-group-icon',
       ]); ?>
       <div>Verification & Maintenance</div>
+      <div class="font-normal text-primary-700" data-assessment-section-total>0 <span class="text-brand-500">/ 5</span></div>
     </div>
   </td>
 </tr>

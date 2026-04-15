@@ -488,9 +488,8 @@ function build_component_class(string $component_name, array $states = []): stri
 
 function component(string $component_name, array $data = []): void
 {
-  $shared_components_root = __DIR__ . '/../views/shared/components';
-  $theme_components_root  = __DIR__ . '/../views/components';
-  $component_key          = trim(str_replace('\\', '/', $component_name), '/');
+  $components_root = __DIR__ . '/../views/components';
+  $component_key   = trim(str_replace('\\', '/', $component_name), '/');
 
   if ($component_key === '' || str_contains($component_key, '..')) {
     throw new RuntimeException('Component not found: ' . $component_name);
@@ -499,15 +498,11 @@ function component(string $component_name, array $data = []): void
   $component_candidates = [];
 
   if (str_contains($component_key, '/')) {
-    $component_candidates[] = $shared_components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $shared_components_root . '/' . basename($component_key) . '.php';
-    $component_candidates[] = $theme_components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $theme_components_root . '/' . basename($component_key) . '.php';
+    $component_candidates[] = $components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $components_root . '/' . basename($component_key) . '.php';
   } else {
-    $component_candidates[] = $shared_components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $shared_components_root . '/form/' . $component_key . '.php';
-    $component_candidates[] = $theme_components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $theme_components_root . '/form/' . $component_key . '.php';
+    $component_candidates[] = $components_root . '/' . $component_key . '.php';
+    $component_candidates[] = $components_root . '/form/' . $component_key . '.php';
   }
 
   $component_path = '';

@@ -17,7 +17,7 @@ declare(strict_types=1);
  * - $label_tag (string): label|p|span|div (default: label).
  * - $hide_label (bool): When true, omit rendering the label element.
  * - $label_for (string): Optional explicit value for label for="" when label_tag is label.
- * - $input_component (string): Form component key under views/shared/components/form (default: input).
+ * - $input_component (string): Form component key under views/components/form (default: input).
  * - $input_props (array): Props passed into the selected form component.
  * - $id (string): Optional control id. Auto-generated when omitted.
  * - $helper_id (string): Optional helper text id. Auto-generated when omitted.

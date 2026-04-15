@@ -36,7 +36,7 @@ layout('dashboard/partials/dashboard-start', [
   .assessment-table > tfoot > tr > td:last-child {
     border-right: 0;
     padding-right: 16px;
-    width: 40%;
+    width: 33%;
   }
 
   .assessment-table > tbody tbody td {
@@ -64,6 +64,14 @@ layout('dashboard/partials/dashboard-start', [
 
   .assessment-table > tbody > tr > td[colspan="2"] table > tbody > tr > td:nth-child(2) {
     border-left: 0;
+  }
+
+  .assessment-table__item-content {
+    font-size: 13px;
+  }
+
+  .assessment-table__item-content > .uppercase.font-bold {
+    font-size: 14px;
   }
 
 </style>
@@ -161,27 +169,34 @@ layout('dashboard/partials/dashboard-start', [
                 'placeholder' => 'Describe building type, use, and key details',
               ],
             ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Total Gross Floor Area',
+              'helper_text' => 'Use the latest approved GFA value for this submission.',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'total_gross_floor_area',
+                'placeholder' => 'e.g. 12500 m²',
+              ],
+            ]); ?>
+
+            <?php component('form/field', [
+              'label'       => 'Land Area (for landed property)',
+              'class'       => 'space-y-2',
+              'input_props' => [
+                'name'        => 'land_area_landed_property',
+                'placeholder' => 'e.g. 18000 m²',
+              ],
+            ]); ?>
           </div>
         </section>
 
         <section class="grid grid-cols-6 p-6 gap-10 space-y-2">
           <div class="col-span-2">
-            <p class="text-xl font-semibold text-brand-900">Project Overview</p>
-            <p class="mt-1 text-sm text-brand-500">Provide basic project information for record-keeping and reporting purposes.</p> 
+            <p class="text-xl font-semibold text-brand-900">Applicant & Contact</p>
+            <p class="mt-1 text-sm text-brand-500">Specify the organisation or individual submitting this application and the main contact person for communication.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-          </div>
-        </section>
-
-
-
-
-
-
-
-        <section class="space-y-4">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500"></h3>
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
             <?php component('form/field', [
               'label'       => 'Applicant',
               'class'       => 'space-y-2',
@@ -202,9 +217,12 @@ layout('dashboard/partials/dashboard-start', [
           </div>
         </section>
 
-        <section class="space-y-4">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Project Team</h3>
-          <div class="space-y-4">
+        <section class="grid grid-cols-6 p-6 gap-10 space-y-2">
+          <div class="col-span-2">
+            <p class="text-xl font-semibold text-brand-900">Project Team</p>
+            <p class="mt-1 text-sm text-brand-500">List all appointed consultants and professionals involved in the design and delivery of the project.</p> 
+          </div>
+          <div class="col-span-4 space-y-6">
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Core Consultant</p>
             <div class="grid grid-cols-1 gap-4">
               <?php component('form/field', [
@@ -303,9 +321,12 @@ layout('dashboard/partials/dashboard-start', [
           </div>
         </section>
 
-        <section class="space-y-4">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Authority & Contractor</h3>
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <section class="grid grid-cols-6 p-6 gap-10 space-y-2">
+          <div class="col-span-2">
+            <p class="text-xl font-semibold text-brand-900">Authority & Contractor</p>
+            <p class="mt-1 text-sm text-brand-500">Identify the approving authority and the main contractor responsible for executing the project.</p> 
+          </div>
+          <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
             <?php component('form/field', [
               'label'       => 'Local Authority',
               'class'       => 'space-y-2',
@@ -321,30 +342,6 @@ layout('dashboard/partials/dashboard-start', [
               'input_props' => [
                 'name'        => 'main_contractor',
                 'placeholder' => 'Enter main contractor',
-              ],
-            ]); ?>
-          </div>
-        </section>
-
-        <section class="space-y-4">
-          <h3 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Project Specifications</h3>
-          <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/field', [
-              'label'       => 'Total Gross Floor Area',
-              'helper_text' => 'Use the latest approved GFA value for this submission.',
-              'class'       => 'space-y-2',
-              'input_props' => [
-                'name'        => 'total_gross_floor_area',
-                'placeholder' => 'e.g. 12500 m²',
-              ],
-            ]); ?>
-
-            <?php component('form/field', [
-              'label'       => 'Land Area (for landed property)',
-              'class'       => 'space-y-2',
-              'input_props' => [
-                'name'        => 'land_area_landed_property',
-                'placeholder' => 'e.g. 18000 m²',
               ],
             ]); ?>
           </div>
@@ -440,7 +437,7 @@ layout('dashboard/partials/dashboard-start', [
     ?>
     <div id="assessment-widgets-brand" class="assessment-widget-grid mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3" aria-label="Assessment category widgets">
       <?php foreach ($assessment_widgets as $assessment_widget): ?>
-        <?php component('dashboard/widgets/widget-assessment', $assessment_widget); ?>
+        <?php component('dashboard/widget-assessment', $assessment_widget); ?>
       <?php endforeach; ?>
     </div>
 
@@ -448,11 +445,20 @@ layout('dashboard/partials/dashboard-start', [
       Scores are based on documented sustainable practices and verified data inputs across each category.
     </div>
 
+    <div class="assessment-section-toggle mt-6 mb-2">
+      <?php component('form/checkbox', [
+        'id'      => 'assessment-collapse-sections-toggle',
+        'name'    => 'assessment-collapse-sections-toggle',
+        'label'   => 'Collapse Section Headers',
+        'checked' => false,
+      ]); ?>
+    </div>
+
     <?php component('dashboard/assessment-category', [
       'assessment_category_modifier'         => 'assessment-category--ee',
       'assessment_category_id'               => 'assessment-category-heading',
       'assessment_category_title'            => 'Energy Efficiency (EE)',
-      'assessment_category_subtitle'         => 'Design / Commissioning / Verification & Maintenance',
+      'assessment_category_subtitle'         => 'Measures energy-saving strategies across systems and operations.',
       'assessment_category_header_icon_name' => 'flashlight-line',
       'assessment_category_header_score'     => '26',
       'assessment_category_header_max'       => '35',
@@ -465,10 +471,10 @@ layout('dashboard/partials/dashboard-start', [
       'assessment_category_modifier'         => 'assessment-category--eq',
       'assessment_category_id'               => 'assessment-category-eq-heading',
       'assessment_category_title'            => 'Indoor Environmental QualitY (EQ)',
-      'assessment_category_subtitle'         => 'Air Quality | Thermal Comfort | Lighting, Visual & Acoustic Comfort | Verification',
+      'assessment_category_subtitle'         => 'Focuses on air quality, thermal comfort, and occupant wellbeing.',
       'assessment_category_header_icon_name' => 'windy-line',
       'assessment_category_header_score'     => '0',
-      'assessment_category_header_max'       => '0',
+      'assessment_category_header_max'       => '16',
       'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-eq-rows.php',
       'assessment_category_total_label'      => 'Total EQ Score',
       'assessment_category_meta_html'        => '',
@@ -477,13 +483,52 @@ layout('dashboard/partials/dashboard-start', [
     <?php component('dashboard/assessment-category', [
       'assessment_category_modifier'         => 'assessment-category--sm',
       'assessment_category_id'               => 'assessment-category-sm-heading',
-      'assessment_category_title'            => 'Sustainable Site PLANNING & Management (SM)',
-      'assessment_category_subtitle'         => 'Site Planning / Construction Management / Transportation / Design',
+      'assessment_category_title'            => 'Sustainable Site Planning & Management (SM)',
+      'assessment_category_subtitle'         => 'Assesses responsible site use, transport, and ecological impact.',
       'assessment_category_header_icon_name' => 'road-map-line',
       'assessment_category_header_score'     => '0',
       'assessment_category_header_max'       => '0',
       'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-sm-rows.php',
       'assessment_category_total_label'      => 'Total SM Score',
+      'assessment_category_meta_html'        => '',
+    ]); ?>
+
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--mr',
+      'assessment_category_id'               => 'assessment-category-mr-heading',
+      'assessment_category_title'            => 'Material & Resources (MR)',
+      'assessment_category_subtitle'         => 'Tracks low-impact materials, reuse practices, and waste reduction.',
+      'assessment_category_header_icon_name' => 'recycle-line',
+      'assessment_category_header_score'     => '0',
+      'assessment_category_header_max'       => '0',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-mr-rows.php',
+      'assessment_category_total_label'      => 'Total MR Score',
+      'assessment_category_meta_html'        => '',
+    ]); ?>
+
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--we',
+      'assessment_category_id'               => 'assessment-category-we-heading',
+      'assessment_category_title'            => 'Water Efficiency (WE)',
+      'assessment_category_subtitle'         => 'Evaluates water-saving fixtures, reuse, and monitoring performance.',
+      'assessment_category_header_icon_name' => 'water-flash-line',
+      'assessment_category_header_score'     => '0',
+      'assessment_category_header_max'       => '0',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-we-rows.php',
+      'assessment_category_total_label'      => 'Total WE Score',
+      'assessment_category_meta_html'        => '',
+    ]); ?>
+
+    <?php component('dashboard/assessment-category', [
+      'assessment_category_modifier'         => 'assessment-category--in',
+      'assessment_category_id'               => 'assessment-category-in-heading',
+      'assessment_category_title'            => 'Innovation (IN)',
+      'assessment_category_subtitle'         => 'Rewards new ideas and exemplary sustainable solutions.',
+      'assessment_category_header_icon_name' => 'lightbulb-flash-line',
+      'assessment_category_header_score'     => '0',
+      'assessment_category_header_max'       => '0',
+      'assessment_category_rows_partial'     => __DIR__ . '/partials/assessment-category-in-rows.php',
+      'assessment_category_total_label'      => 'Total IN Score',
       'assessment_category_meta_html'        => '',
     ]); ?>
 
@@ -493,10 +538,24 @@ layout('dashboard/partials/dashboard-start', [
     <script>
       (function () {
         var category_nodes = document.querySelectorAll('.js-assessment-category');
+        var collapse_sections_toggle = document.getElementById('assessment-collapse-sections-toggle');
+        var all_group_controllers = [];
 
         if (category_nodes.length === 0) {
           return;
         }
+
+        var set_group_rows_visibility = function (group_row, controlled_rows, group_icon, should_hide) {
+          controlled_rows.forEach(function (row) {
+            row.classList.toggle('hidden', should_hide);
+          });
+
+          group_row.setAttribute('aria-expanded', should_hide ? 'false' : 'true');
+
+          if (group_icon) {
+            group_icon.classList.toggle('-rotate-90', should_hide);
+          }
+        };
 
         category_nodes.forEach(function (category_node) {
           var assessment_table = category_node.querySelector('.js-assessment-table');
@@ -508,19 +567,28 @@ layout('dashboard/partials/dashboard-start', [
           var assessment_rows = assessment_table.querySelectorAll('[data-assessment-row]');
           var group_rows = assessment_table.querySelectorAll('tbody > tr.js-assessment-group-row');
 
-          var setup_section_toggles = function () {
-            group_rows.forEach(function (group_row) {
-              var controlled_rows = [];
-              var next_row = group_row.nextElementSibling;
+          var get_group_controlled_rows = function (group_row) {
+            var controlled_rows = [];
+            var next_row = group_row.nextElementSibling;
 
-              while (next_row && !next_row.classList.contains('js-assessment-group-row')) {
-                controlled_rows.push(next_row);
-                next_row = next_row.nextElementSibling;
-              }
+            while (next_row && !next_row.classList.contains('js-assessment-group-row')) {
+              controlled_rows.push(next_row);
+              next_row = next_row.nextElementSibling;
+            }
+
+            return controlled_rows;
+          };
+
+          var setup_section_toggles = function () {
+            var category_group_controllers = [];
+
+            group_rows.forEach(function (group_row) {
+              var controlled_rows = get_group_controlled_rows(group_row);
 
               if (controlled_rows.length === 0) {
                 return;
               }
+
               var group_icon = group_row.querySelector('.js-assessment-group-icon');
 
               var toggle_group_rows = function () {
@@ -528,15 +596,7 @@ layout('dashboard/partials/dashboard-start', [
                   return !row.classList.contains('hidden');
                 });
 
-                controlled_rows.forEach(function (row) {
-                  row.classList.toggle('hidden', should_hide);
-                });
-
-                group_row.setAttribute('aria-expanded', should_hide ? 'false' : 'true');
-
-                if (group_icon) {
-                  group_icon.classList.toggle('-rotate-90', should_hide);
-                }
+                set_group_rows_visibility(group_row, controlled_rows, group_icon, should_hide);
               };
 
               group_row.addEventListener('click', function () {
@@ -551,7 +611,15 @@ layout('dashboard/partials/dashboard-start', [
                 event.preventDefault();
                 toggle_group_rows();
               });
+
+              category_group_controllers.push({
+                group_row:       group_row,
+                controlled_rows: controlled_rows,
+                group_icon:      group_icon,
+              });
             });
+
+            return category_group_controllers;
           };
 
           var read_points = function (row) {
@@ -563,76 +631,12 @@ layout('dashboard/partials/dashboard-start', [
             return String(score) + ' <span class="font-normal text-brand-500">/ ' + String(max) + '</span>';
           };
 
-          var update_row_total = function (row) {
-            var checkbox = row.querySelector('input[type="checkbox"]');
-            var total_node = row.querySelector('[data-assessment-total]');
-
-            if (!checkbox || !total_node) {
-              return;
-            }
-
-            var points = read_points(row);
-            var score = checkbox.checked ? points : 0;
-            total_node.innerHTML = render_score_markup(score, points);
-            total_node.classList.toggle('text-primary-600', score > 0);
-          };
-
-          var update_group_totals = function () {
-            var group_total_nodes = assessment_table.querySelectorAll('[data-assessment-group-total]');
-
-            group_total_nodes.forEach(function (group_total_node) {
-              var group_name = group_total_node.getAttribute('data-assessment-group-total');
-              var group_mode = group_total_node.getAttribute('data-assessment-group-mode');
-              var group_max = Number(group_total_node.getAttribute('data-assessment-group-max'));
-
-              if (!group_name) {
-                return;
-              }
-
-              var grouped_rows = assessment_table.querySelectorAll('[data-assessment-row][data-assessment-group="' + group_name + '"]');
-              var group_points = 0;
-              var group_score = 0;
-
-              grouped_rows.forEach(function (row) {
-                var points = read_points(row);
-                var checkbox = row.querySelector('input[type="checkbox"]');
-
-                group_points += points;
-
-                if (group_mode === 'max') {
-                  if (checkbox && checkbox.checked) {
-                    group_score = Math.max(group_score, points);
-                  }
-                  return;
-                }
-
-                group_score += checkbox && checkbox.checked ? points : 0;
-              });
-
-              if (Number.isFinite(group_max) && group_max > 0) {
-                group_points = group_max;
-              }
-
-              group_total_node.innerHTML = render_score_markup(group_score, group_points);
-              group_total_node.classList.toggle('text-primary-600', group_score > 0);
-            });
-          };
-
-          var update_table_total = function () {
-            var total_node = assessment_table.querySelector('[data-assessment-table-total]');
-            var header_score_node = category_node.querySelector('[data-assessment-header-score]');
-            var header_max_node = category_node.querySelector('[data-assessment-header-max]');
-
-            if (!total_node) {
-              return;
-            }
-
-            var all_rows = assessment_table.querySelectorAll('[data-assessment-row]');
+          var calculate_totals_from_rows = function (rows) {
             var group_map = {};
             var total_max = 0;
             var total_score = 0;
 
-            all_rows.forEach(function (row) {
+            rows.forEach(function (row) {
               var group_name = row.getAttribute('data-assessment-group');
               var points = read_points(row);
               var checkbox = row.querySelector('input[type="checkbox"]');
@@ -695,15 +699,116 @@ layout('dashboard/partials/dashboard-start', [
               total_score += group_score;
             });
 
-            total_node.innerHTML = render_score_markup(total_score, total_max);
-            total_node.classList.toggle('text-primary-600', total_score > 0);
+            return {
+              score: total_score,
+              max: total_max,
+            };
+          };
+
+          var update_row_total = function (row) {
+            var checkbox = row.querySelector('input[type="checkbox"]');
+            var total_node = row.querySelector('[data-assessment-total]');
+
+            if (!checkbox || !total_node) {
+              return;
+            }
+
+            var points = read_points(row);
+            var score = checkbox.checked ? points : 0;
+            total_node.innerHTML = render_score_markup(score, points);
+            total_node.classList.toggle('text-primary-600', score > 0);
+          };
+
+          var update_group_totals = function () {
+            var group_total_nodes = assessment_table.querySelectorAll('[data-assessment-group-total]');
+
+            group_total_nodes.forEach(function (group_total_node) {
+              var group_name = group_total_node.getAttribute('data-assessment-group-total');
+              var group_mode = group_total_node.getAttribute('data-assessment-group-mode');
+              var group_max = Number(group_total_node.getAttribute('data-assessment-group-max'));
+
+              if (!group_name) {
+                return;
+              }
+
+              var grouped_rows = assessment_table.querySelectorAll('[data-assessment-row][data-assessment-group="' + group_name + '"]');
+              var group_points = 0;
+              var group_score = 0;
+
+              grouped_rows.forEach(function (row) {
+                var points = read_points(row);
+                var checkbox = row.querySelector('input[type="checkbox"]');
+
+                group_points += points;
+
+                if (group_mode === 'max') {
+                  if (checkbox && checkbox.checked) {
+                    group_score = Math.max(group_score, points);
+                  }
+                  return;
+                }
+
+                group_score += checkbox && checkbox.checked ? points : 0;
+              });
+
+              if (Number.isFinite(group_max) && group_max > 0) {
+                group_points = group_max;
+              }
+
+              group_total_node.innerHTML = render_score_markup(group_score, group_points);
+              group_total_node.classList.toggle('text-primary-600', group_score > 0);
+            });
+          };
+
+          var update_section_totals = function () {
+            group_rows.forEach(function (group_row) {
+              var section_total_node = group_row.querySelector('[data-assessment-section-total]');
+
+              if (!section_total_node) {
+                return;
+              }
+
+              var controlled_rows = get_group_controlled_rows(group_row);
+              var section_rows = [];
+
+              controlled_rows.forEach(function (row) {
+                if (row.hasAttribute('data-assessment-row')) {
+                  section_rows.push(row);
+                }
+
+                var nested_rows = row.querySelectorAll('[data-assessment-row]');
+                nested_rows.forEach(function (nested_row) {
+                  section_rows.push(nested_row);
+                });
+              });
+              var section_totals = calculate_totals_from_rows(section_rows);
+
+              section_total_node.innerHTML = render_score_markup(section_totals.score, section_totals.max);
+              section_total_node.classList.toggle('text-primary-600', section_totals.score > 0);
+            });
+          };
+
+          var update_table_total = function () {
+            var total_node = assessment_table.querySelector('[data-assessment-table-total]');
+            var header_score_node = category_node.querySelector('[data-assessment-header-score]');
+            var header_max_node = category_node.querySelector('[data-assessment-header-max]');
+
+            if (!total_node) {
+              return;
+            }
+
+            var all_rows = Array.from(assessment_table.querySelectorAll('[data-assessment-row]'));
+            var totals = calculate_totals_from_rows(all_rows);
+
+            total_node.innerHTML = render_score_markup(totals.score, totals.max);
+            total_node.classList.toggle('text-primary-600', totals.score > 0);
 
             if (header_score_node) {
-              header_score_node.textContent = String(total_score);
+              header_score_node.textContent = String(totals.score);
             }
 
             if (header_max_node) {
-              header_max_node.textContent = String(total_max);
+              header_max_node.textContent = String(totals.max);
             }
           };
 
@@ -739,13 +844,34 @@ layout('dashboard/partials/dashboard-start', [
 
               update_row_total(row);
               update_group_totals();
+              update_section_totals();
               update_table_total();
             });
           });
 
           update_group_totals();
+          update_section_totals();
           update_table_total();
-          setup_section_toggles();
+          all_group_controllers = all_group_controllers.concat(setup_section_toggles());
+        });
+
+        if (!collapse_sections_toggle) {
+          return;
+        }
+
+        var set_all_sections_collapsed = function (should_collapse) {
+          all_group_controllers.forEach(function (group_controller) {
+            set_group_rows_visibility(
+              group_controller.group_row,
+              group_controller.controlled_rows,
+              group_controller.group_icon,
+              should_collapse
+            );
+          });
+        };
+
+        collapse_sections_toggle.addEventListener('change', function () {
+          set_all_sections_collapsed(collapse_sections_toggle.checked);
         });
       })();
     </script>

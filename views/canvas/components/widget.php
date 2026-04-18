@@ -15,12 +15,14 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Widget',
     'header_subtitle'        => 'Reference for dashboard metric widgets built on card layout with BEM extension classes.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
 <section class="space-y-8">

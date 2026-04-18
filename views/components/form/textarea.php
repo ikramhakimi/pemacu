@@ -42,10 +42,10 @@ if ($disabled) {
 }
 
 $state_map = [
-  'default'  => 'bg-white ring-1 ring-brand-300 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500',
-  'positive' => 'bg-white ring-1 ring-positive-400 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-positive-500',
-  'negative' => 'bg-white ring-1 ring-negative-400 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-negative-500',
-  'disabled' => 'bg-brand-100 text-brand-400 ring-1 ring-brand-200 ring-inset placeholder:text-brand-400',
+  'default'  => 'block bg-white ring-1 ring-brand-300 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500',
+  'positive' => 'block bg-white ring-1 ring-positive-400 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-positive-500',
+  'negative' => 'block bg-white ring-1 ring-negative-400 ring-inset placeholder:text-brand-400 focus:outline-none focus:ring-2 focus:ring-negative-500',
+  'disabled' => 'block bg-brand-100 text-brand-400 ring-1 ring-brand-200 ring-inset placeholder:text-brand-400',
 ];
 
 if (!isset($state_map[$state])) {

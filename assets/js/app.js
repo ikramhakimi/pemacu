@@ -8,3 +8,7 @@ import './components/stepper.js';
 import './components/dropdown.js';
 import './components/pagination.js';
 import './components/modal.js';
+import './components/drawer.js';
+import './components/assessment-form-drawer.js';
+import './components/assessment-form-bottom-nav.js';
+import './components/dashboard-sidebar.js';

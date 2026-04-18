@@ -54,12 +54,14 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Alert',
     'header_subtitle'        => 'Reference for semantic alert tones, dismissible behavior, and action affordances.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
 <section class="space-y-8">

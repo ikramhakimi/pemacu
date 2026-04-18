@@ -15,12 +15,14 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Headers',
     'header_subtitle'        => 'Reference for section-level and page-level header patterns across product surfaces.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
 <section class="space-y-3">
@@ -46,12 +48,14 @@ layout('canvas/layouts/canvas-start', [
     <h3 class="text-xl font-bold text-brand-900">Header Page</h3>
     <p class="mt-2 max-w-3xl text-brand-600">Use for page introductions and main content context.</p>
     <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-3">
-      <?php component('header-page', [
-        'header_topic'           => 'Components',
+      <?php
+      $canvas_header = [
         'header_title'           => 'Page Header',
         'header_subtitle'        => 'Use this variant to introduce page scope, intent, and expected actions.',
         'header_container_class' => 'w-full',
-      ]); ?>
+      ];
+      component('canvas/header', ['canvas_header' => $canvas_header]);
+      ?>
     </div>
   </div>
 
@@ -70,7 +74,6 @@ layout('canvas/layouts/canvas-start', [
     <p class="mt-2 max-w-3xl text-brand-600">Use inside pages to separate related content blocks.</p>
     <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
       <?php component('header-section', [
-        'header_topic'           => 'Section',
         'header_title'           => 'Content Group Header',
         'header_subtitle'        => 'Use this variant to frame grouped content and define the section purpose.',
         'header_container_class' => 'w-full',

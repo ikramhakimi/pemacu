@@ -15,12 +15,14 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Layout',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Grids',
     'header_subtitle'        => 'Reference for responsive grid patterns and spacing density across content layouts.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
 <section class="space-y-8">

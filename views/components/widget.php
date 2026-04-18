@@ -48,7 +48,7 @@ if (!in_array($widget_badge_tone, $allowed_badge_tones, true)) {
 }
 
 $widget_classes = trim(implode(' ', array_filter([
-  'widget widget--metric bg-white p-5',
+  'widget widget--metric bg-brand-50 p-5',
   $widget_class_name,
 ])));
 ?>

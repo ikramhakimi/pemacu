@@ -5,6 +5,39 @@ declare(strict_types=1);
 $page_title           = 'Canvas Components - Breadcrumb';
 $page_current         = 'canvas-components';
 $component_page_links = canvas_links('components');
+$breadcrumb_base_items = [
+  ['label' => 'Home', 'href' => '#'],
+  ['label' => 'Library', 'href' => '#'],
+  ['label' => 'Components', 'href' => '#'],
+  ['label' => 'Breadcrumb', 'current' => true],
+];
+$breadcrumb_icon_items = [
+  [
+    'label'     => 'Home',
+    'href'      => '#',
+    'icon_name' => 'home-6-line',
+  ],
+  [
+    'label'     => 'Components',
+    'href'      => '#',
+    'icon_name' => 'box-1-line',
+  ],
+  [
+    'label'     => 'Navigation',
+    'href'      => '#',
+    'icon_name' => 'function-line',
+  ],
+  [
+    'label'     => 'Breadcrumb',
+    'current'   => true,
+    'icon_name' => 'map-pin-line',
+  ],
+];
+$breadcrumb_compact_items = [
+  ['label' => 'Home', 'href' => '#'],
+  ['label' => 'Dashboards', 'href' => '#'],
+  ['label' => 'Analytics', 'current' => true],
+];
 
 layout('canvas/layouts/canvas-start', [
   'page_title'         => $page_title,
@@ -15,65 +48,79 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Breadcrumb',
     'header_subtitle'        => 'Reference for path hierarchy, separator styles, and compact breadcrumb usage.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Use breadcrumbs to show current location in a multi-level hierarchy.</li>
-      <li>Keep each crumb label short and descriptive.</li>
-      <li>Keep parent levels as links and render the current page as plain text.</li>
-      <li>Use compact size only in dense layouts such as utilities and sub-headers.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Slash Separator</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use for simple content hierarchies where a lightweight divider keeps the path easy to scan.
-      </p>
-      <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
-        <?php component('breadcrumb-slash'); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Breadcrumb Base
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('breadcrumb', [
+            'items' => $breadcrumb_base_items,
+          ]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Chevron Separator (SVG)</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use when you want stronger directional cues between levels, especially in product and docs flows.
-      </p>
-      <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
-        <?php component('breadcrumb-chevron'); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Breadcrumb A
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('breadcrumb', [
+            'items'     => $breadcrumb_base_items,
+            'separator' => 'chevron',
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">With Icon</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use to reinforce section meaning with familiar symbols in navigation-heavy experiences.
-      </p>
-      <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
-        <?php component('breadcrumb-icon'); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Breadcrumb B
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('breadcrumb', [
+            'items'           => $breadcrumb_icon_items,
+            'separator'       => 'chevron',
+            'show_item_icons' => true,
+          ]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Compact</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use in tight spaces like toolbars, table headers, and nested utility panels.
-      </p>
-      <div class="mt-4 rounded-md bg-white p-5 border border-dashed border-brand-300">
-        <?php component('breadcrumb-compact'); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Breadcrumb C
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('breadcrumb', [
+            'items' => $breadcrumb_compact_items,
+            'size'  => 'sm',
+          ]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

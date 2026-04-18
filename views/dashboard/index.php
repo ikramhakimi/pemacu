@@ -5,130 +5,201 @@ declare(strict_types=1);
 $page_title   = 'Dashboard';
 $page_current = 'dashboard';
 
+$dashboard_users_grid_rows = [
+  ['Aina Zulkifli', 'aina@aurorastudio.my', 'Active', 18, 'RM 12,400'],
+  ['Mika Rahman', 'mika@northframe.co', 'Draft', 6, 'RM 4,200'],
+  ['Siti Lim', 'siti@everlight.my', 'Active', 10, 'RM 7,500'],
+  ['Daniel Chong', 'daniel@northframe.co', 'Pending', 4, 'RM 2,050'],
+  ['Farah Nabila', 'farah@aurorastudio.my', 'Active', 13, 'RM 8,900'],
+  ['Kevin Tan', 'kevin@everlight.my', 'Paused', 2, 'RM 760'],
+];
+
 layout('dashboard/partials/dashboard-start', [
   'page_title'   => $page_title,
   'page_current' => $page_current,
 ]);
 ?>
-<article class="app-article">
-    <header class="flex flex-col gap-4 border-b border-brand-200 pb-6 md:flex-row md:items-end md:justify-between">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Overview</p>
-        <h1 class="mt-2 text-3xl font-semibold leading-tight text-brand-900">Dashboard</h1>
-        <p class="mt-2 max-w-2xl text-sm text-brand-600">
-          Monitor bookings, revenue, and recent updates for your studio in one place.
-        </p>
-      </div>
-      <div class="flex gap-3">
-        <?php component('button', [
-          'label'   => 'New Booking',
-          'href'    => path('/package-book-call'),
-          'variant' => 'primary',
-          'size'    => 'md',
-        ]); ?>
-        <?php component('button', [
-          'label'   => 'View Packages',
-          'href'    => path('/package'),
-          'variant' => 'secondary',
-          'size'    => 'md',
-        ]); ?>
-      </div>
-    </header>
+<header class="app-header border-b border-brand-200 py-6 px-4 md:px-6 -mx-4 md:-mx-6">
+  <div>
+    <h1 class="text-3xl font-semibold leading-none text-brand-900">Overview</h1>
+    <p class="mt-4 max-w-2xl text-sm text-brand-600">
+      Monitor bookings, revenue, and recent updates for your studio in one place.
+    </p>
+  </div>
+</header>
+<article class="app-article space-y-4 md:space-y-6 max-w-7xl pt-6 pb-20">
+  <section aria-labelledby="dashboard-kpi-heading">
+    <h2 id="dashboard-kpi-heading" class="sr-only">Key metrics</h2>
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <?php component('widget', [
+        'widget_icon_name'  => 'calendar-check-line',
+        'widget_caption'    => 'Today Bookings',
+        'widget_number'     => '12',
+        'widget_tone'       => 'positive',
+        'widget_badge'      => '+20%',
+        'widget_info'       => 'from yesterday',
+        'widget_class_name' => 'bg-brand-50 h-full',
+      ]); ?>
+      <?php component('widget', [
+        'widget_icon_name'  => 'time-line',
+        'widget_caption'    => 'Pending Sessions',
+        'widget_number'     => '8',
+        'widget_tone'       => 'warning',
+        'widget_badge'      => 'Pending',
+        'widget_info'       => 'Requires confirmation',
+        'widget_class_name' => 'h-full',
+      ]); ?>
+      <?php component('widget', [
+        'widget_icon_name'  => 'money-dollar-circle-line',
+        'widget_caption'    => 'Monthly Revenue',
+        'widget_number'     => '$14,280',
+        'widget_tone'       => 'positive',
+        'widget_badge'      => '+9%',
+        'widget_info'       => 'from last month',
+        'widget_class_name' => 'h-full',
+      ]); ?>
+      <?php component('widget', [
+        'widget_icon_name'  => 'star-line',
+        'widget_caption'    => 'Client Satisfaction',
+        'widget_number'     => '4.9/5',
+        'widget_tone'       => 'info',
+        'widget_badge'      => 'Reviews',
+        'widget_info'       => 'Based on 96 reviews',
+        'widget_class_name' => 'h-full',
+      ]); ?>
+    </div>
+  </section>
 
-    <section class="mt-8" aria-labelledby="dashboard-kpi-heading">
-      <h2 id="dashboard-kpi-heading" class="sr-only">Key metrics</h2>
-      <div class="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <?php component('widget', [
-          'widget_icon_name'  => 'calendar-check-line',
-          'widget_caption'    => 'Today Bookings',
-          'widget_number'     => '12',
-          'widget_tone'       => 'positive',
-          'widget_badge'      => '+20%',
-          'widget_info'       => 'from yesterday',
-          'widget_class_name' => 'h-full',
-        ]); ?>
-        <?php component('widget', [
-          'widget_icon_name'  => 'time-line',
-          'widget_caption'    => 'Pending Sessions',
-          'widget_number'     => '8',
-          'widget_tone'       => 'warning',
-          'widget_badge'      => 'Pending',
-          'widget_info'       => 'Requires confirmation',
-          'widget_class_name' => 'h-full',
-        ]); ?>
-        <?php component('widget', [
-          'widget_icon_name'  => 'money-dollar-circle-line',
-          'widget_caption'    => 'Monthly Revenue',
-          'widget_number'     => '$14,280',
-          'widget_tone'       => 'positive',
-          'widget_badge'      => '+9%',
-          'widget_info'       => 'from last month',
-          'widget_class_name' => 'h-full',
-        ]); ?>
-        <?php component('widget', [
-          'widget_icon_name'  => 'star-line',
-          'widget_caption'    => 'Client Satisfaction',
-          'widget_number'     => '4.9/5',
-          'widget_tone'       => 'info',
-          'widget_badge'      => 'Reviews',
-          'widget_info'       => 'Based on 96 reviews',
-          'widget_class_name' => 'h-full',
-        ]); ?>
-      </div>
-    </section>
+  <section aria-labelledby="dashboard-packages-table-heading">
+    <h2 id="dashboard-packages-table-heading" class="text-base font-semibold text-brand-900">
+      Recent Packages
+    </h2>
+    <div class="dashboard-table-wrap mt-3">
+      <div id="dashboard-users-grid" class="dashboard-users-grid"></div>
+    </div>
+  </section>
+  <script id="dashboard-users-grid-data" type="application/json"><?= (string) json_encode($dashboard_users_grid_rows, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?></script>
 
-    <section class="mt-8 grid gap-4 lg:grid-cols-3" aria-labelledby="dashboard-details-heading">
-      <h2 id="dashboard-details-heading" class="sr-only">Dashboard details</h2>
+  <form class="space-y-5 max-w-4xl">
+    <div class="grid lg:w-3/4">
+      <?php component('form/field', [
+        'label'           => 'Package Name *',
+        'input_component' => 'input',
+        'input_props'     => [
+          'name'        => 'package_name',
+          'placeholder' => 'e.g. Wedding Essential',
+          'required'    => true,
+        ],
+      ]); ?>
+    </div>
 
-      <article class="rounded-lg border border-brand-200 bg-white p-6 lg:col-span-2">
-        <header class="flex items-center justify-between">
-          <h3 class="text-lg font-semibold text-brand-900">Recent Activity</h3>
-          <a class="text-sm font-medium text-brand-700 hover:text-brand-900" href="<?= e(path('/portfolio')); ?>">
-            View all
-          </a>
-        </header>
-        <ul class="mt-4 space-y-4" aria-label="Recent activity feed">
-          <li class="flex items-start justify-between gap-4 border-b border-dashed border-brand-200 pb-4">
-            <div>
-              <p class="font-medium text-brand-900">Booking confirmed for Sarah & Amir</p>
-              <p class="mt-1 text-sm text-brand-600">Engagement session · Apr 15, 2026 at 3:00 PM</p>
-            </div>
-            <span class="text-xs font-medium text-brand-500">2m ago</span>
-          </li>
-          <li class="flex items-start justify-between gap-4 border-b border-dashed border-brand-200 pb-4">
-            <div>
-              <p class="font-medium text-brand-900">Invoice paid: Editorial Portrait Package</p>
-              <p class="mt-1 text-sm text-brand-600">Client: Nova Atelier · $1,800</p>
-            </div>
-            <span class="text-xs font-medium text-brand-500">18m ago</span>
-          </li>
-          <li class="flex items-start justify-between gap-4">
-            <div>
-              <p class="font-medium text-brand-900">New inquiry from company website</p>
-              <p class="mt-1 text-sm text-brand-600">Brand shoot request for May 2026</p>
-            </div>
-            <span class="text-xs font-medium text-brand-500">1h ago</span>
-          </li>
-        </ul>
-      </article>
+    <div class="grid gap-4 md:grid-cols-3">
+      <?php component('form/field', [
+        'label'           => 'Price (RM) *',
+        'input_component' => 'input',
+        'input_props'     => [
+          'type'        => 'number',
+          'name'        => 'price_rm',
+          'placeholder' => '0.00',
+          'required'    => true,
+          'attributes'  => [
+            'min'  => '0',
+            'step' => '0.01',
+          ],
+        ],
+      ]); ?>
 
-      <article class="rounded-lg border border-brand-200 bg-white p-6">
-        <h3 class="text-lg font-semibold text-brand-900">Upcoming Tasks</h3>
-        <ul class="mt-4 space-y-3" aria-label="Upcoming tasks list">
-          <li class="rounded-md bg-brand-50 p-3">
-            <p class="font-medium text-brand-900">Finalize shot list</p>
-            <p class="mt-1 text-sm text-brand-600">Wedding session · Apr 16, 2026</p>
-          </li>
-          <li class="rounded-md bg-brand-50 p-3">
-            <p class="font-medium text-brand-900">Send quotation follow-up</p>
-            <p class="mt-1 text-sm text-brand-600">Corporate campaign · Due today</p>
-          </li>
-          <li class="rounded-md bg-brand-50 p-3">
-            <p class="font-medium text-brand-900">Review photo edits</p>
-            <p class="mt-1 text-sm text-brand-600">Lifestyle portrait batch · 48 photos</p>
-          </li>
-        </ul>
-      </article>
-    </section>
+      <?php component('form/field', [
+        'label'           => 'Deposit (RM) *',
+        'input_component' => 'input',
+        'input_props'     => [
+          'type'        => 'number',
+          'name'        => 'deposit_rm',
+          'placeholder' => '0.00',
+          'required'    => true,
+          'attributes'  => [
+            'min'  => '0',
+            'step' => '0.01',
+          ],
+        ],
+      ]); ?>
+
+      <?php component('form/field', [
+        'label'           => 'Pax Max *',
+        'input_component' => 'input',
+        'input_props'     => [
+          'type'        => 'number',
+          'name'        => 'pax_max',
+          'placeholder' => '0',
+          'required'    => true,
+          'attributes'  => [
+            'min'  => '1',
+            'step' => '1',
+          ],
+        ],
+      ]); ?>
+    </div>
+
+    <div class="grid lg:w-3/4">
+      <?php component('form/field', [
+        'label'           => 'Description',
+        'helper_text'     => 'Write a short overview for package details page.',
+        'input_component' => 'textarea',
+        'input_props'     => [
+          'name'        => 'description',
+          'rows'        => 4,
+          'placeholder' => 'Describe what is included in this package.',
+        ],
+      ]); ?>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-3">
+      <?php component('form/field', [
+        'label'           => 'Time Slots',
+        'input_component' => 'textarea',
+        'input_props'     => [
+          'name'        => 'time_slots',
+          'rows'        => 5,
+          'placeholder' => 'Add available time slots.',
+        ],
+      ]); ?>
+
+      <?php component('form/field', [
+        'label'           => 'Date Excludes',
+        'input_component' => 'textarea',
+        'input_props'     => [
+          'name'        => 'date_excludes',
+          'rows'        => 5,
+          'placeholder' => 'Add excluded dates.',
+        ],
+      ]); ?>
+
+      <?php component('form/field', [
+        'label'           => 'Pax Price Setup',
+        'input_component' => 'textarea',
+        'input_props'     => [
+          'name'        => 'pax_price_setup',
+          'rows'        => 5,
+          'placeholder' => 'Set up pax-based pricing notes.',
+        ],
+      ]); ?>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 pt-2">
+      <?php component('button', [
+        'label'    => 'Save Package',
+        'type'     => 'submit',
+        'variant'  => 'default',
+        'gradient' => true,
+      ]); ?>
+
+      <?php component('button', [
+        'label'    => 'Preview Package',
+        'type'     => 'button',
+        'variant'  => 'secondary',
+        'gradient' => true,
+      ]); ?>
+    </div>
+  </form>
 </article>
 <?php layout('dashboard/partials/dashboard-end'); ?>

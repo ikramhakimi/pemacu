@@ -9,7 +9,6 @@ $app_js_url     = $app_js_version !== '' ? $app_js_href . '?v=' . $app_js_versio
 ?>
         </div>
       </div>
-    </div>
   <script type="module" src="<?= e($app_js_url); ?>"></script>
 </body>
 </html>

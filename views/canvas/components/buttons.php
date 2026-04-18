@@ -16,12 +16,14 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Buttons',
     'header_subtitle'        => 'Reference for action priority, intent, and state across product workflows.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
 <section class="space-y-8">

@@ -9,11 +9,40 @@ $canvas_links          = isset($canvas_links) && is_array($canvas_links)
   ? $canvas_links
   : canvas_links($canvas_primary);
 $canvas_active_link    = isset($canvas_active_link) ? (string) $canvas_active_link : '';
-$canvas_content_max    = isset($canvas_content_max) ? (string) $canvas_content_max : 'max-w-5xl';
 $app_css_path          = __DIR__ . '/../../../assets/build/app.css';
 $app_css_href          = path('/assets/build/app.css');
 $app_css_version       = is_file($app_css_path) ? (string) filemtime($app_css_path) : '';
 $app_css_url           = $app_css_version !== '' ? $app_css_href . '?v=' . $app_css_version : $app_css_href;
+$breadcrumb_items      = [
+  ['label' => 'Canvas', 'href' => path('/canvas')],
+];
+
+if ($canvas_primary === 'components') {
+  $components_href = path('/canvas/components');
+  $current_label   = $resolved_page_title;
+
+  foreach ($canvas_links as $link) {
+    $link_href  = isset($link['href']) ? (string) $link['href'] : '';
+    $link_label = isset($link['label']) ? trim((string) $link['label']) : '';
+
+    if ($link_href === $canvas_active_link && $link_label !== '') {
+      $current_label = $link_label;
+      break;
+    }
+  }
+
+  $breadcrumb_items[] = ['label' => 'UI Components', 'href' => $components_href];
+
+  if ($canvas_active_link !== '' && $canvas_active_link !== '/canvas/components') {
+    $breadcrumb_items[] = ['label' => $current_label, 'current' => true];
+  } else {
+    $breadcrumb_items[1] = ['label' => 'UI Components', 'current' => true];
+  }
+} elseif ($canvas_primary === 'patterns') {
+  $breadcrumb_items[] = ['label' => 'UI Patterns', 'current' => true];
+} else {
+  $breadcrumb_items[] = ['label' => $resolved_page_title, 'current' => true];
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -28,18 +57,17 @@ $app_css_url           = $app_css_version !== '' ? $app_css_href . '?v=' . $app_
 </head>
 <body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed" style="letter-spacing: -1%;">
   <main id="root">
-    <div class="grid w-full min-h-screen gap-6 bg-brand-100 lg:grid-cols-[240px_minmax(0,1fr)]">
-      <aside class="ui-sidebar lg:self-start p-4" aria-label="Canvas documentation navigation">
-        <?php
-        $sidebar_path = __DIR__ . '/../partials/sidebar.php';
+    <div class="canvas-side fixed inset-y-0 left-0 z-30 w-[280px] overflow-y-auto border-r border-brand-200 bg-brand-100 px-2 py-5" aria-label="Canvas navigation">
+      <?php component('canvas/sidebar', [
+        'canvas_primary'     => $canvas_primary,
+        'canvas_active_link' => $canvas_active_link,
+      ]); ?>
+    </div>
 
-        if (!is_file($sidebar_path)) {
-          throw new RuntimeException('Canvas sidebar partial not found.');
-        }
-
-        require $sidebar_path;
-        ?>
-      </aside>
-
-      <div class="ui-content bg-white pb-96 p-10">
-        <div class="w-full <?= e($canvas_content_max); ?> space-y-8">
+    <div class="canvas-main lg:pl-[280px]">
+      <div class="canvas-breadcrumb px-6 py-4 border-b border-brand-200">
+        <?php component('breadcrumb-chevron', [
+          'items' => $breadcrumb_items,
+        ]); ?>
+      </div>
+      <div class="canvas-container">

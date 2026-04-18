@@ -7,56 +7,101 @@ $page_current         = 'canvas-components';
 $component_page_links = canvas_links('components');
 
 $avatar_images = [
-  'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=200&q=80',
-  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=80',
-  'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=260&q=80',
-  'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=180&q=80',
-  'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=180&q=80',
+  path('/assets/images/avatars/avatar-01.jpg'),
+  path('/assets/images/avatars/avatar-02.jpg'),
+  path('/assets/images/avatars/avatar-03.jpg'),
+  path('/assets/images/avatars/avatar-04.jpg'),
+  path('/assets/images/avatars/avatar-05.jpg'),
+  path('/assets/images/avatars/avatar-06.jpg'),
+];
+
+$avatar_base_items = [
+  [
+    'image_src' => $avatar_images[0],
+    'image_alt' => 'Profile photo of Aina',
+    'size'      => '48',
+  ],
+  [
+    'initials' => 'MR',
+    'size'     => '48',
+  ],
+  [
+    'icon_name' => 'user-3-line',
+    'icon_size' => '20',
+    'size'      => '48',
+    'bg_class'     => 'bg-amber-100',
+    'text_class'   => 'text-amber-700',
+    'border_class' => 'ring-amber-700/20',
+    'icon_class'   => 'text-current',
+  ],
+  [
+    'icon_name'    => 'building-4-line',
+    'icon_size'    => '20',
+    'size'         => '48',
+    'bg_class'     => 'bg-primary-100',
+    'text_class'   => 'text-primary-700',
+    'border_class' => 'ring-primary-700/20',
+    'icon_class'   => 'text-current',
+  ],
 ];
 
 $size_variations = [
   [
     'image_src' => $avatar_images[0],
+    'image_alt' => 'Avatar size 24',
+    'size'      => '24',
+  ],
+  [
+    'image_src' => $avatar_images[1],
     'image_alt' => 'Avatar size 32',
     'size'      => '32',
   ],
   [
-    'image_src' => $avatar_images[1],
+    'image_src' => $avatar_images[2],
     'image_alt' => 'Avatar size 40',
     'size'      => '40',
   ],
   [
-    'image_src' => $avatar_images[2],
+    'image_src' => $avatar_images[3],
     'image_alt' => 'Avatar size 48',
     'size'      => '48',
   ],
+  [
+    'image_src' => $avatar_images[4],
+    'image_alt' => 'Avatar size 56',
+    'size'      => '56',
+  ],
+  [
+    'image_src' => $avatar_images[5],
+    'image_alt' => 'Avatar size 64',
+    'size'      => '64',
+  ],
 ];
 
-$initials_tones = [
+$initials_size_items = [
   [
     'initials' => 'IH',
-    'size'     => '48',
-    'tone'     => 'brand',
+    'size'     => '24',
   ],
   [
     'initials' => 'SH',
-    'size'     => '48',
-    'tone'     => 'primary',
+    'size'     => '32',
   ],
   [
     'initials' => 'AC',
-    'size'     => '48',
-    'tone'     => 'positive',
+    'size'     => '40',
   ],
   [
     'initials' => 'NT',
     'size'     => '48',
-    'tone'     => 'negative',
   ],
   [
     'initials' => 'NV',
-    'size'     => '48',
-    'tone'     => 'neutral',
+    'size'     => '56',
+  ],
+  [
+    'initials' => 'ZA',
+    'size'     => '64',
   ],
 ];
 
@@ -88,6 +133,35 @@ $avatar_group_items = [
   ],
 ];
 
+$avatar_online_status_items = [
+  [
+    'image_src' => $avatar_images[3],
+    'image_alt' => 'Online avatar size 48',
+    'size'      => '48',
+    'status'    => 'online',
+  ],
+];
+
+$avatar_offline_status_items = [
+  [
+    'image_src' => $avatar_images[3],
+    'image_alt' => 'Offline avatar size 48',
+    'size'      => '48',
+    'status'    => 'offline',
+  ],
+];
+
+$avatar_story_items = [
+  [
+    'image_src'  => $avatar_images[4],
+    'image_alt'  => 'Story avatar 3 size 48',
+    'size'       => '48',
+    'status'    => 'online',
+    'status_ring_class'=> 'ring-2 ring-brand-100',
+    'class_name' => 'ring-2 ring-positive-500 ring-offset-2 ring-offset-white',
+  ],
+];
+
 layout('canvas/layouts/canvas-start', [
   'page_title'         => $page_title,
   'page_current'       => $page_current,
@@ -97,58 +171,108 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Avatar',
-    'header_subtitle'        => 'Reference for size tokens, initials tones, and overlapping group presentation.',
+    'header_subtitle'        => 'Reference for size tokens, initials, icons, and overlapping group presentation.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
-
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Use image avatars when user photos are available; fall back to initials when not available.</li>
-      <li>Use size tokens consistently: 32, 40 (44px), and 48.</li>
-      <li>Use tone variants to encode lightweight user categories when initials are shown.</li>
-      <li>Use avatar groups for team/member lists where overlapping saves horizontal space.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Size Variations</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use `32`, `40`, and `48` size tokens to keep avatar scaling consistent across layouts.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('avatar', ['items' => $size_variations]); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar Base
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $avatar_base_items]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Initials Tones</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use full tone set (`brand`, `primary`, `positive`, `negative`, `neutral`) for quick identity placeholders.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('avatar', ['items' => $initials_tones]); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar A
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $size_variations]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Avatar Group</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use overlapping group layout with `-m-2` spacing for compact participant and team lists.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('avatar', [
-          'items'    => $avatar_group_items,
-          'is_group' => true,
-        ]); ?>
+  </div>
+</section>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar B
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $initials_size_items]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar C
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', [
+            'items'    => $avatar_group_items,
+            'is_group' => true,
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar D
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $avatar_online_status_items]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar E
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $avatar_offline_status_items]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex flex-col p-6 h-full">
+      <div class="font-medium text-brand-900 flex items-center justify-between border-b border-brand-200 pb-4">
+        Avatar F
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center bg-background px-6 py-8 overflow-hidden">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('avatar', ['items' => $avatar_story_items]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

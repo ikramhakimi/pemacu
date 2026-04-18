@@ -5,6 +5,29 @@ declare(strict_types=1);
 $page_title           = 'Canvas Components - Dropdown';
 $page_current         = 'canvas-components';
 $component_page_links = canvas_links('components');
+$dropdown_base_items = [
+  ['type' => 'label', 'label' => 'Quick Actions'],
+  ['label' => 'Edit details', 'href' => '#'],
+  ['label' => 'Duplicate entry', 'href' => '#'],
+  ['type' => 'divider'],
+  ['type' => 'label', 'label' => 'Danger Zone'],
+  [
+    'type'      => 'button',
+    'label'     => 'Transfer ownership (disabled)',
+    'disabled'  => true,
+    'item_class' => 'cursor-not-allowed text-brand-400',
+  ],
+  [
+    'type'      => 'button',
+    'label'     => 'Delete workspace',
+    'item_class' => 'text-negative-700 hover:bg-negative-50',
+  ],
+];
+$dropdown_navigation_items = [
+  ['label' => 'Documentation', 'href' => '#'],
+  ['label' => 'Release notes', 'href' => '#'],
+  ['label' => 'Status page', 'href' => '#'],
+];
 
 layout('canvas/layouts/canvas-start', [
   'page_title'         => $page_title,
@@ -15,75 +38,196 @@ layout('canvas/layouts/canvas-start', [
 ]);
 ?>
 <section class="p-0">
-  <?php component('header-page', [
-    'header_topic'           => 'Components',
+  <?php
+  $canvas_header = [
     'header_title'           => 'Dropdown',
     'header_subtitle'        => 'Reference for trigger styles, menu alignment, and contextual action grouping.',
     'header_container_class' => 'w-full',
-  ]); ?>
+  ];
+  component('canvas/header', ['canvas_header' => $canvas_header]);
+?>
 </section>
 
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Group related, secondary actions that do not need full-time visibility.</li>
-      <li>Use clear trigger labels so the menu purpose is obvious before opening.</li>
-      <li>Prefer left alignment by default unless the trigger sits near the right edge.</li>
-      <li>Keep menu items concise and ordered by priority or frequency.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Default Dropdown</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Button trigger with dividers, labels, disabled and danger actions.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('dropdown-default'); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Dropdown Base
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-visible bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-base',
+            'items'       => $dropdown_base_items,
+          ]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Trigger Variations</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Neutral style, icon+text trigger, and icon-only trigger.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('dropdown-trigger-variations'); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Dropdown A
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-visible bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg items-center justify-center gap-4">
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-filter',
+            'trigger'     => [
+              'label' => 'Filter',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[180px]',
+            ],
+            'items'       => [
+              ['label' => 'All items', 'href' => '#'],
+              ['label' => 'Assigned to me', 'href' => '#'],
+            ],
+          ]); ?>
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-settings',
+            'trigger'     => [
+              'label'         => 'Settings',
+              'icon_name'     => 'settings-3-line',
+              'icon_position' => 'left',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[180px]',
+            ],
+            'items'       => [
+              ['label' => 'Preferences', 'href' => '#'],
+              ['label' => 'Notifications', 'href' => '#'],
+            ],
+          ]); ?>
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-icon-only',
+            'align'       => 'right',
+            'trigger'     => [
+              'label'      => 'More actions',
+              'aria_label' => 'More actions',
+              'icon_name'  => 'more-2-fill',
+              'icon_only'  => true,
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[180px]',
+            ],
+            'items'       => [
+              ['label' => 'Rename', 'href' => '#'],
+              ['label' => 'Archive', 'href' => '#'],
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Button Size Variations</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Dropdown trigger reuses button tokens: sm, default, lg, including icon-only.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('dropdown-button-size-variations'); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Dropdown B
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-visible bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg items-center justify-center gap-4">
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-size-sm',
+            'trigger'     => [
+              'label' => 'Small',
+              'size'  => 'sm',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[160px]',
+            ],
+            'items'       => [
+              ['label' => 'View', 'href' => '#'],
+              ['label' => 'Edit', 'href' => '#'],
+            ],
+          ]); ?>
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-size-md',
+            'trigger'     => [
+              'label' => 'Default',
+              'size'  => 'md',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[180px]',
+            ],
+            'items'       => [
+              ['label' => 'View', 'href' => '#'],
+              ['label' => 'Edit', 'href' => '#'],
+            ],
+          ]); ?>
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-size-lg',
+            'trigger'     => [
+              'label' => 'Large',
+              'size'  => 'lg',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[180px]',
+            ],
+            'items'       => [
+              ['label' => 'View', 'href' => '#'],
+              ['label' => 'Edit', 'href' => '#'],
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Link Trigger Dropdown</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use anchor trigger while keeping JS toggle and outside-click dismiss.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('dropdown-link-trigger'); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Dropdown C
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-visible bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-link-trigger',
+            'trigger'     => [
+              'type'      => 'link',
+              'label'     => 'Manage links',
+              'icon_name' => 'arrow-down-s-line',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[200px]',
+            ],
+            'items'       => [
+              ['label' => 'Open record', 'href' => '#'],
+              ['label' => 'Share access', 'href' => '#'],
+              ['label' => 'Archive record', 'href' => '#'],
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Navigation Dropdown</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Simple link-style trigger for navigation groups.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('dropdown-navigation'); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Dropdown D
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-visible bg-background px-6 py-8">
+        <div class="flex w-full max-w-lg justify-center">
+          <?php component('dropdown', [
+            'dropdown_id' => 'canvas-dropdown-navigation',
+            'trigger'     => [
+              'type'      => 'link',
+              'label'     => 'Resources',
+              'icon_name' => 'arrow-down-s-line',
+            ],
+            'menu'        => [
+              'min_width_class' => 'min-w-[240px]',
+            ],
+            'items'       => $dropdown_navigation_items,
+          ]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

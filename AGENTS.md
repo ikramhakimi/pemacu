@@ -139,3 +139,13 @@ Only when necessary:
 - JS: non-trivial behavior → purpose + required DOM hooks
 - PHP: reusable/changed components → Component, Purpose, Structure, Data
 - CSS: only non-obvious patterns
+
+## UI Guardrails
+
+- Always reuse existing components in `/views/components` first.
+- Treat existing components as the source of truth for UI structure and styling.
+- Do not invent new visual patterns, layouts, variants, or interaction styles without explicit approval.
+- Prefer existing helper APIs (`component(...)`, `section(...)`, `layout(...)`) over raw custom markup.
+- Before implementation, inspect relevant existing components and align with their naming, spacing, and behavior.
+- If existing components are not enough, stop and propose the smallest safe extension before writing code.
+- Do not redesign, restyle, or “improve” existing UI unless explicitly requested.

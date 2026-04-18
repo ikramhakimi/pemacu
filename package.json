@@ -3,12 +3,15 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --minify",
-    "watch:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --watch"
+    "watch:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --watch",
+    "build:dashboard-css": "tailwindcss -i ./assets/css/dashboard.css -o ./assets/build/dashboard.css --minify",
+    "watch:dashboard-css": "tailwindcss -i ./assets/css/dashboard.css -o ./assets/build/dashboard.css --watch"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.19"
   },
   "dependencies": {
+    "gridjs": "^6.2.0",
     "remixicon": "^4.9.1"
   }
 }

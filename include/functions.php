@@ -87,11 +87,13 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/breadcrumb', 'label' => 'Breadcrumb'],
     ['href' => '/canvas/components/cards', 'label' => 'Cards'],
     ['href' => '/canvas/components/dropdown', 'label' => 'Dropdown'],
+    ['href' => '/canvas/components/drawer', 'label' => 'Drawer'],
     ['href' => '/canvas/components/fields', 'label' => 'Fields'],
     ['href' => '/canvas/components/forms', 'label' => 'Forms'],
     ['href' => '/canvas/components/pick-date', 'label' => 'Pick Date'],
     ['href' => '/canvas/components/pick-time', 'label' => 'Pick Time'],
     ['href' => '/canvas/components/pagination', 'label' => 'Pagination'],
+    ['href' => '/canvas/components/table', 'label' => 'Table'],
     ['href' => '/canvas/components/tabs', 'label' => 'Tabs'],
     ['href' => '/canvas/components/grids', 'label' => 'Grids'],
     ['href' => '/canvas/components/headers', 'label' => 'Headers'],
@@ -103,10 +105,88 @@ function canvas_links(string $canvas_primary): array
 function dashboard_links(): array
 {
   return [
-    ['label' => 'Overview',  'href' => path('/dashboard'),         'icon_name' => 'home-6-line'],
-    ['label' => 'Bookings',  'href' => path('/package-book-call'), 'icon_name' => 'calendar-2-line'],
-    ['label' => 'Packages',  'href' => path('/package'),           'icon_name' => 'price-tag-3-line'],
-    ['label' => 'Portfolio', 'href' => path('/portfolio'),         'icon_name' => 'image-line'],
+    ['label' => 'Overview', 'href' => '#', 'icon_name' => 'home-6-line'],
+    [
+      'label'     => 'Sales',
+      'href'      => '#',
+      'icon_name' => 'money-dollar-circle-line',
+      'children'  => [
+        ['label' => 'Overview', 'href' => '#'],
+        ['label' => 'Calendar', 'href' => '#'],
+      ],
+    ],
+    [
+      'label'     => 'Analytics',
+      'href'      => '#',
+      'icon_name' => 'bar-chart-box-line',
+      'children'  => [
+        ['label' => 'Overview', 'href' => '#'],
+        ['label' => 'Pageviews', 'href' => '#'],
+        ['label' => 'Sources', 'href' => '#'],
+        ['label' => 'Campaigns', 'href' => '#'],
+        ['label' => 'Clicks', 'href' => '#'],
+      ],
+    ],
+    [
+      'label'     => 'Orders',
+      'href'      => '#',
+      'icon_name' => 'shopping-bag-3-line',
+      'children'  => [
+        ['label' => 'All Orders', 'href' => '#'],
+        ['label' => 'Unpaid Orders', 'href' => '#'],
+        ['label' => 'Session Today', 'href' => '#'],
+      ],
+    ],
+    [
+      'label'     => 'Customers',
+      'href'      => '#',
+      'icon_name' => 'group-line',
+      'children'  => [
+        ['label' => 'All Customers', 'href' => '#'],
+        ['label' => 'Segments', 'href' => '#'],
+        ['label' => 'Customer Profile Form', 'href' => '#'],
+      ],
+    ],
+    ['label' => 'Feedback', 'href' => '#', 'icon_name' => 'chat-smile-3-line'],
+    ['section_label' => 'SETUP'],
+    [
+      'label'     => 'Website',
+      'href'      => '#',
+      'icon_name' => 'global-line',
+      'children'  => [
+        ['label' => 'Settings', 'href' => '#'],
+        ['label' => 'Content', 'href' => '#'],
+      ],
+    ],
+    [
+      'label'     => 'Packages',
+      'href'      => '#',
+      'icon_name' => 'price-tag-3-line',
+      'children'  => [
+        ['label' => 'All Packages', 'href' => '#'],
+        ['label' => 'Create Package', 'href' => '#'],
+      ],
+    ],
+    [
+      'label'     => 'Portfolio',
+      'href'      => '#',
+      'icon_name' => 'image-line',
+      'children'  => [
+        ['label' => 'All Portfolio', 'href' => '#'],
+        ['label' => 'Create Portfolio', 'href' => '#'],
+        ['label' => 'Trashed', 'href' => '#'],
+      ],
+    ],
+    ['label' => 'Payment Gateway', 'href' => '#', 'icon_name' => 'secure-payment-line'],
+    [
+      'label'     => 'Users',
+      'href'      => '#',
+      'icon_name' => 'account-circle-line',
+      'children'  => [
+        ['label' => 'All Users', 'href' => '#'],
+        ['label' => 'Create User', 'href' => '#'],
+      ],
+    ],
   ];
 }
 

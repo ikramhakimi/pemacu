@@ -100,7 +100,7 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Provide basic project information for record-keeping and reporting purposes.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Project Name',
               'helper_text' => 'Use the official project title shown in submission documents.',
               'class'           => 'md:col-span-2 space-y-2',
@@ -111,7 +111,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Project Address',
               'helper_text' => 'Include lot, street, and city for site verification.',
               'class'           => 'md:col-span-2 space-y-2',
@@ -121,7 +121,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Postcode',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -130,7 +130,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'           => 'State',
               'input_component' => 'select',
               'class'           => 'space-y-2',
@@ -158,7 +158,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'           => 'Building Description',
               'helper_text'     => 'Describe building type, use, and scope details.',
               'input_component' => 'textarea',
@@ -170,7 +170,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Total Gross Floor Area',
               'helper_text' => 'Use the latest approved GFA value for this submission.',
               'class'       => 'space-y-2',
@@ -180,7 +180,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Land Area (for landed property)',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -197,7 +197,7 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Specify the organisation or individual submitting this application and the main contact person for communication.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Applicant',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -206,7 +206,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Contact Person',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -225,7 +225,7 @@ layout('dashboard/partials/dashboard-start', [
           <div class="col-span-4 space-y-6">
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Core Consultant</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Architect',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -239,7 +239,7 @@ layout('dashboard/partials/dashboard-start', [
 
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Engineers</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Civil Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -248,7 +248,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Structural Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -257,7 +257,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Mechanical Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -266,7 +266,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Electrical Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -280,7 +280,7 @@ layout('dashboard/partials/dashboard-start', [
 
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Surveyors & Specialists</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Quantity Surveyor',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -289,7 +289,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Land Surveyor',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -298,7 +298,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'       => 'Landscape Consultant',
                 'class'       => 'space-y-2 md:max-w-[75%]',
                 'input_props' => [
@@ -307,7 +307,7 @@ layout('dashboard/partials/dashboard-start', [
                 ],
               ]); ?>
 
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'           => 'Other Specialist Consultant(s)',
                 'input_component' => 'textarea',
                 'class'           => 'space-y-2 md:max-w-[75%]',
@@ -327,7 +327,7 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Identify the approving authority and the main contractor responsible for executing the project.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Local Authority',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -336,7 +336,7 @@ layout('dashboard/partials/dashboard-start', [
               ],
             ]); ?>
 
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'       => 'Main Contractor',
               'class'       => 'space-y-2',
               'input_props' => [
@@ -356,25 +356,25 @@ layout('dashboard/partials/dashboard-start', [
     </article>
 
     <div class="mt-6 flex flex-wrap items-center justify-end gap-6">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'id'      => 'assessment-theme-toggle',
         'name'    => 'assessment-theme-toggle',
         'label'   => 'Color Mode',
         'checked' => false,
       ]); ?>
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'id'      => 'assessment-description-toggle',
         'name'    => 'assessment-description-toggle',
         'label'   => 'Hide Details',
         'checked' => false,
       ]); ?>
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'id'      => 'assessment-full-width-toggle',
         'name'    => 'assessment-full-width-toggle',
         'label'   => 'Full Width',
         'checked' => false,
       ]); ?>
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'id'      => 'assessment-compact-toggle',
         'name'    => 'assessment-compact-toggle',
         'label'   => 'Compact',
@@ -446,7 +446,7 @@ layout('dashboard/partials/dashboard-start', [
     </div>
 
     <div class="assessment-section-toggle mt-6 mb-2">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'id'      => 'assessment-collapse-sections-toggle',
         'name'    => 'assessment-collapse-sections-toggle',
         'label'   => 'Collapse Section Headers',

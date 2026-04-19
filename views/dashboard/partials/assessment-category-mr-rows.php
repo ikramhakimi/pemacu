@@ -25,7 +25,7 @@
           <td class="p-3 border border-brand-200">Where reused products/materials constitutes ≥ 2% of the project’s total material cost value.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr1_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -41,7 +41,7 @@
           <td class="p-3 border border-brand-200">Where reused products/materials constitutes ≥ 5% of the project’s total material cost value.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr1_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -85,7 +85,7 @@
           <td class="p-3 border border-brand-200">Where use of materials with recycled content is such that the sum of post-consumer recycled plus one-half of the pre-consumer content constitutes ≥ 10% (based on cost) of the total value of the materials in the project.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr2_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -101,7 +101,7 @@
           <td class="p-3 border border-brand-200">Where use of materials with recycled content is such that the sum of post-consumer recycled plus one-half of the pre-consumer content constitutes at least 30% (based on cost) of the total value of the materials in the project.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr2_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -156,7 +156,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'mr3_score',
         'label'      => '1',
         'checked'    => false,
@@ -194,7 +194,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'mr4_score',
         'label'      => '1',
         'checked'    => false,
@@ -246,7 +246,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'mr5_score',
         'label'      => '1',
         'checked'    => false,
@@ -286,7 +286,7 @@
           <td class="p-3 border border-brand-200">Recycle and/or salvage ≥ 50% volume of non-hazardous construction debris.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr6_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -302,7 +302,7 @@
           <td class="p-3 border border-brand-200">Recycle and/or salvage ≥ 75% volume of non-hazardous construction debris.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr6_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -359,7 +359,7 @@
           <td class="p-3 border border-brand-200">Use zero Ozone Depleting Potential (ODP) products: non-CFC and non-HCFC refrigerants/clean agents.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr7_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -375,7 +375,7 @@
           <td class="p-3 border border-brand-200">Use non-synthetic (natural) refrigerants/clean agents with zero ODP and negligible Global Warming Potential.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'mr7_2_score',
                 'label'      => '1',
                 'checked'    => false,

@@ -12,10 +12,7 @@ $render_component_html = static function (string $component_name, array $props =
   return (string) ob_get_clean();
 };
 
-$render_row_actions = static function (int $row_index): string {
-  $trigger_id = 'table-row-actions-trigger-' . $row_index;
-  $menu_id    = 'table-row-actions-menu-' . $row_index;
-
+$render_table_action = static function (string $label): string {
   ob_start();
   ?>
   <div class="flex items-center justify-end gap-2">
@@ -23,120 +20,113 @@ $render_row_actions = static function (int $row_index): string {
       'label'   => 'View',
       'variant' => 'default',
       'size'    => 'sm',
-      'gradient' => true,
     ]); ?>
-
     <?php component('button', [
-      'label'      => 'Edit booking',
-      'variant'    => 'secondary',
-      'size'       => 'sm',
-      'icon_name'  => 'pencil-line',
-      'icon_only'  => true,
-      'aria_label' => 'Edit booking',
+      'label'     => $label,
+      'variant'   => 'secondary',
+      'size'      => 'sm',
+      'icon_name' => 'pencil-line',
+      'icon_only' => true,
     ]); ?>
-
-    <div class="dropdown relative inline-block" data-dropdown data-dropdown-align="right">
-      <?php component('button', [
-        'id'            => $trigger_id,
-        'label'         => 'More actions',
-        'variant'       => 'secondary',
-        'size'          => 'sm',
-        'icon_name'     => 'more-2-fill',
-        'icon_only'     => true,
-        'aria_label'    => 'More actions',
-        'attributes'    => [
-          'aria-haspopup'         => 'menu',
-          'aria-expanded'         => 'false',
-          'aria-controls'         => $menu_id,
-          'data-dropdown-trigger' => true,
-        ],
-      ]); ?>
-
-      <ul
-        id="<?= e($menu_id); ?>"
-        class="dropdown__menu absolute right-0 z-20 mt-2 hidden min-w-[180px] list-none rounded-lg border border-brand-200 bg-white p-1 shadow-lg"
-        role="menu"
-        aria-labelledby="<?= e($trigger_id); ?>"
-        data-dropdown-menu
-      >
-        <li role="none">
-          <a class="dropdown__item flex rounded-md px-3 py-2 text-sm text-brand-700 hover:bg-brand-100 hover:text-brand-900" href="#" role="menuitem">Reschedule</a>
-        </li>
-        <li role="none">
-          <a class="dropdown__item flex rounded-md px-3 py-2 text-sm text-brand-700 hover:bg-brand-100 hover:text-brand-900" href="#" role="menuitem">Send reminder</a>
-        </li>
-        <li role="none">
-          <button class="dropdown__item flex w-full rounded-md px-3 py-2 text-left text-sm text-negative-700 hover:bg-negative-50" type="button" role="menuitem">
-            Cancel booking
-          </button>
-        </li>
-      </ul>
-    </div>
   </div>
   <?php
 
   return (string) ob_get_clean();
 };
 
-$default_spacing_rows = [
+$pipeline_headers = [
+  ['label' => 'Company', 'key' => 'company'],
+  ['label' => 'Stage', 'key' => 'stage', 'align' => 'center'],
+  ['label' => 'MRR', 'key' => 'mrr', 'align' => 'right'],
+  ['label' => 'Owner', 'key' => 'owner'],
+];
+
+$pipeline_data = [
   [
-    'guest' => [
+    'company' => 'Northlane Health',
+    'stage'   => 'Discovery',
+    'mrr'     => '$2,400',
+    'owner'   => 'Nora',
+  ],
+  [
+    'company' => 'Atlas Retail',
+    'stage'   => 'Proposal',
+    'mrr'     => '$5,900',
+    'owner'   => 'Imran',
+  ],
+  [
+    'company' => 'SignalLabs',
+    'stage'   => 'Negotiation',
+    'mrr'     => '$7,200',
+    'owner'   => 'Evelyn',
+  ],
+];
+
+$customer_health_headers = [
+  ['label' => 'Account', 'key' => 'account'],
+  ['label' => 'Primary Contact', 'key' => 'contact'],
+  ['label' => 'Health', 'key' => 'health', 'align' => 'center'],
+  ['label' => 'Plan', 'key' => 'plan'],
+  ['label' => 'Actions', 'key' => 'actions', 'align' => 'right'],
+];
+
+$customer_health_data = [
+  [
+    'account' => [
       'content' => $render_component_html('avatar', [
         'items' => [[
-          'initials' => 'AZ',
+          'initials' => 'NH',
           'size'     => '40',
           'tone'     => 'brand',
         ]],
       ]),
       'is_html' => true,
     ],
-    'contact' => '<p class="font-semibold text-brand-900">Aina Zulkifli</p><p class="text-brand-600">aina@aurorastudio.my</p>',
-    'status'  => [
+    'contact' => '<p class="font-semibold text-brand-900">Nadia Hassan</p><p class="text-brand-600">nadia@northlane.io</p>',
+    'health' => [
       'content' => $render_component_html('badge', [
-        'label' => 'Confirmed',
+        'label' => 'Healthy',
         'tone'  => 'positive',
       ]),
       'is_html' => true,
       'align'   => 'center',
     ],
-    'package' => 'Pre-Wedding Session',
-    'total'   => 'RM 1,800',
+    'plan' => 'Growth Annual',
     'actions' => [
-      'content'   => $render_row_actions(1),
+      'content'   => $render_table_action('Edit account'),
       'is_html'   => true,
       'class_name' => 'whitespace-nowrap',
     ],
   ],
   [
-    'guest' => [
+    'account' => [
       'content' => $render_component_html('avatar', [
         'items' => [[
-          'initials' => 'MR',
+          'initials' => 'AR',
           'size'     => '40',
           'tone'     => 'primary',
         ]],
       ]),
       'is_html' => true,
     ],
-    'contact' => '<p class="font-semibold text-brand-900">Mika Rahman</p><p class="text-brand-600">mika@northframe.co</p>',
-    'status'  => [
+    'contact' => '<p class="font-semibold text-brand-900">Ariq Rahim</p><p class="text-brand-600">ariq@atlasretail.com</p>',
+    'health' => [
       'content' => $render_component_html('badge', [
-        'label' => 'Pending',
+        'label' => 'At Risk',
         'tone'  => 'warning',
       ]),
       'is_html' => true,
       'align'   => 'center',
     ],
-    'package' => 'Corporate Portrait',
-    'total'   => 'RM 950',
+    'plan' => 'Scale Monthly',
     'actions' => [
-      'content'   => $render_row_actions(2),
+      'content'   => $render_table_action('Edit account'),
       'is_html'   => true,
       'class_name' => 'whitespace-nowrap',
     ],
   ],
   [
-    'guest' => [
+    'account' => [
       'content' => $render_component_html('avatar', [
         'items' => [[
           'initials' => 'SL',
@@ -146,62 +136,70 @@ $default_spacing_rows = [
       ]),
       'is_html' => true,
     ],
-    'contact' => '<p class="font-semibold text-brand-900">Siti Lim</p><p class="text-brand-600">siti@everlight.my</p>',
-    'status'  => [
+    'contact' => '<p class="font-semibold text-brand-900">Sophia Lim</p><p class="text-brand-600">sophia@signallabs.ai</p>',
+    'health' => [
       'content' => $render_component_html('badge', [
-        'label' => 'Needs Follow-up',
+        'label' => 'Needs Review',
         'tone'  => 'attention',
       ]),
       'is_html' => true,
       'align'   => 'center',
     ],
-    'package' => 'Engagement Shoot',
-    'total'   => 'RM 1,250',
+    'plan' => 'Enterprise',
     'actions' => [
-      'content'   => $render_row_actions(3),
+      'content'   => $render_table_action('Edit account'),
       'is_html'   => true,
       'class_name' => 'whitespace-nowrap',
     ],
   ],
 ];
 
-$alignment_rows = [
+$billing_headers = [
+  ['label' => 'Invoice', 'key' => 'invoice'],
+  ['label' => 'Status', 'key' => 'status', 'align' => 'center'],
+  ['label' => 'Amount', 'key' => 'amount', 'align' => 'right'],
+];
+
+$billing_data = [
   [
-    'service' => 'Portrait Session',
-    'status'  => ['content' => 'Open', 'align' => 'center'],
-    'revenue' => ['content' => 'RM 4,320', 'align' => 'right'],
+    'invoice' => 'INV-24081',
+    'status'  => [
+      'content' => $render_component_html('badge', [
+        'label' => 'Paid',
+        'tone'  => 'positive',
+      ]),
+      'is_html' => true,
+    ],
+    'amount'  => '$1,400',
   ],
   [
-    'service' => 'Wedding Coverage',
-    'status'  => ['content' => 'Limited', 'align' => 'center'],
-    'revenue' => ['content' => 'RM 9,800', 'align' => 'right'],
+    'invoice' => 'INV-24082',
+    'status'  => [
+      'content' => $render_component_html('badge', [
+        'label' => 'Due Soon',
+        'tone'  => 'warning',
+      ]),
+      'is_html' => true,
+    ],
+    'amount'  => '$980',
   ],
   [
-    'service' => 'Corporate Event',
-    'status'  => ['content' => 'Closed', 'align' => 'center'],
-    'revenue' => ['content' => 'RM 0', 'align' => 'right'],
+    'invoice' => 'INV-24083',
+    'status'  => [
+      'content' => $render_component_html('badge', [
+        'label' => 'Overdue',
+        'tone'  => 'negative',
+      ]),
+      'is_html' => true,
+    ],
+    'amount'  => '$620',
   ],
 ];
 
-$basic_rows = [
-  [
-    'name'      => 'Lead Follow-up',
-    'owner'     => 'Nadia',
-    'priority'  => 'High',
-    'due_date'  => 'May 3, 2026',
-  ],
-  [
-    'name'      => 'Portfolio Review',
-    'owner'     => 'Farid',
-    'priority'  => 'Medium',
-    'due_date'  => 'May 5, 2026',
-  ],
-  [
-    'name'      => 'Invoice Reminder',
-    'owner'     => 'Aiman',
-    'priority'  => 'Low',
-    'due_date'  => 'May 7, 2026',
-  ],
+$empty_headers = [
+  ['label' => 'Workspace', 'key' => 'workspace'],
+  ['label' => 'Owner', 'key' => 'owner'],
+  ['label' => 'Seats', 'key' => 'seats', 'align' => 'right'],
 ];
 
 layout('canvas/layouts/canvas-start', [
@@ -215,144 +213,124 @@ layout('canvas/layouts/canvas-start', [
 <section class="p-0">
   <?php
   $canvas_header = [
-    'title'       => 'Table',
-    'subtitle'    => 'Reference for mixed-content tabular layout, spacing density, alignment, and empty states.',
-    'inner_class' => 'w-full',
+    'header_title'           => 'Table',
+    'header_subtitle'        => 'Reference for API-driven SaaS data tables with semantic structure, alignment, and empty states.',
+    'header_container_class' => 'w-full',
   ];
   component('canvas/header', ['canvas_header' => $canvas_header]);
 ?>
 </section>
 
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Use semantic table structure for scannable data with fixed column meaning.</li>
-      <li>Use <code>appearance="basic"</code> as the foundation, then move to <code>default</code> when container emphasis is needed.</li>
-      <li>Use spacing density based on data complexity and reading comfort.</li>
-      <li>Keep row actions grouped at the right edge to reduce visual noise.</li>
-      <li>Always provide an explicit empty state when no rows are available.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">API Quick Reference</h2>
-    <div class="rounded-md border border-dashed border-brand-300 bg-white p-5 text-sm text-brand-700">
-      <p><code>columns</code>, <code>rows</code>, <code>appearance</code> (<code>basic</code> | <code>default</code>), <code>spacing</code> (<code>default</code> | <code>comfortable</code>), <code>caption</code>, <code>empty_title</code>, <code>empty_message</code>.</p>
-      <p class="mt-2">Cell options: <code>content</code>, <code>is_html</code>, <code>align</code>, <code>class_name</code>.</p>
-    </div>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Foundation: Basic Appearance</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Start from <code>basic</code> for minimal presentation without container background or outer border.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 p-5">
-        <?php component('table', [
-          'appearance' => 'basic',
-          'columns'    => [
-            ['label' => 'Task', 'key' => 'name'],
-            ['label' => 'Owner', 'key' => 'owner'],
-            ['label' => 'Priority', 'key' => 'priority'],
-            ['label' => 'Due Date', 'key' => 'due_date', 'align' => 'right'],
-          ],
-          'rows'       => $basic_rows,
-        ]); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table Base
       </div>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Spacing + Alignment</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Compare <code>default</code> and <code>comfortable</code> spacing using the same <code>basic</code> table style.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <div class="grid gap-6 lg:grid-cols-2">
-          <div class="space-y-3">
-            <h4 class="text-base font-semibold text-brand-900">Basic + Default Spacing</h4>
-            <?php component('table', [
-              'appearance' => 'basic',
-              'spacing'    => 'default',
-              'columns'    => [
-                ['label' => 'Service', 'key' => 'service', 'align' => 'left'],
-                ['label' => 'Status', 'key' => 'status', 'align' => 'center'],
-                ['label' => 'Projected Revenue', 'key' => 'revenue', 'align' => 'right'],
-              ],
-              'rows'       => $alignment_rows,
-            ]); ?>
-          </div>
-
-          <div class="space-y-3">
-            <h4 class="text-base font-semibold text-brand-900">Basic + Comfortable Spacing</h4>
-            <?php component('table', [
-              'appearance' => 'basic',
-              'spacing'    => 'comfortable',
-              'columns'    => [
-                ['label' => 'Service', 'key' => 'service', 'align' => 'left'],
-                ['label' => 'Status', 'key' => 'status', 'align' => 'center'],
-                ['label' => 'Projected Revenue', 'key' => 'revenue', 'align' => 'right'],
-              ],
-              'rows'       => $alignment_rows,
-            ]); ?>
-          </div>
+      <div class="relative flex min-h-[240px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-3xl">
+          <?php component('table', [
+            'appearance' => 'basic',
+            'headers'    => $pipeline_headers,
+            'data'       => $pipeline_data,
+          ]); ?>
         </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Empty State</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Empty tables should remain informative with a direct message and next-step cue.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('table', [
-          'columns' => [
-            ['label' => 'Guest', 'key' => 'guest'],
-            ['label' => 'Status', 'key' => 'status', 'align' => 'center'],
-            ['label' => 'Total', 'key' => 'total', 'align' => 'right'],
-          ],
-          'rows'          => [],
-          'empty_title'   => 'No bookings yet',
-          'empty_message' => 'When a booking is created, it will appear in this table.',
-        ]); ?>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table A
+      </div>
+      <div class="relative flex min-h-[240px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-3xl">
+          <?php component('table', [
+            'headers' => $pipeline_headers,
+            'data'    => $pipeline_data,
+            'caption' => 'Sales pipeline snapshot',
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Composition: Mixed Content</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use <code>default</code> appearance for richer table modules with avatar, badge, actions dropdown, and pagination.
-      </p>
-      <div class="mt-4 space-y-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('table', [
-          'caption' => 'Recent booking activity',
-          'columns' => [
-            ['label' => 'Guest', 'key' => 'guest'],
-            ['label' => 'Contact', 'key' => 'contact'],
-            ['label' => 'Status', 'key' => 'status', 'align' => 'center'],
-            ['label' => 'Package', 'key' => 'package'],
-            ['label' => 'Total', 'key' => 'total', 'align' => 'right'],
-            ['label' => 'Actions', 'key' => 'actions', 'align' => 'right'],
-          ],
-          'rows'    => array_map(static function (array $row): array {
-            $row['contact'] = [
-              'content' => (string) $row['contact'],
-              'is_html' => true,
-            ];
-            return $row;
-          }, $default_spacing_rows),
-        ]); ?>
-
-        <?php component('pagination', [
-          'current_page' => 1,
-          'per_page'     => 3,
-          'total_items'  => 12,
-          'show_info'    => true,
-        ]); ?>
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table B
+      </div>
+      <div class="relative flex min-h-[280px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-3xl">
+          <?php component('table', [
+            'headers' => $billing_headers,
+            'data'    => $billing_data,
+          ]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table C
+      </div>
+      <div class="relative flex min-h-[280px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-3xl">
+          <?php component('table', [
+            'appearance' => 'basic',
+            'spacing'    => 'comfortable',
+            'headers'    => $billing_headers,
+            'data'       => $billing_data,
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table D
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-4xl">
+          <?php component('table', [
+            'headers' => $customer_health_headers,
+            'data'    => array_map(static function (array $row): array {
+              $row['contact'] = [
+                'content' => (string) $row['contact'],
+                'is_html' => true,
+              ];
+
+              return $row;
+            }, $customer_health_data),
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Table E
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-3xl">
+          <?php component('table', [
+            'appearance'    => 'basic',
+            'headers'       => $empty_headers,
+            'data'          => [],
+            'empty_title'   => 'No workspaces found',
+            'empty_message' => 'Create your first workspace to start inviting your team.',
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

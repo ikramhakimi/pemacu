@@ -29,7 +29,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm1_score',
         'label'      => '1',
         'checked'    => false,
@@ -65,7 +65,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm2_score',
         'label'      => '1',
         'checked'    => false,
@@ -108,7 +108,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm3_a_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -129,7 +129,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm3_b_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -178,7 +178,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm4_a_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -201,7 +201,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm4_b_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -261,7 +261,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm5_score',
         'label'      => '1',
         'checked'    => false,
@@ -298,7 +298,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm6_score',
         'label'      => '1',
         'checked'    => false,
@@ -341,7 +341,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm7_score',
         'label'      => '1',
         'checked'    => false,
@@ -393,7 +393,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm8_score',
         'label'      => '1',
         'checked'    => false,
@@ -431,7 +431,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm9_score',
         'label'      => '1',
         'checked'    => false,
@@ -468,7 +468,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm10_score',
         'label'      => '1',
         'checked'    => false,
@@ -522,7 +522,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm11_score',
         'label'      => '1',
         'checked'    => false,
@@ -570,7 +570,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm12_a_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -602,7 +602,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'sm12_b_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -643,7 +643,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'sm13_score',
         'label'      => '1',
         'checked'    => false,

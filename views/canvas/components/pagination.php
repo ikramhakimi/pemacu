@@ -18,68 +18,132 @@ layout('canvas/layouts/canvas-start', [
   <?php
   $canvas_header = [
     'header_title'           => 'Pagination',
-    'header_subtitle'        => 'Reference for data-driven page navigation, item range context, and empty state handling.',
+    'header_subtitle'        => 'Reference for API-driven SaaS pagination flows with server links, page windows, and range context.',
     'header_container_class' => 'w-full',
   ];
   component('canvas/header', ['canvas_header' => $canvas_header]);
 ?>
 </section>
 
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Use `current_page`, `per_page`, and `total_items` to drive pagination state from data.</li>
-      <li>Use `show_info` when users need context for current range and total records.</li>
-      <li>Keep Prev/Next as primary controls and clamp navigation at first and last page.</li>
-      <li>Disable controls when only one page is available to communicate empty or single-page state.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Default (Prev + Next Clamp)</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Connected previous and next controls with compact numbered pages and ellipsis for long ranges.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('pagination', [
-          'current_page' => 1,
-          'per_page'     => 10,
-          'total_items'  => 100,
-        ]); ?>
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pagination Base
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-6xl">
+          <?php component('pagination', [
+            'pagination' => [
+              'current_page' => 2,
+              'per_page'     => 1,
+              'total_items'  => 3,
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
-
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Pagination with Info</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Add item range context to help users understand where they are in large datasets.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('pagination', [
-          'current_page' => 7,
-          'per_page'     => 10,
-          'total_items'  => 240,
-          'show_info'    => true,
-        ]); ?>
+  </div>
+  <div class="canvas-demo border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pagination A
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('pagination', [
+            'pagination' => [
+              'current_page' => 5,
+              'per_page'     => 25,
+              'total_items'  => 1460,
+              'show_info'    => true,
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Single Page / Empty State</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Keep controls disabled when no additional pages are available.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('pagination', [
-          'current_page' => 1,
-          'per_page'     => 10,
-          'total_items'  => 0,
-          'show_info'    => true,
-        ]); ?>
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pagination B
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('pagination', [
+            'pagination' => [
+              'current_page' => 9,
+              'per_page'     => 10,
+              'total_items'  => 520,
+              'page_window'  => 2,
+              'show_info'    => true,
+            ],
+          ]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="canvas-demo border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pagination C
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('pagination', [
+            'pagination' => [
+              'current_page' => 1,
+              'per_page'     => 50,
+              'total_items'  => 36,
+              'show_info'    => true,
+            ],
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pagination D
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('pagination', [
+            'pagination' => [
+              'current_page' => 4,
+              'per_page'     => 15,
+              'total_pages'  => 8,
+              'total_items'  => 120,
+              'show_info'    => true,
+              'links'        => [
+                'prev'  => [
+                  'label' => 'Previous Batch',
+                ],
+                'next'  => [
+                  'label' => 'Next Batch',
+                ],
+                'pages' => [
+                  ['page' => 1],
+                  ['type' => 'ellipsis'],
+                  ['page' => 3],
+                  ['page' => 4, 'is_current' => true],
+                  ['page' => 5],
+                  ['type' => 'ellipsis'],
+                  ['page' => 8],
+                ],
+              ],
+            ],
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

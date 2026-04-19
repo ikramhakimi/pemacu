@@ -82,7 +82,7 @@ layout('dashboard/partials/dashboard-start', [
 
   <form class="space-y-5 max-w-4xl">
     <div class="grid lg:w-3/4">
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Package Name *',
         'input_component' => 'input',
         'input_props'     => [
@@ -94,7 +94,7 @@ layout('dashboard/partials/dashboard-start', [
     </div>
 
     <div class="grid gap-4 md:grid-cols-3">
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Price (RM) *',
         'input_component' => 'input',
         'input_props'     => [
@@ -109,7 +109,7 @@ layout('dashboard/partials/dashboard-start', [
         ],
       ]); ?>
 
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Deposit (RM) *',
         'input_component' => 'input',
         'input_props'     => [
@@ -124,7 +124,7 @@ layout('dashboard/partials/dashboard-start', [
         ],
       ]); ?>
 
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Pax Max *',
         'input_component' => 'input',
         'input_props'     => [
@@ -141,7 +141,7 @@ layout('dashboard/partials/dashboard-start', [
     </div>
 
     <div class="grid lg:w-3/4">
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Description',
         'helper_text'     => 'Write a short overview for package details page.',
         'input_component' => 'textarea',
@@ -154,7 +154,7 @@ layout('dashboard/partials/dashboard-start', [
     </div>
 
     <div class="grid gap-4 md:grid-cols-3">
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Time Slots',
         'input_component' => 'textarea',
         'input_props'     => [
@@ -164,7 +164,7 @@ layout('dashboard/partials/dashboard-start', [
         ],
       ]); ?>
 
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Date Excludes',
         'input_component' => 'textarea',
         'input_props'     => [
@@ -174,7 +174,7 @@ layout('dashboard/partials/dashboard-start', [
         ],
       ]); ?>
 
-      <?php component('form/field', [
+      <?php component('form/fields', [
         'label'           => 'Pax Price Setup',
         'input_component' => 'textarea',
         'input_props'     => [

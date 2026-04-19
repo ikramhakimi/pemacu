@@ -152,12 +152,13 @@ $gridjs_css_url        = $gridjs_css_version !== '' ? $gridjs_css_href . '?v=' .
 
       <div class="<?= e($dashboard_no_sidebar ? 'app-content' : 'app-content lg:pl-[280px]'); ?>">
         <div class="app-breadcrumb px-6 py-4 border-b border-brand-200">
-          <?php component('breadcrumb-chevron', [
+          <?php component('breadcrumb', [
             'items' => [
               ['label' => 'Home', 'href' => '#'],
               ['label' => 'Sales', 'href' => '#'],
               ['label' => 'Overview', 'current' => true],
             ],
+            'separator' => 'chevron',
           ]); ?>
         </div>
         <?php if ($dashboard_no_sidebar): ?>

@@ -43,7 +43,7 @@ layout('canvas/layouts/canvas-start', [
         Baseline date picker for one target day.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/field', [
+        <?php component('form/fields', [
           'label'           => 'Session date',
           'helper_text'     => 'Choose one preferred date for your session.',
           'input_component' => 'pickdate',
@@ -63,7 +63,7 @@ layout('canvas/layouts/canvas-start', [
         Restrict date window to the current booking period.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/field', [
+        <?php component('form/fields', [
           'label'           => 'Available slot',
           'helper_text'     => 'Only dates between 2026-06-01 and 2026-07-31 are open.',
           'input_component' => 'pickdate',
@@ -86,7 +86,7 @@ layout('canvas/layouts/canvas-start', [
         Use range mode for stay duration and schedule windows.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/field', [
+        <?php component('form/fields', [
           'label'           => 'Stay range',
           'helper_text'     => 'Pick check-in and check-out dates in one interaction.',
           'input_component' => 'pickdate',

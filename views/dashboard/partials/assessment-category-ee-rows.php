@@ -36,7 +36,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'ee1_score',
         'label'      => '1',
         'checked'    => false,
@@ -80,7 +80,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee2_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -98,7 +98,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee2_2_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -116,7 +116,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee2_3_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -162,7 +162,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'ee3_score',
         'label'      => '1',
         'checked'    => false,
@@ -206,7 +206,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee4_1_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -224,7 +224,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee4_2_score',
                 'label'      => '3',
                 'checked'    => false,
@@ -242,7 +242,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee4_3_score',
                 'label'      => '4',
                 'checked'    => false,
@@ -260,7 +260,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee4_4_score',
                 'label'      => '5',
                 'checked'    => false,
@@ -305,7 +305,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_1_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -321,7 +321,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 140, OR</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_2_score',
                 'label'      => '3',
                 'checked'    => false,
@@ -337,7 +337,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 130, OR</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_3_score',
                 'label'      => '5',
                 'checked'    => false,
@@ -353,7 +353,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 120, OR</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_4_score',
                 'label'      => '8',
                 'checked'    => false,
@@ -369,7 +369,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 110, OR</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_5_score',
                 'label'      => '10',
                 'checked'    => false,
@@ -385,7 +385,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 100, OR</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_6_score',
                 'label'      => '12',
                 'checked'    => false,
@@ -401,7 +401,7 @@
           <td class="p-3 border border-brand-200">BEI ≤ 90</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee5_7_score',
                 'label'      => '15',
                 'checked'    => false,
@@ -472,7 +472,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'ee6_score',
         'label'      => '3',
         'checked'    => false,
@@ -518,7 +518,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee7_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -536,7 +536,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee7_2_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -598,7 +598,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'ee8_score',
         'label'      => '2',
         'checked'    => false,
@@ -646,7 +646,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee9_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -667,7 +667,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'ee9_2_score',
                 'label'      => '2',
                 'checked'    => false,

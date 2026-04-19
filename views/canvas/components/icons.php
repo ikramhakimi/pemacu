@@ -59,10 +59,10 @@ layout('canvas/layouts/canvas-start', [
 ?>
 </section>
 
-<section class="space-y-8" data-icon-finder-root>
-  <section class="space-y-3">
+<section data-icon-finder-root>
+  <section class="p-6 border-b border-brand-200">
     <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
+    <ul class="list-disc space-y-1 pl-5 mt-4">
       <li>Use icons to support text labels, not replace critical labels.</li>
       <li>Prefer consistent icon size per surface or component family.</li>
       <li>Use recognizable glyphs for common actions and states.</li>
@@ -70,8 +70,8 @@ layout('canvas/layouts/canvas-start', [
     </ul>
   </section>
 
-  <section class="space-y-8">
-    <div>
+  <section>
+    <div class="p-6 border-b border-brand-200">
       <h3 class="text-xl font-bold text-brand-900">Icon Sizes</h3>
       <p class="mt-2 max-w-3xl text-brand-600">
         Use consistent sizing per surface: 16 for dense rows, 20 for controls, 24 for standard UI, and 32 for emphasis.
@@ -113,7 +113,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
     </div>
 
-    <div>
+    <div class="p-6">
       <h3 class="text-xl font-bold text-brand-900">Icon Library</h3>
       <p class="mt-2 max-w-3xl text-brand-600">Search and browse Remixicon glyphs by name or category.</p>
       <div class="mt-4">
@@ -143,7 +143,7 @@ layout('canvas/layouts/canvas-start', [
               <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 <?php foreach ($icon_category['icons'] as $icon_name): ?>
                   <div
-                    class="rounded-lg border border-brand-200 bg-white px-4 py-2"
+                    class="rounded-lg border border-brand-200 bg-brand-50 hover:bg-white px-4 py-2"
                     data-icon-finder-item
                     data-icon-name="<?= e(strtolower($icon_name)); ?>"
                     data-icon-category="<?= e(strtolower($icon_category['name'])); ?>"

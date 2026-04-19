@@ -83,13 +83,18 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/alert', 'label' => 'Alert'],
     ['href' => '/canvas/components/avatar', 'label' => 'Avatar'],
     ['href' => '/canvas/components/badge', 'label' => 'Badge'],
-    ['href' => '/canvas/components/buttons', 'label' => 'Buttons'],
+    ['href' => '/canvas/components/button', 'label' => 'Button'],
+    ['href' => '/canvas/components/checkbox', 'label' => 'Checkbox'],
+    ['href' => '/canvas/components/radio', 'label' => 'Radio'],
+    ['href' => '/canvas/components/rating', 'label' => 'Rating'],
+    ['href' => '/canvas/components/select', 'label' => 'Select'],
     ['href' => '/canvas/components/breadcrumb', 'label' => 'Breadcrumb'],
     ['href' => '/canvas/components/cards', 'label' => 'Cards'],
     ['href' => '/canvas/components/dropdown', 'label' => 'Dropdown'],
     ['href' => '/canvas/components/drawer', 'label' => 'Drawer'],
-    ['href' => '/canvas/components/fields', 'label' => 'Fields'],
+    ['href' => '/canvas/components/field', 'label' => 'Field'],
     ['href' => '/canvas/components/forms', 'label' => 'Forms'],
+    ['href' => '/canvas/components/switch', 'label' => 'Switch'],
     ['href' => '/canvas/components/pick-date', 'label' => 'Pick Date'],
     ['href' => '/canvas/components/pick-time', 'label' => 'Pick Time'],
     ['href' => '/canvas/components/pagination', 'label' => 'Pagination'],
@@ -190,65 +195,6 @@ function dashboard_links(): array
   ];
 }
 
-function canvas_component_variants(string $component_name): array
-{
-  if ($component_name === 'buttons') {
-    return [
-      [
-        'id'          => 'default',
-        'title'       => 'Default',
-        'description' => 'Use for low-priority actions inside dense layouts.',
-        'component'   => 'buttons-default',
-        'panel_class' => 'flex items-center gap-4',
-      ],
-      [
-        'id'          => 'primary',
-        'title'       => 'Primary',
-        'description' => 'Use for the main action on the current screen.',
-        'component'   => 'buttons-primary',
-        'panel_class' => 'flex items-center gap-4',
-      ],
-      [
-        'id'          => 'secondary',
-        'title'       => 'Secondary',
-        'description' => 'Use for supporting actions that sit next to the primary action.',
-        'component'   => 'buttons-secondary',
-        'panel_class' => 'flex items-center gap-4',
-      ],
-      [
-        'id'          => 'positive',
-        'title'       => 'Positive',
-        'description' => 'Use to confirm successful or safe completion actions.',
-        'component'   => 'buttons-positive',
-        'panel_class' => 'flex items-center gap-4',
-      ],
-      [
-        'id'          => 'negative',
-        'title'       => 'Negative',
-        'description' => 'Use only for destructive or irreversible actions.',
-        'component'   => 'buttons-negative',
-        'panel_class' => 'flex items-center gap-4',
-      ],
-      [
-        'id'          => 'icon-only',
-        'title'       => 'Icon Only',
-        'description' => 'Use for compact actions when context is clear and nearby labels already exist.',
-        'component'   => 'buttons-icon-only',
-        'panel_class' => 'flex flex-wrap items-center gap-4',
-      ],
-      [
-        'id'          => 'with-icons',
-        'title'       => 'With Icons (Left/Right)',
-        'description' => 'Use leading icons for action intent and trailing icons for directional flow cues.',
-        'component'   => 'buttons-with-icons',
-        'panel_class' => 'flex flex-wrap items-center gap-4',
-      ],
-    ];
-  }
-
-  return [];
-}
-
 function button_class(array $options = []): string
 {
   $tone      = isset($options['tone']) ? (string) $options['tone'] : 'default';
@@ -259,7 +205,7 @@ function button_class(array $options = []): string
   $extra     = isset($options['extra']) ? trim((string) $options['extra']) : '';
 
   $allowed_tones = ['default', 'primary', 'secondary', 'positive', 'negative'];
-  $allowed_sizes = ['sm', 'md', 'lg'];
+  $allowed_sizes = ['sm', 'md', 'lg', 'xl'];
 
   if (!in_array($tone, $allowed_tones, true)) {
     $tone = 'default';
@@ -290,6 +236,13 @@ function button_class(array $options = []): string
       'padding' => 'px-[var(--ui-px-lg)]',
       'text'    => 'text-base',
       'width'   => 'w-[var(--ui-h-lg)]',
+    ],
+    'xl' => [
+      'height'  => 'h-[var(--ui-h-xl)]',
+      'leading' => 'leading-[var(--ui-h-xl)]',
+      'padding' => 'px-[var(--ui-px-xl)]',
+      'text'    => 'text-lg',
+      'width'   => 'w-[var(--ui-h-xl)]',
     ],
   ];
 
@@ -354,7 +307,7 @@ function button_class(array $options = []): string
   return implode(' ', array_filter($classes));
 }
 
-function button(string $variant_size = 'md/default', string $extra_class = ''): void
+function button_options_from_variant_size(string $variant_size = 'md/default'): array
 {
   $resolved_size = 'md';
   $resolved_tone = 'default';
@@ -370,32 +323,31 @@ function button(string $variant_size = 'md/default', string $extra_class = ''): 
     }
   }
 
+  return [
+    'size' => $resolved_size,
+    'tone' => $resolved_tone,
+  ];
+}
+
+function button(string $variant_size = 'md/default', string $extra_class = ''): void
+{
+  $resolved_options = button_options_from_variant_size($variant_size);
+
   echo e(button_class([
-    'size'  => $resolved_size,
-    'tone'  => $resolved_tone,
-    'extra' => $extra_class,
+    'size'     => $resolved_options['size'],
+    'tone'     => $resolved_options['tone'],
+    'gradient' => true,
+    'extra'    => $extra_class,
   ]));
 }
 
 function button_gradient(string $variant_size = 'md/default', string $extra_class = ''): void
 {
-  $resolved_size = 'md';
-  $resolved_tone = 'default';
-  $resolved_pair = trim($variant_size);
-
-  if ($resolved_pair !== '') {
-    if (str_contains($resolved_pair, '/')) {
-      [$raw_size, $raw_tone] = explode('/', $resolved_pair, 2);
-      $resolved_size = trim($raw_size) !== '' ? trim($raw_size) : 'md';
-      $resolved_tone = trim($raw_tone) !== '' ? trim($raw_tone) : 'default';
-    } else {
-      $resolved_size = $resolved_pair;
-    }
-  }
+  $resolved_options = button_options_from_variant_size($variant_size);
 
   echo e(button_class([
-    'size'     => $resolved_size,
-    'tone'     => $resolved_tone,
+    'size'     => $resolved_options['size'],
+    'tone'     => $resolved_options['tone'],
     'gradient' => true,
     'extra'    => $extra_class,
   ]));
@@ -418,7 +370,7 @@ function button_capture(): callable
 function capture_checkbox(array $options = []): string
 {
   ob_start();
-  component('form/checkbox', $options);
+  component('checkbox', $options);
   return (string) ob_get_clean();
 }
 
@@ -474,15 +426,13 @@ function otp_input_capture(): callable
 function capture_radio(array $options = []): string
 {
   ob_start();
-  component('form/radio', $options);
+  component('radio', $options);
   return (string) ob_get_clean();
 }
 
 function radio_capture(): callable
 {
-  return static function (array $options = []): string {
-    return capture_radio($options);
-  };
+  return 'capture_radio';
 }
 
 function capture_rating(array $options = []): string
@@ -600,6 +550,7 @@ function component(string $component_name, array $data = []): void
 
   $states          = isset($data['states']) && is_array($data['states']) ? $data['states'] : [];
   $component_class = build_component_class($component_key, $states);
+  $component_props = $data;
 
   extract($data, EXTR_SKIP);
   require $component_path;

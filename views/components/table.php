@@ -1,9 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 /**
  * Component: table
- * Purpose: Render a semantic, data-driven table with spacing variants, alignment controls, and empty state.
+ * Purpose: Render one reusable, API-driven semantic table with configurable columns, row data, and empty state.
  * Anatomy:
  * - .table-wrapper
  *   - table.table
@@ -14,20 +15,39 @@ declare(strict_types=1);
  *       - tr.table__row
  *         - td.table__cell
  * Data Contract:
- * - `columns` (array, optional): list of columns (string label or array with `label`, `key`, `align`, `class_name`).
- * - `rows` (array, optional): list of rows (array of cells or row object with `cells`, `row_class`).
- * - Cell object supports `content`, `is_html`, `align`, `class_name`.
- * - `appearance` (string, optional): `default` or `basic`. Default: `default`.
- * - `spacing` (string, optional): `default` or `comfortable`. Default: `default`.
- * - `caption` (string, optional): table caption text.
- * - `empty_title` (string, optional): empty state heading. Default: `No records found`.
- * - `empty_message` (string, optional): empty state description.
- * - `class_name` (string, optional): wrapper classes.
- * - `attributes` (array, optional): extra attributes for `<table>`.
+ * - `columns`|`headers` (array): column schema. Item: string or array (`label`, `key`, `align`, `class_name`, `heading_class`).
+ * - `rows`|`data` (array): table rows. Item: indexed/assoc row or object row (`cells`, `row_class`).
+ * - Cell object: `content`, `is_html`, `align`, `class_name`.
+ * - `appearance` (string): `default` | `basic`. Default: `default`.
+ * - `spacing` (string): `default` | `comfortable`. Default: `default`.
+ * - `caption` (string): accessible table caption.
+ * - `empty_title` (string): empty-state title.
+ * - `empty_message` (string): empty-state supporting text.
+ * - `class_name` (string): wrapper utility classes.
+ * - `attributes` (array): additional `<table>` attributes.
  */
 
-$columns       = isset($columns) && is_array($columns) ? array_values($columns) : [];
-$rows          = isset($rows) && is_array($rows) ? array_values($rows) : [];
+$columns_source = [];
+
+if (isset($columns) && is_array($columns)) {
+  $columns_source = $columns;
+} elseif (isset($headers) && is_array($headers)) {
+  $columns_source = $headers;
+}
+
+$rows_source           = [];
+$rows_alias_from_props = isset($component_props['data']) && is_array($component_props['data'])
+  ? $component_props['data']
+  : [];
+
+if (isset($rows) && is_array($rows)) {
+  $rows_source = $rows;
+} elseif ($rows_alias_from_props !== []) {
+  $rows_source = $rows_alias_from_props;
+}
+
+$columns       = array_values($columns_source);
+$rows          = array_values($rows_source);
 $appearance    = isset($appearance) ? trim((string) $appearance) : 'default';
 $spacing       = isset($spacing) ? trim((string) $spacing) : 'default';
 $caption       = isset($caption) ? trim((string) $caption) : '';
@@ -57,8 +77,6 @@ if (!isset($appearance_map[$appearance])) {
   $appearance = 'default';
 }
 
-$edge_padding_class = $appearance === 'basic' ? 'first:pl-0 last:pr-0' : '';
-
 $spacing_map = [
   'default' => [
     'heading' => 'py-3',
@@ -80,31 +98,25 @@ $align_map = [
   'right'  => 'text-right',
 ];
 
-$resolve_align = static function (string $align) use ($align_map): string {
-  $align = trim($align);
-
-  if (!isset($align_map[$align])) {
-    $align = 'left';
-  }
-
-  return $align_map[$align];
-};
-
-$resolve_optional_align = static function (string $align) use ($resolve_align): string {
+$resolve_optional_align = static function (string $align) use ($align_map): string {
   $align = trim($align);
 
   if ($align === '' || $align === 'left') {
     return '';
   }
 
-  return $resolve_align($align);
+  if (!isset($align_map[$align])) {
+    return '';
+  }
+
+  return $align_map[$align];
 };
 
 $render_attributes = static function (array $attrs): string {
   $compiled = [];
 
   foreach ($attrs as $key => $value_attr) {
-    if (!is_string($key) || $key === '') {
+    if (!is_string($key) || trim($key) === '') {
       continue;
     }
 
@@ -129,15 +141,17 @@ $column_meta = [];
 
 foreach ($columns as $index => $column) {
   if (is_array($column)) {
-    $column_label = isset($column['label']) ? trim((string) $column['label']) : 'Column ' . ($index + 1);
-    $column_key   = isset($column['key']) ? trim((string) $column['key']) : 'column_' . ($index + 1);
-    $column_align = isset($column['align']) ? trim((string) $column['align']) : 'left';
-    $column_class = isset($column['class_name']) ? trim((string) $column['class_name']) : '';
+    $column_label        = isset($column['label']) ? trim((string) $column['label']) : 'Column ' . ($index + 1);
+    $column_key          = isset($column['key']) ? trim((string) $column['key']) : 'column_' . ($index + 1);
+    $column_align        = isset($column['align']) ? trim((string) $column['align']) : 'left';
+    $column_class        = isset($column['class_name']) ? trim((string) $column['class_name']) : '';
+    $column_heading_class  = isset($column['heading_class']) ? trim((string) $column['heading_class']) : '';
   } else {
-    $column_label = trim((string) $column);
-    $column_key   = 'column_' . ($index + 1);
-    $column_align = 'left';
-    $column_class = '';
+    $column_label        = trim((string) $column);
+    $column_key          = 'column_' . ($index + 1);
+    $column_align        = 'left';
+    $column_class        = '';
+    $column_heading_class  = '';
   }
 
   if ($column_label === '') {
@@ -149,12 +163,15 @@ foreach ($columns as $index => $column) {
   }
 
   $column_meta[] = [
-    'label'      => $column_label,
-    'key'        => $column_key,
-    'align'      => $column_align,
-    'class_name' => $column_class,
+    'label'         => $column_label,
+    'key'           => $column_key,
+    'align'         => $column_align,
+    'class_name'    => $column_class,
+    'heading_class' => $column_heading_class,
   ];
 }
+
+$edge_padding_class = $appearance === 'basic' ? 'first:pl-0 last:pr-0' : '';
 
 $table_attributes          = $attributes;
 $table_attributes['class'] = trim(implode(' ', array_filter([
@@ -174,15 +191,16 @@ $table_attributes['class'] = trim(implode(' ', array_filter([
       <tr>
         <?php foreach ($column_meta as $column): ?>
           <?php
-          $heading_class = trim(implode(' ', array_filter([
+          $heading_classes = trim(implode(' ', array_filter([
             'table__heading px-4',
             $edge_padding_class,
             $spacing_map[$spacing]['heading'],
             $resolve_optional_align((string) $column['align']),
-            $column['class_name'],
+            (string) $column['class_name'],
+            (string) $column['heading_class'],
           ])));
           ?>
-          <th scope="col" class="<?= e($heading_class); ?>">
+          <th scope="col" class="<?= e($heading_classes); ?>">
             <?= e((string) $column['label']); ?>
           </th>
         <?php endforeach; ?>
@@ -222,7 +240,9 @@ $table_attributes['class'] = trim(implode(' ', array_filter([
             $cell_class   = '';
 
             if (is_array($raw_cell)) {
-              $cell_content = isset($raw_cell['content']) ? (string) $raw_cell['content'] : '';
+              $cell_content = isset($raw_cell['content'])
+                ? (string) $raw_cell['content']
+                : (isset($raw_cell['value']) ? (string) $raw_cell['value'] : '');
               $cell_is_html = !empty($raw_cell['is_html']);
               $cell_align   = isset($raw_cell['align']) ? (string) $raw_cell['align'] : $cell_align;
               $cell_class   = isset($raw_cell['class_name']) ? trim((string) $raw_cell['class_name']) : '';

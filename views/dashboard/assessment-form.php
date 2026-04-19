@@ -80,7 +80,7 @@ foreach ($assessment_items_map as $item_key => $item_data) {
       : 'assessment_option_' . $item_key . '[]';
 
     ob_start();
-    component('form/checkbox', [
+    component('checkbox', [
       'id'         => $option_id,
       'name'       => $option_name,
       'value'      => (string) $option_points,

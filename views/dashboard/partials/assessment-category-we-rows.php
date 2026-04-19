@@ -25,7 +25,7 @@
           <td class="p-3 border border-brand-200">Rainwater harvesting that leads to ≥ 15% reduction in potable water consumption.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we1_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -41,7 +41,7 @@
           <td class="p-3 border border-brand-200">Rainwater harvesting that leads to ≥ 30% reduction in potable water consumption.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we1_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -85,7 +85,7 @@
           <td class="p-3 border border-brand-200">Treat and recycle ≥ 10% wastewater leading to reduction in potable water consumption.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we2_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -101,7 +101,7 @@
           <td class="p-3 border border-brand-200">Treat and recycle ≥ 30% wastewater leading to reduction in potable water consumption.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we2_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -158,7 +158,7 @@
           <td class="p-3 border border-brand-200">Reduce potable water consumption for landscape irrigation by ≥ 50% (e.g. through use of native or adaptive plants to reduce or eliminate irrigation requirement).</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we3_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -174,7 +174,7 @@
           <td class="p-3 border border-brand-200">Do not use potable water at all for landscape irrigation.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we3_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -218,7 +218,7 @@
           <td class="p-3 border border-brand-200">Reduce annual potable water consumption by ≥ 30%.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we4_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -234,7 +234,7 @@
           <td class="p-3 border border-brand-200">Reduce annual potable water consumption by ≥ 50%.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we4_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -278,7 +278,7 @@
           <td class="p-3 border border-brand-200">Use of sub-meters to monitor and manage major water usage for cooling towers, irrigation, kitchens and tenancy use.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we5_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -294,7 +294,7 @@
           <td class="p-3 border border-brand-200">Link all water sub-meters to EMS to facilitate early detection of water leakage.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'we5_2_score',
                 'label'      => '1',
                 'checked'    => false,

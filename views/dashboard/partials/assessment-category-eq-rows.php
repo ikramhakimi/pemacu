@@ -22,7 +22,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq1_score',
         'label'      => '1',
         'checked'    => false,
@@ -62,7 +62,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq2_score',
         'label'      => '1',
         'checked'    => false,
@@ -99,7 +99,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq3_score',
         'label'      => '1',
         'checked'    => false,
@@ -145,7 +145,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq4_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -169,7 +169,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq4_2_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -221,7 +221,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq5_score',
         'label'      => '1',
         'checked'    => false,
@@ -274,7 +274,7 @@
           <td class="p-3 border border-brand-200">Design to ASHRAE 55 in conjunction with the relevant localised parameters as listed in MS1525:2007.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq6_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -295,7 +295,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq6_2_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -337,7 +337,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq7_score',
         'label'      => '1',
         'checked'    => false,
@@ -390,7 +390,7 @@
           <td class="p-3 border border-brand-200">Demonstrate that ≥ 30% of the NLA has a daylight factor in the range of 1.0 – 3.5% as measured at the working plane, 800mm from floor level.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq8_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -406,7 +406,7 @@
           <td class="p-3 border border-brand-200">Demonstrate that ≥ 50% of the NLA has a daylight factor in the range of 1.0 – 3.5% as measured at the working plane, 800mm from floor level.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq8_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -452,7 +452,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq9_score',
         'label'      => '1',
         'checked'    => false,
@@ -489,7 +489,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq10_score',
         'label'      => '1',
         'checked'    => false,
@@ -526,7 +526,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq11_score',
         'label'      => '1',
         'checked'    => false,
@@ -566,7 +566,7 @@
           <td class="p-3 border border-brand-200">Demonstrate that ≥ 60% of the NLA has a direct line of sight through vision glazing at a height of 1.2m from floor level.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq12_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -582,7 +582,7 @@
           <td class="p-3 border border-brand-200">Demonstrate that ≥ 75% of the NLA has a direct line of sight through vision glazing at a height of 1.2m from floor level.</td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq12_2_score',
                 'label'      => '2',
                 'checked'    => false,
@@ -625,7 +625,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq13_score',
         'label'      => '1',
         'checked'    => false,
@@ -684,7 +684,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq14_1_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -702,7 +702,7 @@
           </td>
           <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
             <div class="flex items-center justify-end">
-              <?php component('form/checkbox', [
+              <?php component('checkbox', [
                 'name'       => 'eq14_2_score',
                 'label'      => '1',
                 'checked'    => false,
@@ -746,7 +746,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'eq15_score',
         'label'      => '2',
         'checked'    => false,

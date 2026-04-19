@@ -42,7 +42,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'in1_score',
         'label'      => '6',
         'checked'    => false,
@@ -79,7 +79,7 @@
   </td>
   <td class="assessment-table__item-action p-3 border border-brand-200 align-top text-right" width="160">
     <div class="flex items-center justify-end">
-      <?php component('form/checkbox', [
+      <?php component('checkbox', [
         'name'       => 'in2_score',
         'label'      => '1',
         'checked'    => false,

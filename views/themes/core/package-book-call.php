@@ -79,7 +79,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
         <div class="col-span-3 lg:col-span-2">
           <form class="space-y-3" action="#" method="post">
-            <?php component('form/field', [
+            <?php component('form/fields', [
               'label'           => 'Name',
               'hide_label'      => true,
               'input_component' => 'input-group',
@@ -97,7 +97,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
               ],
             ]); ?>
             <div class="grid gap-3 md:grid-cols-2">
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'           => 'Phone',
                 'hide_label'      => true,
                 'input_component' => 'input-group',
@@ -114,7 +114,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                   ],
                 ],
               ]); ?>
-              <?php component('form/field', [
+              <?php component('form/fields', [
                 'label'           => 'Email',
                 'hide_label'      => true,
                 'input_component' => 'input-group',

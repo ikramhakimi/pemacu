@@ -57,7 +57,7 @@ if ($canvas_primary === 'components') {
 </head>
 <body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed" style="letter-spacing: -1%;">
   <main id="root">
-    <div class="canvas-side fixed inset-y-0 left-0 z-30 w-[280px] overflow-y-auto border-r border-brand-200 bg-brand-100 px-2 py-5" aria-label="Canvas navigation">
+    <div class="canvas-side fixed inset-y-0 left-0 z-30 w-[280px] overflow-y-auto border-r border-brand-200 bg-brand-100" aria-label="Canvas navigation">
       <?php component('canvas/sidebar', [
         'canvas_primary'     => $canvas_primary,
         'canvas_active_link' => $canvas_active_link,
@@ -66,8 +66,9 @@ if ($canvas_primary === 'components') {
 
     <div class="canvas-main lg:pl-[280px]">
       <div class="canvas-breadcrumb px-6 py-4 border-b border-brand-200">
-        <?php component('breadcrumb-chevron', [
+        <?php component('breadcrumb', [
           'items' => $breadcrumb_items,
+          'separator' => 'chevron',
         ]); ?>
       </div>
       <div class="canvas-container">

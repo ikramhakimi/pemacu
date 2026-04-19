@@ -4,24 +4,28 @@
 
 :root {
   /* Control height tokens */
-  --ui-h-sm: 32px;
-  --ui-h-md: 40px;
-  --ui-h-lg: 48px;
+  --ui-h-sm: 28px;
+  --ui-h-md: 36px;
+  --ui-h-lg: 44px;
+  --ui-h-xl: 52px;
 
   /* Control horizontal padding tokens */
   --ui-px-sm: 12px;
   --ui-px-md: 16px;
   --ui-px-lg: 20px;
+  --ui-px-xl: 24px;
 
   /* Control vertical padding tokens */
   --ui-py-sm: 8px;
   --ui-py-md: 12px;
   --ui-py-lg: 16px;
+  --ui-py-xl: 24px;
 
   /* Corner radius scale */
   --ui-rd-sm: 4px;
   --ui-rd-md: 8px;
   --ui-rd-lg: 12px;
+  --ui-rd-xl: 16px;
 
   /* Default control radius alias */
   --ui-rd-control: var(--ui-rd-md);

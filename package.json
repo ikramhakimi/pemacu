@@ -1,5 +1,5 @@
 {
-  "name": "bookingpro-themes",
+  "name": "pemacu",
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./assets/css/app.css -o ./assets/build/app.css --minify",

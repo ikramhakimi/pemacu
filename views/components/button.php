@@ -6,14 +6,15 @@ declare(strict_types=1);
  * Purpose: Render one reusable button element as `<button>` or `<a>` using an API-driven prop model.
  * Anatomy:
  * - .btn.btn--{tone}.btn--{size}
- * - Optional: .btn--gradient, .btn--icon-only
+ * - .btn--gradient
+ * - Optional: .btn--icon-only
  * - Optional children: svg.button__icon.opacity-75, .button__label
  * Data Contract:
  * - Flat props: label, href, type, variant, size, class, id, name, target, rel, aria_label
- * - Flat props: icon_name, icon_size, icon_class, icon_only, icon_position, disabled, gradient, attributes
+ * - Flat props: icon_name, icon_size, icon_class, icon_only, icon_position, disabled, attributes
  * - Structured API:
  *   - icon: [name, size, class, only, position]
- *   - state: [disabled, gradient]
+ *   - state: [disabled]
  *   - link: [href, target, rel]
  * - loading_center: bool (center loading icon with transparent label text)
  */
@@ -95,13 +96,6 @@ if (isset($state_props['disabled'])) {
   $disabled = !empty($props['disabled']);
 }
 
-$gradient = true;
-if (isset($state_props['gradient'])) {
-  $gradient = (bool) $state_props['gradient'];
-} elseif (isset($props['gradient'])) {
-  $gradient = (bool) $props['gradient'];
-}
-
 $loading_center = isset($props['loading_center']) ? (bool) $props['loading_center'] : false;
 
 $attributes = isset($props['attributes']) && is_array($props['attributes']) ? $props['attributes'] : [];
@@ -135,17 +129,7 @@ $icon_size_map = [
 ];
 $resolved_icon_size = $icon_size === null ? $icon_size_map[$resolved_size] : $icon_size;
 
-$icon_alias_map = [
-  'plus'          => 'add-line',
-  'close'         => 'close-line',
-  'x'             => 'close-line',
-  'chevron-right' => 'arrow-right-s-line',
-  'chevron-left'  => 'arrow-left-s-line',
-];
 $resolved_icon_name = trim($icon_name);
-if ($resolved_icon_name !== '' && isset($icon_alias_map[$resolved_icon_name])) {
-  $resolved_icon_name = $icon_alias_map[$resolved_icon_name];
-}
 
 if ($icon_position !== 'right') {
   $icon_position = 'left';
@@ -156,13 +140,12 @@ $is_link  = $href !== '';
 
 $tone_modifier      = 'btn--' . $resolved_tone;
 $size_modifier      = 'btn--' . $resolved_size;
-$gradient_modifier  = $gradient ? 'btn--gradient' : '';
+$gradient_modifier  = 'btn--gradient';
 $icon_only_modifier = $icon_only ? 'btn--icon-only' : '';
 
 $core_classes = button_class([
   'tone'      => $resolved_tone,
   'size'      => $resolved_size,
-  'gradient'  => $gradient,
   'disabled'  => $disabled,
   'icon_only' => $icon_only,
   'extra'     => !$icon_only && $has_icon && !$loading_center ? 'gap-2' : '',

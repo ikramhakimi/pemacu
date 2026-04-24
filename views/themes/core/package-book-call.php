@@ -79,11 +79,12 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
         <div class="col-span-3 lg:col-span-2">
           <form class="space-y-3" action="#" method="post">
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'           => 'Name',
-              'hide_label'      => true,
-              'input_component' => 'input-group',
-              'input_props'     => [
+              'show_label' => false,
+              'control' => [
+                'component' => 'input-group',
+                'props' => [
                 'id'          => 'booking-contact-name',
                 'name'        => 'name',
                 'type'        => 'text',
@@ -94,14 +95,16 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                 'attributes'  => [
                   'autocomplete' => 'name',
                 ],
+                ],
               ],
             ]); ?>
             <div class="grid gap-3 md:grid-cols-2">
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'           => 'Phone',
-                'hide_label'      => true,
-                'input_component' => 'input-group',
-                'input_props'     => [
+                'show_label' => false,
+                'control' => [
+                  'component' => 'input-group',
+                  'props' => [
                   'id'          => 'booking-contact-phone',
                   'name'        => 'phone',
                   'type'        => 'tel',
@@ -112,13 +115,15 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                   'attributes'  => [
                     'autocomplete' => 'tel',
                   ],
+                  ],
                 ],
               ]); ?>
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'           => 'Email',
-                'hide_label'      => true,
-                'input_component' => 'input-group',
-                'input_props'     => [
+                'show_label' => false,
+                'control' => [
+                  'component' => 'input-group',
+                  'props' => [
                   'id'          => 'booking-contact-email',
                   'name'        => 'email',
                   'type'        => 'email',
@@ -128,6 +133,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
                   'placeholder' => 'Enter your email',
                   'attributes'  => [
                     'autocomplete' => 'email',
+                  ],
                   ],
                 ],
               ]); ?>

@@ -9,6 +9,9 @@ $component_links      = canvas_links('components');
 $component_overview   = $component_links[0] ?? null;
 $component_sub_links  = array_slice($component_links, 1);
 $pattern_overview_raw = '/canvas/patterns#overview';
+$icons_href_raw       = '/canvas/resources/icons';
+$avatars_href_raw     = '/canvas/resources/avatars';
+$logos_href_raw       = '';
 
 usort($component_sub_links, static function (array $first_link, array $second_link): int {
   $first_label  = isset($first_link['label']) ? trim((string) $first_link['label']) : '';
@@ -17,8 +20,12 @@ usort($component_sub_links, static function (array $first_link, array $second_li
   return strcasecmp($first_label, $second_label);
 });
 
-$is_components_open = $canvas_primary === 'components';
-$is_patterns_open   = $canvas_primary === 'patterns';
+$is_icons_active    = $canvas_active_link === $icons_href_raw;
+$is_avatars_active  = $canvas_active_link === $avatars_href_raw;
+$is_logos_active    = $logos_href_raw !== '' && $canvas_active_link === $logos_href_raw;
+$is_resources_open  = $is_icons_active || $is_avatars_active || $is_logos_active;
+$is_components_open = $canvas_primary === 'components' && !$is_resources_open;
+$is_patterns_open   = $canvas_primary === 'patterns' || $is_resources_open;
 ?>
 <nav>
   <h2 class="font-semibold uppercase tracking-wide text-brand-500">Canvas</h2>
@@ -36,30 +43,30 @@ $is_patterns_open   = $canvas_primary === 'patterns';
         <ul class="ml-8">
           <li>
             <a
-              class="<?= e($canvas_primary === 'patterns'
-                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 font-semibold'
+              class="<?= e($is_icons_active
+                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 bg-brand-200 font-semibold'
                 : 'block rounded-md px-3 py-0.5 leading-5 text-brand-700 hover:bg-brand-200 hover:text-brand-900'); ?>"
-              href="#"
+              href="<?= e(path($icons_href_raw)); ?>"
             >
               Icons
             </a>
           </li>
           <li>
             <a
-              class="<?= e($canvas_primary === 'patterns'
-                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 font-semibold'
+              class="<?= e($is_avatars_active
+                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 bg-brand-200 font-semibold'
                 : 'block rounded-md px-3 py-0.5 leading-5 text-brand-700 hover:bg-brand-200 hover:text-brand-900'); ?>"
-              href=""
+              href="<?= e(path($avatars_href_raw)); ?>"
             >
               Avatars
             </a>
           </li>
           <li>
             <a
-              class="<?= e($canvas_primary === 'patterns'
-                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 font-semibold'
+              class="<?= e($is_logos_active
+                ? 'block rounded-md px-3 py-0.5 leading-5 text-brand-900 bg-brand-200 font-semibold'
                 : 'block rounded-md px-3 py-0.5 leading-5 text-brand-700 hover:bg-brand-200 hover:text-brand-900'); ?>"
-              href=""
+              href="<?= e($logos_href_raw); ?>"
             >
               Logos
             </a>
@@ -101,6 +108,9 @@ $is_patterns_open   = $canvas_primary === 'patterns';
             $link_label    = isset($link['label']) ? trim((string) $link['label']) : '';
             $is_active     = $canvas_active_link !== '' && $link_href_raw === $canvas_active_link;
             ?>
+            <?php if ($link_href_raw === $icons_href_raw): ?>
+              <?php continue; ?>
+            <?php endif; ?>
             <?php if ($link_href_raw === '' || $link_label === ''): ?>
               <?php continue; ?>
             <?php endif; ?>

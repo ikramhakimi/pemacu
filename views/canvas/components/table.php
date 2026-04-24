@@ -140,7 +140,7 @@ $customer_health_data = [
     'health' => [
       'content' => $render_component_html('badge', [
         'label' => 'Needs Review',
-        'tone'  => 'attention',
+        'tone'  => 'warning',
       ]),
       'is_html' => true,
       'align'   => 'center',
@@ -221,8 +221,8 @@ layout('canvas/layouts/canvas-start', [
 ?>
 </section>
 
-<section class="canvas-showcase grid md:grid-cols-2">
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table Base
@@ -231,14 +231,14 @@ layout('canvas/layouts/canvas-start', [
         <div class="w-full max-w-3xl">
           <?php component('table', [
             'appearance' => 'basic',
-            'headers'    => $pipeline_headers,
-            'data'       => $pipeline_data,
+            'columns'    => $pipeline_headers,
+            'rows'       => $pipeline_data,
           ]); ?>
         </div>
       </div>
     </div>
   </div>
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table A
@@ -246,8 +246,8 @@ layout('canvas/layouts/canvas-start', [
       <div class="relative flex min-h-[240px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="w-full max-w-3xl">
           <?php component('table', [
-            'headers' => $pipeline_headers,
-            'data'    => $pipeline_data,
+            'columns'    => $pipeline_headers,
+            'rows'       => $pipeline_data,
             'caption' => 'Sales pipeline snapshot',
           ]); ?>
         </div>
@@ -256,8 +256,8 @@ layout('canvas/layouts/canvas-start', [
   </div>
 </section>
 
-<section class="canvas-showcase grid md:grid-cols-2">
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table B
@@ -265,14 +265,14 @@ layout('canvas/layouts/canvas-start', [
       <div class="relative flex min-h-[280px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="w-full max-w-3xl">
           <?php component('table', [
-            'headers' => $billing_headers,
-            'data'    => $billing_data,
+            'columns'    => $billing_headers,
+            'rows'       => $billing_data,
           ]); ?>
         </div>
       </div>
     </div>
   </div>
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table C
@@ -282,8 +282,8 @@ layout('canvas/layouts/canvas-start', [
           <?php component('table', [
             'appearance' => 'basic',
             'spacing'    => 'comfortable',
-            'headers'    => $billing_headers,
-            'data'       => $billing_data,
+            'columns'    => $billing_headers,
+            'rows'       => $billing_data,
           ]); ?>
         </div>
       </div>
@@ -291,8 +291,8 @@ layout('canvas/layouts/canvas-start', [
   </div>
 </section>
 
-<section class="canvas-showcase grid md:grid-cols-2">
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+<section class="canvas-showcase grid grid-cols-1">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table D
@@ -300,8 +300,8 @@ layout('canvas/layouts/canvas-start', [
       <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="w-full max-w-4xl">
           <?php component('table', [
-            'headers' => $customer_health_headers,
-            'data'    => array_map(static function (array $row): array {
+            'columns'    => $customer_health_headers,
+            'rows'       => array_map(static function (array $row): array {
               $row['contact'] = [
                 'content' => (string) $row['contact'],
                 'is_html' => true,
@@ -314,7 +314,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
     </div>
   </div>
-  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+  <div class="canvas-demo border-b border-dashed border-brand-300">
     <div class="flex h-full flex-col p-6">
       <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
         Table E
@@ -323,8 +323,8 @@ layout('canvas/layouts/canvas-start', [
         <div class="w-full max-w-3xl">
           <?php component('table', [
             'appearance'    => 'basic',
-            'headers'       => $empty_headers,
-            'data'          => [],
+            'columns'    => $empty_headers,
+            'rows'       => [],
             'empty_title'   => 'No workspaces found',
             'empty_message' => 'Create your first workspace to start inviting your team.',
           ]); ?>

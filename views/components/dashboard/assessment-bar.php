@@ -60,7 +60,7 @@ $assessment_bar_is_interactive = $assessment_bar_item_key !== '';
       <?= e($assessment_bar_code); ?>
     </span>
 
-    <h3 class="assessment-bar__title text-sm text-brand-900">
+    <h3 class="assessment-bar__title  text-brand-900">
       <?= e($assessment_bar_title); ?>
       <?php if ($assessment_bar_score !== ''): ?>
         <span class="assessment-bar__score font-mono text-[11px] text-brand-500 ml-2"><?= e($assessment_bar_score); ?></span>

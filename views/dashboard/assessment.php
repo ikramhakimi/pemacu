@@ -100,41 +100,51 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Provide basic project information for record-keeping and reporting purposes.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Project Name',
               'helper_text' => 'Use the official project title shown in submission documents.',
               'class'           => 'md:col-span-2 space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'project_name',
                 'placeholder' => 'Enter project name',
                 'required'    => true,
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Project Address',
               'helper_text' => 'Include lot, street, and city for site verification.',
               'class'           => 'md:col-span-2 space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'project_address',
                 'placeholder' => 'Enter project address',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Postcode',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'postcode',
                 'placeholder' => 'e.g. 50450',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'           => 'State',
-              'input_component' => 'select',
               'class'           => 'space-y-2',
-              'input_props'     => [
+              'control' => [
+                'component' => 'select',
+                'props' => [
                 'name'    => 'state',
                 'options' => [
                   ['label' => 'Select state', 'value' => '', 'selected' => true],
@@ -155,37 +165,46 @@ layout('dashboard/partials/dashboard-start', [
                   ['label' => 'Selangor', 'value' => 'selangor'],
                   ['label' => 'Terengganu', 'value' => 'terengganu'],
                 ],
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'           => 'Building Description',
               'helper_text'     => 'Describe building type, use, and scope details.',
-              'input_component' => 'textarea',
               'class'           => 'md:col-span-2 space-y-2',
-              'input_props'     => [
+              'control' => [
+                'component' => 'textarea',
+                'props' => [
                 'name'        => 'building_description',
                 'rows'        => 5,
                 'placeholder' => 'Describe building type, use, and key details',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Total Gross Floor Area',
               'helper_text' => 'Use the latest approved GFA value for this submission.',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'total_gross_floor_area',
                 'placeholder' => 'e.g. 12500 m²',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Land Area (for landed property)',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'land_area_landed_property',
                 'placeholder' => 'e.g. 18000 m²',
+                ],
               ],
             ]); ?>
           </div>
@@ -197,21 +216,27 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Specify the organisation or individual submitting this application and the main contact person for communication.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Applicant',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'applicant',
                 'placeholder' => 'Enter applicant name',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Contact Person',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'contact_person',
                 'placeholder' => 'Enter contact person name',
+                ],
               ],
             ]); ?>
           </div>
@@ -225,12 +250,15 @@ layout('dashboard/partials/dashboard-start', [
           <div class="col-span-4 space-y-6">
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Core Consultant</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Architect',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'architect',
                   'placeholder' => 'Enter architect',
+                  ],
                 ],
               ]); ?>
             </div>
@@ -239,39 +267,51 @@ layout('dashboard/partials/dashboard-start', [
 
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Engineers</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Civil Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'civil_engineer',
                   'placeholder' => 'Enter civil engineer',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Structural Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'structural_engineer',
                   'placeholder' => 'Enter structural engineer',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Mechanical Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'mechanical_engineer',
                   'placeholder' => 'Enter mechanical engineer',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Electrical Engineer',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'electrical_engineer',
                   'placeholder' => 'Enter electrical engineer',
+                  ],
                 ],
               ]); ?>
             </div>
@@ -280,41 +320,52 @@ layout('dashboard/partials/dashboard-start', [
 
             <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Surveyors & Specialists</p>
             <div class="grid grid-cols-1 gap-4">
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Quantity Surveyor',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'quantity_surveyor',
                   'placeholder' => 'Enter quantity surveyor',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Land Surveyor',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'land_surveyor',
                   'placeholder' => 'Enter land surveyor',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'       => 'Landscape Consultant',
                 'class'       => 'space-y-2 md:max-w-[75%]',
-                'input_props' => [
+                'control' => [
+                  'component' => 'input',
+                  'props' => [
                   'name'        => 'landscape_consultant',
                   'placeholder' => 'Enter landscape consultant',
+                  ],
                 ],
               ]); ?>
 
-              <?php component('form/fields', [
+              <?php component('fields', [
                 'label'           => 'Other Specialist Consultant(s)',
-                'input_component' => 'textarea',
                 'class'           => 'space-y-2 md:max-w-[75%]',
-                'input_props'     => [
+                'control' => [
+                  'component' => 'textarea',
+                  'props' => [
                   'name'        => 'other_specialist_consultants',
                   'rows'        => 4,
                   'placeholder' => 'List other specialist consultants',
+                  ],
                 ],
               ]); ?>
             </div>
@@ -327,21 +378,27 @@ layout('dashboard/partials/dashboard-start', [
             <p class="mt-1 text-sm text-brand-500">Identify the approving authority and the main contractor responsible for executing the project.</p> 
           </div>
           <div class="col-span-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Local Authority',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'local_authority',
                 'placeholder' => 'Enter local authority',
+                ],
               ],
             ]); ?>
 
-            <?php component('form/fields', [
+            <?php component('fields', [
               'label'       => 'Main Contractor',
               'class'       => 'space-y-2',
-              'input_props' => [
+              'control' => [
+                'component' => 'input',
+                'props' => [
                 'name'        => 'main_contractor',
                 'placeholder' => 'Enter main contractor',
+                ],
               ],
             ]); ?>
           </div>

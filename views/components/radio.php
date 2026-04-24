@@ -85,7 +85,7 @@ $wrapper_classes = trim(implode(' ', array_filter([
 
 $label_classes = trim(implode(' ', array_filter([
   'choice__label',
-  ($has_description || $has_label_end) ? 'flex w-full flex-col gap-1' : 'text-sm',
+  ($has_description || $has_label_end) ? 'flex w-full flex-col gap-1' : '',
   $resolved_label_icon_name !== '' && !$has_description ? 'inline-flex items-center gap-2' : '',
   $resolved_label_class,
 ])));

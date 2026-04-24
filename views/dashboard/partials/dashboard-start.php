@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 $resolved_page_title   = isset($page_title) ? (string) $page_title : 'Dashboard';
 $resolved_page_current = isset($page_current) ? (string) $page_current : 'dashboard';
-$dashboard_content_max = isset($dashboard_content_max) ? (string) $dashboard_content_max : 'max-w-none md:px-6';
+$dashboard_content_max = isset($dashboard_content_max) ? (string) $dashboard_content_max : 'max-w-7xl md:px-6';
 $dashboard_no_sidebar  = isset($dashboard_no_sidebar) ? (bool) $dashboard_no_sidebar : false;
 $dashboard_sidebar     = isset($dashboard_sidebar) && is_array($dashboard_sidebar)
   ? $dashboard_sidebar
   : dashboard_links();
 $request_uri_path      = parse_url((string) ($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH);
 $request_uri_path      = is_string($request_uri_path) && $request_uri_path !== '' ? $request_uri_path : '/';
+$dashboard_breadcrumb_items = isset($dashboard_breadcrumb_items) && is_array($dashboard_breadcrumb_items)
+  ? $dashboard_breadcrumb_items
+  : dashboard_breadcrumb_items($dashboard_sidebar, $request_uri_path);
+$dashboard_breadcrumb_description = isset($dashboard_breadcrumb_description) && is_string($dashboard_breadcrumb_description)
+  ? trim($dashboard_breadcrumb_description)
+  : '';
 $app_css_path          = __DIR__ . '/../../../assets/build/app.css';
 $app_css_href          = path('/assets/build/app.css');
 $app_css_version       = is_file($app_css_path) ? (string) filemtime($app_css_path) : '';
@@ -19,10 +25,6 @@ $dashboard_css_path    = __DIR__ . '/../../../assets/build/dashboard.css';
 $dashboard_css_href    = path('/assets/build/dashboard.css');
 $dashboard_css_version = is_file($dashboard_css_path) ? (string) filemtime($dashboard_css_path) : '';
 $dashboard_css_url     = $dashboard_css_version !== '' ? $dashboard_css_href . '?v=' . $dashboard_css_version : $dashboard_css_href;
-$gridjs_css_path       = __DIR__ . '/../../../assets/vendor/gridjs/mermaid.min.css';
-$gridjs_css_href       = path('/assets/vendor/gridjs/mermaid.min.css');
-$gridjs_css_version    = is_file($gridjs_css_path) ? (string) filemtime($gridjs_css_path) : '';
-$gridjs_css_url        = $gridjs_css_version !== '' ? $gridjs_css_href . '?v=' . $gridjs_css_version : $gridjs_css_href;
 ?>
 <!doctype html>
 <html lang="en">
@@ -32,21 +34,21 @@ $gridjs_css_url        = $gridjs_css_version !== '' ? $gridjs_css_href . '?v=' .
   <title><?= e($resolved_page_title); ?> | Booking Pro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<?= e($app_css_url); ?>">
-  <link rel="stylesheet" href="<?= e($gridjs_css_url); ?>">
-  <link rel="stylesheet" href="<?= e($dashboard_css_url); ?>">
-  <style>
-    .font-mono { font-family: "JetBrains Mono", monospace; }
-  </style>
 </head>
 <body class="dashboard-ui bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed" style="letter-spacing: -1%;">
   <main id="root">
-    <div class="<?= e('w-full min-h-screen bg-brand-100'); ?>">
+    <div class="<?= e('w-full min-h-screen'); ?>">
       <?php if (!$dashboard_no_sidebar): ?>
-        <div class="app-sidebar fixed inset-y-0 left-0 z-30 w-[280px] overflow-y-auto border-r border-brand-200 bg-brand-100 px-2 py-5" aria-label="Dashboard navigation">
+        <div
+          id="dashboard-sidebar-panel"
+          class="app-sidebar fixed inset-y-0 left-0 z-30 w-[240px] -translate-x-full overflow-y-auto border-r border-brand-200 bg-brand-100 px-2 py-5 transition-transform duration-200 ease-out xl:translate-x-0 js-dashboard-sidebar-panel"
+          aria-label="Dashboard navigation"
+          aria-hidden="true"
+        >
           <div class="">
-            <h2 class="text-sm font-semibold uppercase tracking-wide text-brand-500">Dashboard</h2>
+            <h2 class="font-semibold uppercase tracking-wide text-brand-500">Dashboard</h2>
             <ul class="mt-3">
               <?php foreach ($dashboard_sidebar as $item_index => $item): ?>
                 <?php
@@ -134,7 +136,7 @@ $gridjs_css_url        = $gridjs_css_version !== '' ? $gridjs_css_href . '?v=' .
                         ?>
                         <li>
                           <a
-                            class="block rounded-md px-3 py-1.5 text-sm leading-5 text-brand-700 hover:bg-brand-200 hover:text-brand-900 js-dashboard-sidebar-child-link"
+                            class="block rounded-md px-3 py-1.5 leading-5 text-brand-700 hover:bg-brand-200 hover:text-brand-900 js-dashboard-sidebar-child-link"
                             href="<?= e($child_href); ?>"
                           >
                             <?= e($child_label); ?>
@@ -148,22 +150,39 @@ $gridjs_css_url        = $gridjs_css_version !== '' ? $gridjs_css_href . '?v=' .
             </ul>
           </div>
         </div>
+        <div
+          class="fixed inset-0 z-20 hidden bg-brand-900/40 xl:hidden js-dashboard-sidebar-overlay"
+          hidden
+          aria-hidden="true"
+        ></div>
       <?php endif; ?>
 
-      <div class="<?= e($dashboard_no_sidebar ? 'app-content' : 'app-content lg:pl-[280px]'); ?>">
-        <div class="app-breadcrumb px-6 py-4 border-b border-brand-200">
-          <?php component('breadcrumb', [
-            'items' => [
-              ['label' => 'Home', 'href' => '#'],
-              ['label' => 'Sales', 'href' => '#'],
-              ['label' => 'Overview', 'current' => true],
-            ],
-            'separator' => 'chevron',
-          ]); ?>
+      <div class="<?= e($dashboard_no_sidebar ? 'app-content' : 'app-content xl:pl-[240px]'); ?>">
+        <div class="app-breadcrumb px-4 py-3 md:px-6 md:py-4 border-b border-brand-200">
+          <div class="flex items-center gap-3 md:gap-1">
+            <?php if (!$dashboard_no_sidebar): ?>
+              <button
+                type="button"
+                class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-brand-200 bg-white text-brand-700 transition hover:bg-brand-100 hover:text-brand-900 xl:hidden js-dashboard-sidebar-toggle"
+                aria-label="Open sidebar"
+                aria-controls="dashboard-sidebar-panel"
+                aria-expanded="false"
+              >
+                <?php icon('menu-line', ['icon_size' => '20']); ?>
+              </button>
+            <?php endif; ?>
+            <?php component('breadcrumb', [
+              'items'     => $dashboard_breadcrumb_items,
+              'separator' => 'chevron',
+              'class'     => 'font-medium',
+            ]); ?>
+            <?php if ($dashboard_breadcrumb_description !== ''): ?>
+              <span class="text-brand-500 hidden md:block">: <?= e($dashboard_breadcrumb_description); ?></span>
+            <?php endif; ?>
+          </div>
         </div>
         <?php if ($dashboard_no_sidebar): ?>
-          <div class="app-container px-4 md:px-6">
+        <div class="app-container px-4 md:px-6">
         <?php else: ?>
-          
-          <div class="app-container <?php container($dashboard_content_max); ?>">
+        <div class="app-container <?php container($dashboard_content_max); ?>">
         <?php endif; ?>

@@ -1,98 +1,154 @@
 (() => {
-  /**
-   * Dropdown Controller
-   * - Scope: every `[data-dropdown]` instance.
-   * - Responsibility: accessible toggle flow, outside click dismissal, and Escape close.
-   * - Contract: each instance provides `[data-dropdown-trigger]` and `[data-dropdown-menu]`.
-   */
-  const dropdown_nodes = document.querySelectorAll('[data-dropdown]');
+  const set_menu_placement = (dropdown_node) => {
+    if (!(dropdown_node instanceof HTMLElement)) {
+      return;
+    }
 
-  if (dropdown_nodes.length === 0) {
-    return;
-  }
+    const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
+    const trigger_node = dropdown_node.querySelector('[data-dropdown-trigger]');
 
-  const dropdown_instances = Array.from(dropdown_nodes)
-    .map((dropdown_node) => {
+    if (!(menu_node instanceof HTMLElement) || !(trigger_node instanceof HTMLElement)) {
+      return;
+    }
+
+    const was_hidden = menu_node.classList.contains('hidden');
+    if (was_hidden) {
+      menu_node.classList.remove('hidden');
+      menu_node.style.visibility = 'hidden';
+      menu_node.style.pointerEvents = 'none';
+    }
+
+    menu_node.classList.remove('bottom-full', 'mb-2');
+    menu_node.classList.add('mt-2');
+
+    const trigger_rect = trigger_node.getBoundingClientRect();
+    const menu_rect = menu_node.getBoundingClientRect();
+    const viewport_height = window.innerHeight || document.documentElement.clientHeight;
+    const space_below = viewport_height - trigger_rect.bottom;
+    const space_above = trigger_rect.top;
+    const menu_height = menu_rect.height;
+
+    if (space_below < menu_height && space_above > space_below) {
+      menu_node.classList.remove('mt-2');
+      menu_node.classList.add('bottom-full', 'mb-2');
+    }
+
+    if (was_hidden) {
+      menu_node.classList.add('hidden');
+      menu_node.style.visibility = '';
+      menu_node.style.pointerEvents = '';
+    }
+  };
+
+  const close_dropdown = (dropdown_node, should_focus_trigger = false) => {
+    if (!(dropdown_node instanceof HTMLElement)) {
+      return;
+    }
+
+    const trigger_node = dropdown_node.querySelector('[data-dropdown-trigger]');
+    const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
+
+    if (!(trigger_node instanceof HTMLElement) || !(menu_node instanceof HTMLElement)) {
+      return;
+    }
+
+    menu_node.classList.add('hidden');
+    trigger_node.setAttribute('aria-expanded', 'false');
+
+    if (should_focus_trigger) {
+      trigger_node.focus();
+    }
+  };
+
+  const open_dropdown = (dropdown_node) => {
+    if (!(dropdown_node instanceof HTMLElement)) {
+      return;
+    }
+
+    const trigger_node = dropdown_node.querySelector('[data-dropdown-trigger]');
+    const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
+
+    if (!(trigger_node instanceof HTMLElement) || !(menu_node instanceof HTMLElement)) {
+      return;
+    }
+
+    set_menu_placement(dropdown_node);
+    menu_node.classList.remove('hidden');
+    trigger_node.setAttribute('aria-expanded', 'true');
+  };
+
+  const close_all_dropdowns = (excluded_dropdown = null) => {
+    const dropdown_nodes = Array.from(document.querySelectorAll('[data-dropdown]'));
+
+    dropdown_nodes.forEach((dropdown_node) => {
+      if (!(dropdown_node instanceof HTMLElement) || dropdown_node === excluded_dropdown) {
+        return;
+      }
+
+      close_dropdown(dropdown_node);
+    });
+  };
+
+  const initialize_dropdowns = () => {
+    const dropdown_nodes = Array.from(document.querySelectorAll('[data-dropdown]'));
+
+    dropdown_nodes.forEach((dropdown_node) => {
       if (!(dropdown_node instanceof HTMLElement)) {
-        return null;
+        return;
       }
 
       const trigger_node = dropdown_node.querySelector('[data-dropdown-trigger]');
-      const menu_node    = dropdown_node.querySelector('[data-dropdown-menu]');
+      const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
 
       if (!(trigger_node instanceof HTMLElement) || !(menu_node instanceof HTMLElement)) {
-        return null;
+        return;
       }
 
       trigger_node.setAttribute('aria-expanded', 'false');
       menu_node.classList.add('hidden');
-
-      return {
-        dropdown_node,
-        trigger_node,
-        menu_node,
-      };
-    })
-    .filter((instance) => instance !== null);
-
-  if (dropdown_instances.length === 0) {
-    return;
-  }
-
-  const close_dropdown = (instance, should_focus_trigger = false) => {
-    instance.menu_node.classList.add('hidden');
-    instance.trigger_node.setAttribute('aria-expanded', 'false');
-
-    if (should_focus_trigger) {
-      instance.trigger_node.focus();
-    }
-  };
-
-  const open_dropdown = (instance) => {
-    instance.menu_node.classList.remove('hidden');
-    instance.trigger_node.setAttribute('aria-expanded', 'true');
-  };
-
-  const close_all_dropdowns = (excluded_instance = null) => {
-    dropdown_instances.forEach((instance) => {
-      if (instance === excluded_instance) {
-        return;
-      }
-
-      close_dropdown(instance);
     });
   };
 
-  dropdown_instances.forEach((instance) => {
-    instance.trigger_node.addEventListener('click', (event) => {
-      if (instance.trigger_node instanceof HTMLAnchorElement) {
-        event.preventDefault();
-      }
-
-      const is_open = !instance.menu_node.classList.contains('hidden');
-      close_all_dropdowns(instance);
-
-      if (is_open) {
-        close_dropdown(instance);
-        return;
-      }
-
-      open_dropdown(instance);
-    });
-  });
+  initialize_dropdowns();
 
   document.addEventListener('click', (event) => {
-    if (!(event.target instanceof Node)) {
+    const click_target = event.target;
+    if (!(click_target instanceof Element)) {
       return;
     }
 
-    dropdown_instances.forEach((instance) => {
-      if (instance.dropdown_node.contains(event.target)) {
+    const trigger_node = click_target.closest('[data-dropdown-trigger]');
+    if (trigger_node instanceof HTMLElement) {
+      const dropdown_node = trigger_node.closest('[data-dropdown]');
+      if (!(dropdown_node instanceof HTMLElement)) {
         return;
       }
 
-      close_dropdown(instance);
-    });
+      if (trigger_node instanceof HTMLAnchorElement) {
+        event.preventDefault();
+      }
+
+      const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
+      if (!(menu_node instanceof HTMLElement)) {
+        return;
+      }
+
+      const is_open = !menu_node.classList.contains('hidden');
+      close_all_dropdowns(dropdown_node);
+
+      if (is_open) {
+        close_dropdown(dropdown_node);
+      } else {
+        open_dropdown(dropdown_node);
+      }
+
+      return;
+    }
+
+    const within_dropdown = click_target.closest('[data-dropdown]');
+    if (!(within_dropdown instanceof HTMLElement)) {
+      close_all_dropdowns();
+    }
   });
 
   document.addEventListener('keydown', (event) => {
@@ -100,15 +156,19 @@
       return;
     }
 
-    const open_instance = dropdown_instances.find((instance) => {
-      return !instance.menu_node.classList.contains('hidden');
+    const open_dropdown_node = Array.from(document.querySelectorAll('[data-dropdown]')).find((dropdown_node) => {
+      if (!(dropdown_node instanceof HTMLElement)) {
+        return false;
+      }
+
+      const menu_node = dropdown_node.querySelector('[data-dropdown-menu]');
+      return menu_node instanceof HTMLElement && !menu_node.classList.contains('hidden');
     });
 
-    if (!open_instance) {
+    if (!(open_dropdown_node instanceof HTMLElement)) {
       return;
     }
 
-    close_dropdown(open_instance, true);
+    close_dropdown(open_dropdown_node, true);
   });
 })();
-

@@ -320,15 +320,15 @@ foreach ($assessment_categories as $category_index => $assessment_category) {
 <script id="assessment-form-items-data" type="application/json"><?= (string) json_encode($assessment_items_map, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?></script>
 
 <?php component('drawer', [
-  'drawer_id'          => 'assessment-form-item-drawer',
-  'drawer_title'       => 'Assessment Details',
-  'drawer_position'    => 'right',
-  'drawer_size'        => 'lg',
-  'drawer_show_trigger'=> false,
-  'drawer_body_html'   => '<div class="space-y-4 js-assessment-form-drawer-content">' .
+  'id'          => 'assessment-form-item-drawer',
+  'title'       => 'Assessment Details',
+  'position'    => 'right',
+  'size'        => 'lg',
+  'show_trigger'=> false,
+  'body_html'   => '<div class="space-y-4 js-assessment-form-drawer-content">' .
     '<p class="text-sm text-brand-500">Select an assessment item to load its form details.</p>' .
     '</div>',
-  'drawer_footer_html' => $drawer_cancel_button . $drawer_save_button,
+  'footer_html' => $drawer_cancel_button . $drawer_save_button,
 ]); ?>
 
 <?php layout('dashboard/partials/dashboard-end'); ?>

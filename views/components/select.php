@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * Component: form/select
+ * Component: select
  * Purpose: Render one API-driven select control with size/state variants and option data mapping.
  * Anatomy:
  * - .select.relative
@@ -14,7 +14,6 @@ declare(strict_types=1);
  * - `size` (string, optional): `sm`, `md`, or `lg`. Default: `md`.
  * - `state` (string, optional): `default`, `positive`, `negative`, `disabled`. Default: `default`.
  * - `selected_value` (string|int, optional): value selected from `options`.
- * - `value` (string|int, optional): alias of `selected_value`.
  * - `placeholder` (string, optional): placeholder option label.
  * - `placeholder_disabled` (bool, optional): disable placeholder option. Default: true.
  * - `class` (string, optional): additional classes appended to `<select>`.
@@ -44,9 +43,6 @@ $resolved_selected_value = '';
 if (isset($selected_value)) {
   $has_selected_value = true;
   $resolved_selected_value = (string) $selected_value;
-} elseif (isset($value)) {
-  $has_selected_value = true;
-  $resolved_selected_value = (string) $value;
 }
 
 $size_map = [
@@ -57,7 +53,7 @@ $size_map = [
   ],
   'md' => [
     'height' => 'h-[var(--ui-h-md)]',
-    'text'   => 'text-sm',
+    'text'   => '',
     'px'     => 'px-[var(--ui-px-md)]',
   ],
   'lg' => [

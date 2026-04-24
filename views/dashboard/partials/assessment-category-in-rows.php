@@ -57,7 +57,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 6</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-in1',
       'name'        => 'assessment_remark_in1',
       'rows'        => 5,
@@ -94,7 +94,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-in2',
       'name'        => 'assessment_remark_in2',
       'rows'        => 5,

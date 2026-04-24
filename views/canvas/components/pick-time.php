@@ -43,16 +43,18 @@ layout('canvas/layouts/canvas-start', [
         Best for booking journeys where users expect AM/PM labels.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Call time',
           'helper_text'     => 'Choose a preferred call slot in AM/PM format.',
-          'input_component' => 'picktime',
-          'input_props'     => [
+          'control' => [
+            'component' => 'picktime',
+            'props' => [
             'name'        => 'call_time',
             'format'      => '12h',
             'value'       => '09:30 AM',
             'minute_step' => 15,
             'placeholder' => 'Pick AM/PM time',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>
@@ -65,16 +67,18 @@ layout('canvas/layouts/canvas-start', [
         Recommended for operations and technical workflows.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Dispatch time',
           'helper_text'     => 'Use 24-hour clock for team scheduling consistency.',
-          'input_component' => 'picktime',
-          'input_props'     => [
+          'control' => [
+            'component' => 'picktime',
+            'props' => [
             'name'        => 'dispatch_time',
             'format'      => '24h',
             'value'       => '18:45',
             'minute_step' => 5,
             'placeholder' => 'Pick 24-hour time',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>
@@ -87,15 +91,17 @@ layout('canvas/layouts/canvas-start', [
         Use larger steps for simplified slot selection in high-volume flows.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Consultation slot',
           'helper_text'     => 'Only half-hour slots are available for this service.',
-          'input_component' => 'picktime',
-          'input_props'     => [
+          'control' => [
+            'component' => 'picktime',
+            'props' => [
             'name'        => 'consult_slot',
             'format'      => '12h',
             'minute_step' => 30,
             'placeholder' => 'Pick 30-minute slot',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>
@@ -108,11 +114,12 @@ layout('canvas/layouts/canvas-start', [
         Select start and end time in one control. End time options before start are muted automatically.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Session window',
           'helper_text'     => 'Pick a valid time window. End time cannot be earlier than start time.',
-          'input_component' => 'picktime',
-          'input_props'     => [
+          'control' => [
+            'component' => 'picktime',
+            'props' => [
             'mode'        => 'range',
             'format'      => '12h',
             'name_start'  => 'session_start_time',
@@ -121,6 +128,7 @@ layout('canvas/layouts/canvas-start', [
             'end_value'   => '11:30 AM',
             'minute_step' => 15,
             'placeholder' => 'Pick start and end time',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>

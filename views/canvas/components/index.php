@@ -54,4 +54,27 @@ layout('canvas/layouts/canvas-start', [
     </a>
   </div>
 </section>
+
+<section id="carousel">
+  <div class="space-y-2">
+    <h2 class="text-xl font-bold text-brand-900">Carousel</h2>
+    <p class="max-w-3xl text-brand-600">
+      Explore the latest carousel demos including grouped slides, autoplay, loop, snap, and centered behavior.
+    </p>
+    <div class="flex flex-wrap items-center gap-4">
+      <a
+        href="/canvas/components/carousel"
+        class="inline-flex items-center text-sm font-semibold text-brand-700 hover:text-brand-900"
+      >
+        Open Carousel base demo
+      </a>
+      <a
+        href="/canvas/components/carousel-advanced"
+        class="inline-flex items-center text-sm font-semibold text-brand-700 hover:text-brand-900"
+      >
+        Open Carousel advanced demo
+      </a>
+    </div>
+  </div>
+</section>
 <?php layout('canvas/layouts/canvas-end'); ?>

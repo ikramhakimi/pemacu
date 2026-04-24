@@ -37,7 +37,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq1',
       'name'        => 'assessment_remark_eq1',
       'rows'        => 5,
@@ -77,7 +77,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq2',
       'name'        => 'assessment_remark_eq2',
       'rows'        => 5,
@@ -114,7 +114,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq3',
       'name'        => 'assessment_remark_eq3',
       'rows'        => 5,
@@ -188,7 +188,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-4">0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq4',
       'name'        => 'assessment_remark_eq4',
       'rows'        => 5,
@@ -236,7 +236,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq5',
       'name'        => 'assessment_remark_eq5',
       'rows'        => 5,
@@ -314,7 +314,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-6">0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq6',
       'name'        => 'assessment_remark_eq6',
       'rows'        => 5,
@@ -352,7 +352,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq7',
       'name'        => 'assessment_remark_eq7',
       'rows'        => 5,
@@ -425,7 +425,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-8" data-assessment-group-mode="max" data-assessment-group-max="2">0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq8',
       'name'        => 'assessment_remark_eq8',
       'rows'        => 5,
@@ -467,7 +467,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq9',
       'name'        => 'assessment_remark_eq9',
       'rows'        => 5,
@@ -504,7 +504,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq10',
       'name'        => 'assessment_remark_eq10',
       'rows'        => 5,
@@ -541,7 +541,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq11',
       'name'        => 'assessment_remark_eq11',
       'rows'        => 5,
@@ -601,7 +601,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-12" data-assessment-group-mode="max" data-assessment-group-max="2">0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq12',
       'name'        => 'assessment_remark_eq12',
       'rows'        => 5,
@@ -640,7 +640,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 1</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq13',
       'name'        => 'assessment_remark_eq13',
       'rows'        => 5,
@@ -721,7 +721,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-group-total="group-14">0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq14',
       'name'        => 'assessment_remark_eq14',
       'rows'        => 5,
@@ -761,7 +761,7 @@
     <div class="h-[var(--ui-h-md)] flex items-center justify-end gap-1" data-assessment-total>0 <span class="font-normal text-brand-500">/ 2</span></div>
   </td>
   <td class="assessment-table__item-remarks p-3 border border-brand-200 align-top font-semibold">
-    <?php component('form/textarea', [
+    <?php component('textarea', [
       'id'          => 'assessment-remark-eq15',
       'name'        => 'assessment_remark_eq15',
       'rows'        => 5,

@@ -23,7 +23,6 @@ declare(strict_types=1);
  *   - `icon_only` (bool, optional): Use icon-only trigger.
  *   - `variant` (string, optional): Button variant. Default: `secondary`.
  *   - `size` (string, optional): Button size. Default: `md`.
- *   - `gradient` (bool, optional): Button gradient. Default: true.
  * - `menu` (array, optional):
  *   - `class` (string, optional): Extra classes for menu node.
  *   - `min_width_class` (string, optional): Width class. Default: `min-w-[220px]`.
@@ -70,8 +69,6 @@ $resolved_trigger_variant = isset($trigger['variant']) && is_string($trigger['va
 $resolved_trigger_size = isset($trigger['size']) && is_string($trigger['size']) && trim($trigger['size']) !== ''
   ? trim($trigger['size'])
   : 'md';
-$resolved_trigger_gradient = isset($trigger['gradient']) ? (bool) $trigger['gradient'] : true;
-
 $resolved_menu_class = isset($menu['class']) && is_string($menu['class']) ? trim($menu['class']) : '';
 $resolved_menu_min_width_class = isset($menu['min_width_class']) && is_string($menu['min_width_class']) && trim($menu['min_width_class']) !== ''
   ? trim($menu['min_width_class'])
@@ -109,7 +106,7 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
   <?php if ($resolved_trigger_type === 'link'): ?>
     <a
       id="dropdown-trigger-<?= e($resolved_dropdown_id); ?>"
-      class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-900 hover:underline ' . $resolved_trigger_class)); ?>"
+      class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5  font-semibold text-brand-700 hover:text-brand-900 hover:underline ' . $resolved_trigger_class)); ?>"
       href="#"
       aria-label="<?= e($resolved_trigger_aria_label); ?>"
       aria-haspopup="menu"
@@ -128,7 +125,6 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
       'label'         => $resolved_trigger_label,
       'aria_label'    => $resolved_trigger_aria_label,
       'variant'       => $resolved_trigger_variant,
-      'gradient'      => $resolved_trigger_gradient,
       'size'          => $resolved_trigger_size,
       'icon_name'     => $resolved_trigger_icon_name,
       'icon_position' => $resolved_trigger_icon_position,
@@ -178,7 +174,7 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
       <li role="none"<?= $item_li_class !== '' ? ' class="' . e($item_li_class) . '"' : ''; ?>>
         <?php if ($item_type === 'button'): ?>
           <button
-            class="<?= e(trim('dropdown__item flex w-full rounded-md px-3 py-2 text-left text-sm text-brand-700 hover:bg-brand-100 hover:text-brand-900 ' . $item_class)); ?>"
+            class="<?= e(trim('dropdown__item flex w-full rounded-md px-3 py-2 text-left  text-brand-700 hover:bg-brand-100 hover:text-brand-900 ' . $item_class)); ?>"
             type="button"
             role="menuitem"
             <?= $item_disabled ? 'disabled' : ''; ?>
@@ -188,7 +184,7 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
         <?php else: ?>
           <?php if ($item_disabled): ?>
             <span
-              class="<?= e(trim('dropdown__item flex w-full cursor-not-allowed rounded-md px-3 py-2 text-left text-sm text-brand-400 ' . $item_class)); ?>"
+              class="<?= e(trim('dropdown__item flex w-full cursor-not-allowed rounded-md px-3 py-2 text-left  text-brand-400 ' . $item_class)); ?>"
               role="menuitem"
               aria-disabled="true"
             >
@@ -196,7 +192,7 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
             </span>
           <?php else: ?>
             <a
-              class="<?= e(trim('dropdown__item flex rounded-md px-3 py-2 text-sm text-brand-700 hover:bg-brand-100 hover:text-brand-900 ' . $item_class)); ?>"
+              class="<?= e(trim('dropdown__item flex rounded-md px-3 py-2  text-brand-700 hover:bg-brand-100 hover:text-brand-900 ' . $item_class)); ?>"
               href="<?= e($item_href); ?>"
               role="menuitem"
             >

@@ -33,7 +33,7 @@ $resolved_dropdown_align = isset($dropdown_align) && in_array($dropdown_align, [
 
 $resolved_trigger_class = isset($trigger_class) && is_string($trigger_class) && trim($trigger_class) !== ''
   ? trim($trigger_class)
-  : 'dropdown__trigger inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 hover:text-brand-900';
+  : 'dropdown__trigger inline-flex items-center gap-1.5  font-semibold text-brand-700 hover:text-brand-900';
 
 $resolved_dropdown_links = isset($dropdown_links) && is_array($dropdown_links) && $dropdown_links !== []
   ? $dropdown_links
@@ -77,7 +77,7 @@ $menu_position_class = $resolved_dropdown_align === 'right' ? 'right-0' : 'left-
         ? trim($dropdown_link['li_class'])
         : '';
       $link_li_class_attribute = $link_li_class !== '' ? ' class="' . e($link_li_class) . '"' : '';
-      $link_class = 'dropdown__item flex rounded-md px-3 py-2 text-sm text-brand-700 hover:bg-brand-100 hover:text-brand-900';
+      $link_class = 'dropdown__item flex rounded-md px-3 py-2  text-brand-700 hover:bg-brand-100 hover:text-brand-900';
       if ($link_item_class !== '') {
         $link_class .= ' ' . $link_item_class;
       }

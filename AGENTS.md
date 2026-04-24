@@ -149,3 +149,37 @@ Only when necessary:
 - Before implementation, inspect relevant existing components and align with their naming, spacing, and behavior.
 - If existing components are not enough, stop and propose the smallest safe extension before writing code.
 - Do not redesign, restyle, or “improve” existing UI unless explicitly requested.
+
+# AGENTS.md
+
+## Design System Priority
+- Follow the existing design system and UI patterns already present in this repository.
+- Reuse existing components before creating new UI.
+- Do not introduce new visual patterns, spacing rules, radius, shadows, or interaction styles unless explicitly requested.
+- Match the current typography, spacing rhythm, border treatment, and component conventions.
+
+## Component Reuse Rules
+- Check `/views/components` first before writing new markup.
+- Prefer existing helpers:
+  - `layout(...)`
+  - `section(...)`
+  - `component(...)`
+- If an existing component is close, extend its API only if explicitly requested.
+- If no existing component fits, stop and propose the closest reusable options first.
+
+## Page Building Rules
+- When creating a new page, assemble it from existing sections/components as much as possible.
+- Keep the page visually consistent with existing pages.
+- Do not redesign the system while implementing the page.
+- Do not invent new card, button, form, badge, table, or nav styles without approval.
+
+## Styling Rules
+- Use Tailwind CSS as the primary styling system.
+- Do not replace existing classes or tokens unless required by the task.
+- Respect existing spacing scale, container width, and responsive behavior.
+- Avoid one-off visual styling if an existing utility pattern already exists.
+
+## Output Rules
+- Before coding, inspect relevant existing pages/components.
+- State which existing components/patterns will be reused.
+- If the design system is insufficient, pause and propose options instead of improvising.

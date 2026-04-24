@@ -62,7 +62,7 @@ $resolved_link_class = isset($link_class) && is_string($link_class) ? trim($link
 $resolved_current_class = isset($current_class) && is_string($current_class) ? trim($current_class) : '';
 $resolved_separator_class = isset($separator_class) && is_string($separator_class) ? trim($separator_class) : '';
 
-$size_list_class = $resolved_size === 'sm' ? 'gap-1.5 text-xs' : 'gap-2 text-sm';
+$size_list_class = $resolved_size === 'sm' ? 'gap-1.5 text-xs' : 'gap-2 ';
 $size_item_class = $resolved_size === 'sm' ? 'gap-1.5' : 'gap-2';
 $size_icon_gap_class = $resolved_size === 'sm' ? 'gap-1' : 'gap-1.5';
 
@@ -112,19 +112,19 @@ if ($resolved_items === []) {
       ])));
 
       $link_classes = trim(implode(' ', array_filter([
-        'breadcrumb__link text-brand-600 hover:text-brand-900',
+        'breadcrumb__link text-inherit',
         $show_item_icon ? 'inline-flex items-center ' . $size_icon_gap_class : '',
         $resolved_link_class,
       ])));
 
       $current_classes = trim(implode(' ', array_filter([
         $show_item_icon ? 'inline-flex items-center ' . $size_icon_gap_class : '',
-        'text-brand-900',
+        'text-inherit',
         $resolved_current_class,
       ])));
 
       $separator_classes = trim(implode(' ', array_filter([
-        'breadcrumb__separator text-brand-400',
+        'breadcrumb__separator text-inherit opacity-60',
         $resolved_separator_class,
       ])));
       ?>
@@ -146,13 +146,14 @@ if ($resolved_items === []) {
         <?php endif; ?>
 
         <?php if (!$is_last_item): ?>
-          <span class="<?= e($separator_classes); ?>" aria-hidden="true">
-            <?php if ($resolved_separator === 'chevron'): ?>
-              <?php icon($resolved_separator_icon_name, ['icon_size' => '16']); ?>
-            <?php else: ?>
-              /
-            <?php endif; ?>
-          </span>
+          <?php if ($resolved_separator === 'chevron'): ?>
+            <?php icon($resolved_separator_icon_name, [
+              'icon_size'  => '16',
+              'icon_class' => $separator_classes,
+            ]); ?>
+          <?php else: ?>
+            <span class="<?= e($separator_classes); ?>" aria-hidden="true">/</span>
+          <?php endif; ?>
         <?php endif; ?>
       </li>
     <?php endforeach; ?>

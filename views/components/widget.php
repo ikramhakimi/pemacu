@@ -48,44 +48,51 @@ if (!in_array($widget_badge_tone, $allowed_badge_tones, true)) {
 }
 
 $widget_classes = trim(implode(' ', array_filter([
-  'widget widget--metric bg-brand-50 p-5',
+  'widget widget--metric bg-brand-800',
   $widget_class_name,
 ])));
 ?>
-<article class="<?php card($widget_classes); ?>">
-  <span class="widget__icon float-right bg-brand-100 rounded-lg w-12 h-12 flex items-center justify-center text-brand-700">
+<article class="<?php card($widget_classes); ?> overflow-hidden">
+  <span class="widget__icon float-right flex items-center justify-center text-brand-400 -mr-1 
+    relative  size-[50px] rounded-full border-2 border-brand-500
+    before:absolute before:rounded-full before:border-2 
+    after:absolute after:rounded-full after:border-2 
+    
+    before:size-[70px] after:size-[90px] 
+    before:border-brand-600 after:border-brand-700
+  ">
     <?php component('icon', [
       'icon_name'  => $widget_icon_name,
-      'icon_size'  => '20',
+      'icon_size'  => '24',
       'icon_class' => 'text-current',
     ]); ?>
   </span>
-
-  <p class="widget__caption text-xs uppercase text-brand-500 mb-4">
+  <div class="widget__caption text-xs font-medium uppercase text-white p-4">
     <?= e($widget_caption); ?>
-  </p>
-  <p class="widget__number mt-1 text-3xl font-semibold text-brand-900">
-    <?= e($widget_number); ?>
-  </p>
-
-  <?php if ($widget_badge !== '' || $widget_info !== ''): ?>
-    <div class="mt-2 flex items-center justify-start gap-2">
-      <?php if ($widget_badge !== ''): ?>
-        <?php component('badge', [
-          'items' => [[
-            'label'      => $widget_badge,
-            'tone'       => $widget_badge_tone,
-            'class_name' => 'widget__badge',
-          ]],
-          'show_wrapper' => false,
-        ]); ?>
-      <?php endif; ?>
-
-      <?php if ($widget_info !== ''): ?>
-        <p class="widget__info text-xs text-brand-500">
-          <?= e($widget_info); ?>
-        </p>
-      <?php endif; ?>
+  </div>
+  <div class="widget__content bg-white m-1 mt-0 p-3 rounded-md relative">
+    <div class="widget__number text-2xl font-semibold text-brand-900">
+      <?= e($widget_number); ?>
     </div>
-  <?php endif; ?>
+    <?php if ($widget_badge !== '' || $widget_info !== ''): ?>
+      <div class="mt-4 flex items-center justify-start gap-2">
+        <?php if ($widget_badge !== ''): ?>
+          <?php component('badge', [
+            'items' => [[
+              'label'      => $widget_badge,
+              'tone'       => $widget_badge_tone,
+              'class_name' => 'widget__badge',
+            ]],
+            'show_wrapper' => false,
+          ]); ?>
+        <?php endif; ?>
+
+        <?php if ($widget_info !== ''): ?>
+          <p class="widget__info text-brand-500">
+            <?= e($widget_info); ?>
+          </p>
+        <?php endif; ?>
+      </div>
+    <?php endif; ?>
+  </div>
 </article>

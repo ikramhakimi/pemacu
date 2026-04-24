@@ -55,6 +55,6 @@ $card_note_text         = isset($card_intro_call['note_text']) && is_string($car
     <div class="card__note-icon w-12 h-12 shrink-0 bg-brand-200 rounded-lg flex items-center justify-center">
       <?php icon($card_note_icon_name, ['icon_size' => '24', 'icon_class' => 'text-brand-600']); ?>
     </div>
-    <p class="card__note-text text-sm text-brand-500"><?= htmlspecialchars($card_note_text, ENT_QUOTES, 'UTF-8'); ?></p>
+    <p class="card__note-text  text-brand-500"><?= htmlspecialchars($card_note_text, ENT_QUOTES, 'UTF-8'); ?></p>
   </div>
 </article>

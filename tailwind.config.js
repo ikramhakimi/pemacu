@@ -8,6 +8,7 @@ module.exports = {
     './views/**/*.php',
   ],
   safelist: [
+    'hover:bg-negative-100',
     'from-white',
     'to-brand-100',
     'bg-white/70',

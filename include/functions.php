@@ -84,7 +84,12 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/avatar', 'label' => 'Avatar'],
     ['href' => '/canvas/components/badge', 'label' => 'Badge'],
     ['href' => '/canvas/components/button', 'label' => 'Button'],
+    ['href' => '/canvas/components/carousel', 'label' => 'Carousel'],
+    ['href' => '/canvas/components/carousel-advanced', 'label' => 'Carousel Advanced'],
     ['href' => '/canvas/components/checkbox', 'label' => 'Checkbox'],
+    ['href' => '/canvas/components/input', 'label' => 'Input'],
+    ['href' => '/canvas/components/input-group', 'label' => 'Input Group'],
+    ['href' => '/canvas/components/textarea', 'label' => 'Textarea'],
     ['href' => '/canvas/components/radio', 'label' => 'Radio'],
     ['href' => '/canvas/components/rating', 'label' => 'Rating'],
     ['href' => '/canvas/components/select', 'label' => 'Select'],
@@ -92,17 +97,23 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/cards', 'label' => 'Cards'],
     ['href' => '/canvas/components/dropdown', 'label' => 'Dropdown'],
     ['href' => '/canvas/components/drawer', 'label' => 'Drawer'],
+    ['href' => '/canvas/components/empty-state', 'label' => 'Empty State'],
     ['href' => '/canvas/components/field', 'label' => 'Field'],
     ['href' => '/canvas/components/forms', 'label' => 'Forms'],
     ['href' => '/canvas/components/switch', 'label' => 'Switch'],
     ['href' => '/canvas/components/pick-date', 'label' => 'Pick Date'],
     ['href' => '/canvas/components/pick-time', 'label' => 'Pick Time'],
+    ['href' => '/canvas/components/progressbar', 'label' => 'Progressbar'],
     ['href' => '/canvas/components/pagination', 'label' => 'Pagination'],
+    ['href' => '/canvas/components/stats-card', 'label' => 'Stats Card'],
+    ['href' => '/canvas/components/stepper', 'label' => 'Stepper'],
     ['href' => '/canvas/components/table', 'label' => 'Table'],
+    ['href' => '/canvas/components/table-data', 'label' => 'Table Data'],
     ['href' => '/canvas/components/tabs', 'label' => 'Tabs'],
+    ['href' => '/canvas/components/toast', 'label' => 'Toast'],
+    ['href' => '/canvas/components/tooltip', 'label' => 'Tooltip'],
     ['href' => '/canvas/components/grids', 'label' => 'Grids'],
     ['href' => '/canvas/components/headers', 'label' => 'Headers'],
-    ['href' => '/canvas/components/icons', 'label' => 'Icons'],
     ['href' => '/canvas/components/modal', 'label' => 'Modal'],
   ];
 }
@@ -125,11 +136,11 @@ function dashboard_links(): array
       'href'      => '#',
       'icon_name' => 'bar-chart-box-line',
       'children'  => [
-        ['label' => 'Overview', 'href' => '#'],
-        ['label' => 'Pageviews', 'href' => '#'],
-        ['label' => 'Sources', 'href' => '#'],
-        ['label' => 'Campaigns', 'href' => '#'],
-        ['label' => 'Clicks', 'href' => '#'],
+        ['label' => 'Overview', 'href' => path('/dashboard/analytics/overview')],
+        ['label' => 'Pageviews', 'href' => path('/dashboard/analytics/pageviews')],
+        ['label' => 'Sources', 'href' => path('/dashboard/analytics/sources')],
+        ['label' => 'Campaigns', 'href' => path('/dashboard/analytics/campaigns')],
+        ['label' => 'Clicks', 'href' => path('/dashboard/analytics/clicks')],
       ],
     ],
     [
@@ -137,9 +148,9 @@ function dashboard_links(): array
       'href'      => '#',
       'icon_name' => 'shopping-bag-3-line',
       'children'  => [
-        ['label' => 'All Orders', 'href' => '#'],
-        ['label' => 'Unpaid Orders', 'href' => '#'],
-        ['label' => 'Session Today', 'href' => '#'],
+        ['label' => 'All Orders', 'href' => path('/dashboard/orders/all-orders')],
+        ['label' => 'Unpaid Orders', 'href' => path('/dashboard/orders/unpaid-orders')],
+        ['label' => 'Session Today', 'href' => path('/dashboard/orders/session-today')],
       ],
     ],
     [
@@ -169,7 +180,7 @@ function dashboard_links(): array
       'icon_name' => 'price-tag-3-line',
       'children'  => [
         ['label' => 'All Packages', 'href' => '#'],
-        ['label' => 'Create Package', 'href' => '#'],
+        ['label' => 'Create Package', 'href' => path('/dashboard/packages/create-package')],
       ],
     ],
     [
@@ -195,11 +206,91 @@ function dashboard_links(): array
   ];
 }
 
+function dashboard_breadcrumb_items(array $dashboard_sidebar, string $request_uri_path): array
+{
+  $normalize_path = static function (string $path): string {
+    $path = trim($path);
+
+    if ($path === '') {
+      return '/';
+    }
+
+    $path = '/' . ltrim($path, '/');
+    $path = rtrim($path, '/');
+
+    return $path === '' ? '/' : $path;
+  };
+
+  $home_href = path('/dashboard');
+  $home_item = ['label' => 'Home', 'href' => $home_href];
+  $target_path = $normalize_path($request_uri_path);
+
+  foreach ($dashboard_sidebar as $item) {
+    if (!is_array($item)) {
+      continue;
+    }
+
+    $item_label = isset($item['label']) ? trim((string) $item['label']) : '';
+    $item_href  = isset($item['href']) ? trim((string) $item['href']) : '';
+    $children   = isset($item['children']) && is_array($item['children']) ? $item['children'] : [];
+
+    if ($item_label === '') {
+      continue;
+    }
+
+    foreach ($children as $child_item) {
+      if (!is_array($child_item)) {
+        continue;
+      }
+
+      $child_label = isset($child_item['label']) ? trim((string) $child_item['label']) : '';
+      $child_href  = isset($child_item['href']) ? trim((string) $child_item['href']) : '';
+
+      if ($child_label === '' || $child_href === '' || $child_href === '#') {
+        continue;
+      }
+
+      if ($normalize_path($child_href) !== $target_path) {
+        continue;
+      }
+
+      $items = [$home_item];
+
+      if ($item_href !== '' && $item_href !== '#') {
+        $items[] = ['label' => $item_label, 'href' => $item_href];
+      } else {
+        $items[] = ['label' => $item_label];
+      }
+
+      $items[] = ['label' => $child_label, 'current' => true];
+
+      return $items;
+    }
+
+    if ($item_href === '' || $item_href === '#') {
+      continue;
+    }
+
+    if ($normalize_path($item_href) !== $target_path) {
+      continue;
+    }
+
+    return [
+      $home_item,
+      ['label' => $item_label, 'current' => true],
+    ];
+  }
+
+  return [
+    $home_item,
+    ['label' => 'Overview', 'current' => true],
+  ];
+}
+
 function button_class(array $options = []): string
 {
   $tone      = isset($options['tone']) ? (string) $options['tone'] : 'default';
   $size      = isset($options['size']) ? (string) $options['size'] : 'md';
-  $gradient  = isset($options['gradient']) ? (bool) $options['gradient'] : false;
   $disabled  = isset($options['disabled']) ? (bool) $options['disabled'] : false;
   $icon_only = isset($options['icon_only']) ? (bool) $options['icon_only'] : false;
   $extra     = isset($options['extra']) ? trim((string) $options['extra']) : '';
@@ -248,27 +339,22 @@ function button_class(array $options = []): string
 
   $tone_tokens = [
     'default' => [
-      'base'     => 'border-transparent bg-brand-900 text-white',
       'disabled' => 'border-transparent bg-brand-400 text-white',
       'gradient' => 'border-brand-900 bg-gradient-to-b from-brand-600 to-brand-800 text-white',
     ],
     'primary' => [
-      'base'     => 'border-transparent bg-primary-600 text-white',
       'disabled' => 'border-transparent bg-primary-400 text-white',
       'gradient' => 'border-primary-700 bg-gradient-to-b from-primary-500 to-primary-700 text-white',
     ],
     'secondary' => [
-      'base'     => 'border-transparent bg-brand-200 text-brand-900',
       'disabled' => 'border-transparent bg-brand-200 text-brand-400',
       'gradient' => 'border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900',
     ],
     'positive' => [
-      'base'     => 'border-transparent bg-positive-600 text-white',
       'disabled' => 'border-transparent bg-positive-300 text-white',
       'gradient' => 'border-positive-600 bg-gradient-to-b from-positive-500 to-positive-600 text-white',
     ],
     'negative' => [
-      'base'     => 'border-transparent bg-negative-600 text-white',
       'disabled' => 'border-transparent bg-negative-300 text-white',
       'gradient' => 'border-negative-600 bg-gradient-to-b from-negative-500 to-negative-600 text-white',
     ],
@@ -276,7 +362,7 @@ function button_class(array $options = []): string
 
   $tone_state = $disabled
     ? $tone_tokens[$tone]['disabled']
-    : ($gradient ? $tone_tokens[$tone]['gradient'] : $tone_tokens[$tone]['base']);
+    : $tone_tokens[$tone]['gradient'];
 
   $classes = [
     'inline-flex',
@@ -334,10 +420,9 @@ function button(string $variant_size = 'md/default', string $extra_class = ''): 
   $resolved_options = button_options_from_variant_size($variant_size);
 
   echo e(button_class([
-    'size'     => $resolved_options['size'],
-    'tone'     => $resolved_options['tone'],
-    'gradient' => true,
-    'extra'    => $extra_class,
+    'size'  => $resolved_options['size'],
+    'tone'  => $resolved_options['tone'],
+    'extra' => $extra_class,
   ]));
 }
 
@@ -346,10 +431,9 @@ function button_gradient(string $variant_size = 'md/default', string $extra_clas
   $resolved_options = button_options_from_variant_size($variant_size);
 
   echo e(button_class([
-    'size'     => $resolved_options['size'],
-    'tone'     => $resolved_options['tone'],
-    'gradient' => true,
-    'extra'    => $extra_class,
+    'size'  => $resolved_options['size'],
+    'tone'  => $resolved_options['tone'],
+    'extra' => $extra_class,
   ]));
 }
 
@@ -384,7 +468,7 @@ function checkbox_capture(): callable
 function capture_input(array $options = []): string
 {
   ob_start();
-  component('form/input', $options);
+  component('input', $options);
   return (string) ob_get_clean();
 }
 
@@ -398,7 +482,7 @@ function input_capture(): callable
 function capture_input_group(array $options = []): string
 {
   ob_start();
-  component('form/input-group', $options);
+  component('input-group', $options);
   return (string) ob_get_clean();
 }
 
@@ -406,20 +490,6 @@ function input_group_capture(): callable
 {
   return static function (array $options = []): string {
     return capture_input_group($options);
-  };
-}
-
-function capture_otp_input(array $options = []): string
-{
-  ob_start();
-  component('form/otp-input', $options);
-  return (string) ob_get_clean();
-}
-
-function otp_input_capture(): callable
-{
-  return static function (array $options = []): string {
-    return capture_otp_input($options);
   };
 }
 
@@ -438,7 +508,7 @@ function radio_capture(): callable
 function capture_rating(array $options = []): string
 {
   ob_start();
-  component('form/rating', $options);
+  component('rating', $options);
   return (string) ob_get_clean();
 }
 
@@ -452,7 +522,7 @@ function rating_capture(): callable
 function capture_select(array $options = []): string
 {
   ob_start();
-  component('form/select', $options);
+  component('select', $options);
   return (string) ob_get_clean();
 }
 
@@ -466,23 +536,11 @@ function select_capture(): callable
 function capture_textarea(array $options = []): string
 {
   ob_start();
-  component('form/textarea', $options);
+  component('textarea', $options);
   return (string) ob_get_clean();
 }
 
 function textarea_capture(): callable
-{
-  return static function (array $options = []): string {
-    return capture_textarea($options);
-  };
-}
-
-function capture_texarea(array $options = []): string
-{
-  return capture_textarea($options);
-}
-
-function texarea_capture(): callable
 {
   return static function (array $options = []): string {
     return capture_textarea($options);
@@ -527,13 +585,7 @@ function component(string $component_name, array $data = []): void
 
   $component_candidates = [];
 
-  if (str_contains($component_key, '/')) {
-    $component_candidates[] = $components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $components_root . '/' . basename($component_key) . '.php';
-  } else {
-    $component_candidates[] = $components_root . '/' . $component_key . '.php';
-    $component_candidates[] = $components_root . '/form/' . $component_key . '.php';
-  }
+  $component_candidates[] = $components_root . '/' . $component_key . '.php';
 
   $component_path = '';
 
@@ -556,15 +608,69 @@ function component(string $component_name, array $data = []): void
   require $component_path;
 }
 
+function theme_component(string $component_name, array $data = []): void
+{
+  $theme_key     = active_theme();
+  $components_root = __DIR__ . '/../views/themes/' . $theme_key . '/components';
+  $component_key = trim(str_replace('\\', '/', $component_name), '/');
+
+  if ($component_key === '' || str_contains($component_key, '..')) {
+    throw new RuntimeException('Theme component not found: ' . $component_name);
+  }
+
+  $component_candidates = [
+    $components_root . '/' . $component_key . '.php',
+  ];
+  $component_path = '';
+
+  foreach ($component_candidates as $component_candidate) {
+    if (is_file($component_candidate)) {
+      $component_path = $component_candidate;
+      break;
+    }
+  }
+
+  if ($component_path === '') {
+    throw new RuntimeException('Theme component not found: ' . $component_name);
+  }
+
+  extract($data, EXTR_SKIP);
+  require $component_path;
+}
+
+function set_active_theme(string $theme_name): void
+{
+  $resolved_theme_name = trim($theme_name);
+
+  if ($resolved_theme_name === '' || preg_match('/^[a-z0-9_-]+$/i', $resolved_theme_name) !== 1) {
+    $resolved_theme_name = 'core';
+  }
+
+  $GLOBALS['active_theme'] = strtolower($resolved_theme_name);
+}
+
+function active_theme(): string
+{
+  $active_theme = isset($GLOBALS['active_theme']) ? (string) $GLOBALS['active_theme'] : 'core';
+
+  if ($active_theme === '' || preg_match('/^[a-z0-9_-]+$/i', $active_theme) !== 1) {
+    return 'core';
+  }
+
+  return strtolower($active_theme);
+}
+
 function layout(string $layout_name, array $data = []): void
 {
   $layout_key = trim(str_replace('\\', '/', $layout_name), '/');
+  $theme_key  = active_theme();
 
   if ($layout_key === '' || str_contains($layout_key, '..')) {
     throw new RuntimeException('Layout not found: ' . $layout_name);
   }
 
   $layout_candidates = [
+    __DIR__ . '/../views/themes/' . $theme_key . '/layouts/' . $layout_key . '.php',
     __DIR__ . '/../views/' . $layout_key . '.php',
     __DIR__ . '/../views/themes/core/layouts/' . $layout_key . '.php',
     __DIR__ . '/../views/layout/' . $layout_key . '.php',
@@ -589,12 +695,14 @@ function layout(string $layout_name, array $data = []): void
 function section(string $section_name, array $data = []): void
 {
   $section_key = trim(str_replace('\\', '/', $section_name), '/');
+  $theme_key   = active_theme();
 
   if ($section_key === '' || str_contains($section_key, '..')) {
     throw new RuntimeException('Section not found: ' . $section_name);
   }
 
   $section_candidates = [
+    __DIR__ . '/../views/themes/' . $theme_key . '/sections/' . $section_key . '.php',
     __DIR__ . '/../views/sections/' . $section_key . '.php',
     __DIR__ . '/../views/themes/core/sections/' . $section_key . '.php',
   ];
@@ -621,12 +729,14 @@ function section(string $section_name, array $data = []): void
 function partial(string $partial_name, array $data = []): void
 {
   $partial_key = trim(str_replace('\\', '/', $partial_name), '/');
+  $theme_key   = active_theme();
 
   if ($partial_key === '' || str_contains($partial_key, '..')) {
     throw new RuntimeException('Partial not found: ' . $partial_name);
   }
 
   $partial_candidates = [
+    __DIR__ . '/../views/themes/' . $theme_key . '/partials/' . $partial_key . '.php',
     __DIR__ . '/../views/themes/core/partials/' . $partial_key . '.php',
     __DIR__ . '/../views/partials/' . $partial_key . '.php',
   ];

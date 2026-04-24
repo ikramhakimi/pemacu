@@ -22,7 +22,6 @@ declare(strict_types=1);
  *   - `aria_label` (string, optional): trigger aria-label.
  *   - `variant` (string, optional): trigger button variant. Default: `default`.
  *   - `size` (string, optional): trigger button size. Default: `md`.
- *   - `gradient` (bool, optional): gradient trigger style. Default: false.
  *   - `icon_name` (string, optional): trigger icon.
  *   - `icon_only` (bool, optional): icon-only trigger style. Default: false.
  *   - `icon_position` (string, optional): `left` or `right`. Default: `left`.
@@ -39,34 +38,28 @@ declare(strict_types=1);
  * - `classes` (array, optional): extra class hooks:
  *   - `overlay`, `panel`, `header`, `body`, `footer`, `title`, `description`, `close`.
  * - `attributes` (array, optional): additional attributes for modal root element.
- * - Backward-compatible aliases are supported:
- *   - `modal_id`, `modal_title`, `modal_description`, `modal_header_html`, `modal_size`, `modal_show_trigger`,
- *     `modal_trigger_label`, `modal_trigger_variant`, `modal_trigger_size`, `modal_body_html`,
- *     `modal_footer_html`, `modal_show_close_button`, `modal_overlay_class`, `modal_panel_class`.
  */
 
-$resolved_id = isset($id) && is_string($id) && trim($id) !== ''
-  ? trim($id)
-  : (isset($modal_id) && is_string($modal_id) ? trim($modal_id) : '');
+$resolved_id = isset($id) && is_string($id) ? trim($id) : '';
 $resolved_title = isset($title) && is_string($title) && trim($title) !== ''
   ? trim($title)
-  : (isset($modal_title) ? trim((string) $modal_title) : 'Modal');
+  : 'Modal';
 $resolved_description = isset($description) && is_string($description)
   ? trim($description)
-  : (isset($modal_description) ? trim((string) $modal_description) : '');
+  : '';
 $resolved_header_html = isset($header_html)
   ? $header_html
-  : (isset($modal_header_html) ? $modal_header_html : '');
+  : '';
 $resolved_size = isset($size) && is_string($size) && trim($size) !== ''
   ? trim($size)
-  : (isset($modal_size) ? trim((string) $modal_size) : 'md');
+  : 'md';
 
 $resolved_show_trigger = isset($show_trigger)
   ? (bool) $show_trigger
-  : (isset($modal_show_trigger) ? (bool) $modal_show_trigger : true);
+  : true;
 $resolved_show_close_button = isset($show_close_button)
   ? (bool) $show_close_button
-  : (isset($modal_show_close_button) ? (bool) $modal_show_close_button : true);
+  : true;
 
 $trigger = isset($trigger) && is_array($trigger) ? $trigger : [];
 $close_button = isset($close_button) && is_array($close_button) ? $close_button : [];
@@ -75,17 +68,16 @@ $resolved_attributes = isset($attributes) && is_array($attributes) ? $attributes
 
 $resolved_trigger_label = isset($trigger['label']) && is_string($trigger['label']) && trim($trigger['label']) !== ''
   ? trim($trigger['label'])
-  : (isset($modal_trigger_label) ? trim((string) $modal_trigger_label) : 'Open Modal');
+  : 'Open Modal';
 $resolved_trigger_aria_label = isset($trigger['aria_label']) && is_string($trigger['aria_label']) && trim($trigger['aria_label']) !== ''
   ? trim($trigger['aria_label'])
   : '';
 $resolved_trigger_variant = isset($trigger['variant']) && is_string($trigger['variant']) && trim($trigger['variant']) !== ''
   ? trim($trigger['variant'])
-  : (isset($modal_trigger_variant) ? trim((string) $modal_trigger_variant) : 'default');
+  : 'default';
 $resolved_trigger_size = isset($trigger['size']) && is_string($trigger['size']) && trim($trigger['size']) !== ''
   ? trim($trigger['size'])
-  : (isset($modal_trigger_size) ? trim((string) $modal_trigger_size) : 'md');
-$resolved_trigger_gradient = isset($trigger['gradient']) ? (bool) $trigger['gradient'] : false;
+  : 'md';
 $resolved_trigger_icon_name = isset($trigger['icon_name']) && is_string($trigger['icon_name'])
   ? trim($trigger['icon_name'])
   : '';
@@ -102,10 +94,10 @@ $resolved_trigger_attributes = isset($trigger['attributes']) && is_array($trigge
 
 $resolved_body_html = isset($body_html)
   ? $body_html
-  : (isset($modal_body_html) ? $modal_body_html : '');
+  : '';
 $resolved_footer_html = isset($footer_html)
   ? $footer_html
-  : (isset($modal_footer_html) ? $modal_footer_html : '');
+  : '';
 
 $resolved_close_aria_label = isset($close_button['aria_label']) && is_string($close_button['aria_label']) && trim($close_button['aria_label']) !== ''
   ? trim($close_button['aria_label'])
@@ -124,13 +116,6 @@ $resolved_description_class = isset($classes['description']) && is_string($class
   ? trim($classes['description'])
   : '';
 $resolved_close_class = isset($classes['close']) && is_string($classes['close']) ? trim($classes['close']) : '';
-
-if ($resolved_overlay_class === '' && isset($modal_overlay_class) && is_string($modal_overlay_class)) {
-  $resolved_overlay_class = trim($modal_overlay_class);
-}
-if ($resolved_panel_class === '' && isset($modal_panel_class) && is_string($modal_panel_class)) {
-  $resolved_panel_class = trim($modal_panel_class);
-}
 
 if ($resolved_id === '') {
   return;
@@ -166,7 +151,7 @@ $modal_footer_class = trim(
   'modal__actions flex items-center justify-end gap-2 px-5 py-4 ' . $resolved_footer_class,
 );
 $modal_title_class = trim('text-lg font-semibold text-brand-900 ' . $resolved_title_class);
-$modal_description_class = trim('mt-1 text-sm text-brand-600 ' . $resolved_description_class);
+$modal_description_class = trim('mt-1  text-brand-600 ' . $resolved_description_class);
 
 $render_attributes = static function (array $attrs): string {
   $compiled = [];
@@ -239,7 +224,6 @@ if ($resolved_title !== '') {
     'aria_label'    => $resolved_trigger_aria_label,
     'variant'       => $resolved_trigger_variant,
     'size'          => $resolved_trigger_size,
-    'gradient'      => $resolved_trigger_gradient,
     'icon_name'     => $resolved_trigger_icon_name,
     'icon_only'     => $resolved_trigger_icon_only,
     'icon_position' => $resolved_trigger_icon_position,

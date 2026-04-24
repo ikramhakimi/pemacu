@@ -59,7 +59,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="w-full max-w-lg">
-          <?php component('form/select', [
+          <?php component('select', [
             'id'            => 'select-base-workspace-plan',
             'name'          => 'workspace_plan_base',
             'placeholder'   => 'Choose workspace plan',
@@ -77,21 +77,21 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="grid w-full max-w-lg gap-3">
-          <?php component('form/select', [
+          <?php component('select', [
             'size'           => 'sm',
             'name'           => 'billing_cycle_sm',
             'placeholder'    => 'Billing cycle (small)',
             'options'        => $billing_cycle_options,
             'selected_value' => 'monthly',
           ]); ?>
-          <?php component('form/select', [
+          <?php component('select', [
             'size'           => 'md',
             'name'           => 'billing_cycle_md',
             'placeholder'    => 'Billing cycle (medium)',
             'options'        => $billing_cycle_options,
             'selected_value' => 'quarterly',
           ]); ?>
-          <?php component('form/select', [
+          <?php component('select', [
             'size'           => 'lg',
             'name'           => 'billing_cycle_lg',
             'placeholder'    => 'Billing cycle (large)',
@@ -112,15 +112,17 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="grid w-full max-w-lg gap-4">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'           => 'Onboarding Owner',
             'helper_text'     => 'Assign one team as the default onboarding owner.',
-            'input_component' => 'select',
-            'input_props'     => [
+            'control' => [
+              'component' => 'select',
+              'props' => [
               'name'           => 'onboarding_owner',
               'placeholder'    => 'Select owner team',
               'options'        => $owner_team_options,
               'selected_value' => 'implementation',
+              ],
             ],
           ]); ?>
         </div>
@@ -134,14 +136,14 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="grid w-full max-w-lg gap-3">
-          <?php component('form/select', [
+          <?php component('select', [
             'name'           => 'workspace_region_positive',
             'state'          => 'positive',
             'placeholder'    => 'Primary data region',
             'options'        => $region_options,
             'selected_value' => 'my-kul',
           ]); ?>
-          <?php component('form/select', [
+          <?php component('select', [
             'name'           => 'workspace_region_negative',
             'state'          => 'negative',
             'placeholder'    => 'Primary data region',
@@ -168,7 +170,7 @@ layout('canvas/layouts/canvas-start', [
               <p class="mt-1 text-sm text-brand-600">Locked because this workspace is controlled by enterprise policy.</p>
             </div>
             <div class="p-4">
-              <?php component('form/select', [
+              <?php component('select', [
                 'name'           => 'workspace_status_locked',
                 'state'          => 'disabled',
                 'disabled'       => true,
@@ -189,11 +191,12 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="grid w-full max-w-lg gap-4">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'           => 'SLA Priority',
             'helper_text'     => 'Required for ticket routing.',
-            'input_component' => 'select',
-            'input_props'     => [
+            'control' => [
+              'component' => 'select',
+              'props' => [
               'id'                   => 'select-sla-priority',
               'name'                 => 'sla_priority',
               'required'             => true,
@@ -203,6 +206,7 @@ layout('canvas/layouts/canvas-start', [
                 ['label' => 'Standard (48h)', 'value' => 'standard'],
                 ['label' => 'Priority (24h)', 'value' => 'priority'],
                 ['label' => 'Critical (4h)', 'value' => 'critical'],
+              ],
               ],
             ],
           ]); ?>

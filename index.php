@@ -49,16 +49,49 @@ if ($uri === '' || strtolower($uri) === 'index.php') {
   $uri = 'home';
 }
 
-$page = '';
-$pages_root     = realpath(__DIR__ . '/views/themes/core');
-$canvas_root    = realpath(__DIR__ . '/views/canvas');
+$page         = '';
+$themes_root  = realpath(__DIR__ . '/views/themes');
+$pages_root   = realpath(__DIR__ . '/views/themes/core');
+$canvas_root  = realpath(__DIR__ . '/views/canvas');
 $dashboard_root = realpath(__DIR__ . '/views/dashboard');
 $is_valid_route = preg_match('/^[a-z0-9\/-]+$/i', $uri) === 1 && strpos($uri, '..') === false;
 
+$active_theme = 'core';
+$theme_uri    = $uri;
+
+if ($is_valid_route && $themes_root !== false) {
+  $uri_segments = $uri === '' ? [] : explode('/', $uri);
+  $theme_slug   = $uri_segments[0] ?? '';
+
+  if ($theme_slug !== '' && $theme_slug !== 'canvas' && $theme_slug !== 'dashboard') {
+    $theme_root_candidate = realpath($themes_root . '/' . $theme_slug);
+    $is_in_themes_root    = is_string($theme_root_candidate)
+      && strpos($theme_root_candidate, $themes_root . DIRECTORY_SEPARATOR) === 0;
+
+    if ($is_in_themes_root && is_dir($theme_root_candidate)) {
+      $active_theme = $theme_slug;
+      array_shift($uri_segments);
+      $theme_uri = trim(implode('/', $uri_segments), '/');
+
+      if ($theme_uri === '' || strtolower($theme_uri) === 'index.php') {
+        $theme_uri = 'home';
+      }
+    }
+  }
+}
+
+$resolved_theme_root = $themes_root !== false
+  ? realpath($themes_root . '/' . $active_theme)
+  : false;
+
+if ($resolved_theme_root !== false) {
+  $pages_root = $resolved_theme_root;
+}
+
 if ($is_valid_route && $pages_root !== false) {
   $page_candidates = [
-    realpath($pages_root . '/' . $uri . '.php'),
-    realpath($pages_root . '/' . $uri . '/index.php'),
+    realpath($pages_root . '/' . $theme_uri . '.php'),
+    realpath($pages_root . '/' . $theme_uri . '/index.php'),
   ];
 
   foreach ($page_candidates as $candidate) {
@@ -132,6 +165,7 @@ if ($page === '') {
 ob_start();
 
 try {
+  set_active_theme($active_theme);
   require $page;
   $content = (string) ob_get_clean();
 } catch (Throwable $exception) {

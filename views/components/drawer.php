@@ -21,7 +21,6 @@ declare(strict_types=1);
  *   - `aria_label` (string, optional): trigger aria-label.
  *   - `variant` (string, optional): standard button variant. Default: `default`.
  *   - `size` (string, optional): standard button size. Default: `md`.
- *   - `gradient` (bool, optional): trigger gradient style. Default: false.
  *   - `icon_name` (string, optional): trigger icon.
  *   - `icon_only` (bool, optional): icon-only trigger style.
  *   - `icon_position` (string, optional): `left` or `right`. Default: `left`.
@@ -36,30 +35,24 @@ declare(strict_types=1);
  *   - `icon_name` (string, optional): close icon. Default: `close-line`.
  * - `classes` (array, optional):
  *   - `overlay`, `panel`, `header`, `body`, `footer` (string, optional): extra class hooks.
- * - Backward-compatible aliases are supported:
- *   - `drawer_id`, `drawer_title`, `drawer_position`, `drawer_size`, `drawer_show_trigger`,
- *     `drawer_trigger_label`, `drawer_trigger_variant`, `drawer_trigger_size`,
- *     `drawer_body_html`, `drawer_footer_html`, `drawer_panel_class`, `drawer_overlay_class`.
  */
 
-$resolved_id = isset($id) && is_string($id) && trim($id) !== ''
-  ? trim($id)
-  : (isset($drawer_id) ? trim((string) $drawer_id) : '');
+$resolved_id = isset($id) && is_string($id) ? trim($id) : '';
 $resolved_title = isset($title) && is_string($title) && trim($title) !== ''
   ? trim($title)
-  : (isset($drawer_title) ? trim((string) $drawer_title) : 'Drawer');
+  : 'Drawer';
 $resolved_position = isset($position) && is_string($position) ? trim($position) : '';
 $resolved_position = $resolved_position !== ''
   ? $resolved_position
-  : (isset($drawer_position) ? trim((string) $drawer_position) : 'right');
+  : 'right';
 $resolved_size = isset($size) && is_string($size) ? trim($size) : '';
 $resolved_size = $resolved_size !== ''
   ? $resolved_size
-  : (isset($drawer_size) ? trim((string) $drawer_size) : 'md');
+  : 'md';
 
 $resolved_show_trigger = isset($show_trigger)
   ? (bool) $show_trigger
-  : (isset($drawer_show_trigger) ? (bool) $drawer_show_trigger : true);
+  : true;
 
 $trigger = isset($trigger) && is_array($trigger) ? $trigger : [];
 $close_button = isset($close_button) && is_array($close_button) ? $close_button : [];
@@ -67,17 +60,16 @@ $classes = isset($classes) && is_array($classes) ? $classes : [];
 
 $resolved_trigger_label = isset($trigger['label']) && is_string($trigger['label']) && trim($trigger['label']) !== ''
   ? trim($trigger['label'])
-  : (isset($drawer_trigger_label) ? trim((string) $drawer_trigger_label) : 'Open Drawer');
+  : 'Open Drawer';
 $resolved_trigger_aria_label = isset($trigger['aria_label']) && is_string($trigger['aria_label']) && trim($trigger['aria_label']) !== ''
   ? trim($trigger['aria_label'])
   : '';
 $resolved_trigger_variant = isset($trigger['variant']) && is_string($trigger['variant']) && trim($trigger['variant']) !== ''
   ? trim($trigger['variant'])
-  : (isset($drawer_trigger_variant) ? trim((string) $drawer_trigger_variant) : 'default');
+  : 'default';
 $resolved_trigger_size = isset($trigger['size']) && is_string($trigger['size']) && trim($trigger['size']) !== ''
   ? trim($trigger['size'])
-  : (isset($drawer_trigger_size) ? trim((string) $drawer_trigger_size) : 'md');
-$resolved_trigger_gradient = isset($trigger['gradient']) ? (bool) $trigger['gradient'] : false;
+  : 'md';
 $resolved_trigger_icon_name = isset($trigger['icon_name']) && is_string($trigger['icon_name']) ? trim($trigger['icon_name']) : '';
 $resolved_trigger_icon_only = isset($trigger['icon_only']) ? (bool) $trigger['icon_only'] : false;
 $resolved_trigger_icon_position = isset($trigger['icon_position']) && is_string($trigger['icon_position']) && trim($trigger['icon_position']) !== ''
@@ -88,10 +80,10 @@ $resolved_trigger_attributes = isset($trigger['attributes']) && is_array($trigge
 
 $resolved_body_html = isset($body_html)
   ? (string) $body_html
-  : (isset($drawer_body_html) ? (string) $drawer_body_html : '');
+  : '';
 $resolved_footer_html = isset($footer_html)
   ? (string) $footer_html
-  : (isset($drawer_footer_html) ? (string) $drawer_footer_html : '');
+  : '';
 
 $resolved_close_aria_label = isset($close_button['aria_label']) && is_string($close_button['aria_label']) && trim($close_button['aria_label']) !== ''
   ? trim($close_button['aria_label'])
@@ -111,13 +103,6 @@ $resolved_panel_class = isset($classes['panel']) && is_string($classes['panel'])
 $resolved_header_class = isset($classes['header']) && is_string($classes['header']) ? trim($classes['header']) : '';
 $resolved_body_class = isset($classes['body']) && is_string($classes['body']) ? trim($classes['body']) : '';
 $resolved_footer_class = isset($classes['footer']) && is_string($classes['footer']) ? trim($classes['footer']) : '';
-
-if ($resolved_overlay_class === '' && isset($drawer_overlay_class) && is_string($drawer_overlay_class)) {
-  $resolved_overlay_class = trim($drawer_overlay_class);
-}
-if ($resolved_panel_class === '' && isset($drawer_panel_class) && is_string($drawer_panel_class)) {
-  $resolved_panel_class = trim($drawer_panel_class);
-}
 
 if ($resolved_id === '') {
   return;
@@ -202,7 +187,6 @@ $trigger_attributes = array_merge([
     'aria_label' => $resolved_trigger_aria_label,
     'variant'    => $resolved_trigger_variant,
     'size'       => $resolved_trigger_size,
-    'gradient'   => $resolved_trigger_gradient,
     'icon_name'  => $resolved_trigger_icon_name,
     'icon_only'  => $resolved_trigger_icon_only,
     'icon_position' => $resolved_trigger_icon_position,

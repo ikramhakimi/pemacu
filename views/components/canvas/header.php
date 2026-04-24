@@ -39,7 +39,7 @@ $canvas_title_class      = isset($canvas_header['title_class'])
   : (isset($canvas_header['header_title_class']) ? trim((string) $canvas_header['header_title_class']) : 'canvas-header__title text-3xl font-semibold leading-none text-brand-900');
 $canvas_subtitle_class   = isset($canvas_header['subtitle_class'])
   ? trim((string) $canvas_header['subtitle_class'])
-  : (isset($canvas_header['header_subtitle_class']) ? trim((string) $canvas_header['header_subtitle_class']) : 'canvas-header__subtitle mt-4 text-sm text-brand-600');
+  : (isset($canvas_header['header_subtitle_class']) ? trim((string) $canvas_header['header_subtitle_class']) : 'canvas-header__subtitle mt-4  text-brand-600');
 $canvas_subtitle_max_w   = isset($canvas_header['subtitle_max_w'])
   ? trim((string) $canvas_header['subtitle_max_w'])
   : (isset($canvas_header['header_subtitle_max_w']) ? trim((string) $canvas_header['header_subtitle_max_w']) : 'max-w-2xl');
@@ -57,7 +57,7 @@ if ($canvas_title_class === '') {
 }
 
 if ($canvas_subtitle_class === '') {
-  $canvas_subtitle_class = 'canvas-header__subtitle mt-4 text-sm text-brand-600';
+  $canvas_subtitle_class = 'canvas-header__subtitle mt-4  text-brand-600';
 }
 
 if ($canvas_subtitle_max_w === '') {

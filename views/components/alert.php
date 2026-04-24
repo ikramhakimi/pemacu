@@ -17,7 +17,7 @@ declare(strict_types=1);
  * - `description` (string, optional): supportive message body.
  * - `tone` (string, optional): `positive`, `negative`, `neutral`, `warning`, `info`. Default: `neutral`.
  * - `dismissible` (bool, optional): render dismiss button. Default: false.
- * - `actions` (array, optional): list of button configs (`label`, `href`, `type`, `variant`, `gradient`, `attributes`).
+ * - `actions` (array, optional): list of button configs (`label`, `href`, `type`, `variant`, `attributes`).
  * - `icon_name` (string, optional): custom icon override.
  * - `show_icon` (bool, optional): show leading icon. Default: true.
  * - `class_name` (string, optional): extra root classes.
@@ -140,13 +140,13 @@ $root_attributes['data-alert-js'] = true;
 
   <div class="alert__content min-w-0 flex-1 space-y-1">
     <?php if ($title !== ''): ?>
-      <p class="alert__title text-sm font-semibold <?= e($tone_data['title']); ?>">
+      <p class="alert__title  font-semibold <?= e($tone_data['title']); ?>">
         <?= e($title); ?>
       </p>
     <?php endif; ?>
 
     <?php if ($description !== ''): ?>
-      <p class="alert__description text-sm <?= e($tone_data['copy']); ?>">
+      <p class="alert__description  <?= e($tone_data['copy']); ?>">
         <?= e($description); ?>
       </p>
     <?php endif; ?>
@@ -158,7 +158,6 @@ $root_attributes['data-alert-js'] = true;
           $action_label = is_array($action) && isset($action['label']) ? trim((string) $action['label']) : '';
           $action_href  = is_array($action) && isset($action['href']) ? trim((string) $action['href']) : '';
           $action_type  = is_array($action) && isset($action['type']) ? trim((string) $action['type']) : 'button';
-          $action_gradient = is_array($action) && isset($action['gradient']) ? (bool) $action['gradient'] : false;
           $action_attrs = is_array($action) && isset($action['attributes']) && is_array($action['attributes'])
             ? $action['attributes']
             : [];
@@ -175,7 +174,6 @@ $root_attributes['data-alert-js'] = true;
             'type'       => $action_type,
             'variant'    => $action_variant,
             'size'       => 'sm',
-            'gradient'   => $action_gradient,
             'attributes' => $action_attrs,
           ]); ?>
         <?php endforeach; ?>

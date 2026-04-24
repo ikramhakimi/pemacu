@@ -43,14 +43,16 @@ layout('canvas/layouts/canvas-start', [
         Baseline date picker for one target day.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Session date',
           'helper_text'     => 'Choose one preferred date for your session.',
-          'input_component' => 'pickdate',
-          'input_props'     => [
+          'control' => [
+            'component' => 'pickdate',
+            'props' => [
             'name'        => 'session_date',
             'mode'        => 'single',
             'placeholder' => 'Pick one date',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>
@@ -63,17 +65,19 @@ layout('canvas/layouts/canvas-start', [
         Restrict date window to the current booking period.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Available slot',
           'helper_text'     => 'Only dates between 2026-06-01 and 2026-07-31 are open.',
-          'input_component' => 'pickdate',
-          'input_props'     => [
+          'control' => [
+            'component' => 'pickdate',
+            'props' => [
             'name'        => 'slot_date',
             'mode'        => 'single',
             'min_date'    => '2026-06-01',
             'max_date'    => '2026-07-31',
             'value'       => '2026-06-15',
             'placeholder' => 'Select available date',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>
@@ -86,11 +90,12 @@ layout('canvas/layouts/canvas-start', [
         Use range mode for stay duration and schedule windows.
       </p>
       <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('form/fields', [
+        <?php component('fields', [
           'label'           => 'Stay range',
           'helper_text'     => 'Pick check-in and check-out dates in one interaction.',
-          'input_component' => 'pickdate',
-          'input_props'     => [
+          'control' => [
+            'component' => 'pickdate',
+            'props' => [
             'mode'        => 'range',
             'name'        => 'stay_date',
             'name_start'  => 'check_in',
@@ -99,6 +104,7 @@ layout('canvas/layouts/canvas-start', [
             'end_value'   => '2026-07-16',
             'min_date'    => '2026-05-01',
             'max_date'    => '2026-10-31',
+            ],
           ],
           'class'           => 'space-y-2',
         ]); ?>

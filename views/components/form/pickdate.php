@@ -59,12 +59,12 @@ if ($mode === 'range') {
 }
 
 $trigger_classes = trim(implode(' ', array_filter([
-  'pickdate__trigger group relative flex h-[var(--ui-h-md)] w-full items-center justify-between rounded-md bg-white px-[var(--ui-px-md)] text-sm text-brand-900 ring-1 ring-brand-300 ring-inset transition focus:outline-none focus:ring-2 focus:ring-brand-500',
+  'pickdate__trigger group relative flex h-[var(--ui-h-md)] w-full items-center justify-between rounded-md bg-white px-[var(--ui-px-md)]  text-brand-900 ring-1 ring-brand-300 ring-inset transition focus:outline-none focus:ring-2 focus:ring-brand-500',
   $disabled ? 'cursor-not-allowed bg-brand-100 text-brand-400 ring-brand-200' : 'hover:ring-brand-400',
 ])));
 
 $display_classes = trim(implode(' ', array_filter([
-  'pickdate__display pointer-events-none w-full border-0 bg-transparent p-0 text-left text-sm focus:outline-none',
+  'pickdate__display pointer-events-none w-full border-0 bg-transparent p-0 text-left  focus:outline-none',
   $disabled ? 'text-brand-400' : 'text-brand-800 placeholder:text-brand-400',
 ])));
 
@@ -130,7 +130,7 @@ $panel_id   = $id . '-panel';
         <?php icon('arrow-left-s-line', ['icon_size' => '16']); ?>
       </button>
 
-      <p class="text-sm font-semibold text-brand-900" data-pickdate-month-label></p>
+      <p class=" font-semibold text-brand-900" data-pickdate-month-label></p>
 
       <button
         type="button"

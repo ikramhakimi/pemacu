@@ -65,9 +65,22 @@ $section_faq_classes    = trim(
     ]),
   ),
 );
+$section_faq_container_spacing_class = isset($container_spacing_class)
+  ? trim((string) $container_spacing_class)
+  : 'py-16';
+$section_faq_container_class = isset($container_class) ? trim((string) $container_class) : '';
+$section_faq_container_classes = trim(
+  implode(
+    ' ',
+    array_filter([
+      $section_faq_container_spacing_class,
+      $section_faq_container_class,
+    ]),
+  ),
+);
 ?>
 <section class="<?= e($section_faq_classes); ?>">
-  <div class="<?php container('py-16') ?>">
+  <div class="<?php container($section_faq_container_classes); ?>">
     <?php component('header-section', [
       'header_topic'           => $section_faq_header_topic,
       'header_title'           => $section_faq_header_title,

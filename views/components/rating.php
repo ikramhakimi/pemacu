@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 /**
- * Component: form/rating
+ * Component: rating
  * Purpose: Render one API-driven star rating control for SaaS feedback workflows.
  * Anatomy:
  * - .rating
@@ -13,7 +13,6 @@ declare(strict_types=1);
  * - `name` (string, optional): radio group name.
  * - `max` (int, optional): total stars, clamped to 1..10. Default: 5.
  * - `value` (int, optional): selected value.
- * - `selected_value` (int, optional): alias of `value`.
  * - `disabled` (bool, optional): disable interaction and submission.
  * - `read_only` (bool, optional): lock interaction while preserving display state.
  * - `required` (bool, optional): require a selection on form submit.
@@ -36,14 +35,9 @@ $resolved_input_attributes = isset($input_attributes) && is_array($input_attribu
 $resolved_active_icon_class = isset($active_icon_class) ? trim((string) $active_icon_class) : 'text-amber-500';
 $resolved_inactive_icon_class = isset($inactive_icon_class) ? trim((string) $inactive_icon_class) : 'text-brand-300';
 
-$has_selected_value = false;
 $resolved_value = 0;
 
-if (isset($selected_value)) {
-  $has_selected_value = true;
-  $resolved_value = (int) $selected_value;
-} elseif (isset($value)) {
-  $has_selected_value = true;
+if (isset($value)) {
   $resolved_value = (int) $value;
 }
 

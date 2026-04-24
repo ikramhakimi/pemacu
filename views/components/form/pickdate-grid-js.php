@@ -69,7 +69,7 @@ if ($forward_months < 1 || $forward_months > 36) {
     <div class="select select--md relative min-w-[11rem]">
       <select
         id="<?= e($id); ?>-month-select"
-        class="select__input input h-[var(--ui-h-md)] w-full appearance-none rounded-md bg-white px-[var(--ui-px-md)] pr-10 text-sm font-medium text-brand-900 ring-1 ring-brand-300 ring-inset focus:outline-none focus:ring-2 focus:ring-brand-500"
+        class="select__input input h-[var(--ui-h-md)] w-full appearance-none rounded-md bg-white px-[var(--ui-px-md)] pr-10  font-medium text-brand-900 ring-1 ring-brand-300 ring-inset focus:outline-none focus:ring-2 focus:ring-brand-500"
         data-pickdate-grid-month-select
       ></select>
       <span class="select__icon pointer-events-none absolute inset-y-0 right-3 inline-flex items-center text-brand-500">
@@ -127,7 +127,7 @@ if ($forward_months < 1 || $forward_months > 36) {
     <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-brand-200 text-brand-500">
       <?php icon('calendar-check-line', ['icon_size' => '16']); ?>
     </span>
-    <p class="pickdate__selected-text text-sm font-medium" data-pickdate-grid-selected>
+    <p class="pickdate__selected-text  font-medium" data-pickdate-grid-selected>
       Selected date: -
     </p>
   </div>
@@ -139,8 +139,8 @@ if ($forward_months < 1 || $forward_months > 36) {
     hidden
   >
     <p class="pickdate__promo-eyebrow text-xs font-semibold uppercase text-brand-700">Promo Available</p>
-    <p class="pickdate__promo-title mt-1 text-sm font-semibold capitalize text-positive-600" data-pickdate-grid-promo-title></p>
-    <p class="pickdate__promo-copy mt-1 text-sm" data-pickdate-grid-promo-copy>
+    <p class="pickdate__promo-title mt-1  font-semibold capitalize text-positive-600" data-pickdate-grid-promo-title></p>
+    <p class="pickdate__promo-copy mt-1 " data-pickdate-grid-promo-copy>
       Pick this date now to secure the promotion before slots run out.
     </p>
   </div>

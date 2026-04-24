@@ -242,7 +242,7 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
 <nav<?= $render_attributes($nav_attributes); ?>>
   <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
     <?php if ($show_info): ?>
-      <p class="pagination__info text-sm text-brand-700">
+      <p class="pagination__info  text-brand-700">
         Showing <span data-pagination-range><?= e((string) $range_start); ?>-<?= e((string) $range_end); ?></span> of
         <span data-pagination-total><?= e((string) $total_items); ?></span>
       </p>
@@ -266,7 +266,7 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
       <div class="pagination__pages inline-flex items-center gap-2" data-pagination-pages>
         <?php foreach ($resolved_pages as $page_item): ?>
           <?php if ($page_item['type'] === 'ellipsis'): ?>
-            <span class="inline-flex h-[var(--ui-h-md)] min-w-7 items-center justify-center px-1 text-sm text-brand-500" aria-hidden="true">...</span>
+            <span class="inline-flex h-[var(--ui-h-md)] min-w-7 items-center justify-center px-1  text-brand-500" aria-hidden="true">...</span>
             <?php continue; ?>
           <?php endif; ?>
           <?php
@@ -274,7 +274,7 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
           $page_label       = (string) $page_item['label'];
           $page_url         = (string) $page_item['url'];
           $is_current_page  = !empty($page_item['is_current']);
-          $page_button_base = 'inline-flex h-[var(--ui-h-md)] min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-semibold transition';
+          $page_button_base = 'inline-flex h-[var(--ui-h-md)] min-w-10 items-center justify-center rounded-lg border px-3  font-semibold transition';
           $page_button_tone = $is_current_page
             ? 'border-brand-900 bg-brand-900 text-white'
             : 'border-brand-200 bg-white text-brand-700 hover:border-brand-300 hover:text-brand-900';

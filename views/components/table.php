@@ -15,8 +15,8 @@ declare(strict_types=1);
  *       - tr.table__row
  *         - td.table__cell
  * Data Contract:
- * - `columns`|`headers` (array): column schema. Item: string or array (`label`, `key`, `align`, `class_name`, `heading_class`).
- * - `rows`|`data` (array): table rows. Item: indexed/assoc row or object row (`cells`, `row_class`).
+ * - `columns` (array): column schema. Item: string or array (`label`, `key`, `align`, `class_name`, `heading_class`).
+ * - `rows` (array): table rows. Item: indexed/assoc row or object row (`cells`, `row_class`).
  * - Cell object: `content`, `is_html`, `align`, `class_name`.
  * - `appearance` (string): `default` | `basic`. Default: `default`.
  * - `spacing` (string): `default` | `comfortable`. Default: `default`.
@@ -27,24 +27,8 @@ declare(strict_types=1);
  * - `attributes` (array): additional `<table>` attributes.
  */
 
-$columns_source = [];
-
-if (isset($columns) && is_array($columns)) {
-  $columns_source = $columns;
-} elseif (isset($headers) && is_array($headers)) {
-  $columns_source = $headers;
-}
-
-$rows_source           = [];
-$rows_alias_from_props = isset($component_props['data']) && is_array($component_props['data'])
-  ? $component_props['data']
-  : [];
-
-if (isset($rows) && is_array($rows)) {
-  $rows_source = $rows;
-} elseif ($rows_alias_from_props !== []) {
-  $rows_source = $rows_alias_from_props;
-}
+$columns_source = isset($columns) && is_array($columns) ? $columns : [];
+$rows_source    = isset($rows) && is_array($rows) ? $rows : [];
 
 $columns       = array_values($columns_source);
 $rows          = array_values($rows_source);
@@ -64,12 +48,12 @@ if ($columns === []) {
 
 $appearance_map = [
   'default' => [
-    'wrapper' => 'overflow-x-auto rounded-md border border-brand-200 bg-white',
-    'head'    => 'border-b-4 border-brand-200 bg-brand-100 text-xs font-semibold uppercase tracking-wide text-brand-700',
+    'wrapper' => 'rounded-md border border-brand-200 bg-white',
+    'head'    => 'border-b-4 border-brand-200 bg-brand-100 text-xs font-medium uppercase text-brand-700',
   ],
   'basic' => [
-    'wrapper' => 'overflow-x-auto',
-    'head'    => 'border-b-4 border-brand-200 text-xs font-semibold uppercase tracking-wide text-brand-700',
+    'wrapper' => '',
+    'head'    => 'border-b-4 border-brand-200 text-xs font-medium uppercase text-brand-700',
   ],
 ];
 
@@ -175,27 +159,31 @@ $edge_padding_class = $appearance === 'basic' ? 'first:pl-0 last:pr-0' : '';
 
 $table_attributes          = $attributes;
 $table_attributes['class'] = trim(implode(' ', array_filter([
-  'table min-w-full align-middle text-left text-sm text-brand-700',
+  'table min-w-full align-middle text-left  text-brand-700',
   isset($table_attributes['class']) ? trim((string) $table_attributes['class']) : '',
 ])));
 ?>
 <div class="<?= e(trim('table-wrapper ' . $appearance_map[$appearance]['wrapper'] . ' ' . $class_name)); ?>">
   <table<?= $render_attributes($table_attributes); ?>>
     <?php if ($caption !== ''): ?>
-      <caption class="table__caption px-4 py-3 text-left text-sm text-brand-600">
+      <caption class="table__caption px-4 py-3 text-left  text-brand-600">
         <?= e($caption); ?>
       </caption>
     <?php endif; ?>
 
     <thead class="table__head <?= e($appearance_map[$appearance]['head']); ?>">
       <tr>
-        <?php foreach ($column_meta as $column): ?>
+        <?php foreach ($column_meta as $column_index => $column): ?>
           <?php
+          $is_first_heading = $column_index === 0;
+          $is_last_heading  = $column_index === (count($column_meta) - 1);
           $heading_classes = trim(implode(' ', array_filter([
             'table__heading px-4',
             $edge_padding_class,
             $spacing_map[$spacing]['heading'],
             $resolve_optional_align((string) $column['align']),
+            $is_first_heading ? 'rounded-tl-sm' : '',
+            $is_last_heading ? 'rounded-tl-sm' : '',
             (string) $column['class_name'],
             (string) $column['heading_class'],
           ])));
@@ -211,20 +199,21 @@ $table_attributes['class'] = trim(implode(' ', array_filter([
       <?php if ($rows === []): ?>
         <tr class="table__row">
           <td class="table__cell px-4 py-10 text-center" colspan="<?= e((string) count($column_meta)); ?>">
-            <p class="text-sm font-semibold text-brand-900"><?= e($empty_title); ?></p>
+            <p class=" font-semibold text-brand-900"><?= e($empty_title); ?></p>
             <?php if ($empty_message !== ''): ?>
-              <p class="mt-1 text-sm text-brand-600"><?= e($empty_message); ?></p>
+              <p class="mt-1  text-brand-600"><?= e($empty_message); ?></p>
             <?php endif; ?>
           </td>
         </tr>
       <?php endif; ?>
 
-      <?php foreach ($rows as $row): ?>
+      <?php foreach ($rows as $row_index => $row): ?>
         <?php
         $row_cells = is_array($row) && isset($row['cells']) && is_array($row['cells'])
           ? $row['cells']
           : (is_array($row) ? $row : []);
         $row_class = is_array($row) && isset($row['row_class']) ? trim((string) $row['row_class']) : '';
+        $is_last_row = $row_index === (count($rows) - 1);
         ?>
         <tr class="<?= e(trim('table__row transition-colors hover:bg-brand-50 ' . $row_class)); ?>">
           <?php foreach ($column_meta as $column_index => $column): ?>
@@ -255,6 +244,8 @@ $table_attributes['class'] = trim(implode(' ', array_filter([
               $edge_padding_class,
               $spacing_map[$spacing]['cell'],
               $resolve_optional_align($cell_align),
+              $is_last_row && $column_index === 0 ? 'rounded-bl-sm' : '',
+              $is_last_row && $column_index === (count($column_meta) - 1) ? 'rounded-bl-sm' : '',
               $cell_class,
             ])));
             ?>

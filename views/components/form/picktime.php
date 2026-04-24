@@ -59,16 +59,16 @@ if ($mode === 'range') {
 }
 
 $trigger_classes = trim(implode(' ', array_filter([
-  'picktime__trigger group relative flex h-[var(--ui-h-md)] w-full items-center justify-between rounded-md bg-white px-[var(--ui-px-md)] text-sm text-brand-900 ring-1 ring-brand-300 ring-inset transition focus:outline-none focus:ring-2 focus:ring-brand-500',
+  'picktime__trigger group relative flex h-[var(--ui-h-md)] w-full items-center justify-between rounded-md bg-white px-[var(--ui-px-md)]  text-brand-900 ring-1 ring-brand-300 ring-inset transition focus:outline-none focus:ring-2 focus:ring-brand-500',
   $disabled ? 'cursor-not-allowed bg-brand-100 text-brand-400 ring-brand-200' : 'hover:ring-brand-400',
 ])));
 
 $display_classes = trim(implode(' ', array_filter([
-  'picktime__display pointer-events-none w-full border-0 bg-transparent p-0 text-left text-sm focus:outline-none',
+  'picktime__display pointer-events-none w-full border-0 bg-transparent p-0 text-left  focus:outline-none',
   $disabled ? 'text-brand-400' : 'text-brand-800 placeholder:text-brand-400',
 ])));
 
-$select_classes = 'h-[var(--ui-h-md)] w-full rounded-md border border-brand-300 bg-white px-[var(--ui-px-sm)] text-sm text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-500';
+$select_classes = 'h-[var(--ui-h-md)] w-full rounded-md border border-brand-300 bg-white px-[var(--ui-px-sm)]  text-brand-900 focus:outline-none focus:ring-2 focus:ring-brand-500';
 $panel_classes  = 'picktime__panel absolute z-30 mt-2 w-full min-w-[18rem] rounded-xl border border-brand-200 bg-white p-4 shadow-xl';
 $root_classes   = trim(implode(' ', array_filter(['picktime relative', $class])));
 $grid_classes   = $format === '24h'
@@ -119,7 +119,7 @@ $panel_id   = $id . '-panel';
     aria-labelledby="<?= e($trigger_id); ?>"
   >
     <div class="picktime__header mb-3">
-      <p class="text-sm font-semibold text-brand-900">Choose time</p>
+      <p class=" font-semibold text-brand-900">Choose time</p>
       <p class="mt-1 text-xs text-brand-500" data-picktime-caption></p>
     </div>
 

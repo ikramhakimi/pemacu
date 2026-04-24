@@ -33,7 +33,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Workspace Name',
             'helper_text' => 'Used in team invites and project billing records.',
             'control'     => [
@@ -56,7 +56,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Plan Tier',
             'helper_text' => 'Changing tier updates seat and automation limits.',
             'control'     => [
@@ -87,7 +87,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Support Contact Email',
             'helper_text' => 'Verified email used for SLA and incident notifications.',
             'state'       => 'positive',
@@ -112,7 +112,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Billing Contact Email',
             'helper_text' => 'Enter a valid business email, for example finance@acmecloud.io.',
             'state'       => 'negative',
@@ -140,7 +140,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Tenant ID',
             'helper_text' => 'System-generated ID. This value is read-only.',
             'state'       => 'disabled',
@@ -164,7 +164,7 @@ layout('canvas/layouts/canvas-start', [
       </div>
       <div class="relative flex min-h-[260px] items-center justify-center overflow-hidden bg-background px-6 py-8">
         <div class="flex w-full max-w-lg justify-center">
-          <?php component('form/fields', [
+          <?php component('fields', [
             'label'       => 'Customer Success Handoff Notes',
             'helper_text' => 'Shared with onboarding and support teams during implementation.',
             'control'     => [
@@ -176,6 +176,48 @@ layout('canvas/layouts/canvas-start', [
               ],
             ],
             'class'       => 'w-full',
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="canvas-showcase grid">
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Field F
+      </div>
+      <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-3xl justify-center">
+          <?php component('fields', [
+            'label'       => 'Field Label',
+            'helper_text' => 'Helper Text',
+            'control'     => [
+              'component' => 'input',
+              'props'     => [
+                'name'        => 'field_f_grid_demo',
+                'placeholder' => 'Input',
+              ],
+            ],
+            'class'       => implode(' ', [
+              'w-full',
+              'grid',
+              'gap-y-2',
+              'md:grid-cols-[minmax(0,180px)_minmax(0,1fr)]',
+              'md:gap-x-6',
+              'md:gap-y-1',
+              'md:items-start',
+              'md:space-y-0',
+              '[&>*:nth-child(1)]:md:col-start-1',
+              '[&>*:nth-child(1)]:md:row-start-1',
+              '[&>*:nth-child(1)]:md:pt-2',
+              '[&>*:nth-child(2)]:md:col-start-2',
+              '[&>*:nth-child(2)]:md:row-start-1',
+              '[&>*:nth-child(3)]:md:col-start-2',
+              '[&>*:nth-child(3)]:md:row-start-2',
+            ]),
           ]); ?>
         </div>
       </div>

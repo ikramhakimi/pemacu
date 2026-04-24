@@ -104,7 +104,7 @@ $thumb_classes = trim(implode(' ', array_filter([
   $resolved_thumb_class,
 ])));
 $label_classes = trim(implode(' ', array_filter([
-  'switch__label inline-flex items-center gap-3 text-sm',
+  'switch__label inline-flex items-center gap-3 ',
   $resolved_disabled ? 'text-brand-400' : 'text-brand-700',
   $resolved_label_class,
 ])));

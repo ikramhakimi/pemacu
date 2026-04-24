@@ -17,7 +17,6 @@ declare(strict_types=1);
  *   `avatar_src`, `avatar_alt`, `avatar_size`, `avatar_class`, `mode`, `position_class`.
  * - `show_wrapper` (bool, optional): render `.badge-list` wrapper. Default: false.
  * - Supported tones: `positive`, `negative`, `neutral`, `warning`, `info`, `accent`.
- * - Tone alias: `attention` resolves to `warning`.
  * - Supported modes: `inline` (default), `badge_count`, `badge_dot`.
  */
 
@@ -67,10 +66,6 @@ $tone_class_map = [
   'accent'   => 'border-indigo-300 bg-indigo-100 text-indigo-700',
 ];
 
-$tone_alias_map = [
-  'attention' => 'warning',
-];
-
 $avatar_size_class_map = [
   '16' => 'h-4 w-4',
   '20' => 'h-5 w-5',
@@ -98,10 +93,6 @@ $badge_list_class = 'badge-list flex flex-wrap items-center gap-2';
   $item_avatar_class = isset($item['avatar_class']) ? trim((string) $item['avatar_class']) : '';
   $item_mode = isset($item['mode']) ? trim((string) $item['mode']) : 'inline';
   $item_position_class = isset($item['position_class']) ? trim((string) $item['position_class']) : '';
-
-  if (array_key_exists($item_tone, $tone_alias_map)) {
-    $item_tone = $tone_alias_map[$item_tone];
-  }
 
   if (!array_key_exists($item_tone, $tone_class_map)) {
     $item_tone = 'neutral';

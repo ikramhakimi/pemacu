@@ -74,7 +74,7 @@ $wrapper_classes = trim(implode(' ', array_filter([
 ])));
 
 $label_classes = trim(implode(' ', array_filter([
-  'choice__label text-sm',
+  'choice__label leading-5',
   $resolved_label_icon_name !== '' ? 'inline-flex items-center gap-2' : '',
   $resolved_disabled ? 'text-brand-400' : 'text-brand-700',
   $resolved_label_class,

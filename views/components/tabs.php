@@ -3,341 +3,198 @@ declare(strict_types=1);
 
 /**
  * Component: tabs
- * Purpose: Render data-driven tabs with shared interactive behavior for documentation demos.
+ * Purpose: Render one API-driven tab navigation block with accessible keyboard interaction.
  * Anatomy:
- * - .tabs
+ * - .tabs[data-tabs]
  *   - .tabs__list[role=tablist]
- *     - .tabs__item.btn[role=tab]
+ *     - .tabs__item[role=tab]
+ *       - icon (optional)
+ *       - label
+ *       - .tabs__badge (optional)
  *   - .tabs__panel[role=tabpanel]
- * Optional:
- * - underline / pills / gradient button visual styles
- * - labels with icons and badges
- * - dark and tinted backgrounds
  * Data Contract:
- * - variant (string, optional): one of the predefined demo variation ids.
+ * - `items` (array, optional): list of tabs with `label`, `panel`, `icon_name`, `badge`, `key`.
+ * - `active_index` (int, optional): selected tab index. Default: `0`.
+ * - `aria_label` (string, optional): tablist label. Default: `Tabs`.
+ * - `wrapper_class` (string, optional): root class override.
+ * - `list_class` (string, optional): tab list class override.
+ * - `item_base_class` (string, optional): base class for each tab trigger.
+ * - `item_active_class` (string, optional): active tab class.
+ * - `item_inactive_class` (string, optional): inactive tab class.
+ * - `panel_class` (string, optional): tab panel class.
+ * - `badge_base_class` (string, optional): badge base class.
+ * - `badge_active_class` (string, optional): active badge class.
+ * - `badge_inactive_class` (string, optional): inactive badge class.
+ * - `icon_size` (string|int, optional): icon size for all tabs. Default: `16`.
+ * - `class_name` (string, optional): appended root class.
+ * - `id` (string, optional): custom instance id suffix.
+ * - `attributes` (array, optional): additional root HTML attributes.
  */
-$active_variant = isset($variant) ? trim((string) $variant) : '';
 
-$underline_items = [
-  ['label' => 'Overview', 'panel' => 'Summary and KPI snapshot for this area.'],
-  ['label' => 'Details', 'panel' => 'Expanded information for audits and review.'],
-  ['label' => 'Activity', 'panel' => 'Timeline of recent changes and events.'],
-];
+$items                = isset($items) && is_array($items) ? array_values($items) : [];
+$active_index         = isset($active_index) ? (int) $active_index : 0;
+$aria_label           = isset($aria_label) ? trim((string) $aria_label) : 'Tabs';
+$wrapper_class        = isset($wrapper_class) ? trim((string) $wrapper_class) : 'tabs w-full';
+$list_class           = isset($list_class) ? trim((string) $list_class) : 'tabs__list flex flex-wrap items-center gap-6 border-b border-brand-200';
+$item_base_class      = isset($item_base_class) ? trim((string) $item_base_class) : 'tabs__item -mb-[1px] inline-flex items-center gap-2 px-1 pb-3 font-medium transition-colors transition-shadow';
+$item_active_class    = isset($item_active_class) ? trim((string) $item_active_class) : 'text-brand-900 shadow-[inset_0_-2px_0_0_theme(colors.primary.600)]';
+$item_inactive_class  = isset($item_inactive_class) ? trim((string) $item_inactive_class) : 'text-brand-700 hover:text-brand-900 hover:shadow-[inset_0_-1px_0_0_theme(colors.brand.600)]';
+$panel_class          = isset($panel_class) ? trim((string) $panel_class) : 'tabs__panel mt-4 text-brand-700';
+$badge_base_class     = isset($badge_base_class) ? trim((string) $badge_base_class) : 'tabs__badge rounded-full px-2 py-0.5 text-xs font-semibold';
+$badge_active_class   = isset($badge_active_class) ? trim((string) $badge_active_class) : 'bg-brand-900 text-white';
+$badge_inactive_class = isset($badge_inactive_class) ? trim((string) $badge_inactive_class) : 'bg-brand-200 text-brand-700';
+$icon_size            = isset($icon_size) ? trim((string) $icon_size) : '16';
+$class_name           = isset($class_name) ? trim((string) $class_name) : '';
+$custom_id            = isset($id) ? trim((string) $id) : '';
+$attributes           = isset($attributes) && is_array($attributes) ? $attributes : [];
 
-$pills_items = [
-  ['label' => 'All', 'panel' => 'All records in a single unified list.'],
-  ['label' => 'Open', 'panel' => 'Only active records that still need attention.'],
-  ['label' => 'Closed', 'panel' => 'Completed records for reference and reporting.'],
-];
+if ($items === []) {
+  $items = [
+    ['label' => 'Overview', 'panel' => 'Summary and KPI snapshot for this area.'],
+    ['label' => 'Performance', 'panel' => 'Key growth and retention details for this period.'],
+    ['label' => 'Activity', 'panel' => 'Recent timeline events and operational notes.'],
+  ];
+}
 
-$tabs_variations = [
-  'underline' => [
-    'aria_label'          => 'Tabs with underline',
-    'wrapper_class'       => 'tabs w-full',
-    'list_class'          => 'tabs__list inline-flex flex-wrap items-center gap-6 border-b border-brand-200',
-    'item_base_class'     => 'tabs__item -mb-[1px] inline-flex items-center px-1 pb-3 text-sm font-medium transition-colors transition-shadow',
-    'item_active_class'   => 'text-brand-900 shadow-[inset_0_-2px_0_0_theme(colors.primary.600)]',
-    'item_inactive_class' => 'text-brand-600 hover:text-brand-900 hover:shadow-[inset_0_-1px_0_0_theme(colors.brand.600)]',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700',
-    'items'               => $underline_items,
-  ],
-  'underline-full' => [
-    'aria_label'          => 'Full width tabs with underline',
-    'wrapper_class'       => 'tabs w-full',
-    'list_class'          => 'tabs__list grid w-full grid-cols-3 border-b border-brand-200',
-    'item_base_class'     => 'tabs__item -mb-[1px] inline-flex items-center justify-center px-3 pb-3 text-sm font-medium transition-colors transition-shadow',
-    'item_active_class'   => 'text-brand-900 shadow-[inset_0_-2px_0_0_theme(colors.primary.600)]',
-    'item_inactive_class' => 'text-brand-600 hover:text-brand-900 hover:shadow-[inset_0_-1px_0_0_theme(colors.brand.600)]',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700',
-    'items'               => [
-      ['label' => 'Starter', 'panel' => 'Starter plan essentials and basic onboarding details.'],
-      ['label' => 'Growth', 'panel' => 'Growth plan options with collaboration features.'],
-      ['label' => 'Scale', 'panel' => 'Scale plan with advanced controls and support.'],
-    ],
-  ],
-  'underline-badges' => [
-    'aria_label'             => 'Tabs with underline and badges',
-    'wrapper_class'          => 'tabs w-full',
-    'list_class'             => 'tabs__list inline-flex flex-wrap items-center gap-6 border-b border-brand-200',
-    'item_base_class'        => 'tabs__item -mb-[1px] inline-flex items-center gap-2 px-1 pb-3 text-sm font-medium transition-colors transition-shadow',
-    'item_active_class'      => 'text-brand-900 shadow-[inset_0_-2px_0_0_theme(colors.primary.600)]',
-    'item_inactive_class'    => 'text-brand-600 hover:text-brand-900 hover:shadow-[inset_0_-1px_0_0_theme(colors.brand.600)]',
-    'panel_wrap_class'       => 'mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700',
-    'badge_active_class'     => 'bg-brand-900 text-white',
-    'badge_inactive_class'   => 'bg-brand-200 text-brand-700',
-    'badge_base_class'       => 'rounded-full px-2 py-0.5 text-xs font-semibold',
-    'items'                  => [
-      ['label' => 'Inbox', 'badge' => '18', 'panel' => 'Open incoming messages requiring action.'],
-      ['label' => 'Pending', 'badge' => '7', 'panel' => 'Pending items waiting for approval.'],
-      ['label' => 'Archive', 'badge' => '92', 'panel' => 'Historical records saved for reference.'],
-    ],
-  ],
-  'underline-icons' => [
-    'aria_label'          => 'Tabs with underline and icons',
-    'wrapper_class'       => 'tabs w-full',
-    'list_class'          => 'tabs__list inline-flex flex-wrap items-center gap-6 border-b border-brand-200',
-    'item_base_class'     => 'tabs__item -mb-[1px] inline-flex items-center gap-2 px-1 pb-3 text-sm font-medium transition-colors transition-shadow',
-    'item_active_class'   => 'text-brand-900 shadow-[inset_0_-2px_0_0_theme(colors.primary.600)]',
-    'item_inactive_class' => 'text-brand-600 hover:text-brand-900 hover:shadow-[inset_0_-1px_0_0_theme(colors.brand.600)]',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700',
-    'items'               => [
-      ['label' => 'Dashboard', 'icon' => 'home-6-line', 'panel' => 'Top level workspace status and quick actions.'],
-      ['label' => 'Reports', 'icon' => 'file-list-3-line', 'panel' => 'Performance reports with scheduled exports.'],
-      ['label' => 'Settings', 'icon' => 'settings-3-line', 'panel' => 'Workspace configuration and user preferences.'],
-    ],
-  ],
-  'pills' => [
-    'aria_label'          => 'Tabs in pills',
-    'wrapper_class'       => 'tabs w-full',
-    'list_class'          => 'tabs__list inline-flex flex-wrap items-center gap-1 rounded-lg border border-brand-200 bg-white p-1',
-    'item_base_class'     => 'tabs__item rounded-md px-4 py-2 text-sm font-medium transition-colors',
-    'item_active_class'   => 'bg-brand-900 text-white',
-    'item_inactive_class' => 'text-brand-700 hover:bg-brand-100',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700',
-    'items'               => $pills_items,
-  ],
-  'pills-gray' => [
-    'aria_label'          => 'Tabs in pills on gray background',
-    'wrapper_class'       => 'tabs w-full rounded-lg bg-brand-100 p-2',
-    'list_class'          => 'tabs__list inline-flex flex-wrap items-center gap-1',
-    'item_base_class'     => 'tabs__item rounded-md px-4 py-2 text-sm font-medium transition-colors',
-    'item_active_class'   => 'bg-white text-brand-900 shadow-sm',
-    'item_inactive_class' => 'text-brand-700 hover:bg-white/80',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-200 bg-white p-3 text-sm text-brand-700',
-    'items'               => $pills_items,
-  ],
-  'pills-dark' => [
-    'aria_label'          => 'Tabs in pills on dark background',
-    'wrapper_class'       => 'tabs w-full rounded-lg bg-brand-800 p-2',
-    'list_class'          => 'tabs__list inline-flex flex-wrap items-center gap-1',
-    'item_base_class'     => 'tabs__item rounded-md px-4 py-2 text-sm font-medium transition-colors',
-    'item_active_class'   => 'bg-white text-brand-900',
-    'item_inactive_class' => 'text-brand-100 hover:bg-brand-700',
-    'panel_wrap_class'    => 'mt-3 rounded-md border border-brand-700 bg-brand-900 p-3 text-sm text-brand-100',
-    'items'               => $pills_items,
-  ],
-  'button-gradient' => [
-    'is_gradient' => true,
-    'sizes'       => [
-      [
-        'label' => 'btn--sm',
-        'size'  => 'sm',
-        'items' => [
-          ['label' => 'Day', 'panel' => 'Daily filter with compact button tabs.'],
-          ['label' => 'Week', 'panel' => 'Weekly filter for short planning windows.'],
-          ['label' => 'Month', 'panel' => 'Monthly filter for trend review.'],
-        ],
-      ],
-      [
-        'label' => 'btn--md',
-        'size'  => 'md',
-        'items' => [
-          ['label' => 'Summary', 'panel' => 'Summary mode for high-level reporting.'],
-          ['label' => 'Detailed', 'panel' => 'Detailed mode for item-by-item analysis.'],
-          ['label' => 'Exports', 'panel' => 'Export mode for distribution workflows.'],
-        ],
-      ],
-    ],
-  ],
-  'button-gradient-sm' => [
-    'is_gradient' => true,
-    'sizes'       => [
-      [
-        'label' => 'btn--sm',
-        'size'  => 'sm',
-        'items' => [
-          ['label' => 'Day', 'panel' => 'Daily filter with compact button tabs.'],
-          ['label' => 'Week', 'panel' => 'Weekly filter for short planning windows.'],
-          ['label' => 'Month', 'panel' => 'Monthly filter for trend review.'],
-        ],
-      ],
-    ],
-  ],
-  'button-gradient-md' => [
-    'is_gradient' => true,
-    'sizes'       => [
-      [
-        'label' => 'btn--md',
-        'size'  => 'md',
-        'items' => [
-          ['label' => 'Summary', 'panel' => 'Summary mode for high-level reporting.'],
-          ['label' => 'Detailed', 'panel' => 'Detailed mode for item-by-item analysis.'],
-          ['label' => 'Exports', 'panel' => 'Export mode for distribution workflows.'],
-        ],
-      ],
-    ],
-  ],
-];
+$normalized_items = [];
 
-if ($active_variant !== '' && !isset($tabs_variations[$active_variant])) {
+foreach ($items as $item_index => $item) {
+  $item_label = is_array($item) && isset($item['label']) ? trim((string) $item['label']) : '';
+  if ($item_label === '') {
+    continue;
+  }
+
+  $item_panel = is_array($item) && isset($item['panel']) ? trim((string) $item['panel']) : '';
+  $item_icon  = is_array($item) && isset($item['icon_name']) ? trim((string) $item['icon_name']) : '';
+  $item_badge = is_array($item) && isset($item['badge']) ? trim((string) $item['badge']) : '';
+  $item_key   = is_array($item) && isset($item['key']) ? trim((string) $item['key']) : (string) ($item_index + 1);
+
+  if ($item_key === '') {
+    $item_key = (string) ($item_index + 1);
+  }
+
+  $item_key = preg_replace('/[^a-z0-9_-]+/i', '-', $item_key);
+  $item_key = trim((string) $item_key, '-');
+
+  if ($item_key === '') {
+    $item_key = (string) ($item_index + 1);
+  }
+
+  $normalized_items[] = [
+    'label'     => $item_label,
+    'panel'     => $item_panel,
+    'icon_name' => $item_icon,
+    'badge'     => $item_badge,
+    'key'       => $item_key,
+  ];
+}
+
+if ($normalized_items === []) {
   return;
 }
 
-$render_variants = $active_variant !== ''
-  ? [$active_variant => $tabs_variations[$active_variant]]
-  : $tabs_variations;
+$item_count = count($normalized_items);
+
+if ($active_index < 0 || $active_index >= $item_count) {
+  $active_index = 0;
+}
 
 $tabs_instance_index = isset($GLOBALS['__tabs_component_instance_index'])
   ? (int) $GLOBALS['__tabs_component_instance_index']
   : 0;
-?>
-<div class="space-y-4">
-  <?php foreach ($render_variants as $variant_key => $variant_config): ?>
-    <?php if (!empty($variant_config['is_gradient'])): ?>
-      <div class="space-y-4">
-        <?php foreach ($variant_config['sizes'] as $size_config): ?>
-          <?php
-          $tabs_instance_index += 1;
-          $size_key          = isset($size_config['size']) ? (string) $size_config['size'] : 'md';
-          $size_label        = isset($size_config['label']) ? (string) $size_config['label'] : '';
-          $size_items        = isset($size_config['items']) && is_array($size_config['items']) ? $size_config['items'] : [];
-          $size_base_class   = $size_key === 'sm'
-            ? 'tabs__item btn btn--sm -ml-px first:ml-0 inline-flex items-center justify-center rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-sm)] leading-[var(--ui-h-sm)] px-[var(--ui-px-sm)] text-sm font-medium transition-colors'
-            : 'tabs__item btn btn--md -ml-px first:ml-0 inline-flex items-center justify-center rounded-none first:rounded-l-md last:rounded-r-md border h-[var(--ui-h-md)] leading-[var(--ui-h-md)] px-[var(--ui-px-md)] font-medium transition-colors';
-          $size_active_class = $size_base_class . ' relative z-10 btn--primary btn--gradient border-primary-700 bg-gradient-to-b from-primary-700 to-primary-500 text-white';
-          $size_inactive     = $size_base_class . ' z-0 btn--secondary btn--gradient border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900';
-          ?>
-          <div class="space-y-2">
-            <?php if ($size_label !== ''): ?>
-              <p class="text-xs font-semibold uppercase tracking-[0.14em] text-brand-500"><?= e($size_label); ?></p>
-            <?php endif; ?>
-            <div
-              class="tabs w-full max-w-[420px]"
-              data-tabs
-              data-tabs-id="<?= e($variant_key . '-' . $size_key . '-' . (string) $tabs_instance_index); ?>"
-            >
-              <div class="tabs__list grid w-full grid-cols-3" role="tablist" aria-label="Gradient button tabs <?= e($size_label); ?>">
-                <?php foreach ($size_items as $tab_index => $tab_item): ?>
-                  <?php
-                  $tab_label   = isset($tab_item['label']) ? (string) $tab_item['label'] : '';
-                  $tab_panel   = isset($tab_item['panel']) ? (string) $tab_item['panel'] : '';
-                  $is_selected = $tab_index === 0;
-                  $tab_id      = 'tab-' . $tabs_instance_index . '-' . ($tab_index + 1);
-                  $panel_id    = 'panel-' . $tabs_instance_index . '-' . ($tab_index + 1);
-                  ?>
-                  <?php if ($tab_label === ''): ?>
-                    <?php continue; ?>
-                  <?php endif; ?>
-                  <button
-                    class="<?= e($is_selected ? $size_active_class : $size_inactive); ?>"
-                    type="button"
-                    role="tab"
-                    id="<?= e($tab_id); ?>"
-                    aria-controls="<?= e($panel_id); ?>"
-                    aria-selected="<?= $is_selected ? 'true' : 'false'; ?>"
-                    tabindex="<?= $is_selected ? '0' : '-1'; ?>"
-                    data-active-class="<?= e($size_active_class); ?>"
-                    data-inactive-class="<?= e($size_inactive); ?>"
-                  >
-                    <?= e($tab_label); ?>
-                  </button>
-                <?php endforeach; ?>
-              </div>
-              <?php foreach ($size_items as $tab_index => $tab_item): ?>
-                <?php
-                $tab_panel = isset($tab_item['panel']) ? (string) $tab_item['panel'] : '';
-                $tab_id    = 'tab-' . $tabs_instance_index . '-' . ($tab_index + 1);
-                $panel_id  = 'panel-' . $tabs_instance_index . '-' . ($tab_index + 1);
-                ?>
-                <div
-                  class="tabs__panel mt-3 rounded-md border border-brand-200 bg-brand-50 p-3 text-sm text-brand-700"
-                  role="tabpanel"
-                  id="<?= e($panel_id); ?>"
-                  aria-labelledby="<?= e($tab_id); ?>"
-                  <?= $tab_index === 0 ? '' : 'hidden'; ?>
-                >
-                  <?= e($tab_panel); ?>
-                </div>
-              <?php endforeach; ?>
-            </div>
-          </div>
-        <?php endforeach; ?>
-      </div>
-      <?php continue; ?>
-    <?php endif; ?>
+$tabs_instance_index += 1;
 
-    <?php
-    $tabs_instance_index += 1;
-    $wrapper_class       = isset($variant_config['wrapper_class']) ? (string) $variant_config['wrapper_class'] : 'tabs';
-    $list_class          = isset($variant_config['list_class']) ? (string) $variant_config['list_class'] : 'tabs__list';
-    $item_base_class     = isset($variant_config['item_base_class']) ? (string) $variant_config['item_base_class'] : 'tabs__item';
-    $item_active_class   = isset($variant_config['item_active_class']) ? (string) $variant_config['item_active_class'] : '';
-    $item_inactive_class = isset($variant_config['item_inactive_class']) ? (string) $variant_config['item_inactive_class'] : '';
-    $panel_wrap_class    = isset($variant_config['panel_wrap_class']) ? (string) $variant_config['panel_wrap_class'] : 'tabs__panel mt-3';
-    $aria_label          = isset($variant_config['aria_label']) ? (string) $variant_config['aria_label'] : 'Tabs';
-    $badge_base_class    = isset($variant_config['badge_base_class']) ? (string) $variant_config['badge_base_class'] : '';
-    $badge_active_class  = isset($variant_config['badge_active_class']) ? (string) $variant_config['badge_active_class'] : '';
-    $badge_inactive      = isset($variant_config['badge_inactive_class']) ? (string) $variant_config['badge_inactive_class'] : '';
-    $variant_items       = isset($variant_config['items']) && is_array($variant_config['items']) ? $variant_config['items'] : [];
-    ?>
-    <div class="<?= e($wrapper_class); ?>" data-tabs data-tabs-id="<?= e($variant_key . '-' . (string) $tabs_instance_index); ?>">
-      <div class="<?= e($list_class); ?>" role="tablist" aria-label="<?= e($aria_label); ?>">
-        <?php foreach ($variant_items as $tab_index => $tab_item): ?>
-          <?php
-          $tab_label   = isset($tab_item['label']) ? (string) $tab_item['label'] : '';
-          $tab_icon    = isset($tab_item['icon']) ? (string) $tab_item['icon'] : '';
-          $tab_badge   = isset($tab_item['badge']) ? (string) $tab_item['badge'] : '';
-          $is_selected = $tab_index === 0;
-          $tab_id      = 'tab-' . $tabs_instance_index . '-' . ($tab_index + 1);
-          $panel_id    = 'panel-' . $tabs_instance_index . '-' . ($tab_index + 1);
-          $item_class  = trim(implode(' ', [
-            $item_base_class,
-            $is_selected ? $item_active_class : $item_inactive_class,
-          ]));
-          ?>
-          <?php if ($tab_label === ''): ?>
-            <?php continue; ?>
-          <?php endif; ?>
-          <button
-            class="<?= e($item_class); ?>"
-            type="button"
-            role="tab"
-            id="<?= e($tab_id); ?>"
-            aria-controls="<?= e($panel_id); ?>"
-            aria-selected="<?= $is_selected ? 'true' : 'false'; ?>"
-            tabindex="<?= $is_selected ? '0' : '-1'; ?>"
-            data-active-class="<?= e(trim(implode(' ', [$item_base_class, $item_active_class]))); ?>"
-            data-inactive-class="<?= e(trim(implode(' ', [$item_base_class, $item_inactive_class]))); ?>"
+$instance_suffix = $custom_id !== ''
+  ? $custom_id
+  : (string) $tabs_instance_index;
+
+$root_class = trim(implode(' ', array_filter([$wrapper_class, $class_name])));
+
+$render_attributes = static function (array $attrs): string {
+  $compiled = [];
+
+  foreach ($attrs as $key => $value) {
+    if (!is_string($key) || $key === '') {
+      continue;
+    }
+
+    if (is_bool($value)) {
+      if ($value) {
+        $compiled[] = $key;
+      }
+      continue;
+    }
+
+    if ($value === null) {
+      continue;
+    }
+
+    $compiled[] = $key . '="' . e((string) $value) . '"';
+  }
+
+  return $compiled === [] ? '' : ' ' . implode(' ', $compiled);
+};
+
+$root_attributes                   = $attributes;
+$root_attributes['class']          = $root_class;
+$root_attributes['data-tabs']      = true;
+$root_attributes['data-tabs-id']   = 'tabs-' . $instance_suffix;
+
+$active_tab_class   = trim(implode(' ', [$item_base_class, $item_active_class]));
+$inactive_tab_class = trim(implode(' ', [$item_base_class, $item_inactive_class]));
+$active_badge_class = trim(implode(' ', [$badge_base_class, $badge_active_class]));
+$inactive_badge_class = trim(implode(' ', [$badge_base_class, $badge_inactive_class]));
+?>
+<div<?= $render_attributes($root_attributes); ?>>
+  <div class="<?= e($list_class); ?>" role="tablist" aria-label="<?= e($aria_label); ?>">
+    <?php foreach ($normalized_items as $item_index => $item): ?>
+      <?php
+      $is_selected = $item_index === $active_index;
+      $tab_id      = 'tab-' . $instance_suffix . '-' . $item['key'];
+      $panel_id    = 'panel-' . $instance_suffix . '-' . $item['key'];
+      ?>
+      <button
+        class="<?= e($is_selected ? $active_tab_class : $inactive_tab_class); ?>"
+        type="button"
+        role="tab"
+        id="<?= e($tab_id); ?>"
+        aria-controls="<?= e($panel_id); ?>"
+        aria-selected="<?= $is_selected ? 'true' : 'false'; ?>"
+        tabindex="<?= $is_selected ? '0' : '-1'; ?>"
+        data-active-class="<?= e($active_tab_class); ?>"
+        data-inactive-class="<?= e($inactive_tab_class); ?>"
+      >
+        <?php if ($item['icon_name'] !== ''): ?>
+          <?php icon($item['icon_name'], ['icon_size' => $icon_size]); ?>
+        <?php endif; ?>
+        <span><?= e($item['label']); ?></span>
+        <?php if ($item['badge'] !== ''): ?>
+          <span
+            class="<?= e($is_selected ? $active_badge_class : $inactive_badge_class); ?>"
+            data-tab-badge
+            data-active-class="<?= e($active_badge_class); ?>"
+            data-inactive-class="<?= e($inactive_badge_class); ?>"
           >
-            <?php if ($tab_icon !== ''): ?>
-              <?php icon($tab_icon, ['icon_size' => '16']); ?>
-            <?php endif; ?>
-            <span><?= e($tab_label); ?></span>
-            <?php if ($tab_badge !== ''): ?>
-              <?php
-              $badge_class = trim(implode(' ', [
-                $badge_base_class,
-                $is_selected ? $badge_active_class : $badge_inactive,
-              ]));
-              ?>
-              <span
-                class="<?= e($badge_class); ?>"
-                data-tab-badge
-                data-active-class="<?= e(trim(implode(' ', [$badge_base_class, $badge_active_class]))); ?>"
-                data-inactive-class="<?= e(trim(implode(' ', [$badge_base_class, $badge_inactive]))); ?>"
-              >
-                <?= e($tab_badge); ?>
-              </span>
-            <?php endif; ?>
-          </button>
-        <?php endforeach; ?>
-      </div>
-      <?php foreach ($variant_items as $tab_index => $tab_item): ?>
-        <?php
-        $tab_panel = isset($tab_item['panel']) ? (string) $tab_item['panel'] : '';
-        $tab_id    = 'tab-' . $tabs_instance_index . '-' . ($tab_index + 1);
-        $panel_id  = 'panel-' . $tabs_instance_index . '-' . ($tab_index + 1);
-        ?>
-        <div
-          class="tabs__panel <?= e($panel_wrap_class); ?>"
-          role="tabpanel"
-          id="<?= e($panel_id); ?>"
-          aria-labelledby="<?= e($tab_id); ?>"
-          <?= $tab_index === 0 ? '' : 'hidden'; ?>
-        >
-          <?= e($tab_panel); ?>
-        </div>
-      <?php endforeach; ?>
+            <?= e($item['badge']); ?>
+          </span>
+        <?php endif; ?>
+      </button>
+    <?php endforeach; ?>
+  </div>
+
+  <?php foreach ($normalized_items as $item_index => $item): ?>
+    <?php
+    $tab_id   = 'tab-' . $instance_suffix . '-' . $item['key'];
+    $panel_id = 'panel-' . $instance_suffix . '-' . $item['key'];
+    ?>
+    <div
+      class="<?= e($panel_class); ?>"
+      role="tabpanel"
+      id="<?= e($panel_id); ?>"
+      aria-labelledby="<?= e($tab_id); ?>"
+      <?= $item_index === $active_index ? '' : 'hidden'; ?>
+    >
+      <?= e($item['panel']); ?>
     </div>
   <?php endforeach; ?>
 </div>
@@ -443,6 +300,7 @@ $tabs_instance_index = isset($GLOBALS['__tabs_component_instance_index'])
 
               event.preventDefault();
               const next_tab = tab_nodes[next_index];
+
               if (next_tab instanceof HTMLElement) {
                 set_active_tab(next_tab);
                 next_tab.focus();

@@ -89,8 +89,8 @@ $period_slots = [
 ];
 
 $selected_period    = 'morning';
-$tab_active_class   = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors bg-brand-900 text-white';
-$tab_inactive_class = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-brand-700 hover:bg-brand-100';
+$tab_active_class   = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2  font-medium transition-colors bg-brand-900 text-white';
+$tab_inactive_class = 'picktime__tab tabs__item inline-flex w-full items-center justify-center rounded-md px-4 py-2  font-medium transition-colors text-brand-700 hover:bg-brand-100';
 ?>
 <?php for ($slot_minutes = $start_minutes; $slot_minutes <= $end_minutes; $slot_minutes += $step_minutes): ?>
   <?php

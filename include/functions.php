@@ -206,6 +206,100 @@ function dashboard_links(): array
   ];
 }
 
+function consultant_global_sidebar_links(): array
+{
+  $views_root = __DIR__ . '/../views/mampan/consultant';
+  $routes     = [
+    'consultant-dashboard'  => ['label' => 'Dashboard',      'icon_name' => 'home-6-line',            'route' => '/mampan/consultant/dashboard',  'file' => '/dashboard.php'],
+    'consultant-projects'   => ['label' => 'Projects',       'icon_name' => 'folder-3-line',          'route' => '/mampan/consultant/projects',   'file' => '/projects/index.php'],
+    'consultant-documents'  => ['label' => 'Documents',      'icon_name' => 'file-list-3-line',       'route' => '/mampan/consultant/documents',  'file' => '/documents/index.php'],
+    'consultant-rfi'        => ['label' => 'Clarifications', 'icon_name' => 'question-answer-line',   'route' => '/mampan/consultant/rfi',        'file' => '/rfi/index.php'],
+    'consultant-evidence'   => ['label' => 'Evidence',       'icon_name' => 'file-shield-2-line',     'route' => '/mampan/consultant/evidence',   'file' => '/evidence/index.php'],
+    'consultant-reports'    => ['label' => 'Reports',        'icon_name' => 'file-chart-line',        'route' => '/mampan/consultant/reports',    'file' => '/reports/index.php'],
+    'consultant-submission' => ['label' => 'Submission',     'icon_name' => 'send-plane-2-line',      'route' => '/mampan/consultant/submission', 'file' => '/submission/index.php'],
+    'client-dashboard'      => ['label' => 'Client Portal',  'icon_name' => 'user-star-line',         'route' => '/mampan/client/dashboard',      'file' => '/../client/dashboard.php'],
+  ];
+  $links      = [];
+
+  foreach ($routes as $active_key => $route_item) {
+    $file_path = $views_root . $route_item['file'];
+
+    $links[] = [
+      'label'      => $route_item['label'],
+      'href'       => is_file($file_path) ? path($route_item['route']) : '#',
+      'icon_name'  => $route_item['icon_name'],
+      'active_key' => $active_key,
+    ];
+  }
+
+  return $links;
+}
+
+function client_global_sidebar_links(): array
+{
+  $views_root = __DIR__ . '/../views/mampan/client';
+  $routes     = [
+    'client-dashboard'     => ['label' => 'Dashboard',     'icon_name' => 'home-6-line',          'route' => '/mampan/client/dashboard',     'file' => '/dashboard.php'],
+    'client-actions'       => ['label' => 'My Actions',    'icon_name' => 'task-line',            'route' => '/mampan/client/actions',       'file' => '/actions.php'],
+    'client-upload-center' => ['label' => 'Upload Center', 'icon_name' => 'upload-cloud-2-line',  'route' => '/mampan/client/upload-center', 'file' => '/upload-center.php'],
+    'client-clarifications' => ['label' => 'Clarifications', 'icon_name' => 'question-answer-line', 'route' => '/mampan/client/clarifications', 'file' => '/clarifications.php'],
+    'client-reports'       => ['label' => 'Reports',       'icon_name' => 'file-chart-line',      'route' => '/mampan/client/reports',       'file' => '/reports.php'],
+    'client-signoff'       => ['label' => 'Sign-off',      'icon_name' => 'checkbox-circle-line', 'route' => '/mampan/client/signoff',       'file' => '/signoff.php'],
+  ];
+  $links      = [];
+
+  foreach ($routes as $active_key => $route_item) {
+    $file_path = $views_root . $route_item['file'];
+
+    $links[] = [
+      'label'      => $route_item['label'],
+      'href'       => is_file($file_path) ? path($route_item['route']) : '#',
+      'icon_name'  => $route_item['icon_name'],
+      'active_key' => $active_key,
+    ];
+  }
+
+  return $links;
+}
+
+function consultant_project_context_defaults(): array
+{
+  return [
+    'project_name'     => 'Menara Harmoni Office Retrofit',
+    'project_code'     => 'GBI-NRNC-2026-014',
+    'client_company'   => 'Harmoni Asset Holdings Berhad',
+    'project_location' => 'Jalan Tun Razak, Kuala Lumpur',
+    'gbi_tool_type'    => 'GBI NRNC: Existing Building',
+    'target_rating'    => 'GBI Gold',
+    'project_status'   => 'Evidence Collection',
+    'consultant_lead'  => 'Ir. Aisyah Kamaruddin',
+    'client_pic'       => 'Faizal Rahman (Head of Projects)',
+  ];
+}
+
+function consultant_project_nav_links(string $project_current = ''): array
+{
+  $nav_items = [
+    'project-workspace'  => ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
+    'project-documents'  => ['label' => 'Documents',      'href' => path('/mampan/consultant/documents/document-hub')],
+    'project-rfi'        => ['label' => 'Clarifications', 'href' => path('/mampan/consultant/rfi/rfi-index')],
+    'project-evidence'   => ['label' => 'Evidence',       'href' => path('/mampan/consultant/evidence/evidence-index')],
+    'project-reports'    => ['label' => 'Reports',        'href' => path('/mampan/consultant/reports/gap-analysis-report')],
+    'project-submission' => ['label' => 'Submission',     'href' => path('/mampan/consultant/submission/submission-package')],
+  ];
+  $links     = [];
+
+  foreach ($nav_items as $active_key => $nav_item) {
+    $links[] = [
+      'label'  => $nav_item['label'],
+      'href'   => $nav_item['href'],
+      'active' => $project_current !== '' && $project_current === $active_key,
+    ];
+  }
+
+  return $links;
+}
+
 function dashboard_breadcrumb_items(array $dashboard_sidebar, string $request_uri_path): array
 {
   $normalize_path = static function (string $path): string {
@@ -577,6 +671,7 @@ function build_component_class(string $component_name, array $states = []): stri
 function component(string $component_name, array $data = []): void
 {
   $components_root = __DIR__ . '/../views/components';
+  $mampan_components_root = __DIR__ . '/../views/mampan/components';
   $component_key   = trim(str_replace('\\', '/', $component_name), '/');
 
   if ($component_key === '' || str_contains($component_key, '..')) {
@@ -584,6 +679,18 @@ function component(string $component_name, array $data = []): void
   }
 
   $component_candidates = [];
+
+  if (
+    strpos($component_key, 'project/') === 0
+    || strpos($component_key, 'documents/') === 0
+    || strpos($component_key, 'rfi/') === 0
+    || strpos($component_key, 'evidence/') === 0
+    || strpos($component_key, 'reports/') === 0
+    || strpos($component_key, 'submission/') === 0
+    || strpos($component_key, 'client/') === 0
+  ) {
+    $component_candidates[] = $mampan_components_root . '/' . $component_key . '.php';
+  }
 
   $component_candidates[] = $components_root . '/' . $component_key . '.php';
 

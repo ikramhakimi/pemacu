@@ -54,6 +54,7 @@ $themes_root  = realpath(__DIR__ . '/views/themes');
 $pages_root   = realpath(__DIR__ . '/views/themes/core');
 $canvas_root  = realpath(__DIR__ . '/views/canvas');
 $dashboard_root = realpath(__DIR__ . '/views/dashboard');
+$mampan_root = realpath(__DIR__ . '/views/mampan');
 $is_valid_route = preg_match('/^[a-z0-9\/-]+$/i', $uri) === 1 && strpos($uri, '..') === false;
 
 $active_theme = 'core';
@@ -151,6 +152,33 @@ if (
   foreach ($dashboard_candidates as $candidate) {
     $is_in_dashboard_directory = is_string($candidate) && strpos($candidate, $dashboard_root . DIRECTORY_SEPARATOR) === 0;
     if ($is_in_dashboard_directory && is_file($candidate)) {
+      $page = $candidate;
+      break;
+    }
+  }
+}
+
+if (
+  $page === '' &&
+  $is_valid_route &&
+  $mampan_root !== false &&
+  ($uri === 'mampan' || strpos($uri, 'mampan/') === 0)
+) {
+  $mampan_uri = substr($uri, strlen('mampan'));
+  $mampan_uri = trim($mampan_uri, '/');
+
+  $mampan_candidates = [];
+
+  if ($mampan_uri === '') {
+    $mampan_candidates[] = realpath($mampan_root . '/index.php');
+  } else {
+    $mampan_candidates[] = realpath($mampan_root . '/' . $mampan_uri . '.php');
+    $mampan_candidates[] = realpath($mampan_root . '/' . $mampan_uri . '/index.php');
+  }
+
+  foreach ($mampan_candidates as $candidate) {
+    $is_in_mampan_directory = is_string($candidate) && strpos($candidate, $mampan_root . DIRECTORY_SEPARATOR) === 0;
+    if ($is_in_mampan_directory && is_file($candidate)) {
       $page = $candidate;
       break;
     }

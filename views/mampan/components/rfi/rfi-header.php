@@ -11,14 +11,14 @@ $overdue_clarifications = isset($overdue_clarifications) ? trim((string) $overdu
 $last_updated           = isset($last_updated) ? trim((string) $last_updated) : '-';
 $action_items           = isset($action_items) && is_array($action_items) ? $action_items : [];
 ?>
-<header class="rounded-lg border border-zinc-200 bg-white p-5 md:p-6" aria-labelledby="clarification-header-title">
+<header class="rounded-lg border border-brand-200 bg-white p-5 md:p-6" aria-labelledby="clarification-header-title">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
     <div>
-      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Clarifications</p>
-      <h1 id="clarification-header-title" class="mt-2 text-2xl font-semibold leading-tight text-zinc-900 md:text-3xl">
+      <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Clarifications</p>
+      <h1 id="clarification-header-title" class="mt-2 text-2xl font-semibold leading-tight text-brand-900 md:text-3xl">
         <?= e($project_name); ?>
       </h1>
-      <p class="mt-1 text-sm text-zinc-600">Project Code: <?= e($project_code); ?></p>
+      <p class="mt-1 text-sm text-brand-600">Project Code: <?= e($project_code); ?></p>
     </div>
 
     <div class="flex flex-wrap items-center gap-2">
@@ -43,24 +43,24 @@ $action_items           = isset($action_items) && is_array($action_items) ? $act
 
   <dl class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Client Company</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($client_company); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Client Company</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($client_company); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Current Stage</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($current_stage); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Current Stage</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($current_stage); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Open Clarifications</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($open_clarifications); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Open Clarifications</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($open_clarifications); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Overdue</dt>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Overdue</dt>
       <dd class="mt-1 font-medium text-rose-700"><?= e($overdue_clarifications); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Last Updated</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($last_updated); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Last Updated</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($last_updated); ?></dd>
     </div>
   </dl>
 </header>

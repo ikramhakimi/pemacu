@@ -13,11 +13,11 @@ $status_tone_map = [
   'Under Review'   => 'info',
 ];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="client-clarification-list-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="client-clarification-list-heading" class="text-lg font-semibold text-zinc-900"><?= e($section_title); ?></h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="client-clarification-list-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="client-clarification-list-heading" class="text-lg font-semibold text-brand-900"><?= e($section_title); ?></h2>
     <?php if ($section_description !== ''): ?>
-      <p class="mt-1 text-sm text-zinc-600"><?= e($section_description); ?></p>
+      <p class="mt-1 text-sm text-brand-600"><?= e($section_description); ?></p>
     <?php endif; ?>
   </header>
 
@@ -41,12 +41,12 @@ $status_tone_map = [
 
       $status_tone = isset($status_tone_map[$status]) ? $status_tone_map[$status] : 'neutral';
       ?>
-      <article class="rounded-lg border border-zinc-200 p-4">
+      <article class="rounded-lg border border-brand-200 p-4">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div class="max-w-4xl">
-            <h3 class="text-base font-semibold text-zinc-900"><?= e($title); ?></h3>
+            <h3 class="text-base font-semibold text-brand-900"><?= e($title); ?></h3>
             <?php if ($question !== ''): ?>
-              <p class="mt-1 text-sm text-zinc-700"><?= e($question); ?></p>
+              <p class="mt-1 text-sm text-brand-700"><?= e($question); ?></p>
             <?php endif; ?>
           </div>
           <div><?php component('badge', ['items' => [['label' => $status, 'tone' => $status_tone]]]); ?></div>
@@ -54,25 +54,25 @@ $status_tone_map = [
 
         <dl class="mt-3 grid gap-2 text-sm sm:grid-cols-2">
           <div>
-            <dt class="font-medium text-zinc-700">Due Date</dt>
-            <dd class="text-zinc-600"><?= e($due_date); ?></dd>
+            <dt class="font-medium text-brand-700">Due Date</dt>
+            <dd class="text-brand-600"><?= e($due_date); ?></dd>
           </div>
           <div>
-            <dt class="font-medium text-zinc-700">Attachment</dt>
-            <dd class="text-zinc-600">Attachment can be uploaded with your reply.</dd>
+            <dt class="font-medium text-brand-700">Attachment</dt>
+            <dd class="text-brand-600">Attachment can be uploaded with your reply.</dd>
           </div>
         </dl>
 
-        <div class="mt-3 space-y-2 rounded-md border border-zinc-200 bg-zinc-50 p-3">
+        <div class="mt-3 space-y-2 rounded-md border border-brand-200 bg-brand-50 p-3">
           <?php if ($consultant_question !== ''): ?>
             <div>
-              <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Consultant Question</p>
-              <p class="mt-1 text-sm text-zinc-700"><?= e($consultant_question); ?></p>
+              <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Consultant Question</p>
+              <p class="mt-1 text-sm text-brand-700"><?= e($consultant_question); ?></p>
             </div>
           <?php endif; ?>
           <div>
-            <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Your Reply</p>
-            <p class="mt-1 text-sm text-zinc-700"><?= e($client_reply); ?></p>
+            <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Your Reply</p>
+            <p class="mt-1 text-sm text-brand-700"><?= e($client_reply); ?></p>
           </div>
         </div>
 
@@ -84,7 +84,7 @@ $status_tone_map = [
     <?php endforeach; ?>
 
     <?php if ($clarifications === []): ?>
-      <p class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-600">No clarifications at the moment.</p>
+      <p class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-600">No clarifications at the moment.</p>
     <?php endif; ?>
   </div>
 </section>

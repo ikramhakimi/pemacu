@@ -3,40 +3,28 @@
 declare(strict_types=1);
 
 $page_title   = 'Evidence Verification';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-evidence';
 $project_current = 'project-evidence';
-
-$evidence_header = [
-  'project_name'    => 'Menara Harmoni Office Retrofit',
-  'project_code'    => 'GBI-NRNC-2026-014',
-  'client_company'  => 'Harmoni Asset Holdings Berhad',
-  'current_stage'   => 'Verification Review',
-  'target_rating'   => 'GBI Gold',
-  'verified_score'  => '56 / 100',
-  'potential_score' => '74 / 100',
-  'last_updated'    => '2026-04-24 12:40',
-  'action_items'    => [
-    ['label' => 'Add Evidence Item', 'tone' => 'primary', 'href' => path('/mampan/consultant/evidence/evidence-detail')],
-    ['label' => 'Export Evidence Register', 'tone' => 'default', 'href' => '#'],
-    ['label' => 'Generate Verification Summary', 'tone' => 'default', 'href' => '#'],
-  ],
-  'related_links'   => [
-    ['label' => 'Project Workspace', 'href' => path('/mampan/consultant/projects/project-workspace')],
-    ['label' => 'Document Hub', 'href' => path('/mampan/consultant/documents/document-hub')],
-    ['label' => 'Clarifications / RFI', 'href' => path('/mampan/consultant/rfi/rfi-index')],
-    ['label' => 'Gap Analysis Report', 'href' => path('/mampan/consultant/reports/gap-analysis-report')],
-    ['label' => 'Final Submission', 'href' => path('/mampan/consultant/submission/submission-package')],
-  ],
+$evidence_phase_data = isset($current_phase_data['evidence']) && is_array($current_phase_data['evidence'])
+  ? $current_phase_data['evidence']
+  : [];
+$evidence_state = isset($evidence_phase_data['state']) ? (string) $evidence_phase_data['state'] : 'not_started';
+$evidence_stage_map = [
+  'not_started' => 'Verification Setup',
+  'pending'     => 'Pending Verification',
+  'active'      => 'Verification Review',
+  'verified'    => 'Verified for Submission',
 ];
+$current_evidence_stage = isset($evidence_stage_map[$evidence_state])
+  ? $evidence_stage_map[$evidence_state]
+  : $evidence_stage_map['not_started'];
 
-$summary_cards = [
-  ['label' => 'Total Evidence Items', 'value' => '28', 'helper' => 'Across all six GBI criteria groups', 'tone' => 'neutral', 'icon_name' => 'file-list-3-line'],
-  ['label' => 'Submitted', 'value' => '6', 'helper' => 'Ready for consultant screening', 'tone' => 'neutral', 'icon_name' => 'upload-cloud-2-line'],
-  ['label' => 'Under Review', 'value' => '7', 'helper' => 'Consultant review in progress', 'tone' => 'warning', 'icon_name' => 'search-eye-line'],
-  ['label' => 'Verified', 'value' => '10', 'helper' => 'Accepted for score claim', 'tone' => 'positive', 'icon_name' => 'checkbox-circle-line'],
-  ['label' => 'Need Revision', 'value' => '3', 'helper' => 'Client action required', 'tone' => 'warning', 'icon_name' => 'error-warning-line'],
-  ['label' => 'At Risk Credits', 'value' => '2', 'helper' => 'May reduce targeted rating outcome', 'tone' => 'negative', 'icon_name' => 'alarm-warning-line'],
-];
+$project_name = 'Menara Harmoni Office Retrofit';
+$project_code = 'GBI-NRNC-2026-014';
 
 $filter_items = [
   ['label' => 'All', 'key' => 'all'],
@@ -49,6 +37,15 @@ $filter_items = [
   ['label' => 'At Risk', 'key' => 'at-risk'],
   ['label' => 'Linked to Clarifications', 'key' => 'linked-clarifications'],
 ];
+
+$selected_filter_key = isset($_GET['filter']) ? trim((string) $_GET['filter']) : 'all';
+$filter_keys         = array_column($filter_items, 'key');
+
+if (!in_array($selected_filter_key, $filter_keys, true)) {
+  $selected_filter_key = 'all';
+}
+
+$section_filter_items = [];
 
 $evidence_rows = [
   [
@@ -181,28 +178,107 @@ $evidence_rows = [
   ],
 ];
 
+$filter_counts = [
+  'all'                   => count($evidence_rows),
+  'not-submitted'         => 0,
+  'submitted'             => 0,
+  'under-review'          => 0,
+  'verified'              => 0,
+  'need-revision'         => 0,
+  'rejected'              => 0,
+  'at-risk'               => 0,
+  'linked-clarifications' => 0,
+];
+
+foreach ($evidence_rows as $evidence_row) {
+  $status = isset($evidence_row['status']) ? strtolower(trim((string) $evidence_row['status'])) : '';
+
+  if ($status === 'not submitted') {
+    $filter_counts['not-submitted']++;
+  }
+
+  if ($status === 'submitted') {
+    $filter_counts['submitted']++;
+  }
+
+  if ($status === 'under review') {
+    $filter_counts['under-review']++;
+  }
+
+  if ($status === 'verified') {
+    $filter_counts['verified']++;
+  }
+
+  if ($status === 'need revision') {
+    $filter_counts['need-revision']++;
+  }
+
+  if ($status === 'rejected') {
+    $filter_counts['rejected']++;
+  }
+
+  $is_at_risk_status = $status === 'not submitted'
+    || $status === 'need revision'
+    || $status === 'rejected';
+  $impact_tone       = isset($evidence_row['impact_tone']) ? strtolower(trim((string) $evidence_row['impact_tone'])) : '';
+  $score_impact      = isset($evidence_row['score_impact']) ? strtolower(trim((string) $evidence_row['score_impact'])) : '';
+
+  if ($is_at_risk_status || $impact_tone === 'at risk' || strpos($score_impact, 'at risk') !== false) {
+    $filter_counts['at-risk']++;
+  }
+
+  $linked_count = isset($evidence_row['linked_count']) ? (int) $evidence_row['linked_count'] : 0;
+
+  if ($linked_count > 0) {
+    $filter_counts['linked-clarifications']++;
+  }
+}
+
+foreach ($filter_items as $filter_item) {
+  $filter_label = isset($filter_item['label']) ? (string) $filter_item['label'] : '';
+  $filter_key   = isset($filter_item['key']) ? (string) $filter_item['key'] : '';
+
+  if ($filter_label === '' || $filter_key === '') {
+    continue;
+  }
+
+  $section_filter_items[] = [
+    'label'     => $filter_label,
+    'href'      => path('/mampan/consultant/evidence/evidence-index') . '?filter=' . rawurlencode($filter_key),
+    'is_active' => $selected_filter_key === $filter_key,
+    'count'     => isset($filter_counts[$filter_key]) ? $filter_counts[$filter_key] : 0,
+  ];
+}
+
 layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <?php component('evidence/evidence-header', $evidence_header); ?>
+  <?php component('mampan/section-header', [
+    'section_header' => [
+      'title'       => $project_name,
+      'description' => 'Evidence verification register for ' . $project_code . ' (' . $current_evidence_stage . ').',
+      'heading_id'  => 'evidence-index-heading',
+    ],
+  ]); ?>
 
-  <section aria-labelledby="evidence-summary-heading">
-    <h2 id="evidence-summary-heading" class="sr-only">Evidence summary cards</h2>
-    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-      <?php foreach ($summary_cards as $summary_card): ?>
-        <?php component('evidence/evidence-summary-card', $summary_card); ?>
-      <?php endforeach; ?>
-    </div>
-  </section>
-
-  <?php component('evidence/evidence-filter-bar', [
-    'filters'         => $filter_items,
-    'selected_filter' => 'all',
-    'search_value'    => '',
+  <?php component('mampan/section-filter', [
+    'section_filter' => [
+      'aria_label' => 'Evidence filter navigation',
+      'items'      => $section_filter_items,
+      'action'     => [
+        'label'   => 'Add Evidence Item',
+        'href'    => path('/mampan/consultant/evidence/evidence-detail'),
+        'variant' => 'primary',
+        'class'   => 'bg-primary-700!important shadow-none',
+      ],
+    ],
   ]); ?>
 
   <?php component('evidence/evidence-credit-table', ['evidence_rows' => $evidence_rows]); ?>

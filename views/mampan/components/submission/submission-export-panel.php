@@ -20,10 +20,10 @@ $validation_tone_map = [
 ];
 ?>
 <section class="space-y-5" aria-label="Submission export configuration panels">
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-export-contents-heading">
-    <header class="border-b border-zinc-200 pb-4">
-      <h2 id="submission-export-contents-heading" class="text-lg font-semibold text-zinc-900">Export Package Contents</h2>
-      <p class="mt-1 text-sm text-zinc-600">Final package sections included for GBI Completion and Verification submission.</p>
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-export-contents-heading">
+    <header class="border-b border-brand-200 pb-4">
+      <h2 id="submission-export-contents-heading" class="text-lg font-semibold text-brand-900">Export Package Contents</h2>
+      <p class="mt-1 text-sm text-brand-600">Final package sections included for GBI Completion and Verification submission.</p>
     </header>
 
     <div class="mt-4 overflow-x-auto">
@@ -47,8 +47,8 @@ $validation_tone_map = [
 
         ob_start();
         ?>
-        <span class="inline-flex h-5 w-10 items-center rounded-full border border-zinc-300 <?= $included ? 'justify-end bg-positive-100' : 'justify-start bg-zinc-100'; ?> px-1">
-          <span class="h-3.5 w-3.5 rounded-full <?= $included ? 'bg-positive-600' : 'bg-zinc-400'; ?>"></span>
+        <span class="inline-flex h-5 w-10 items-center rounded-full border border-brand-300 <?= $included ? 'justify-end bg-positive-100' : 'justify-start bg-brand-100'; ?> px-1">
+          <span class="h-3.5 w-3.5 rounded-full <?= $included ? 'bg-positive-600' : 'bg-brand-400'; ?>"></span>
         </span>
         <?php
         $toggle_html = (string) ob_get_clean();
@@ -79,9 +79,9 @@ $validation_tone_map = [
     </div>
   </section>
 
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-export-options-heading">
-    <header class="border-b border-zinc-200 pb-4">
-      <h2 id="submission-export-options-heading" class="text-lg font-semibold text-zinc-900">Export Options</h2>
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-export-options-heading">
+    <header class="border-b border-brand-200 pb-4">
+      <h2 id="submission-export-options-heading" class="text-lg font-semibold text-brand-900">Export Options</h2>
     </header>
 
     <div class="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -95,10 +95,10 @@ $validation_tone_map = [
           continue;
         }
         ?>
-        <article class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
-          <h3 class="text-sm font-semibold text-zinc-900"><?= e($label); ?></h3>
+        <article class="rounded-md border border-brand-200 bg-brand-50 p-3">
+          <h3 class="text-sm font-semibold text-brand-900"><?= e($label); ?></h3>
           <?php if ($description !== ''): ?>
-            <p class="mt-1 text-xs text-zinc-600"><?= e($description); ?></p>
+            <p class="mt-1 text-xs text-brand-600"><?= e($description); ?></p>
           <?php endif; ?>
           <div class="mt-3">
             <?php component('button', ['label' => 'Prepare Export', 'href' => $href, 'size' => 'sm', 'variant' => 'default', 'class' => 'shadow-none']); ?>
@@ -108,9 +108,9 @@ $validation_tone_map = [
     </div>
   </section>
 
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-validation-results-heading">
-    <header class="border-b border-zinc-200 pb-4">
-      <h2 id="submission-validation-results-heading" class="text-lg font-semibold text-zinc-900">Package Validation Results</h2>
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-validation-results-heading">
+    <header class="border-b border-brand-200 pb-4">
+      <h2 id="submission-validation-results-heading" class="text-lg font-semibold text-brand-900">Package Validation Results</h2>
     </header>
 
     <div class="mt-4 space-y-3">
@@ -124,9 +124,9 @@ $validation_tone_map = [
           continue;
         }
         ?>
-        <article class="flex flex-col gap-2 rounded-md border border-zinc-200 bg-zinc-50 p-3 sm:flex-row sm:items-center sm:justify-between">
+        <article class="flex flex-col gap-2 rounded-md border border-brand-200 bg-brand-50 p-3 sm:flex-row sm:items-center sm:justify-between">
           <?php component('badge', ['items' => [['label' => $type, 'tone' => $tone]]]); ?>
-          <p class="text-sm text-zinc-700 sm:text-right"><?= e($text); ?></p>
+          <p class="text-sm text-brand-700 sm:text-right"><?= e($text); ?></p>
         </article>
       <?php endforeach; ?>
     </div>

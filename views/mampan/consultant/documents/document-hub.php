@@ -3,13 +3,19 @@
 declare(strict_types=1);
 
 $page_title      = 'Document Hub';
+
+require __DIR__ . '/../_data/phase_data.php';
+require __DIR__ . '/../../_data/credits.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current    = 'consultant-documents';
 $project_current = 'project-documents';
 
 $document_header = [
-  'current_phase'         => 'Phase 1 - Design / Planning',
+  'title'                 => 'Document Hub',
+  'current_phase'         => 'Phase 1 - Setup & Planning',
   'current_stage'         => 'Initial Document Review',
-  'requirement_readiness' => '12 / 18 requirements mapped (67%)',
+  'requirement_readiness' => '18%',
   'last_updated'          => '2026-04-25 09:30',
   'action_items'          => [
     ['label' => 'Request Missing Info', 'tone' => 'primary', 'href' => path('/mampan/consultant/rfi/rfi-create')],
@@ -17,6 +23,47 @@ $document_header = [
     ['label' => 'Export Requirement Register', 'tone' => 'secondary', 'href' => path('/mampan/consultant/reports/gap-analysis-report')],
   ],
 ];
+
+$document_stage_map = [
+  'initial'    => 'Initial Document Review',
+  'collection' => 'Document Collection',
+  'review'     => 'Detailed Requirement Review',
+  'complete'   => 'Requirement Closure',
+];
+
+$selected_phase_key = $current_phase;
+
+if (!isset($phase_data_map[$selected_phase_key])) {
+  $selected_phase_key = 'phase-2';
+}
+
+$documents_phase_state = isset($current_phase_data['documents']['state'])
+  ? trim((string) $current_phase_data['documents']['state'])
+  : 'initial';
+$workspace_phase_state = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$phase_label_meta = isset($phase_label_map[$selected_phase_key]) && is_array($phase_label_map[$selected_phase_key])
+  ? $phase_label_map[$selected_phase_key]
+  : [];
+$selected_phase_title = isset($phase_label_meta['title']) ? trim((string) $phase_label_meta['title']) : 'Phase';
+$selected_phase_subtitle = isset($phase_label_meta['subtitle']) ? trim((string) $phase_label_meta['subtitle']) : 'Setup & Planning';
+$selected_phase_label = $selected_phase_title . ' - ' . $selected_phase_subtitle;
+$selected_phase_preset = [
+  'label' => $selected_phase_label,
+];
+
+$document_header['current_phase'] = $selected_phase_label;
+$document_header['phase_key'] = $selected_phase_key;
+$document_header['current_stage'] = isset($document_stage_map[$documents_phase_state])
+  ? $document_stage_map[$documents_phase_state]
+  : $document_stage_map['initial'];
+$document_header['description'] = isset($current_phase_data['documents']['message'])
+  ? (string) $current_phase_data['documents']['message']
+  : 'Start by requesting initial project documents.';
+$document_header['requirement_readiness'] = isset($workspace_phase_state['requirement_readiness'])
+  ? (string) $workspace_phase_state['requirement_readiness']
+  : $document_header['requirement_readiness'];
 
 $summary_cards = [
   ['label' => 'Total Requirements', 'value' => '18', 'helper' => 'Across EE, EQ, SM, MR, WE, and IN', 'tone' => 'neutral', 'icon_name' => 'list-check-3'],
@@ -29,25 +76,32 @@ $summary_cards = [
 
 $phase_reference_cards = [
   [
-    'phase'       => 'Phase 1 - Design / Planning',
+    'phase'       => 'Phase 1 - Setup & Planning',
     'focus'       => 'Collect initial design documents and map requirement readiness.',
     'entry_rule'  => 'Default starting phase for all requirements.',
     'exit_rule'   => 'Requirement can move when planning documents are sufficient for initial gap analysis.',
     'deliverable' => 'Requirement readiness baseline and clarification list.',
   ],
   [
-    'phase'       => 'Phase 2 - Implementation / Construction',
-    'focus'       => 'Track execution evidence as design intent is implemented on site.',
+    'phase'       => 'Phase 2 - Document Collection',
+    'focus'       => 'Collect requirement evidence and supporting project documents.',
     'entry_rule'  => 'Requirement has passed planning completeness and owner alignment.',
     'exit_rule'   => 'Requirement can move when implementation evidence is complete for verification prep.',
     'deliverable' => 'Implementation-ready evidence package per requirement.',
   ],
   [
-    'phase'       => 'Phase 3 - Evidence Verification / Submission',
+    'phase'       => 'Phase 3 - Evidence & Verification',
     'focus'       => 'Final review, verification, and submission readiness by requirement.',
     'entry_rule'  => 'Requirement has complete implementation evidence and review trail.',
     'exit_rule'   => 'Requirement reaches verified/satisfied submission state.',
     'deliverable' => 'Submission-ready verified requirement record.',
+  ],
+  [
+    'phase'       => 'Phase 4 - Finalisation & Submission',
+    'focus'       => 'Lock verified records and prepare final submission package.',
+    'entry_rule'  => 'Requirement is verified and pending package finalisation.',
+    'exit_rule'   => 'Requirement is included in submission-ready package.',
+    'deliverable' => 'Final submission package evidence bundle.',
   ],
 ];
 
@@ -58,12 +112,6 @@ $requirement_filters = [
   ['label' => 'Satisfied', 'key' => 'satisfied'],
   ['label' => 'Ready for Gap Analysis', 'key' => 'ready'],
   ['label' => 'Blocking', 'key' => 'blocking'],
-  ['label' => 'EE', 'key' => 'ee'],
-  ['label' => 'EQ', 'key' => 'eq'],
-  ['label' => 'SM', 'key' => 'sm'],
-  ['label' => 'MR', 'key' => 'mr'],
-  ['label' => 'WE', 'key' => 'we'],
-  ['label' => 'IN', 'key' => 'in'],
 ];
 
 $all_requirements = [
@@ -532,6 +580,77 @@ $all_requirements = [
   ],
 ];
 
+$master_credits_data = isset($credits_data) && is_array($credits_data) ? $credits_data : ['credits' => []];
+$master_credits_list = isset($master_credits_data['credits']) && is_array($master_credits_data['credits'])
+  ? $master_credits_data['credits']
+  : [];
+$existing_requirement_credit_codes = [];
+
+foreach ($all_requirements as $requirement_item) {
+  if (!is_array($requirement_item)) {
+    continue;
+  }
+
+  $existing_credit_code = isset($requirement_item['linked_gbi_credit']) ? strtoupper(trim((string) $requirement_item['linked_gbi_credit'])) : '';
+
+  if ($existing_credit_code === '') {
+    continue;
+  }
+
+  $existing_requirement_credit_codes[$existing_credit_code] = true;
+}
+
+foreach ($master_credits_list as $master_credit_item) {
+  if (!is_array($master_credit_item)) {
+    continue;
+  }
+
+  $master_credit_code = isset($master_credit_item['code']) ? strtoupper(trim((string) $master_credit_item['code'])) : '';
+  $master_credit_title = isset($master_credit_item['title']) ? trim((string) $master_credit_item['title']) : '';
+
+  if ($master_credit_code === '' || $master_credit_title === '') {
+    continue;
+  }
+
+  if (isset($existing_requirement_credit_codes[$master_credit_code])) {
+    continue;
+  }
+
+  $master_category_code = isset($master_credit_item['category_code']) ? strtoupper(trim((string) $master_credit_item['category_code'])) : '';
+  $master_category_title = isset($master_credit_item['category_title']) ? trim((string) $master_credit_item['category_title']) : 'Category';
+  $master_criteria_label = preg_replace('/\s*\([^)]+\)\s*/', '', $master_category_title);
+  $master_criteria_label = is_string($master_criteria_label) && trim($master_criteria_label) !== ''
+    ? trim($master_criteria_label)
+    : $master_category_title;
+  $master_credit_slug = strtolower((string) preg_replace('/[^a-z0-9]+/', '-', $master_credit_code . '-' . $master_credit_title));
+  $master_credit_slug = trim($master_credit_slug, '-');
+  $master_credit_id = $master_credit_slug !== '' ? $master_credit_slug : strtolower($master_credit_code);
+
+  $all_requirements[] = [
+    'id'                     => $master_credit_id,
+    'criteria_code'          => $master_category_code !== '' ? $master_category_code : 'EE',
+    'criteria_label'         => $master_criteria_label,
+    'title'                  => $master_credit_code . ' ' . $master_credit_title,
+    'linked_gbi_credit'      => $master_credit_code,
+    'phase'                  => 'Phase 1 - Design / Planning',
+    'owner'                  => 'Project Coordinator',
+    'status'                 => 'Not Started',
+    'readiness_percent'      => 0,
+    'supporting_files_count' => 0,
+    'missing_items_count'    => 1,
+    'next_action'            => 'Create requirement baseline and request initial supporting documents',
+    'why_needed'             => isset($master_credit_item['criteria_preview']) ? (string) $master_credit_item['criteria_preview'] : 'Required for credit verification and submission readiness.',
+    'submitted_items'        => [],
+    'missing_items'          => ['Initial evidence package not uploaded'],
+    'consultant_note'        => 'Auto-generated from master credit list. No document package has been linked yet.',
+    'next_recommended_action' => 'Assign owner and start document collection for this credit.',
+    'search_tokens'          => strtolower($master_credit_code . ' ' . $master_credit_title . ' ' . $master_criteria_label),
+    'is_generated'           => true,
+  ];
+
+  $existing_requirement_credit_codes[$master_credit_code] = true;
+}
+
 $requirement_rubric_inputs = [
   'ee1-minimum-energy-performance' => [
     'scores' => ['completeness' => 80, 'quality' => 76, 'traceability' => 78, 'review_progress' => 75, 'action_closure' => 80],
@@ -607,6 +726,31 @@ $requirement_rubric_inputs = [
   ],
 ];
 
+foreach ($all_requirements as $requirement_item) {
+  if (!is_array($requirement_item)) {
+    continue;
+  }
+
+  $requirement_id = isset($requirement_item['id']) ? trim((string) $requirement_item['id']) : '';
+  $is_generated_requirement = isset($requirement_item['is_generated']) && $requirement_item['is_generated'] === true;
+
+  if ($requirement_id === '' || !$is_generated_requirement) {
+    continue;
+  }
+
+  if (isset($requirement_rubric_inputs[$requirement_id])) {
+    continue;
+  }
+
+  $requirement_rubric_inputs[$requirement_id] = [
+    'scores' => ['completeness' => 20, 'quality' => 20, 'traceability' => 20, 'review_progress' => 10, 'action_closure' => 10],
+    'mandatory_docs_complete' => false,
+    'has_critical_blocker' => false,
+    'has_blocking_item' => true,
+    'review_state' => 'not_started',
+  ];
+}
+
 $derive_status = static function (int $readiness_percent, string $review_state): string {
   if ($readiness_percent < 20) {
     return 'Not Started';
@@ -630,6 +774,109 @@ $derive_status = static function (int $readiness_percent, string $review_state):
 
   return 'Satisfied';
 };
+
+$phase_label = (string) $selected_phase_preset['label'];
+
+foreach ($all_requirements as $index => $requirement_item) {
+  $all_requirements[$index]['phase'] = $phase_label;
+}
+
+$document_state_adjustments = [
+  'collection' => [
+    'supporting_files_increment' => 2,
+    'clear_missing_items'        => false,
+    'submitted_item_label'       => 'As-built evidence register (latest)',
+    'next_action'                => 'Validate implementation evidence and as-built alignment before verification handoff',
+    'consultant_note'            => 'Implementation-stage evidence is in progress and should be checked against approved design intent.',
+    'next_recommended_action'    => 'Collect site implementation proof and update traceability mapping for this requirement.',
+  ],
+  'review' => [
+    'supporting_files_increment' => 3,
+    'clear_missing_items'        => true,
+    'submitted_item_label'       => 'Final verification and signoff package',
+    'next_action'                => 'Close verifier comments and finalize submission package.',
+    'consultant_note'            => 'Requirement evidence package is in final verification and submission consolidation.',
+    'next_recommended_action'    => 'Complete final verifier signoff and lock supporting evidence references.',
+  ],
+  'complete' => [
+    'supporting_files_increment' => 4,
+    'clear_missing_items'        => true,
+    'submitted_item_label'       => 'Submission-ready evidence package',
+    'next_action'                => 'Maintain traceability and lock approved submission references.',
+    'consultant_note'            => 'Requirement has met completion gate and is ready for final register export.',
+    'next_recommended_action'    => 'Confirm all linked files remain in the locked submission package.',
+  ],
+];
+
+if (isset($document_state_adjustments[$documents_phase_state])) {
+  $documents_adjustment = $document_state_adjustments[$documents_phase_state];
+
+  foreach ($all_requirements as $index => $requirement_item) {
+    $existing_submitted_items = isset($requirement_item['submitted_items']) && is_array($requirement_item['submitted_items'])
+      ? $requirement_item['submitted_items']
+      : [];
+    $existing_missing_items = isset($requirement_item['missing_items']) && is_array($requirement_item['missing_items'])
+      ? $requirement_item['missing_items']
+      : [];
+    $existing_missing_count = count($existing_missing_items);
+
+    $all_requirements[$index]['supporting_files_count'] = (int) ($requirement_item['supporting_files_count'] ?? 0) + (int) $documents_adjustment['supporting_files_increment'];
+    $all_requirements[$index]['next_action'] = (string) $documents_adjustment['next_action'];
+    $all_requirements[$index]['consultant_note'] = (string) $documents_adjustment['consultant_note'];
+    $all_requirements[$index]['next_recommended_action'] = (string) $documents_adjustment['next_recommended_action'];
+    $all_requirements[$index]['submitted_items'] = array_values(array_unique(array_merge($existing_submitted_items, [
+      (string) $documents_adjustment['submitted_item_label'],
+    ])));
+
+    if ($documents_adjustment['clear_missing_items'] === true) {
+      $all_requirements[$index]['missing_items_count'] = 0;
+      $all_requirements[$index]['missing_items'] = [];
+      continue;
+    }
+
+    $all_requirements[$index]['missing_items_count'] = max(0, (int) ($requirement_item['missing_items_count'] ?? 0) - 1);
+
+    if ($existing_missing_count > 0) {
+      $all_requirements[$index]['missing_items'] = array_slice($existing_missing_items, 0, $existing_missing_count - 1);
+    } else {
+      $all_requirements[$index]['missing_items'] = [];
+    }
+  }
+}
+
+if ($documents_phase_state === 'collection') {
+  $documents_collection_blocked_ids = [
+    'eq4-low-voc-material-documentation',
+    'mr-construction-waste-management-plan',
+    'we-rainwater-harvesting-design-package',
+  ];
+  $documents_collection_under_review_ids = [
+    'ee2-energy-monitoring-readiness',
+    'sm-stormwater-management-strategy',
+    'in-green-education-user-guide-concept',
+  ];
+
+  foreach ($requirement_rubric_inputs as $requirement_id => $rubric_input) {
+    $is_documents_collection_blocked = in_array($requirement_id, $documents_collection_blocked_ids, true);
+    $is_documents_collection_review = in_array($requirement_id, $documents_collection_under_review_ids, true);
+
+    $requirement_rubric_inputs[$requirement_id]['mandatory_docs_complete'] = !$is_documents_collection_blocked;
+    $requirement_rubric_inputs[$requirement_id]['has_critical_blocker'] = false;
+    $requirement_rubric_inputs[$requirement_id]['has_blocking_item'] = $is_documents_collection_blocked || $is_documents_collection_review;
+    $requirement_rubric_inputs[$requirement_id]['review_state'] = $is_documents_collection_blocked
+      ? 'submitted'
+      : ($is_documents_collection_review ? 'under_review' : 'accepted');
+  }
+}
+
+if (in_array($documents_phase_state, ['review', 'complete'], true)) {
+  foreach ($requirement_rubric_inputs as $requirement_id => $rubric_input) {
+    $requirement_rubric_inputs[$requirement_id]['mandatory_docs_complete'] = true;
+    $requirement_rubric_inputs[$requirement_id]['has_critical_blocker'] = false;
+    $requirement_rubric_inputs[$requirement_id]['has_blocking_item'] = false;
+    $requirement_rubric_inputs[$requirement_id]['review_state'] = 'accepted';
+  }
+}
 
 $status_counter = [
   'Satisfied'              => 0,
@@ -759,6 +1006,13 @@ $selected_filter = isset($_GET['requirement_filter']) ? trim((string) $_GET['req
 $search_value    = isset($_GET['requirement_search']) ? trim((string) $_GET['requirement_search']) : '';
 $selected_id     = isset($_GET['requirement_id']) ? trim((string) $_GET['requirement_id']) : 'ee2-energy-monitoring-readiness';
 $open_drawer_id  = isset($_GET['open_drawer_id']) ? trim((string) $_GET['open_drawer_id']) : '';
+$project_nav_search_hidden_inputs = [
+  'requirement_filter' => $selected_filter,
+];
+
+if ($selected_id !== '') {
+  $project_nav_search_hidden_inputs['requirement_id'] = $selected_id;
+}
 
 $submitted_gate_requirement_id = isset($_GET['gate_requirement_id']) ? trim((string) $_GET['gate_requirement_id']) : '';
 $allowed_review_states = ['not_started', 'submitted', 'under_review', 'accepted'];
@@ -795,6 +1049,8 @@ foreach ($requirement_filters as $filter_item) {
 if (!in_array($selected_filter, $valid_filter_keys, true)) {
   $selected_filter = 'all';
 }
+
+$document_header['phase_dropdown'] = [];
 
 $filter_count_base_requirements = [];
 
@@ -867,6 +1123,40 @@ foreach ($requirement_filters as $index => $filter_item) {
     : 0;
 }
 
+$requirement_section_filter_items = [];
+
+foreach ($requirement_filters as $filter_item) {
+  $filter_label = isset($filter_item['label']) ? trim((string) $filter_item['label']) : '';
+  $filter_key   = isset($filter_item['key']) ? trim((string) $filter_item['key']) : '';
+  $filter_count = isset($filter_item['count']) ? (int) $filter_item['count'] : 0;
+
+  if ($filter_label === '' || $filter_key === '') {
+    continue;
+  }
+
+  $requirement_section_filter_items[] = [
+    'label'     => $filter_label,
+    'count'     => $filter_count,
+    'is_active' => $selected_filter === $filter_key,
+    'href'      => path('/mampan/consultant/documents/document-hub')
+      . '?phase=' . urlencode($selected_phase_key)
+      . '&requirement_filter=' . urlencode($filter_key)
+      . '&requirement_search=' . urlencode($search_value)
+      . '&requirement_id=' . urlencode($selected_id),
+  ];
+}
+
+$requirement_section_filter = [
+  'aria_label' => 'Requirement filter navigation',
+  'items'      => $requirement_section_filter_items,
+  'action'     => [
+    'label'   => 'Request Missing Info',
+    'variant' => 'primary',
+    'href'    => path('/mampan/consultant/rfi/rfi-create'),
+    'class'   => 'bg-primary-700!important shadow-none',
+  ],
+];
+
 $status_filter_map = [
   'missing'   => ['Missing'],
   'partial'   => ['Partial'],
@@ -934,6 +1224,85 @@ if ($selected_requirement !== null) {
 }
 
 $requirements_grouped = [];
+$related_rfi_rows = [
+  [
+    'rfi_no'      => 'RFI #004',
+    'subject'     => 'EE2 Energy Monitoring Trend Data',
+    'linked_item' => 'GBI Credit: EE2 | Chilled Water System Schematic Rev B',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=004'),
+  ],
+  [
+    'rfi_no'      => 'RFI #009',
+    'subject'     => 'EE2 Meter Calibration Certificate',
+    'linked_item' => 'GBI Credit: EE2 | Metering Layout Rev A',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=009'),
+  ],
+  [
+    'rfi_no'      => 'RFI #010',
+    'subject'     => 'EE2 Monitoring Responsibility Matrix',
+    'linked_item' => 'GBI Credit: EE2 | BMS Point Schedule',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=010'),
+  ],
+  [
+    'rfi_no'      => 'RFI #005',
+    'subject'     => 'EQ4 Low-VOC Paint Declaration',
+    'linked_item' => 'GBI Credit: EQ4 | Low-VOC Paint Declaration',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=005'),
+  ],
+  [
+    'rfi_no'      => 'RFI #006',
+    'subject'     => 'WE3 Rainwater Harvesting O&M Manual',
+    'linked_item' => 'GBI Credit: WE3 | O&M Manual',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=006'),
+  ],
+  [
+    'rfi_no'      => 'RFI #007',
+    'subject'     => 'MR2 Sustainable Material Certificate',
+    'linked_item' => 'GBI Credit: MR2 | Material Certificate',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=007'),
+  ],
+  [
+    'rfi_no'      => 'RFI #008',
+    'subject'     => 'AHU Commissioning Report Test Results',
+    'linked_item' => 'GBI Credit: EE Cx | AHU Commissioning Report Rev B',
+    'detail_url'  => path('/mampan/consultant/rfi/rfi-detail?rfi=008'),
+  ],
+];
+$rfi_links_by_credit = [];
+
+foreach ($related_rfi_rows as $rfi_row) {
+  if (!is_array($rfi_row)) {
+    continue;
+  }
+
+  $rfi_no = isset($rfi_row['rfi_no']) ? trim((string) $rfi_row['rfi_no']) : '';
+  $rfi_subject = isset($rfi_row['subject']) ? trim((string) $rfi_row['subject']) : '';
+  $rfi_linked_item = isset($rfi_row['linked_item']) ? trim((string) $rfi_row['linked_item']) : '';
+  $rfi_detail_url = isset($rfi_row['detail_url']) ? trim((string) $rfi_row['detail_url']) : '';
+
+  if ($rfi_no === '' || $rfi_subject === '' || $rfi_linked_item === '' || $rfi_detail_url === '') {
+    continue;
+  }
+
+  if (!preg_match('/GBI Credit:\s*([^|]+)/i', $rfi_linked_item, $credit_match)) {
+    continue;
+  }
+
+  $rfi_credit_code = trim((string) $credit_match[1]);
+
+  if ($rfi_credit_code === '') {
+    continue;
+  }
+
+  if (!isset($rfi_links_by_credit[$rfi_credit_code]) || !is_array($rfi_links_by_credit[$rfi_credit_code])) {
+    $rfi_links_by_credit[$rfi_credit_code] = [];
+  }
+
+  $rfi_links_by_credit[$rfi_credit_code][] = [
+    'label' => $rfi_no . ': ' . $rfi_subject,
+    'href'  => $rfi_detail_url,
+  ];
+}
 
 foreach ($criteria_order as $criteria_code => $criteria_label) {
   $requirements_grouped[$criteria_code] = [
@@ -951,6 +1320,10 @@ foreach ($requirements_filtered as $requirement_item) {
   }
 
   $requirement_id = isset($requirement_item['id']) ? trim((string) $requirement_item['id']) : '';
+  $requirement_credit = isset($requirement_item['linked_gbi_credit']) ? trim((string) $requirement_item['linked_gbi_credit']) : '';
+  $requirement_rfi_links = isset($rfi_links_by_credit[$requirement_credit]) && is_array($rfi_links_by_credit[$requirement_credit])
+    ? $rfi_links_by_credit[$requirement_credit]
+    : [];
 
   $requirements_grouped[$criteria_code]['items'][] = [
     'id'                     => $requirement_id,
@@ -965,6 +1338,7 @@ foreach ($requirements_filtered as $requirement_item) {
     'supporting_files_count' => isset($requirement_item['supporting_files_count']) ? (int) $requirement_item['supporting_files_count'] : 0,
     'missing_items_count'    => isset($requirement_item['missing_items_count']) ? (int) $requirement_item['missing_items_count'] : 0,
     'next_action'            => isset($requirement_item['next_action']) ? (string) $requirement_item['next_action'] : '-',
+    'rfi_links'              => $requirement_rfi_links,
     'is_selected'            => $requirement_id !== '' && $requirement_id === $selected_id,
   ];
 }
@@ -992,6 +1366,7 @@ foreach ($requirements_filtered as $requirement_item) {
 
   $requirement_detail_data = [
     'title'                   => isset($requirement_item['title']) ? (string) $requirement_item['title'] : '-',
+    'phase_label'             => (string) $selected_phase_preset['label'],
     'linked_gbi_credit'       => isset($requirement_item['linked_gbi_credit']) ? (string) $requirement_item['linked_gbi_credit'] : '-',
     'criteria_group'          => isset($requirement_item['criteria_label']) ? (string) $requirement_item['criteria_label'] : '-',
     'status'                  => isset($requirement_item['status']) ? (string) $requirement_item['status'] : 'Not Started',
@@ -1125,24 +1500,276 @@ $next_actions = [
   ],
 ];
 
-layout('dashboard-project', [
+if ($documents_phase_state === 'collection') {
+  $blocking_items = [
+    [
+      'title'              => 'EE2 as-built meter tagging photos incomplete',
+      'linked_requirement' => 'EE2 Energy Monitoring Readiness',
+      'owner'              => 'M&E Engineer',
+      'priority'           => 'High',
+      'due_date'           => '2026-05-24',
+      'action_label'       => 'Request Site Proof',
+      'action_href'        => path('/mampan/consultant/rfi/rfi-create'),
+    ],
+    [
+      'title'              => 'EQ4 material submittals missing final supplier declaration',
+      'linked_requirement' => 'EQ4 Low-VOC Material Documentation',
+      'owner'              => 'Procurement Manager',
+      'priority'           => 'High',
+      'due_date'           => '2026-05-25',
+      'action_label'       => 'Follow Up',
+      'action_href'        => path('/mampan/consultant/rfi/rfi-index'),
+    ],
+    [
+      'title'              => 'WE3 tank installation method statement pending',
+      'linked_requirement' => 'Rainwater Harvesting Design Package',
+      'owner'              => 'Site Supervisor',
+      'priority'           => 'Medium',
+      'due_date'           => '2026-05-27',
+      'action_label'       => 'Request Method Statement',
+      'action_href'        => path('/mampan/consultant/rfi/rfi-create'),
+    ],
+  ];
+
+  $next_actions = [
+    [
+      'title'               => 'Validate as-built implementation against approved design intent',
+      'related_requirement' => 'Cross-criteria implementation checks',
+      'owner'               => 'Consultant Technical Lead',
+      'priority'            => 'High',
+      'action_label'        => 'Open Requirement',
+      'action_href'         => path('/mampan/consultant/documents/document-hub'),
+    ],
+    [
+      'title'               => 'Close open site-level blockers before verification gate',
+      'related_requirement' => 'Phase 2 gate closure',
+      'owner'               => 'Consultant PM',
+      'priority'            => 'High',
+      'action_label'        => 'Open RFI Index',
+      'action_href'         => path('/mampan/consultant/rfi/rfi-index'),
+    ],
+    [
+      'title'               => 'Bundle implementation evidence per requirement for verifier handoff',
+      'related_requirement' => 'Evidence package readiness',
+      'owner'               => 'Document Controller',
+      'priority'            => 'Medium',
+      'action_label'        => 'Open Evidence Module',
+      'action_href'         => path('/mampan/consultant/evidence/evidence-index'),
+    ],
+  ];
+}
+
+$map_document_status = static function (string $status_label): string {
+  $normalized_status = trim($status_label);
+
+  if ($normalized_status === 'Satisfied' || $normalized_status === 'Ready for Gap Analysis') {
+    return 'Verified';
+  }
+
+  if ($normalized_status === 'Partial') {
+    return 'Need Revision';
+  }
+
+  if ($normalized_status === 'Not Started') {
+    return 'Required';
+  }
+
+  if ($normalized_status === 'Accepted') {
+    return 'Verified';
+  }
+
+  if ($normalized_status === 'Pending Review') {
+    return 'Under Review';
+  }
+
+  if ($normalized_status === 'Needs Revision') {
+    return 'Need Revision';
+  }
+
+  if ($normalized_status === '') {
+    return 'Required';
+  }
+
+  return $normalized_status;
+};
+
+$blocking_due_date_map = [];
+$blocking_priority_map = [];
+
+foreach ($blocking_items as $blocking_item) {
+  $linked_requirement = isset($blocking_item['linked_requirement']) ? trim((string) $blocking_item['linked_requirement']) : '';
+
+  if ($linked_requirement === '') {
+    continue;
+  }
+
+  $blocking_due_date_map[$linked_requirement] = isset($blocking_item['due_date'])
+    ? trim((string) $blocking_item['due_date'])
+    : '-';
+  $blocking_priority_map[$linked_requirement] = isset($blocking_item['priority'])
+    ? trim((string) $blocking_item['priority'])
+    : 'Medium';
+}
+
+$required_documents = [];
+
+foreach ($requirements_filtered as $requirement_item) {
+  $requirement_title = isset($requirement_item['title']) ? trim((string) $requirement_item['title']) : '-';
+  $criteria_label    = isset($requirement_item['criteria_label']) ? trim((string) $requirement_item['criteria_label']) : '-';
+  $phase_label       = isset($requirement_item['phase']) ? trim((string) $requirement_item['phase']) : '-';
+  $credit_label      = isset($requirement_item['linked_gbi_credit']) ? trim((string) $requirement_item['linked_gbi_credit']) : '-';
+  $owner_label       = isset($requirement_item['owner']) ? trim((string) $requirement_item['owner']) : '-';
+  $status_label      = isset($requirement_item['status']) ? (string) $requirement_item['status'] : 'Required';
+
+  $required_documents[] = [
+    'document_name'     => $requirement_title,
+    'category'          => $criteria_label,
+    'linked_stage'      => $phase_label,
+    'linked_gbi_credit' => $credit_label,
+    'owner'             => $owner_label,
+    'status'            => $map_document_status($status_label),
+    'due_date'          => isset($blocking_due_date_map[$requirement_title]) ? $blocking_due_date_map[$requirement_title] : '-',
+  ];
+}
+
+$document_rows = [];
+
+foreach ($requirements_filtered as $requirement_item) {
+  $requirement_id    = isset($requirement_item['id']) ? trim((string) $requirement_item['id']) : '';
+  $requirement_title = isset($requirement_item['title']) ? trim((string) $requirement_item['title']) : 'Requirement Support File';
+  $linked_credit     = isset($requirement_item['linked_gbi_credit']) ? trim((string) $requirement_item['linked_gbi_credit']) : '-';
+  $supporting_files  = isset($supporting_files_by_requirement[$requirement_id])
+    ? $supporting_files_by_requirement[$requirement_id]
+    : $supporting_files_by_requirement['default'];
+
+  foreach ($supporting_files as $supporting_file) {
+    $file_name      = isset($supporting_file['file_name']) ? trim((string) $supporting_file['file_name']) : '-';
+    $file_version   = isset($supporting_file['version']) ? trim((string) $supporting_file['version']) : '-';
+    $file_category  = isset($supporting_file['category']) ? trim((string) $supporting_file['category']) : '-';
+    $uploaded_by    = isset($supporting_file['uploaded_by']) ? trim((string) $supporting_file['uploaded_by']) : '-';
+    $uploaded_date  = isset($supporting_file['uploaded_date']) ? trim((string) $supporting_file['uploaded_date']) : '-';
+    $file_status    = isset($supporting_file['file_status']) ? (string) $supporting_file['file_status'] : 'Submitted';
+    $file_action    = isset($supporting_file['action_label']) ? trim((string) $supporting_file['action_label']) : 'View';
+    $mapped_status  = $map_document_status($file_status);
+
+    $document_rows[] = [
+      'title'          => $file_name,
+      'description'    => 'Requirement: ' . $requirement_title,
+      'category'       => $file_category,
+      'linked_item'    => $linked_credit . ' | ' . $requirement_title,
+      'version'        => $file_version,
+      'submitted_by'   => $uploaded_by,
+      'submitted_date' => $uploaded_date,
+      'status'         => $mapped_status,
+      'actions'        => [$file_action],
+    ];
+  }
+}
+
+$missing_documents = [];
+$revision_documents = [];
+
+foreach ($requirements_filtered as $requirement_item) {
+  $requirement_title = isset($requirement_item['title']) ? trim((string) $requirement_item['title']) : '-';
+  $linked_credit     = isset($requirement_item['linked_gbi_credit']) ? trim((string) $requirement_item['linked_gbi_credit']) : '-';
+  $owner_label       = isset($requirement_item['owner']) ? trim((string) $requirement_item['owner']) : '-';
+  $missing_items     = isset($requirement_item['missing_items']) && is_array($requirement_item['missing_items'])
+    ? $requirement_item['missing_items']
+    : [];
+  $submitted_items   = isset($requirement_item['submitted_items']) && is_array($requirement_item['submitted_items'])
+    ? $requirement_item['submitted_items']
+    : [];
+  $due_date_label    = isset($blocking_due_date_map[$requirement_title]) ? $blocking_due_date_map[$requirement_title] : '-';
+  $priority_label    = isset($blocking_priority_map[$requirement_title]) ? $blocking_priority_map[$requirement_title] : 'Medium';
+
+  foreach ($missing_items as $missing_item) {
+    $missing_documents[] = [
+      'document_name' => trim((string) $missing_item),
+      'owner'         => $owner_label,
+      'due_date'      => $due_date_label,
+      'linked_item'   => $linked_credit . ' | ' . $requirement_title,
+      'priority'      => $priority_label,
+    ];
+  }
+
+  foreach ($submitted_items as $submitted_item) {
+    $submitted_label = trim((string) $submitted_item);
+
+    if ($submitted_label === '') {
+      continue;
+    }
+
+    $revision_documents[] = [
+      'document_name' => $submitted_label,
+      'reason'        => 'Review against latest requirement checklist and missing-item closure.',
+      'reviewer'      => 'Consultant Reviewer',
+      'due_date'      => $due_date_label,
+      'linked_item'   => $linked_credit . ' | ' . $requirement_title,
+    ];
+  }
+}
+
+$version_history = [];
+
+foreach ($document_rows as $document_row) {
+  $document_name = isset($document_row['title']) ? trim((string) $document_row['title']) : '-';
+  $version_label = isset($document_row['version']) ? trim((string) $document_row['version']) : '-';
+  $status_label  = isset($document_row['status']) ? trim((string) $document_row['status']) : 'Submitted';
+  $actor_label   = isset($document_row['submitted_by']) ? trim((string) $document_row['submitted_by']) : '-';
+  $time_label    = isset($document_row['submitted_date']) ? trim((string) $document_row['submitted_date']) : '-';
+
+  $version_history[] = [
+    'document_name' => $document_name,
+    'version'       => $version_label,
+    'activity'      => $status_label . ' update recorded',
+    'actor'         => $actor_label,
+    'timestamp'     => $time_label,
+  ];
+}
+
+$required_documents = array_slice($required_documents, 0, 18);
+$document_rows = array_slice($document_rows, 0, 24);
+$missing_documents = array_slice($missing_documents, 0, 18);
+$revision_documents = array_slice($revision_documents, 0, 18);
+$version_history = array_slice($version_history, 0, 24);
+
+layout('mampan/dashboard-project', [
   'page_title'       => $page_title,
   'page_current'     => $page_current,
-  'project_current'  => $project_current,
+  'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
+  'project_nav_search' => [
+    'enabled'       => true,
+    'action'        => path('/mampan/consultant/documents/document-hub'),
+    'name'          => 'requirement_search',
+    'value'         => $search_value,
+    'placeholder'   => 'Search requirement, document, credit, or owner.',
+    'label'         => 'Search requirement, document, credit, or owner.',
+    'hidden_inputs' => $project_nav_search_hidden_inputs,
+  ],
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <?php component('documents/document-header', $document_header); ?>
+  <?php component('mampan/section-header', [
+    'section_header' => [
+      'title'       => isset($document_header['title']) ? (string) $document_header['title'] : '',
+      'description' => isset($document_header['description']) ? (string) $document_header['description'] : '',
+      'heading_id'  => 'requirement-register-heading',
+      'class_name'  => '',
+    ],
+  ]); ?>
 
-  <section aria-label="Requirement register">
+  <?php component('mampan/section-filter', ['section_filter' => $requirement_section_filter]); ?>
+
   <?php component('documents/document-requirement-list', [
     'requirements_grouped' => $requirements_grouped,
     'selected_filter'      => $selected_filter,
-    'filters'              => $requirement_filters,
     'search_value'         => $search_value,
     'selected_id'          => $selected_id,
+    'document_header'      => $document_header,
   ]); ?>
-  </section>
 
   <section class="grid gap-5 xl:grid-cols-2" aria-label="Phase planning panels">
     <?php component('documents/document-blocking-items', ['blocking_items' => $blocking_items]); ?>
@@ -1153,6 +1780,16 @@ layout('dashboard-project', [
     <?php component('documents/document-phase-reference', [
       'phase_reference_cards' => $phase_reference_cards,
     ]); ?>
+  </section>
+
+  <section class="space-y-5" aria-label="Additional document tracking panels">
+    <?php component('documents/document-required-list', ['required_documents' => $required_documents]); ?>
+    <?php component('documents/document-table', ['document_rows' => $document_rows]); ?>
+    <?php component('documents/document-missing-panel', [
+      'missing_documents'  => $missing_documents,
+      'revision_documents' => $revision_documents,
+    ]); ?>
+    <?php component('documents/document-version-history', ['version_history' => $version_history]); ?>
   </section>
 </article>
 <?php foreach ($requirement_drawers as $drawer_item): ?>
@@ -1231,6 +1868,18 @@ layout('dashboard-project', [
       return `<span class="badge inline-flex items-center border text-xs rounded-md px-2 py-1 badge--${escape_html(tone_key)} ${tone_class}">${escape_html(status_label)}</span>`;
     };
 
+    const get_status_text_class = (status_label) => {
+      const tone_key = get_status_tone(status_label);
+      const text_class_map = {
+        'positive': 'text-positive-700',
+        'negative': 'text-negative-700',
+        'warning': 'text-attention-700',
+        'neutral': 'text-brand-700',
+      };
+
+      return text_class_map[tone_key] || text_class_map.neutral;
+    };
+
     const compute_readiness = ({ mandatory_docs_complete, has_critical_blocker, has_blocking_item, review_state }) => {
       let base_score = 0;
       base_score += mandatory_docs_complete ? 45 : 15;
@@ -1271,13 +1920,16 @@ layout('dashboard-project', [
     const sync_table_row = (requirement_id, readiness_value, status_label) => {
       const status_nodes = document.querySelectorAll(`[data-requirement-status-cell="${requirement_id}"]`);
       const readiness_nodes = document.querySelectorAll(`[data-requirement-readiness-cell="${requirement_id}"]`);
+      const is_readiness_positive = status_label === 'Satisfied' || status_label === 'Ready for Gap Analysis';
 
       status_nodes.forEach((status_node) => {
         if (!(status_node instanceof HTMLElement)) {
           return;
         }
 
-        status_node.innerHTML = render_status_badge_html(status_label);
+        status_node.textContent = status_label;
+        status_node.classList.remove('text-positive-700', 'text-negative-700', 'text-attention-700', 'text-brand-700');
+        status_node.classList.add(get_status_text_class(status_label));
       });
 
       readiness_nodes.forEach((readiness_node) => {
@@ -1286,6 +1938,15 @@ layout('dashboard-project', [
         }
 
         readiness_node.textContent = `${readiness_value}%`;
+
+        const readiness_wrapper = readiness_node.closest('.readiness');
+
+        if (!(readiness_wrapper instanceof HTMLElement)) {
+          return;
+        }
+
+        readiness_wrapper.classList.remove('text-positive-700', 'text-brand-600');
+        readiness_wrapper.classList.add(is_readiness_positive ? 'text-positive-700' : 'text-brand-600');
       });
     };
 

@@ -3,8 +3,37 @@
 declare(strict_types=1);
 
 $page_title   = 'Submission Export';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-submission';
 $project_current = 'project-submission';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$submission_phase_data = isset($current_phase_data['submission']) && is_array($current_phase_data['submission'])
+  ? $current_phase_data['submission']
+  : [];
+$workspace_requirement_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
+$workspace_documents = isset($workspace_phase_data['documents']) ? (string) $workspace_phase_data['documents'] : '0';
+$workspace_clarifications = isset($workspace_phase_data['clarifications']) ? (string) $workspace_phase_data['clarifications'] : '0';
+$workspace_submission_status = isset($workspace_phase_data['submission_status'])
+  ? (string) $workspace_phase_data['submission_status']
+  : 'Not Ready';
+$submission_message = isset($submission_phase_data['message']) ? (string) $submission_phase_data['message'] : 'Project setup incomplete.';
+$submission_state = isset($submission_phase_data['state']) ? (string) $submission_phase_data['state'] : 'not_ready';
+$submission_readiness_status_map = [
+  'Not Ready'    => 'Not Ready',
+  'Blocked'      => 'Not Ready',
+  'Almost Ready' => 'Almost Ready',
+  'Ready'        => 'Ready for Submission',
+];
+$submission_readiness_status = isset($submission_readiness_status_map[$workspace_submission_status])
+  ? $submission_readiness_status_map[$workspace_submission_status]
+  : 'Draft';
 
 $module_nav_links = [
   ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
@@ -24,7 +53,7 @@ $submission_header = [
   'submission_stage' => 'Completion & Verification Assessment',
   'package_version'  => 'Submission Package Rev 2',
   'prepared_by'      => 'Ir. Aisyah Kamaruddin',
-  'last_updated'     => '2026-04-24 17:25',
+  'last_updated'     => date('Y-m-d H:i'),
   'action_items'     => [
     ['label' => 'Back to Submission', 'tone' => 'default', 'href' => path('/mampan/consultant/submission/submission-package')],
     ['label' => 'View Checklist',     'tone' => 'default', 'href' => path('/mampan/consultant/submission/submission-checklist')],
@@ -33,9 +62,9 @@ $submission_header = [
 ];
 
 $summary_cards = [
-  ['label' => 'Export Readiness',     'value' => '82%',             'helper' => '1 blocking error remains',                     'tone' => 'warning',  'icon_name' => 'send-plane-2-line'],
+  ['label' => 'Export Readiness',     'value' => $workspace_requirement_readiness, 'helper' => $submission_message, 'tone' => 'warning',  'icon_name' => 'send-plane-2-line'],
   ['label' => 'Package Version',      'value' => 'Rev 2 (Draft)',   'helper' => 'Lock required before final submission',       'tone' => 'neutral',  'icon_name' => 'archive-stack-line'],
-  ['label' => 'Validation Status',    'value' => '42 Passed / 1 Error', 'helper' => '2 warnings still open',                    'tone' => 'warning',  'icon_name' => 'shield-star-line'],
+  ['label' => 'Validation Status',    'value' => $workspace_submission_status, 'helper' => 'Current submission validation state', 'tone' => 'warning',  'icon_name' => 'shield-star-line'],
 ];
 
 $export_panel = [
@@ -67,14 +96,14 @@ $export_panel = [
 ];
 
 $export_readiness = [
-  'overall_readiness'     => '82%',
-  'readiness_status'      => 'Almost Ready',
-  'readiness_explanation' => 'Export can proceed for internal review copy, but final submission export should wait until client sign-off is completed.',
+  'overall_readiness'     => $workspace_requirement_readiness,
+  'readiness_status'      => $submission_readiness_status,
+  'readiness_explanation' => $submission_message,
   'source_progress'       => [
-    ['label' => 'Package Contents',   'value' => '88%'],
-    ['label' => 'Validation Checks',  'value' => '90%'],
-    ['label' => 'Consultant Sign-off','value' => '100%'],
-    ['label' => 'Client Sign-off',    'value' => '40%'],
+    ['label' => 'Package Contents',   'value' => $workspace_documents],
+    ['label' => 'Validation Checks',  'value' => $workspace_requirement_readiness],
+    ['label' => 'Consultant Sign-off','value' => $submission_state === 'ready' ? '100%' : '80%'],
+    ['label' => 'Client Sign-off',    'value' => $submission_state === 'ready' ? '100%' : '40%'],
   ],
 ];
 
@@ -132,6 +161,9 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
@@ -155,9 +187,9 @@ layout('mampan/dashboard-project', [
       <?php component('submission/submission-readiness', $export_readiness); ?>
       <?php component('submission/submission-signoff-panel', $signoff_panel); ?>
 
-      <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-export-history-heading">
-        <header class="border-b border-zinc-200 pb-4">
-          <h2 id="submission-export-history-heading" class="text-lg font-semibold text-zinc-900">Recent Export History</h2>
+      <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-export-history-heading">
+        <header class="border-b border-brand-200 pb-4">
+          <h2 id="submission-export-history-heading" class="text-lg font-semibold text-brand-900">Recent Export History</h2>
         </header>
 
         <div class="mt-4 overflow-x-auto">

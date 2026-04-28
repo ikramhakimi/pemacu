@@ -5,10 +5,10 @@ declare(strict_types=1);
 $default_review_notes = isset($default_review_notes) ? trim((string) $default_review_notes) : '';
 $default_missing_info = isset($default_missing_info) ? trim((string) $default_missing_info) : '';
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-review-form-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="evidence-review-form-heading" class="text-lg font-semibold text-zinc-900">Checklist Review Form</h2>
-    <p class="mt-1 text-sm text-zinc-600">Record checklist decisions and submit an evidence verification outcome.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-review-form-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="evidence-review-form-heading" class="text-lg font-semibold text-brand-900">Checklist Review Form</h2>
+    <p class="mt-1 text-sm text-brand-600">Record checklist decisions and submit an evidence verification outcome.</p>
   </header>
 
   <form class="mt-4 space-y-4" action="#" method="post">
@@ -119,8 +119,8 @@ $default_missing_info = isset($default_missing_info) ? trim((string) $default_mi
       ],
     ]); ?>
 
-    <div class="border-t border-zinc-200 pt-4">
-      <p class="text-xs uppercase tracking-wide text-zinc-500">Decision Actions</p>
+    <div class="border-t border-brand-200 pt-4">
+      <p class="text-xs uppercase tracking-wide text-brand-500">Decision Actions</p>
       <div class="mt-2 flex flex-wrap gap-2">
         <?php component('button', ['label' => 'Mark as Verified', 'variant' => 'positive', 'size' => 'sm']); ?>
         <?php component('button', ['label' => 'Request Revision', 'variant' => 'default', 'size' => 'sm']); ?>
@@ -130,7 +130,7 @@ $default_missing_info = isset($default_missing_info) ? trim((string) $default_mi
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-2 border-t border-zinc-200 pt-4">
+    <div class="flex flex-wrap gap-2 border-t border-brand-200 pt-4">
       <?php component('button', ['label' => 'Save Review Draft', 'variant' => 'default']); ?>
       <?php component('button', ['label' => 'Submit Decision', 'variant' => 'primary']); ?>
     </div>

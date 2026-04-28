@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 $links = isset($links) && is_array($links) ? $links : [];
 ?>
-<nav class="rounded-lg border border-zinc-200 bg-white p-4" aria-label="Mampan module navigation">
-  <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Mampan Modules</p>
+<nav class="rounded-lg border border-brand-200 bg-white p-4" aria-label="Mampan module navigation">
+  <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Mampan Modules</p>
   <div class="mt-2 flex flex-wrap gap-2">
     <?php foreach ($links as $link_item): ?>
       <?php

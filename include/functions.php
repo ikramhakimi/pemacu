@@ -281,6 +281,7 @@ function consultant_project_nav_links(string $project_current = ''): array
 {
   $nav_items = [
     'project-workspace'  => ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
+    'project-workflow'   => ['label' => 'Workflow',       'href' => path('/mampan/consultant/workflow')],
     'project-documents'  => ['label' => 'Documents',      'href' => path('/mampan/consultant/documents/document-hub')],
     'project-rfi'        => ['label' => 'Clarifications', 'href' => path('/mampan/consultant/rfi/rfi-index')],
     'project-evidence'   => ['label' => 'Evidence',       'href' => path('/mampan/consultant/evidence/evidence-index')],
@@ -690,6 +691,14 @@ function component(string $component_name, array $data = []): void
     || strpos($component_key, 'client/') === 0
   ) {
     $component_candidates[] = $mampan_components_root . '/' . $component_key . '.php';
+  }
+
+  if (strpos($component_key, 'mampan/') === 0) {
+    $mampan_component_key = substr($component_key, strlen('mampan/'));
+
+    if ($mampan_component_key !== '') {
+      $component_candidates[] = $mampan_components_root . '/' . $mampan_component_key . '.php';
+    }
   }
 
   $component_candidates[] = $components_root . '/' . $component_key . '.php';

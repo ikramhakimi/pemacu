@@ -46,7 +46,7 @@ $slide_class = trim('carousel-slide w-full ' . $carousel_slide_class);
 
 $carousel_config = [
   'loadingClasses'   => 'opacity-0',
-  'dotsItemClasses'  => 'size-3 rounded-full border border-zinc-300 cursor-pointer transition carousel-active:border-brand-600 carousel-active:bg-brand-600',
+  'dotsItemClasses'  => 'size-3 rounded-full border border-brand-300 cursor-pointer transition carousel-active:border-brand-600 carousel-active:bg-brand-600',
   'isAutoPlay'       => $carousel_autoplay,
   'autoPlayInterval' => $carousel_interval,
   'isInfiniteLoop'   => $carousel_infinite,

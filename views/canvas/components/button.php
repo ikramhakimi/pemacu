@@ -476,5 +476,50 @@ layout('canvas/layouts/canvas-start', [
       </div>
     </div>
   </div>
+  <div class="canvas-demo first:border-r border-b border-dashed border-brand-300">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Button L
+      </div>
+      <div class="relative flex min-h-[200px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="flex w-full max-w-2xl flex-wrap items-center justify-center gap-4">
+          <?php component('button', [
+            'label'   => 'Default',
+            'variant' => 'default',
+            'size'    => 'md',
+            'class'   => '!bg-none !bg-brand-800 !from-transparent !to-transparent !shadow-none hover:!bg-brand-700',
+          ]); ?>
+
+          <?php component('button', [
+            'label'   => 'Primary',
+            'variant' => 'primary',
+            'size'    => 'md',
+            'class'   => '!bg-none !bg-primary-600 !from-transparent !to-transparent !shadow-none hover:!bg-primary-500',
+          ]); ?>
+
+          <?php component('button', [
+            'label'   => 'Secondary',
+            'variant' => 'secondary',
+            'size'    => 'md',
+            'class'   => '!bg-none !bg-white !from-transparent !to-transparent !shadow-none hover:!bg-brand-50',
+          ]); ?>
+
+          <?php component('button', [
+            'label'   => 'Positive',
+            'variant' => 'positive',
+            'size'    => 'md',
+            'class'   => '!bg-none !bg-positive-600 !from-transparent !to-transparent !shadow-none hover:!bg-positive-500',
+          ]); ?>
+
+          <?php component('button', [
+            'label'   => 'Negative',
+            'variant' => 'negative',
+            'size'    => 'md',
+            'class'   => '!bg-none !bg-negative-600 !from-transparent !to-transparent !shadow-none hover:!bg-negative-500',
+          ]); ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

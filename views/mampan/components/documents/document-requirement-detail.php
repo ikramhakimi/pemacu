@@ -53,6 +53,8 @@ $manage_requirement_id   = isset($manage_form['requirement_id']) ? trim((string)
 $manage_filter           = isset($manage_form['requirement_filter']) ? trim((string) $manage_form['requirement_filter']) : 'all';
 $manage_search           = isset($manage_form['requirement_search']) ? trim((string) $manage_form['requirement_search']) : '';
 $manage_open_drawer_id   = isset($manage_form['open_drawer_id']) ? trim((string) $manage_form['open_drawer_id']) : '';
+$manage_phase            = isset($manage_form['phase']) ? trim((string) $manage_form['phase']) : '';
+$phase_label             = isset($requirement_detail['phase_label']) ? trim((string) $requirement_detail['phase_label']) : '';
 $gate_check_columns = [
   ['label' => 'Gate Check', 'key' => 'gate_check'],
   ['label' => 'State', 'key' => 'state'],
@@ -86,7 +88,7 @@ $gate_check_rows = [
     <div class="flex flex-wrap items-start justify-between gap-2">
       <div>
         <h2 id="requirement-detail-heading" class="text-lg font-semibold text-brand-900">Requirement Detail</h2>
-        <p class="mt-1 text-sm text-brand-600">Selected requirement context for consultant decision-making in Phase 1.</p>
+        <p class="mt-1 text-sm text-brand-600">Selected requirement context for consultant decision-making in <?= e($phase_label !== '' ? $phase_label : 'current phase'); ?>.</p>
       </div>
       <?php if ($close_href !== ''): ?>
         <?php component('button', [
@@ -212,6 +214,9 @@ $gate_check_rows = [
           <input type="hidden" name="requirement_filter" value="<?= e($manage_filter); ?>">
           <input type="hidden" name="requirement_search" value="<?= e($manage_search); ?>">
           <input type="hidden" name="open_drawer_id" value="<?= e($manage_open_drawer_id); ?>">
+          <?php if ($manage_phase !== ''): ?>
+            <input type="hidden" name="phase" value="<?= e($manage_phase); ?>">
+          <?php endif; ?>
 
           <label class="flex items-center gap-2 text-sm text-brand-700">
             <input type="checkbox" name="gate_mandatory_docs" value="1" <?= $mandatory_docs_complete ? 'checked' : ''; ?>>

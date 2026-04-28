@@ -15,12 +15,6 @@ $dashboard_sidebar     = isset($dashboard_sidebar) && is_array($dashboard_sideba
   );
 $request_uri_path      = parse_url((string) ($_SERVER['REQUEST_URI'] ?? '/'), PHP_URL_PATH);
 $request_uri_path      = is_string($request_uri_path) && $request_uri_path !== '' ? $request_uri_path : '/';
-$dashboard_breadcrumb_items = isset($dashboard_breadcrumb_items) && is_array($dashboard_breadcrumb_items)
-  ? $dashboard_breadcrumb_items
-  : dashboard_breadcrumb_items($dashboard_sidebar, $request_uri_path);
-$dashboard_breadcrumb_description = isset($dashboard_breadcrumb_description) && is_string($dashboard_breadcrumb_description)
-  ? trim($dashboard_breadcrumb_description)
-  : '';
 $app_css_path          = __DIR__ . '/../../../assets/build/app.css';
 $app_css_href          = path('/assets/build/app.css');
 $app_css_version       = is_file($app_css_path) ? (string) filemtime($app_css_path) : '';
@@ -35,7 +29,7 @@ $dashboard_css_url     = $dashboard_css_version !== '' ? $dashboard_css_href . '
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= e($resolved_page_title); ?> | Booking Pro</title>
+  <title><?= e($resolved_page_title); ?> | Mampan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -162,31 +156,21 @@ $dashboard_css_url     = $dashboard_css_version !== '' ? $dashboard_css_href . '
       <?php endif; ?>
 
       <div class="<?= e($dashboard_no_sidebar ? 'app-content' : 'app-content xl:pl-[240px]'); ?>">
-        <div class="app-breadcrumb px-4 py-3 md:px-6 md:py-4 border-b border-brand-200">
-          <div class="flex items-center gap-3 md:gap-1">
-            <?php if (!$dashboard_no_sidebar): ?>
-              <button
-                type="button"
-                class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-brand-200 bg-white text-brand-700 transition hover:bg-brand-100 hover:text-brand-900 xl:hidden js-dashboard-sidebar-toggle"
-                aria-label="Open sidebar"
-                aria-controls="dashboard-sidebar-panel"
-                aria-expanded="false"
-              >
-                <?php icon('menu-line', ['icon_size' => '20']); ?>
-              </button>
-            <?php endif; ?>
-            <?php component('breadcrumb', [
-              'items'     => $dashboard_breadcrumb_items,
-              'separator' => 'chevron',
-              'class'     => 'font-medium',
-            ]); ?>
-            <?php if ($dashboard_breadcrumb_description !== ''): ?>
-              <span class="text-brand-500 hidden md:block">: <?= e($dashboard_breadcrumb_description); ?></span>
-            <?php endif; ?>
+        <?php if (!$dashboard_no_sidebar): ?>
+          <div class="px-4 py-3 md:px-6 md:py-4 border-b border-brand-200">
+            <button
+              type="button"
+              class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-brand-200 bg-white text-brand-700 transition hover:bg-brand-100 hover:text-brand-900 xl:hidden js-dashboard-sidebar-toggle"
+              aria-label="Open sidebar"
+              aria-controls="dashboard-sidebar-panel"
+              aria-expanded="false"
+            >
+              <?php icon('menu-line', ['icon_size' => '20']); ?>
+            </button>
           </div>
-        </div>
+        <?php endif; ?>
         <?php if ($dashboard_no_sidebar): ?>
-        <div class="app-container px-4 md:px-6">
+        <div class="app-container">
         <?php else: ?>
         <div class="app-container <?php container($dashboard_content_max); ?>">
         <?php endif; ?>

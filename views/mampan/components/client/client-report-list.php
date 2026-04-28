@@ -12,11 +12,11 @@ $status_tone_map = [
   'Draft'       => 'neutral',
 ];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="client-report-list-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="client-report-list-heading" class="text-lg font-semibold text-zinc-900"><?= e($section_title); ?></h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="client-report-list-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="client-report-list-heading" class="text-lg font-semibold text-brand-900"><?= e($section_title); ?></h2>
     <?php if ($section_description !== ''): ?>
-      <p class="mt-1 text-sm text-zinc-600"><?= e($section_description); ?></p>
+      <p class="mt-1 text-sm text-brand-600"><?= e($section_description); ?></p>
     <?php endif; ?>
   </header>
 
@@ -38,14 +38,14 @@ $status_tone_map = [
 
       $status_tone = isset($status_tone_map[$status]) ? $status_tone_map[$status] : 'neutral';
       ?>
-      <article class="rounded-lg border border-zinc-200 p-4">
+      <article class="rounded-lg border border-brand-200 p-4">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h3 class="text-base font-semibold text-zinc-900"><?= e($title); ?></h3>
+            <h3 class="text-base font-semibold text-brand-900"><?= e($title); ?></h3>
             <?php if ($description !== ''): ?>
-              <p class="mt-1 text-sm text-zinc-600"><?= e($description); ?></p>
+              <p class="mt-1 text-sm text-brand-600"><?= e($description); ?></p>
             <?php endif; ?>
-            <p class="mt-2 text-sm text-zinc-600">Last updated: <?= e($last_updated); ?></p>
+            <p class="mt-2 text-sm text-brand-600">Last updated: <?= e($last_updated); ?></p>
           </div>
           <div><?php component('badge', ['items' => [['label' => $status, 'tone' => $status_tone]]]); ?></div>
         </div>
@@ -58,7 +58,7 @@ $status_tone_map = [
     <?php endforeach; ?>
 
     <?php if ($reports === []): ?>
-      <p class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-600">No reports available yet.</p>
+      <p class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-600">No reports available yet.</p>
     <?php endif; ?>
   </div>
 </section>

@@ -29,11 +29,11 @@ $action_items      = isset($action_items) && is_array($action_items) ? $action_i
         $action_button_class = 'inline-flex items-center rounded-md border px-3 py-2 text-sm font-medium transition';
 
         if ($action_tone === 'primary') {
-          $action_button_class .= ' border-primary-200 bg-primary-600 text-white hover:bg-primary-700';
+          $action_button_class .= ' border-transparent bg-primary-600 text-white hover:bg-primary-700';
         } elseif ($action_tone === 'positive') {
           $action_button_class .= ' border-positive-300 bg-positive-50 text-positive-700 hover:bg-positive-100';
         } else {
-          $action_button_class .= ' border-brand-200 bg-white text-brand-700 hover:bg-brand-100';
+          $action_button_class .= ' border-primary-100 bg-primary-100  text-primary-700 hover:bg-brand-100';
         }
         ?>
         <?php if ($action_href !== ''): ?>

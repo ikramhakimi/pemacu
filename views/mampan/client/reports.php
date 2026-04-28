@@ -28,7 +28,7 @@ $reports = [
   ],
 ];
 
-layout('dashboard-client', [
+layout('mampan/dashboard-client', [
   'page_title'   => $page_title,
   'page_current' => $page_current,
   'global_intro' => 'Review project reports and download copies for your records.',

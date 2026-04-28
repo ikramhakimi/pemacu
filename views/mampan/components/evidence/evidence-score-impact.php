@@ -8,32 +8,32 @@ $current_verified_points  = isset($current_verified_points) ? trim((string) $cur
 $points_at_risk           = isset($points_at_risk) ? trim((string) $points_at_risk) : '-';
 $impact_note              = isset($impact_note) ? trim((string) $impact_note) : '-';
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-score-impact-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="evidence-score-impact-heading" class="text-lg font-semibold text-zinc-900">Score Impact</h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-score-impact-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="evidence-score-impact-heading" class="text-lg font-semibold text-brand-900">Score Impact</h2>
   </header>
 
   <dl class="mt-4 space-y-3">
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Available Points</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($available_points); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Available Points</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($available_points); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Targeted Points</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($targeted_points); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Targeted Points</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($targeted_points); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Currently Verified Points</dt>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Currently Verified Points</dt>
       <dd class="mt-1 font-medium text-positive-700"><?= e($current_verified_points); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Points at Risk</dt>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Points at Risk</dt>
       <dd class="mt-1 font-medium text-negative-700"><?= e($points_at_risk); ?></dd>
     </div>
   </dl>
 
-  <div class="mt-4 rounded-md border border-zinc-200 bg-zinc-50 p-3">
-    <p class="text-xs uppercase tracking-wide text-zinc-500">Impact Note</p>
-    <p class="mt-1 text-sm text-zinc-700"><?= e($impact_note); ?></p>
+  <div class="mt-4 rounded-md border border-brand-200 bg-brand-50 p-3">
+    <p class="text-xs uppercase tracking-wide text-brand-500">Impact Note</p>
+    <p class="mt-1 text-sm text-brand-700"><?= e($impact_note); ?></p>
   </div>
 </section>

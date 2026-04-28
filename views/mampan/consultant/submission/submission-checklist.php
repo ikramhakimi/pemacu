@@ -3,8 +3,36 @@
 declare(strict_types=1);
 
 $page_title   = 'Submission Checklist';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-submission';
 $project_current = 'project-submission';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$submission_phase_data = isset($current_phase_data['submission']) && is_array($current_phase_data['submission'])
+  ? $current_phase_data['submission']
+  : [];
+$workspace_requirement_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
+$workspace_documents = isset($workspace_phase_data['documents']) ? (string) $workspace_phase_data['documents'] : '0';
+$workspace_clarifications = isset($workspace_phase_data['clarifications']) ? (string) $workspace_phase_data['clarifications'] : '0';
+$workspace_submission_status = isset($workspace_phase_data['submission_status'])
+  ? (string) $workspace_phase_data['submission_status']
+  : 'Not Ready';
+$submission_message = isset($submission_phase_data['message']) ? (string) $submission_phase_data['message'] : 'Project setup incomplete.';
+$submission_readiness_status_map = [
+  'Not Ready'    => 'Not Ready',
+  'Blocked'      => 'Not Ready',
+  'Almost Ready' => 'Almost Ready',
+  'Ready'        => 'Ready for Submission',
+];
+$submission_readiness_status = isset($submission_readiness_status_map[$workspace_submission_status])
+  ? $submission_readiness_status_map[$workspace_submission_status]
+  : 'Draft';
 
 $module_nav_links = [
   ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
@@ -32,9 +60,9 @@ $submission_header = [
 ];
 
 $summary_cards = [
-  ['label' => 'Checklist Completion', 'value' => '41 / 49', 'helper' => 'Complete items across 6 categories', 'tone' => 'warning', 'icon_name' => 'task-line'],
-  ['label' => 'Pending Items',        'value' => '6',       'helper' => 'Requires closure before export',     'tone' => 'warning', 'icon_name' => 'time-line'],
-  ['label' => 'At Risk Items',        'value' => '2',       'helper' => 'Score impact possible if unresolved', 'tone' => 'negative', 'icon_name' => 'alarm-warning-line'],
+  ['label' => 'Checklist Completion', 'value' => $workspace_requirement_readiness, 'helper' => 'Completion state in current phase', 'tone' => 'warning', 'icon_name' => 'task-line'],
+  ['label' => 'Pending Items',        'value' => $workspace_clarifications, 'helper' => 'Clarifications requiring closure', 'tone' => 'warning', 'icon_name' => 'time-line'],
+  ['label' => 'At Risk Items',        'value' => $workspace_submission_status === 'Ready' ? '0' : '2', 'helper' => 'Score impact possible if unresolved', 'tone' => 'negative', 'icon_name' => 'alarm-warning-line'],
 ];
 
 $checklist_groups = [
@@ -99,16 +127,16 @@ $checklist_groups = [
 ];
 
 $readiness_data = [
-  'overall_readiness'     => '84%',
-  'readiness_status'      => 'Almost Ready',
-  'readiness_explanation' => 'Checklist is largely complete. Close client sign-off tasks and two evidence-related gaps before export lock.',
+  'overall_readiness'     => $workspace_requirement_readiness,
+  'readiness_status'      => $submission_readiness_status,
+  'readiness_explanation' => $submission_message,
   'source_progress'       => [
     ['label' => 'Project Information', 'value' => '100%'],
-    ['label' => 'Documents',           'value' => '80%'],
-    ['label' => 'Clarifications',      'value' => '75%'],
+    ['label' => 'Documents',           'value' => $workspace_documents],
+    ['label' => 'Clarifications',      'value' => $workspace_clarifications],
     ['label' => 'Evidence',            'value' => '80%'],
     ['label' => 'Gap Report',          'value' => '90%'],
-    ['label' => 'Client Sign-off',     'value' => '50%'],
+    ['label' => 'Client Sign-off',     'value' => $workspace_submission_status === 'Ready' ? '100%' : '50%'],
   ],
 ];
 
@@ -139,6 +167,9 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">

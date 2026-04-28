@@ -13,14 +13,14 @@ $prepared_by       = isset($prepared_by) ? trim((string) $prepared_by) : '-';
 $last_updated      = isset($last_updated) ? trim((string) $last_updated) : '-';
 $action_items      = isset($action_items) && is_array($action_items) ? $action_items : [];
 ?>
-<header class="rounded-lg border border-zinc-200 bg-white p-5 md:p-6" aria-labelledby="submission-header-title">
+<header class="rounded-lg border border-brand-200 bg-white p-5 md:p-6" aria-labelledby="submission-header-title">
   <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
     <div>
-      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">Final Submission Package</p>
-      <h1 id="submission-header-title" class="mt-2 text-2xl font-semibold leading-tight text-zinc-900 md:text-3xl">
+      <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">Final Submission Package</p>
+      <h1 id="submission-header-title" class="mt-2 text-2xl font-semibold leading-tight text-brand-900 md:text-3xl">
         <?= e($project_name); ?>
       </h1>
-      <p class="mt-1 text-sm text-zinc-600">Project Code: <?= e($project_code); ?></p>
+      <p class="mt-1 text-sm text-brand-600">Project Code: <?= e($project_code); ?></p>
     </div>
 
     <div class="flex flex-wrap items-center gap-2">
@@ -45,32 +45,32 @@ $action_items      = isset($action_items) && is_array($action_items) ? $action_i
 
   <dl class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Client Company</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($client_company); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Client Company</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($client_company); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">GBI Tool Type</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($gbi_tool_type); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">GBI Tool Type</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($gbi_tool_type); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Target Rating</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($target_rating); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Target Rating</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($target_rating); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Submission Stage</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($submission_stage); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Submission Stage</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($submission_stage); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Package Version</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($package_version); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Package Version</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($package_version); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Prepared By</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($prepared_by); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Prepared By</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($prepared_by); ?></dd>
     </div>
     <div>
-      <dt class="text-xs uppercase tracking-wide text-zinc-500">Last Updated</dt>
-      <dd class="mt-1 font-medium text-zinc-900"><?= e($last_updated); ?></dd>
+      <dt class="text-xs uppercase tracking-wide text-brand-500">Last Updated</dt>
+      <dd class="mt-1 font-medium text-brand-900"><?= e($last_updated); ?></dd>
     </div>
   </dl>
 </header>

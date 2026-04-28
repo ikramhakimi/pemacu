@@ -3,8 +3,47 @@
 declare(strict_types=1);
 
 $page_title   = 'Final Submission Package';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-submission';
 $project_current = 'project-submission';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$submission_phase_data = isset($current_phase_data['submission']) && is_array($current_phase_data['submission'])
+  ? $current_phase_data['submission']
+  : [];
+$submission_state = isset($submission_phase_data['state']) ? (string) $submission_phase_data['state'] : 'not_ready';
+$submission_message = isset($submission_phase_data['message']) ? (string) $submission_phase_data['message'] : 'Project setup incomplete.';
+$submission_stage_map = [
+  'not_ready'    => 'Setup Incomplete',
+  'blocked'      => 'Blocked by Dependencies',
+  'almost_ready' => 'Final Check Stage',
+  'ready'        => 'Ready for Submission',
+];
+$submission_stage_label = isset($submission_stage_map[$submission_state])
+  ? $submission_stage_map[$submission_state]
+  : $submission_stage_map['not_ready'];
+$workspace_requirement_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
+$workspace_documents = isset($workspace_phase_data['documents']) ? (string) $workspace_phase_data['documents'] : '0';
+$workspace_clarifications = isset($workspace_phase_data['clarifications']) ? (string) $workspace_phase_data['clarifications'] : '0';
+$workspace_evidence_verified = isset($workspace_phase_data['evidence_verified']) ? (string) $workspace_phase_data['evidence_verified'] : '0';
+$workspace_submission_status = isset($workspace_phase_data['submission_status'])
+  ? (string) $workspace_phase_data['submission_status']
+  : 'Not Ready';
+$submission_readiness_status_map = [
+  'Not Ready'   => 'Not Ready',
+  'Blocked'     => 'Not Ready',
+  'Almost Ready' => 'Almost Ready',
+  'Ready'       => 'Ready for Submission',
+];
+$submission_readiness_status = isset($submission_readiness_status_map[$workspace_submission_status])
+  ? $submission_readiness_status_map[$workspace_submission_status]
+  : 'Draft';
 
 $module_nav_links = [
   ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
@@ -21,10 +60,10 @@ $submission_header = [
   'client_company'   => 'Harmoni Asset Holdings Berhad',
   'gbi_tool_type'    => 'GBI NRNC: Existing Building',
   'target_rating'    => 'GBI Gold',
-  'submission_stage' => 'Completion & Verification Assessment',
+  'submission_stage' => $submission_stage_label,
   'package_version'  => 'Submission Package Rev 2',
   'prepared_by'      => 'Ir. Aisyah Kamaruddin',
-  'last_updated'     => '2026-04-24 16:45',
+  'last_updated'     => date('Y-m-d H:i'),
   'action_items'     => [
     ['label' => 'View Checklist',           'tone' => 'default', 'href' => path('/mampan/consultant/submission/submission-checklist')],
     ['label' => 'Export Package',           'tone' => 'default', 'href' => path('/mampan/consultant/submission/submission-export')],
@@ -33,24 +72,24 @@ $submission_header = [
 ];
 
 $summary_cards = [
-  ['label' => 'Submission Readiness',   'value' => '84%',      'helper' => 'Almost ready for final package export',  'tone' => 'warning',  'icon_name' => 'shield-check-line'],
-  ['label' => 'Verified Evidence',      'value' => '42 / 48',  'helper' => '6 items still under review',              'tone' => 'warning',  'icon_name' => 'file-shield-2-line'],
-  ['label' => 'Closed Clarifications',  'value' => '19 / 22',  'helper' => '3 clarifications awaiting closure',       'tone' => 'warning',  'icon_name' => 'question-answer-line'],
-  ['label' => 'Complete Documents',     'value' => '46 / 50',  'helper' => '4 files need revision or upload',         'tone' => 'warning',  'icon_name' => 'file-list-3-line'],
-  ['label' => 'Blocking Items',         'value' => '4',        'helper' => '2 high-priority and 2 client dependencies', 'tone' => 'negative', 'icon_name' => 'alert-line'],
-  ['label' => 'Client Sign-off',        'value' => 'Requested','helper' => 'Formal acknowledgement still pending',    'tone' => 'warning',  'icon_name' => 'user-star-line'],
+  ['label' => 'Submission Readiness',   'value' => $workspace_requirement_readiness,   'helper' => $submission_message, 'tone' => 'warning',  'icon_name' => 'shield-check-line'],
+  ['label' => 'Verified Evidence',      'value' => $workspace_evidence_verified, 'helper' => 'Verified evidence in current phase', 'tone' => 'warning',  'icon_name' => 'file-shield-2-line'],
+  ['label' => 'Open Clarifications',    'value' => $workspace_clarifications, 'helper' => 'Clarifications awaiting closure', 'tone' => 'warning',  'icon_name' => 'question-answer-line'],
+  ['label' => 'Documents Tracked',      'value' => $workspace_documents, 'helper' => 'Documents included in package scope', 'tone' => 'warning',  'icon_name' => 'file-list-3-line'],
+  ['label' => 'Submission Status',      'value' => $workspace_submission_status, 'helper' => 'Current package state', 'tone' => 'negative', 'icon_name' => 'alert-line'],
+  ['label' => 'Client Sign-off',        'value' => $submission_state === 'ready' ? 'Ready' : 'Pending', 'helper' => 'Formal acknowledgement status', 'tone' => 'warning',  'icon_name' => 'user-star-line'],
 ];
 
 $readiness_data = [
-  'overall_readiness'     => '84%',
-  'readiness_status'      => 'Almost Ready',
-  'readiness_explanation' => 'Package quality is stable for GBI Gold target, but submission remains blocked by one evidence verification and unresolved client response.',
+  'overall_readiness'     => $workspace_requirement_readiness,
+  'readiness_status'      => $submission_readiness_status,
+  'readiness_explanation' => $submission_message,
   'source_progress'       => [
-    ['label' => 'Documents',       'value' => '92%'],
-    ['label' => 'Clarifications',  'value' => '86%'],
-    ['label' => 'Evidence',        'value' => '88%'],
-    ['label' => 'Gap Report',      'value' => '100%'],
-    ['label' => 'Client Sign-off', 'value' => '55%'],
+    ['label' => 'Documents',       'value' => $workspace_documents],
+    ['label' => 'Clarifications',  'value' => $workspace_clarifications],
+    ['label' => 'Evidence',        'value' => $workspace_evidence_verified],
+    ['label' => 'Gap Report',      'value' => $workspace_requirement_readiness],
+    ['label' => 'Client Sign-off', 'value' => $submission_state === 'ready' ? '100%' : '40%'],
   ],
 ];
 
@@ -159,6 +198,9 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">

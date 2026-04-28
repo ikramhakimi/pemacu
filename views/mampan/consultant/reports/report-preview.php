@@ -3,8 +3,27 @@
 declare(strict_types=1);
 
 $page_title   = 'Report Preview';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-reports';
 $project_current = 'project-reports';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$reports_phase_data = isset($current_phase_data['reports']) && is_array($current_phase_data['reports'])
+  ? $current_phase_data['reports']
+  : [];
+$reports_message = isset($reports_phase_data['message'])
+  ? (string) $reports_phase_data['message']
+  : 'Initial gap analysis not yet generated.';
+$workspace_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
+$workspace_clarifications = isset($workspace_phase_data['clarifications'])
+  ? (string) $workspace_phase_data['clarifications']
+  : '0';
 
 $module_nav_links = [
   ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
@@ -45,10 +64,13 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <header class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="report-preview-top-heading">
+  <header class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="report-preview-top-heading">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <div class="flex flex-wrap gap-2">
         <?php component('button', ['label' => 'Back to Gap Report', 'href' => path('/mampan/consultant/reports/gap-analysis-report'), 'variant' => 'default', 'size' => 'sm']); ?>
@@ -58,22 +80,23 @@ layout('mampan/dashboard-project', [
     </div>
   </header>
 
-  <section class="rounded-lg border border-zinc-200 bg-white p-6 md:p-8" aria-labelledby="report-preview-top-heading">
-    <header class="border-b border-zinc-200 pb-5">
-      <p class="text-xs font-semibold uppercase tracking-wide text-zinc-500">GBI NRNC Gap Analysis Report Preview</p>
-      <h1 id="report-preview-top-heading" class="mt-2 text-2xl font-semibold text-zinc-900 md:text-3xl">Menara Harmoni Office Retrofit</h1>
+  <section class="rounded-lg border border-brand-200 bg-white p-6 md:p-8" aria-labelledby="report-preview-top-heading">
+    <header class="border-b border-brand-200 pb-5">
+      <p class="text-xs font-semibold uppercase tracking-wide text-brand-500">GBI NRNC Gap Analysis Report Preview</p>
+      <h1 id="report-preview-top-heading" class="mt-2 text-2xl font-semibold text-brand-900 md:text-3xl">Menara Harmoni Office Retrofit</h1>
+      <p class="mt-1 text-sm text-brand-600"><?= e($reports_message); ?></p>
       <dl class="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Project Code</dt><dd class="mt-1 text-sm font-medium text-zinc-900">GBI-NRNC-2026-014</dd></div>
-        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Client</dt><dd class="mt-1 text-sm font-medium text-zinc-900">Harmoni Asset Holdings Berhad</dd></div>
-        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Report Version</dt><dd class="mt-1 text-sm font-medium text-zinc-900">Rev 3</dd></div>
-        <div><dt class="text-xs uppercase tracking-wide text-zinc-500">Prepared By</dt><dd class="mt-1 text-sm font-medium text-zinc-900">Ir. Aisyah Kamaruddin</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-brand-500">Project Code</dt><dd class="mt-1 text-sm font-medium text-brand-900">GBI-NRNC-2026-014</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-brand-500">Client</dt><dd class="mt-1 text-sm font-medium text-brand-900">Harmoni Asset Holdings Berhad</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-brand-500">Report Version</dt><dd class="mt-1 text-sm font-medium text-brand-900">Rev 3</dd></div>
+        <div><dt class="text-xs uppercase tracking-wide text-brand-500">Prepared By</dt><dd class="mt-1 text-sm font-medium text-brand-900">Ir. Aisyah Kamaruddin</dd></div>
       </dl>
     </header>
 
     <section class="mt-6 space-y-6" aria-label="Report preview sections">
       <article>
-        <h2 class="text-lg font-semibold text-zinc-900">Executive Summary</h2>
-        <p class="mt-2 text-sm text-zinc-700">The project currently tracks within GBI Gold threshold at estimated score level, but verified score remains below confidence target due to unresolved evidence gaps in EE2, EQ4, WE3, and MR2. Closing these items is required before final submission package lock.</p>
+        <h2 class="text-lg font-semibold text-brand-900">Executive Summary</h2>
+        <p class="mt-2 text-sm text-brand-700">The project currently tracks within GBI Gold threshold at estimated score level, but verified score remains below confidence target due to unresolved evidence gaps in EE2, EQ4, WE3, and MR2. Closing these items is required before final submission package lock.</p>
       </article>
 
       <?php component('reports/report-score-summary', [
@@ -82,58 +105,58 @@ layout('mampan/dashboard-project', [
         'potential_score'      => '74 / 100',
         'verified_score'       => '56 / 100',
         'rating_gap'           => '10 points pending verification',
-        'submission_readiness' => '78%',
+        'submission_readiness' => $workspace_readiness,
       ]); ?>
 
       <article>
-        <h2 class="text-lg font-semibold text-zinc-900">Criteria Breakdown</h2>
+        <h2 class="text-lg font-semibold text-brand-900">Criteria Breakdown</h2>
         <div class="mt-3">
           <?php component('reports/report-criteria-breakdown', ['criteria_rows' => $criteria_breakdown]); ?>
         </div>
       </article>
 
       <article>
-        <h2 class="text-lg font-semibold text-zinc-900">Key Gaps & Risks</h2>
+        <h2 class="text-lg font-semibold text-brand-900">Key Gaps & Risks</h2>
         <div class="mt-3">
           <?php component('reports/report-risk-credit-list', ['risk_credits' => $risk_credits]); ?>
         </div>
       </article>
 
       <article>
-        <h2 class="text-lg font-semibold text-zinc-900">Required Client Actions</h2>
+        <h2 class="text-lg font-semibold text-brand-900">Required Client Actions</h2>
         <div class="mt-3">
           <?php component('reports/report-client-action-list', ['client_actions' => $client_actions]); ?>
         </div>
       </article>
 
       <article>
-        <h2 class="text-lg font-semibold text-zinc-900">Consultant Recommendations</h2>
+        <h2 class="text-lg font-semibold text-brand-900">Consultant Recommendations</h2>
         <div class="mt-3">
           <?php component('reports/report-recommendation-list', ['recommendations' => $recommendations]); ?>
         </div>
       </article>
 
-      <article class="rounded-md border border-zinc-200 bg-zinc-50 p-4" aria-labelledby="report-next-steps-heading">
-        <h2 id="report-next-steps-heading" class="text-lg font-semibold text-zinc-900">Next Steps</h2>
-        <ol class="mt-2 space-y-1 text-sm text-zinc-700">
-          <li>1. Close all high-priority evidence gaps within this reporting cycle.</li>
-          <li>2. Recalculate verified score after EE2 and MR2 closure confirmation.</li>
-          <li>3. Finalise submission readiness review with consultant and client leads.</li>
+      <article class="rounded-md border border-brand-200 bg-brand-50 p-4" aria-labelledby="report-next-steps-heading">
+        <h2 id="report-next-steps-heading" class="text-lg font-semibold text-brand-900">Next Steps</h2>
+        <ol class="mt-2 space-y-1 text-sm text-brand-700">
+          <li>1. Close open clarifications in current phase (<?= e($workspace_clarifications); ?> active).</li>
+          <li>2. Recalculate verified score after evidence closure confirmation.</li>
+          <li>3. Finalise submission readiness review at <?= e($workspace_readiness); ?> readiness.</li>
         </ol>
       </article>
 
-      <article class="rounded-md border border-zinc-200 bg-white p-4" aria-labelledby="report-sign-off-heading">
-        <h2 id="report-sign-off-heading" class="text-lg font-semibold text-zinc-900">Sign-off</h2>
+      <article class="rounded-md border border-brand-200 bg-white p-4" aria-labelledby="report-sign-off-heading">
+        <h2 id="report-sign-off-heading" class="text-lg font-semibold text-brand-900">Sign-off</h2>
         <div class="mt-3 grid gap-4 sm:grid-cols-2">
-          <div class="rounded-md border border-zinc-200 p-3">
-            <p class="text-xs uppercase tracking-wide text-zinc-500">Consultant Lead</p>
-            <p class="mt-6 text-sm font-medium text-zinc-900">____________________________</p>
-            <p class="mt-1 text-xs text-zinc-600">Ir. Aisyah Kamaruddin</p>
+          <div class="rounded-md border border-brand-200 p-3">
+            <p class="text-xs uppercase tracking-wide text-brand-500">Consultant Lead</p>
+            <p class="mt-6 text-sm font-medium text-brand-900">____________________________</p>
+            <p class="mt-1 text-xs text-brand-600">Ir. Aisyah Kamaruddin</p>
           </div>
-          <div class="rounded-md border border-zinc-200 p-3">
-            <p class="text-xs uppercase tracking-wide text-zinc-500">Client Representative</p>
-            <p class="mt-6 text-sm font-medium text-zinc-900">____________________________</p>
-            <p class="mt-1 text-xs text-zinc-600">Faizal Rahman</p>
+          <div class="rounded-md border border-brand-200 p-3">
+            <p class="text-xs uppercase tracking-wide text-brand-500">Client Representative</p>
+            <p class="mt-6 text-sm font-medium text-brand-900">____________________________</p>
+            <p class="mt-1 text-xs text-brand-600">Faizal Rahman</p>
           </div>
         </div>
       </article>

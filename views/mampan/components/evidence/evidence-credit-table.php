@@ -54,24 +54,24 @@ foreach ($evidence_rows as $row) {
   ob_start();
   ?>
   <div>
-    <p class="font-medium text-zinc-900"><?= e($credit_code); ?></p>
-    <p class="mt-1 text-xs text-zinc-600"><?= e($credit_title); ?></p>
-    <p class="mt-1 text-xs text-zinc-500">Criteria: <?= e($criteria_group); ?></p>
+    <p class="font-medium text-brand-900"><?= e($credit_code); ?></p>
+    <p class="mt-1 text-xs text-brand-600"><?= e($credit_title); ?></p>
+    <p class="mt-1 text-xs text-brand-500">Criteria: <?= e($criteria_group); ?></p>
   </div>
   <?php
   $gbi_credit_html = (string) ob_get_clean();
 
   ob_start();
   ?>
-  <p class="text-sm text-zinc-800"><?= e($evidence_summary); ?></p>
+  <p class="text-sm text-brand-800"><?= e($evidence_summary); ?></p>
   <?php
   $evidence_required_html = (string) ob_get_clean();
 
   ob_start();
   ?>
   <div>
-    <p class="font-medium text-zinc-900"><?= e($linked_count); ?> linked document(s)</p>
-    <p class="mt-1 text-xs text-zinc-600"><?= e($main_document); ?></p>
+    <p class="font-medium text-brand-900"><?= e($linked_count); ?> linked document(s)</p>
+    <p class="mt-1 text-xs text-brand-600"><?= e($main_document); ?></p>
   </div>
   <?php
   $linked_documents_html = (string) ob_get_clean();
@@ -79,8 +79,8 @@ foreach ($evidence_rows as $row) {
   ob_start();
   ?>
   <div>
-    <p class="font-medium text-zinc-900"><?= e($submitted_by); ?></p>
-    <p class="mt-1 text-xs text-zinc-600">Reviewer: <?= e($reviewer); ?></p>
+    <p class="font-medium text-brand-900"><?= e($submitted_by); ?></p>
+    <p class="mt-1 text-xs text-brand-600">Reviewer: <?= e($reviewer); ?></p>
   </div>
   <?php
   $submitted_by_html = (string) ob_get_clean();
@@ -118,10 +118,10 @@ foreach ($evidence_rows as $row) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-register-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="evidence-register-heading" class="text-lg font-semibold text-zinc-900">Evidence Register by GBI Credit</h2>
-    <p class="mt-1 text-sm text-zinc-600">Verification readiness across EE, EQ, SM, MR, WE, and IN criteria.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-register-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="evidence-register-heading" class="text-lg font-semibold text-brand-900">Evidence Register by GBI Credit</h2>
+    <p class="mt-1 text-sm text-brand-600">Verification readiness across EE, EQ, SM, MR, WE, and IN criteria.</p>
   </header>
 
   <div class="mt-4 overflow-x-auto">

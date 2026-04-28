@@ -63,10 +63,10 @@ foreach ($document_rows as $document_row) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="<?= e($heading_id); ?>">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="<?= e($heading_id); ?>" class="text-lg font-semibold text-zinc-900"><?= e($title); ?></h2>
-    <p class="mt-1 text-sm text-zinc-600"><?= e($description); ?></p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="<?= e($heading_id); ?>">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="<?= e($heading_id); ?>" class="text-lg font-semibold text-brand-900"><?= e($title); ?></h2>
+    <p class="mt-1 text-sm text-brand-600"><?= e($description); ?></p>
   </header>
 
   <div class="mt-4 overflow-x-auto">

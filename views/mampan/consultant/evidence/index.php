@@ -12,13 +12,13 @@ layout('mampan/dashboard-global', [
 ]);
 ?>
 <article class="app-article space-y-5 pb-5">
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-label="Evidence review queue">
-    <h2 class="text-lg font-semibold text-zinc-900">Evidence Review Queue</h2>
-    <p class="mt-1 text-sm text-zinc-600">Items pending consultant verification this cycle.</p>
-    <ul class="mt-4 space-y-3 text-sm text-zinc-700">
-      <li class="rounded-md border border-zinc-200 px-3 py-2">Menara Harmoni Office Retrofit: EE2 trend logs pending review</li>
-      <li class="rounded-md border border-zinc-200 px-3 py-2">Putra Tech Campus Annex: EQ4 declaration awaiting evidence link</li>
-      <li class="rounded-md border border-zinc-200 px-3 py-2">Seri Angkasa Tower: WE3 O&M manual revision check</li>
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-label="Evidence review queue">
+    <h2 class="text-lg font-semibold text-brand-900">Evidence Review Queue</h2>
+    <p class="mt-1 text-sm text-brand-600">Items pending consultant verification this cycle.</p>
+    <ul class="mt-4 space-y-3 text-sm text-brand-700">
+      <li class="rounded-md border border-brand-200 px-3 py-2">Menara Harmoni Office Retrofit: EE2 trend logs pending review</li>
+      <li class="rounded-md border border-brand-200 px-3 py-2">Putra Tech Campus Annex: EQ4 declaration awaiting evidence link</li>
+      <li class="rounded-md border border-brand-200 px-3 py-2">Seri Angkasa Tower: WE3 O&M manual revision check</li>
     </ul>
   </section>
 </article>

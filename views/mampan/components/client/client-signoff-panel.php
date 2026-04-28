@@ -14,20 +14,20 @@ $request_changes_label = isset($request_changes_label) ? trim((string) $request_
 $request_changes_href  = isset($request_changes_href) ? trim((string) $request_changes_href) : '#';
 ?>
 <section class="space-y-5" aria-labelledby="client-signoff-panel-heading">
-  <article class="rounded-lg border border-zinc-200 bg-white p-5">
-    <h2 id="client-signoff-panel-heading" class="text-lg font-semibold text-zinc-900">Submission Summary</h2>
+  <article class="rounded-lg border border-brand-200 bg-white p-5">
+    <h2 id="client-signoff-panel-heading" class="text-lg font-semibold text-brand-900">Submission Summary</h2>
     <dl class="mt-4 grid gap-3 text-sm sm:grid-cols-2">
       <div>
-        <dt class="text-zinc-500">Project</dt>
-        <dd class="mt-1 font-medium text-zinc-900"><?= e($project_name); ?></dd>
+        <dt class="text-brand-500">Project</dt>
+        <dd class="mt-1 font-medium text-brand-900"><?= e($project_name); ?></dd>
       </div>
       <div>
-        <dt class="text-zinc-500">Submission Readiness</dt>
-        <dd class="mt-1 font-medium text-zinc-900"><?= e($submission_readiness); ?></dd>
+        <dt class="text-brand-500">Submission Readiness</dt>
+        <dd class="mt-1 font-medium text-brand-900"><?= e($submission_readiness); ?></dd>
       </div>
     </dl>
     <?php if ($key_notes !== ''): ?>
-      <p class="mt-3 text-sm text-zinc-600"><?= e($key_notes); ?></p>
+      <p class="mt-3 text-sm text-brand-600"><?= e($key_notes); ?></p>
     <?php endif; ?>
   </article>
 
@@ -41,8 +41,8 @@ $request_changes_href  = isset($request_changes_href) ? trim((string) $request_c
     <?php endif; ?>
   </article>
 
-  <article class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="client-signoff-checklist-heading">
-    <h3 id="client-signoff-checklist-heading" class="text-base font-semibold text-zinc-900">Checklist</h3>
+  <article class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="client-signoff-checklist-heading">
+    <h3 id="client-signoff-checklist-heading" class="text-base font-semibold text-brand-900">Checklist</h3>
     <div class="mt-3 space-y-2">
       <?php foreach ($checklist_items as $index => $checklist_item): ?>
         <?php
@@ -63,7 +63,7 @@ $request_changes_href  = isset($request_changes_href) ? trim((string) $request_c
     </div>
   </article>
 
-  <article class="rounded-lg border border-zinc-200 bg-white p-5">
+  <article class="rounded-lg border border-brand-200 bg-white p-5">
     <div class="flex flex-wrap items-center gap-2">
       <?php component('button', ['label' => $approve_label, 'href' => $approve_href, 'variant' => 'primary']); ?>
       <?php component('button', ['label' => $request_changes_label, 'href' => $request_changes_href, 'variant' => 'default']); ?>

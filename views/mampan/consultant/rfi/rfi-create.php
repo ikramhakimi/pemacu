@@ -3,15 +3,42 @@
 declare(strict_types=1);
 
 $page_title   = 'New Clarification';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-rfi';
 $project_current = 'project-rfi';
+$clarifications_phase_data = isset($current_phase_data['clarifications']) && is_array($current_phase_data['clarifications'])
+  ? $current_phase_data['clarifications']
+  : [];
+$documents_phase_data = isset($current_phase_data['documents']) && is_array($current_phase_data['documents'])
+  ? $current_phase_data['documents']
+  : [];
+$clarifications_message = isset($clarifications_phase_data['message'])
+  ? (string) $clarifications_phase_data['message']
+  : 'Multiple clarifications are awaiting client response.';
+$clarifications_state = isset($clarifications_phase_data['state']) ? (string) $clarifications_phase_data['state'] : 'active';
+$documents_state = isset($documents_phase_data['state']) ? (string) $documents_phase_data['state'] : 'initial';
+$clarification_stage_map = [
+  'empty'    => 'Project Kickoff',
+  'active'   => 'Evidence Collection',
+  'reducing' => 'Resolution Tracking',
+  'closed'   => 'Finalisation',
+];
+$document_status_map = [
+  'initial'    => 'Missing',
+  'collection' => 'Partial',
+  'review'     => 'Under Review',
+  'complete'   => 'Satisfied',
+];
 
 $create_preview = [
-  'project_stage'         => 'Evidence Collection',
+  'project_stage'         => isset($clarification_stage_map[$clarifications_state]) ? $clarification_stage_map[$clarifications_state] : 'Evidence Collection',
   'linked_document'       => 'Chilled Water System Schematic Rev B',
   'linked_gbi_credit'     => 'EE2 - Energy Monitoring',
   'related_evidence_item' => '3 months chilled water trend logs',
-  'document_hub_status'   => 'Missing',
+  'document_hub_status'   => isset($document_status_map[$documents_state]) ? $document_status_map[$documents_state] : 'Missing',
   'people_involved'       => [
     ['name' => 'Ir. Aisyah Kamaruddin', 'role' => 'Lead Consultant'],
     ['name' => 'Mechanical Engineer (Client)', 'role' => 'Assigned Respondent'],
@@ -24,23 +51,27 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <header class="rounded-lg border border-zinc-200 bg-white p-5">
+  <header class="rounded-lg border border-brand-200 bg-white p-5">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <?php component('button', ['label' => 'Back to Clarifications', 'href' => path('/mampan/consultant/rfi/rfi-index'), 'variant' => 'default', 'size' => 'sm']); ?>
       <?php component('badge', ['items' => [['label' => 'Draft', 'tone' => 'neutral']]]); ?>
     </div>
-    <h1 class="mt-4 text-2xl font-semibold text-zinc-900 md:text-3xl">Create Clarification</h1>
-    <p class="mt-1 text-sm text-zinc-600">
+    <h1 class="mt-4 text-2xl font-semibold text-brand-900 md:text-3xl">Create Clarification</h1>
+    <p class="mt-1 text-sm text-brand-600">
       Link every clarification to a project stage, document, GBI credit, or evidence item to keep review traceable.
     </p>
+    <p class="mt-1 text-sm text-brand-500"><?= e($clarifications_message); ?></p>
   </header>
 
   <section class="grid gap-5 xl:grid-cols-12" aria-label="Create clarification form">
     <div class="xl:col-span-8">
-      <form class="rounded-lg border border-zinc-200 bg-white p-5 space-y-5" action="#" method="post">
+      <form class="rounded-lg border border-brand-200 bg-white p-5 space-y-5" action="#" method="post">
         <div class="grid gap-4 md:grid-cols-2">
           <?php component('fields', [
             'label'       => 'Subject',
@@ -192,9 +223,9 @@ layout('mampan/dashboard-project', [
         </div>
 
         <div>
-          <p class="text-xs uppercase tracking-wide text-zinc-500">Attach Reference File</p>
-          <div class="mt-2 rounded-md border border-dashed border-zinc-300 bg-zinc-50 p-4">
-            <p class="text-sm text-zinc-700">Reference upload placeholder: drawings, screenshots, or previous review notes.</p>
+          <p class="text-xs uppercase tracking-wide text-brand-500">Attach Reference File</p>
+          <div class="mt-2 rounded-md border border-dashed border-brand-300 bg-brand-50 p-4">
+            <p class="text-sm text-brand-700">Reference upload placeholder: drawings, screenshots, or previous review notes.</p>
           </div>
         </div>
 

@@ -16,17 +16,17 @@ $status_tone_map = [
 
 $status_tone = isset($status_tone_map[$readiness_status]) ? $status_tone_map[$readiness_status] : 'neutral';
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-readiness-heading">
-  <header class="flex flex-col gap-3 border-b border-zinc-200 pb-4 sm:flex-row sm:items-start sm:justify-between">
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-readiness-heading">
+  <header class="flex flex-col gap-3 border-b border-brand-200 pb-4 sm:flex-row sm:items-start sm:justify-between">
     <div>
-      <h2 id="submission-readiness-heading" class="text-lg font-semibold text-zinc-900">Submission Readiness</h2>
+      <h2 id="submission-readiness-heading" class="text-lg font-semibold text-brand-900">Submission Readiness</h2>
       <?php if ($readiness_explanation !== ''): ?>
-        <p class="mt-1 text-sm text-zinc-600"><?= e($readiness_explanation); ?></p>
+        <p class="mt-1 text-sm text-brand-600"><?= e($readiness_explanation); ?></p>
       <?php endif; ?>
     </div>
     <div class="flex items-center gap-2">
       <?php component('badge', ['items' => [['label' => $readiness_status, 'tone' => $status_tone]]]); ?>
-      <p class="text-lg font-semibold text-zinc-900"><?= e($overall_readiness); ?></p>
+      <p class="text-lg font-semibold text-brand-900"><?= e($overall_readiness); ?></p>
     </div>
   </header>
 
@@ -54,11 +54,11 @@ $status_tone = isset($status_tone_map[$readiness_status]) ? $status_tone_map[$re
       ?>
       <article>
         <div class="mb-1 flex items-center justify-between gap-3">
-          <h3 class="text-sm font-medium text-zinc-800"><?= e($source_label); ?></h3>
-          <p class="text-sm text-zinc-600"><?= e($source_value); ?></p>
+          <h3 class="text-sm font-medium text-brand-800"><?= e($source_label); ?></h3>
+          <p class="text-sm text-brand-600"><?= e($source_value); ?></p>
         </div>
-        <div class="h-2 rounded-full bg-zinc-100">
-          <div class="h-full rounded-full bg-zinc-700" style="width: <?= e((string) $source_width_number); ?>%"></div>
+        <div class="h-2 rounded-full bg-brand-100">
+          <div class="h-full rounded-full bg-brand-700" style="width: <?= e((string) $source_width_number); ?>%"></div>
         </div>
       </article>
     <?php endforeach; ?>

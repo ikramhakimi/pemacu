@@ -49,10 +49,10 @@ foreach ($missing_evidence_rows as $missing_evidence_row) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="report-missing-evidence-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="report-missing-evidence-heading" class="text-lg font-semibold text-zinc-900">Missing Evidence</h2>
-    <p class="mt-1 text-sm text-zinc-600">Evidence gaps that must be closed before final submission package.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="report-missing-evidence-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="report-missing-evidence-heading" class="text-lg font-semibold text-brand-900">Missing Evidence</h2>
+    <p class="mt-1 text-sm text-brand-600">Evidence gaps that must be closed before final submission package.</p>
   </header>
 
   <div class="mt-4 overflow-x-auto">

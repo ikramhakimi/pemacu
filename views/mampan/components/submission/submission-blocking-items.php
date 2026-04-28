@@ -35,7 +35,7 @@ foreach ($blocking_items as $blocking_item) {
 
   ob_start();
   ?>
-  <p class="font-medium text-zinc-900"><?= e($title); ?></p>
+  <p class="font-medium text-brand-900"><?= e($title); ?></p>
   <?php
   $item_html = (string) ob_get_clean();
 
@@ -58,10 +58,10 @@ foreach ($blocking_items as $blocking_item) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-blocking-items-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="submission-blocking-items-heading" class="text-lg font-semibold text-zinc-900">Blocking Items</h2>
-    <p class="mt-1 text-sm text-zinc-600">Outstanding items that must be closed before final package submission.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-blocking-items-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="submission-blocking-items-heading" class="text-lg font-semibold text-brand-900">Blocking Items</h2>
+    <p class="mt-1 text-sm text-brand-600">Outstanding items that must be closed before final package submission.</p>
   </header>
 
   <div class="mt-4 overflow-x-auto">

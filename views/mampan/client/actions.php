@@ -48,7 +48,7 @@ $actions = [
   ],
 ];
 
-layout('dashboard-client', [
+layout('mampan/dashboard-client', [
   'page_title'   => $page_title,
   'page_current' => $page_current,
   'global_intro' => 'Your central task list. Complete these items to keep submission on schedule.',

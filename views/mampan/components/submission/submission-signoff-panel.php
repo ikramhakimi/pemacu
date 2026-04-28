@@ -21,28 +21,28 @@ $consultant_tone = isset($status_tone_map[$consultant_signoff_status]) ? $status
 $client_tone     = isset($status_tone_map[$client_signoff_status]) ? $status_tone_map[$client_signoff_status] : 'neutral';
 $approval_tone   = isset($status_tone_map[$final_approval_status]) ? $status_tone_map[$final_approval_status] : 'neutral';
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-signoff-panel-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="submission-signoff-panel-heading" class="text-lg font-semibold text-zinc-900">Sign-off Panel</h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-signoff-panel-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="submission-signoff-panel-heading" class="text-lg font-semibold text-brand-900">Sign-off Panel</h2>
   </header>
 
   <dl class="mt-4 space-y-3">
     <div class="flex items-center justify-between gap-3">
-      <dt class="text-sm text-zinc-600">Consultant Sign-off</dt>
+      <dt class="text-sm text-brand-600">Consultant Sign-off</dt>
       <dd><?php component('badge', ['items' => [['label' => $consultant_signoff_status, 'tone' => $consultant_tone]]]); ?></dd>
     </div>
     <div class="flex items-center justify-between gap-3">
-      <dt class="text-sm text-zinc-600">Client Sign-off</dt>
+      <dt class="text-sm text-brand-600">Client Sign-off</dt>
       <dd><?php component('badge', ['items' => [['label' => $client_signoff_status, 'tone' => $client_tone]]]); ?></dd>
     </div>
     <div class="flex items-center justify-between gap-3">
-      <dt class="text-sm text-zinc-600">Final Approval</dt>
+      <dt class="text-sm text-brand-600">Final Approval</dt>
       <dd><?php component('badge', ['items' => [['label' => $final_approval_status, 'tone' => $approval_tone]]]); ?></dd>
     </div>
   </dl>
 
-  <div class="mt-4 border-t border-zinc-200 pt-4">
-    <p class="text-xs uppercase tracking-wide text-zinc-500">Actions</p>
+  <div class="mt-4 border-t border-brand-200 pt-4">
+    <p class="text-xs uppercase tracking-wide text-brand-500">Actions</p>
     <div class="mt-2 grid gap-2">
       <?php foreach ($action_items as $action_item): ?>
         <?php

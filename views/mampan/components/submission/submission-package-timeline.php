@@ -39,9 +39,9 @@ foreach ($timeline_items as $timeline_item) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-package-timeline-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="submission-package-timeline-heading" class="text-lg font-semibold text-zinc-900">Final Package Timeline</h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-package-timeline-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="submission-package-timeline-heading" class="text-lg font-semibold text-brand-900">Final Package Timeline</h2>
   </header>
 
   <div class="mt-4 overflow-x-auto">

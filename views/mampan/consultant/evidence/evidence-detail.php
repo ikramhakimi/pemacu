@@ -3,14 +3,37 @@
 declare(strict_types=1);
 
 $page_title   = 'Evidence Detail';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-evidence';
 $project_current = 'project-evidence';
+$evidence_phase_data = isset($current_phase_data['evidence']) && is_array($current_phase_data['evidence'])
+  ? $current_phase_data['evidence']
+  : [];
+$evidence_state = isset($evidence_phase_data['state']) ? (string) $evidence_phase_data['state'] : 'not_started';
+$evidence_message = isset($evidence_phase_data['message'])
+  ? (string) $evidence_phase_data['message']
+  : 'Evidence verification starts after requirements are ready.';
 
 $evidence_id        = 'EVC-EECX-002';
 $evidence_title     = 'AHU Commissioning Test Results';
 $gbi_credit         = 'EE Commissioning / Verification';
-$current_status     = 'Need Revision';
-$score_impact_label = 'At Risk 2 points';
+$evidence_status_map = [
+  'not_started' => 'Submitted',
+  'pending'     => 'Under Review',
+  'active'      => 'Under Review',
+  'verified'    => 'Verified',
+];
+$score_impact_label_map = [
+  'not_started' => '1 point pending',
+  'pending'     => 'At Risk 1 point',
+  'active'      => 'At Risk 2 points',
+  'verified'    => '+1 point verified',
+];
+$current_status = isset($evidence_status_map[$evidence_state]) ? $evidence_status_map[$evidence_state] : 'Need Revision';
+$score_impact_label = isset($score_impact_label_map[$evidence_state]) ? $score_impact_label_map[$evidence_state] : 'At Risk 2 points';
 
 $status_tone_map = [
   'Not Submitted'           => 'neutral',
@@ -125,10 +148,13 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <header class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-detail-heading">
+  <header class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-detail-heading">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <?php component('button', ['label' => 'Back to Evidence Verification', 'href' => path('/mampan/consultant/evidence/evidence-index'), 'variant' => 'default', 'size' => 'sm']); ?>
       <div class="flex flex-wrap items-center gap-2">
@@ -137,9 +163,10 @@ layout('mampan/dashboard-project', [
       </div>
     </div>
 
-    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-zinc-500"><?= e($evidence_id); ?></p>
-    <h1 id="evidence-detail-heading" class="mt-1 text-2xl font-semibold text-zinc-900 md:text-3xl"><?= e($evidence_title); ?></h1>
-    <p class="mt-1 text-sm text-zinc-600">GBI Credit: <?= e($gbi_credit); ?></p>
+    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-brand-500"><?= e($evidence_id); ?></p>
+    <h1 id="evidence-detail-heading" class="mt-1 text-2xl font-semibold text-brand-900 md:text-3xl"><?= e($evidence_title); ?></h1>
+    <p class="mt-1 text-sm text-brand-600">GBI Credit: <?= e($gbi_credit); ?></p>
+    <p class="mt-1 text-sm text-brand-500"><?= e($evidence_message); ?></p>
   </header>
 
   <section class="grid gap-5 xl:grid-cols-12" aria-label="Evidence detail layout">
@@ -153,48 +180,48 @@ layout('mampan/dashboard-project', [
     <div class="space-y-5 xl:col-span-4">
       <?php component('evidence/evidence-score-impact', $score_impact); ?>
 
-      <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="related-clarification-heading">
-        <header class="border-b border-zinc-200 pb-4">
-          <h2 id="related-clarification-heading" class="text-lg font-semibold text-zinc-900">Related Clarification / RFI</h2>
+      <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="related-clarification-heading">
+        <header class="border-b border-brand-200 pb-4">
+          <h2 id="related-clarification-heading" class="text-lg font-semibold text-brand-900">Related Clarification / RFI</h2>
         </header>
         <div class="mt-4 space-y-3">
-          <div class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
-            <p class="text-xs uppercase tracking-wide text-zinc-500">Linked Item</p>
-            <p class="mt-1 font-medium text-zinc-900">RFI #008 - AHU Commissioning Report Test Results</p>
-            <p class="mt-1 text-sm text-zinc-700">Awaiting complete balancing test sheets and final sign-off reference.</p>
+          <div class="rounded-md border border-brand-200 bg-brand-50 p-3">
+            <p class="text-xs uppercase tracking-wide text-brand-500">Linked Item</p>
+            <p class="mt-1 font-medium text-brand-900">RFI #008 - AHU Commissioning Report Test Results</p>
+            <p class="mt-1 text-sm text-brand-700">Awaiting complete balancing test sheets and final sign-off reference.</p>
           </div>
           <?php component('button', ['label' => 'Open Clarification Detail', 'href' => path('/mampan/consultant/rfi/rfi-detail?rfi=008'), 'variant' => 'default', 'size' => 'sm']); ?>
         </div>
       </section>
 
-      <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-people-heading">
-        <header class="border-b border-zinc-200 pb-4">
-          <h2 id="evidence-people-heading" class="text-lg font-semibold text-zinc-900">People Involved</h2>
+      <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-people-heading">
+        <header class="border-b border-brand-200 pb-4">
+          <h2 id="evidence-people-heading" class="text-lg font-semibold text-brand-900">People Involved</h2>
         </header>
         <ul class="mt-4 space-y-2">
-          <li class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
-            <p class="font-medium text-zinc-900">Ir. Aisyah Kamaruddin</p>
-            <p class="text-xs text-zinc-600">Lead GBI Consultant</p>
+          <li class="rounded-md border border-brand-200 bg-brand-50 p-3">
+            <p class="font-medium text-brand-900">Ir. Aisyah Kamaruddin</p>
+            <p class="text-xs text-brand-600">Lead GBI Consultant</p>
           </li>
-          <li class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
-            <p class="font-medium text-zinc-900">Azlan Yusof</p>
-            <p class="text-xs text-zinc-600">Commissioning Reviewer</p>
+          <li class="rounded-md border border-brand-200 bg-brand-50 p-3">
+            <p class="font-medium text-brand-900">Azlan Yusof</p>
+            <p class="text-xs text-brand-600">Commissioning Reviewer</p>
           </li>
-          <li class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
-            <p class="font-medium text-zinc-900">Daniel Ong</p>
-            <p class="text-xs text-zinc-600">Mechanical Engineer (Client)</p>
+          <li class="rounded-md border border-brand-200 bg-brand-50 p-3">
+            <p class="font-medium text-brand-900">Daniel Ong</p>
+            <p class="text-xs text-brand-600">Mechanical Engineer (Client)</p>
           </li>
         </ul>
       </section>
 
-      <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-sla-heading">
-        <header class="border-b border-zinc-200 pb-4">
-          <h2 id="evidence-sla-heading" class="text-lg font-semibold text-zinc-900">Due Date / Review SLA</h2>
+      <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-sla-heading">
+        <header class="border-b border-brand-200 pb-4">
+          <h2 id="evidence-sla-heading" class="text-lg font-semibold text-brand-900">Due Date / Review SLA</h2>
         </header>
-        <div class="mt-4 rounded-md border border-zinc-200 bg-zinc-50 p-3">
-          <p class="text-xs uppercase tracking-wide text-zinc-500">Due Date</p>
-          <p class="mt-1 font-medium text-zinc-900">2026-04-28</p>
-          <p class="mt-2 text-sm text-zinc-700">SLA target: consultant review update within 3 working days after revised upload.</p>
+        <div class="mt-4 rounded-md border border-brand-200 bg-brand-50 p-3">
+          <p class="text-xs uppercase tracking-wide text-brand-500">Due Date</p>
+          <p class="mt-1 font-medium text-brand-900">2026-04-28</p>
+          <p class="mt-2 text-sm text-brand-700">SLA target: consultant review update within 3 working days after revised upload.</p>
         </div>
       </section>
     </div>

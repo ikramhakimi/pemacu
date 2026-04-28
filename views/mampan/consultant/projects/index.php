@@ -12,11 +12,11 @@ layout('mampan/dashboard-global', [
 ]);
 ?>
 <article class="app-article space-y-5 pb-5">
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-label="All projects">
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-label="All projects">
     <div class="flex flex-wrap items-start justify-between gap-3">
       <div>
-        <h2 class="text-lg font-semibold text-zinc-900">All Projects</h2>
-        <p class="mt-1 text-sm text-zinc-600">Portfolio-level list grouped by delivery status.</p>
+        <h2 class="text-lg font-semibold text-brand-900">All Projects</h2>
+        <p class="mt-1 text-sm text-brand-600">Portfolio-level list grouped by delivery status.</p>
       </div>
       <?php component('button', [
         'label'   => 'New GBI Project',
@@ -26,9 +26,9 @@ layout('mampan/dashboard-global', [
       ]); ?>
     </div>
     <div class="mt-4 overflow-x-auto">
-      <table class="min-w-full divide-y divide-zinc-200 text-sm">
+      <table class="min-w-full divide-y divide-brand-200 text-sm">
         <thead>
-          <tr class="text-left text-xs uppercase tracking-wide text-zinc-500">
+          <tr class="text-left text-xs uppercase tracking-wide text-brand-500">
             <th class="px-3 py-2">Project</th>
             <th class="px-3 py-2">Code</th>
             <th class="px-3 py-2">Client</th>
@@ -36,16 +36,16 @@ layout('mampan/dashboard-global', [
             <th class="px-3 py-2">Target Rating</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-zinc-100">
+        <tbody class="divide-y divide-brand-100">
           <tr>
-            <td class="px-3 py-2 font-medium text-zinc-900"><a class="hover:underline" href="<?= e(path('/mampan/consultant/projects/project-workspace')); ?>">Menara Harmoni Office Retrofit</a></td>
+            <td class="px-3 py-2 font-medium text-brand-900"><a class="hover:underline" href="<?= e(path('/mampan/consultant/projects/project-workspace')); ?>">Menara Harmoni Office Retrofit</a></td>
             <td class="px-3 py-2">GBI-NRNC-2026-014</td>
             <td class="px-3 py-2">Harmoni Asset Holdings Berhad</td>
             <td class="px-3 py-2">Evidence Collection</td>
             <td class="px-3 py-2">GBI Gold</td>
           </tr>
           <tr>
-            <td class="px-3 py-2 font-medium text-zinc-900">Putra Tech Campus Annex</td>
+            <td class="px-3 py-2 font-medium text-brand-900">Putra Tech Campus Annex</td>
             <td class="px-3 py-2">GBI-NRNC-2026-018</td>
             <td class="px-3 py-2">Putra Tech Properties</td>
             <td class="px-3 py-2">Gap Analysis</td>

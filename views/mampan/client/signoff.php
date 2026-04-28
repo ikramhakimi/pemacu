@@ -22,7 +22,7 @@ $signoff_panel = [
   'request_changes_href'  => path('/mampan/client/actions'),
 ];
 
-layout('dashboard-client', [
+layout('mampan/dashboard-client', [
   'page_title'   => $page_title,
   'page_current' => $page_current,
   'global_intro' => 'Review the final summary and confirm your decision.',

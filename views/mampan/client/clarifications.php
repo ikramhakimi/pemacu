@@ -32,7 +32,7 @@ $clarifications = [
   ],
 ];
 
-layout('dashboard-client', [
+layout('mampan/dashboard-client', [
   'page_title'   => $page_title,
   'page_current' => $page_current,
   'global_intro' => 'Reply to consultant questions here. Clear replies help move your submission forward faster.',

@@ -12,11 +12,11 @@ $priority_tone_map = [
   'Low'    => 'neutral',
 ];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="client-action-list-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="client-action-list-heading" class="text-lg font-semibold text-zinc-900"><?= e($section_title); ?></h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="client-action-list-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="client-action-list-heading" class="text-lg font-semibold text-brand-900"><?= e($section_title); ?></h2>
     <?php if ($section_description !== ''): ?>
-      <p class="mt-1 text-sm text-zinc-600"><?= e($section_description); ?></p>
+      <p class="mt-1 text-sm text-brand-600"><?= e($section_description); ?></p>
     <?php endif; ?>
   </header>
 
@@ -38,16 +38,16 @@ $priority_tone_map = [
 
       $priority_tone = isset($priority_tone_map[$priority]) ? $priority_tone_map[$priority] : 'neutral';
       ?>
-      <article class="rounded-lg border border-zinc-200 bg-zinc-50 p-4">
+      <article class="rounded-lg border border-brand-200 bg-brand-50 p-4">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div class="flex flex-wrap items-center gap-2">
               <?php component('badge', ['items' => [['label' => $category, 'tone' => 'neutral']]]); ?>
               <?php component('badge', ['items' => [['label' => $priority . ' Priority', 'tone' => $priority_tone]]]); ?>
             </div>
-            <h3 class="mt-2 text-base font-semibold text-zinc-900"><?= e($title); ?></h3>
+            <h3 class="mt-2 text-base font-semibold text-brand-900"><?= e($title); ?></h3>
             <?php if ($why !== ''): ?>
-              <p class="mt-1 text-sm text-zinc-600"><?= e($why); ?></p>
+              <p class="mt-1 text-sm text-brand-600"><?= e($why); ?></p>
             <?php endif; ?>
           </div>
           <div>
@@ -60,15 +60,15 @@ $priority_tone_map = [
           </div>
         </div>
 
-        <dl class="mt-3 grid gap-2 text-sm text-zinc-600 sm:grid-cols-2">
+        <dl class="mt-3 grid gap-2 text-sm text-brand-600 sm:grid-cols-2">
           <?php if ($related_item !== ''): ?>
             <div>
-              <dt class="font-medium text-zinc-700">Related Item</dt>
+              <dt class="font-medium text-brand-700">Related Item</dt>
               <dd><?= e($related_item); ?></dd>
             </div>
           <?php endif; ?>
           <div>
-            <dt class="font-medium text-zinc-700">Due Date</dt>
+            <dt class="font-medium text-brand-700">Due Date</dt>
             <dd><?= e($due_date); ?></dd>
           </div>
         </dl>
@@ -76,7 +76,7 @@ $priority_tone_map = [
     <?php endforeach; ?>
 
     <?php if ($actions === []): ?>
-      <p class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-600">No pending actions right now.</p>
+      <p class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-600">No pending actions right now.</p>
     <?php endif; ?>
   </div>
 </section>

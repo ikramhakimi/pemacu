@@ -3,8 +3,35 @@
 declare(strict_types=1);
 
 $page_title   = 'Gap Analysis Report';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-reports';
 $project_current = 'project-reports';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$reports_phase_data = isset($current_phase_data['reports']) && is_array($current_phase_data['reports'])
+  ? $current_phase_data['reports']
+  : [];
+$reports_state = isset($reports_phase_data['state']) ? (string) $reports_phase_data['state'] : 'initial';
+$reports_message = isset($reports_phase_data['message'])
+  ? (string) $reports_phase_data['message']
+  : 'Initial gap analysis not yet generated.';
+$report_stage_map = [
+  'initial' => 'Report Setup',
+  'draft'   => 'Drafting Gap Analysis',
+  'updated' => 'Updated with Verification',
+  'final'   => 'Final Report Ready',
+];
+$current_report_stage = isset($report_stage_map[$reports_state]) ? $report_stage_map[$reports_state] : $report_stage_map['initial'];
+$workspace_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
+$workspace_documents = isset($workspace_phase_data['documents']) ? (string) $workspace_phase_data['documents'] : '0';
+$workspace_clarifications = isset($workspace_phase_data['clarifications']) ? (string) $workspace_phase_data['clarifications'] : '0';
+$workspace_evidence_verified = isset($workspace_phase_data['evidence_verified']) ? (string) $workspace_phase_data['evidence_verified'] : '0';
 
 $module_nav_links = [
   ['label' => 'Workspace',      'href' => path('/mampan/consultant/projects/project-workspace')],
@@ -21,9 +48,9 @@ $report_header = [
   'client_company' => 'Harmoni Asset Holdings Berhad',
   'report_type'    => 'GBI NRNC Gap Analysis',
   'report_version' => 'Rev 3',
-  'current_stage'  => 'Verification Review',
+  'current_stage'  => $current_report_stage,
   'prepared_by'    => 'Ir. Aisyah Kamaruddin',
-  'last_updated'   => '2026-04-24 14:15',
+  'last_updated'   => date('Y-m-d H:i'),
   'action_items'   => [
     ['label' => 'Preview Report', 'tone' => 'default', 'href' => path('/mampan/consultant/reports/report-preview')],
     ['label' => 'Edit Report',    'tone' => 'primary', 'href' => path('/mampan/consultant/reports/report-builder')],
@@ -32,12 +59,12 @@ $report_header = [
 ];
 
 $summary_cards = [
-  ['label' => 'Current Estimated Score', 'value' => '68 / 100', 'helper' => 'Based on active evidence + open risks', 'tone' => 'neutral',  'icon_name' => 'bar-chart-box-line'],
-  ['label' => 'Potential Score',         'value' => '74 / 100', 'helper' => 'If pending gaps are closed',            'tone' => 'neutral',  'icon_name' => 'line-chart-line'],
-  ['label' => 'Verified Score',          'value' => '56 / 100', 'helper' => 'Evidence accepted for scoring',          'tone' => 'positive', 'icon_name' => 'checkbox-circle-line'],
-  ['label' => 'Credits At Risk',         'value' => '4',        'helper' => 'EE2, EQ4, WE3, MR2',                    'tone' => 'negative', 'icon_name' => 'alarm-warning-line'],
-  ['label' => 'Missing Evidence',        'value' => '5',        'helper' => 'Document and sign-off gaps remain',      'tone' => 'negative', 'icon_name' => 'file-warning-line'],
-  ['label' => 'Client Actions',          'value' => '6',        'helper' => '3 high priority before report freeze',   'tone' => 'warning',  'icon_name' => 'task-line'],
+  ['label' => 'Requirement Readiness', 'value' => $workspace_readiness, 'helper' => $reports_message, 'tone' => 'neutral',  'icon_name' => 'bar-chart-box-line'],
+  ['label' => 'Documents Tracked',     'value' => $workspace_documents, 'helper' => 'Documents aligned for reporting', 'tone' => 'neutral',  'icon_name' => 'line-chart-line'],
+  ['label' => 'Verified Evidence',     'value' => $workspace_evidence_verified, 'helper' => 'Evidence accepted for scoring', 'tone' => 'positive', 'icon_name' => 'checkbox-circle-line'],
+  ['label' => 'Credits At Risk',       'value' => $workspace_clarifications === '0' ? '0' : '4', 'helper' => 'Open clarifications impact confidence', 'tone' => 'negative', 'icon_name' => 'alarm-warning-line'],
+  ['label' => 'Missing Evidence',      'value' => $workspace_clarifications, 'helper' => 'Clarification-linked evidence gaps', 'tone' => 'negative', 'icon_name' => 'file-warning-line'],
+  ['label' => 'Client Actions',        'value' => $workspace_clarifications, 'helper' => 'Actions tied to open clarifications', 'tone' => 'warning',  'icon_name' => 'task-line'],
 ];
 
 $score_summary = [
@@ -46,7 +73,7 @@ $score_summary = [
   'potential_score'      => '74 / 100',
   'verified_score'       => '56 / 100',
   'rating_gap'           => '10 points still pending verification',
-  'submission_readiness' => '78%',
+  'submission_readiness' => $workspace_readiness,
 ];
 
 $criteria_breakdown = [
@@ -164,6 +191,9 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">

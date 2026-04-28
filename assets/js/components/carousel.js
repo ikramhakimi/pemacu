@@ -11,7 +11,7 @@
 
   const DEFAULT_CONFIG = {
     loadingClasses: '',
-    dotsItemClasses: 'size-3 rounded-full border border-zinc-300 cursor-pointer transition carousel-active:border-brand-600 carousel-active:bg-brand-600',
+    dotsItemClasses: 'size-3 rounded-full border border-brand-300 cursor-pointer transition carousel-active:border-brand-600 carousel-active:bg-brand-600',
     isAutoPlay: false,
     autoPlayInterval: 5000,
     isInfiniteLoop: false,

@@ -11,12 +11,21 @@ $status_tone_map = [
   'Submitted'     => 'positive',
   'Need Revision' => 'negative',
 ];
+
+$linked_area_label_map = [
+  'EE' => 'Energy Efficiency',
+  'EQ' => 'Indoor Environment Quality',
+  'SM' => 'Sustainable Site Planning',
+  'MR' => 'Materials & Resources',
+  'WE' => 'Water Efficiency',
+  'IN' => 'Innovation',
+];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="client-upload-list-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="client-upload-list-heading" class="text-lg font-semibold text-zinc-900"><?= e($section_title); ?></h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="client-upload-list-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="client-upload-list-heading" class="text-lg font-semibold text-brand-900"><?= e($section_title); ?></h2>
     <?php if ($section_description !== ''): ?>
-      <p class="mt-1 text-sm text-zinc-600"><?= e($section_description); ?></p>
+      <p class="mt-1 text-sm text-brand-600"><?= e($section_description); ?></p>
     <?php endif; ?>
   </header>
 
@@ -35,26 +44,43 @@ $status_tone_map = [
         continue;
       }
 
+      $linked_area_display = $linked_area;
+      $linked_area_tokens  = array_values(array_filter(array_map('trim', explode(',', $linked_area))));
+
+      if ($linked_area_tokens !== []) {
+        $linked_area_parts = [];
+
+        foreach ($linked_area_tokens as $linked_area_token) {
+          if (isset($linked_area_label_map[$linked_area_token])) {
+            $linked_area_parts[] = '(' . $linked_area_token . ') ' . $linked_area_label_map[$linked_area_token];
+          } else {
+            $linked_area_parts[] = $linked_area_token;
+          }
+        }
+
+        $linked_area_display = implode(', ', $linked_area_parts);
+      }
+
       $status_tone = isset($status_tone_map[$status]) ? $status_tone_map[$status] : 'neutral';
       ?>
-      <article class="rounded-lg border border-zinc-200 p-4">
+      <article class="rounded-lg border border-brand-200 p-4">
         <div class="flex flex-wrap items-start justify-between gap-3">
           <div class="max-w-3xl">
-            <h3 class="text-base font-semibold text-zinc-900"><?= e($document_name); ?></h3>
+            <h3 class="text-base font-semibold text-brand-900"><?= e($document_name); ?></h3>
             <?php if ($why !== ''): ?>
-              <p class="mt-1 text-sm text-zinc-600"><?= e($why); ?></p>
+              <p class="mt-1 text-sm text-brand-600"><?= e($why); ?></p>
             <?php endif; ?>
             <dl class="mt-3 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
               <div>
-                <dt class="font-medium text-zinc-700">Linked Area</dt>
-                <dd class="text-zinc-600"><?= e($linked_area); ?></dd>
+                <dt class="font-medium text-brand-700">Linked Area</dt>
+                <dd class="text-brand-600"><?= e($linked_area_display); ?></dd>
               </div>
               <div>
-                <dt class="font-medium text-zinc-700">Due Date</dt>
-                <dd class="text-zinc-600"><?= e($due_date); ?></dd>
+                <dt class="font-medium text-brand-700">Due Date</dt>
+                <dd class="text-brand-600"><?= e($due_date); ?></dd>
               </div>
               <div>
-                <dt class="font-medium text-zinc-700">Status</dt>
+                <dt class="font-medium text-brand-700">Status</dt>
                 <dd class="mt-1"><?php component('badge', ['items' => [['label' => $status, 'tone' => $status_tone]]]); ?></dd>
               </div>
             </dl>
@@ -72,7 +98,7 @@ $status_tone_map = [
     <?php endforeach; ?>
 
     <?php if ($uploads === []): ?>
-      <p class="rounded-lg border border-zinc-200 bg-zinc-50 px-4 py-3 text-sm text-zinc-600">No required uploads right now.</p>
+      <p class="rounded-lg border border-brand-200 bg-brand-50 px-4 py-3 text-sm text-brand-600">No required uploads right now.</p>
     <?php endif; ?>
   </div>
 </section>

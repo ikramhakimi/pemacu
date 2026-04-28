@@ -3,12 +3,29 @@
 declare(strict_types=1);
 
 $page_title   = 'Clarification Detail';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-rfi';
 $project_current = 'project-rfi';
+$clarifications_phase_data = isset($current_phase_data['clarifications']) && is_array($current_phase_data['clarifications'])
+  ? $current_phase_data['clarifications']
+  : [];
+$clarifications_state = isset($clarifications_phase_data['state']) ? (string) $clarifications_phase_data['state'] : 'active';
+$clarifications_message = isset($clarifications_phase_data['message'])
+  ? (string) $clarifications_phase_data['message']
+  : 'Multiple clarifications are awaiting client response.';
 
 $rfi_number = 'RFI #008';
 $subject    = 'AHU Commissioning Report Test Results';
-$status     = 'Under Review';
+$rfi_status_map = [
+  'empty'    => 'Open',
+  'active'   => 'Under Review',
+  'reducing' => 'Resolved',
+  'closed'   => 'Closed',
+];
+$status     = isset($rfi_status_map[$clarifications_state]) ? $rfi_status_map[$clarifications_state] : 'Under Review';
 $priority   = 'High';
 
 $status_tone_map = [
@@ -101,10 +118,13 @@ layout('mampan/dashboard-project', [
   'page_title'           => $page_title,
   'page_current'         => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-5 py-5">
-  <header class="rounded-lg border border-zinc-200 bg-white p-5">
+  <header class="rounded-lg border border-brand-200 bg-white p-5">
     <div class="flex flex-wrap items-center justify-between gap-3">
       <?php component('button', ['label' => 'Back to Clarifications', 'href' => path('/mampan/consultant/rfi/rfi-index'), 'variant' => 'default', 'size' => 'sm']); ?>
       <div class="flex flex-wrap items-center gap-2">
@@ -112,8 +132,9 @@ layout('mampan/dashboard-project', [
         <?php component('badge', ['items' => [['label' => $priority . ' Priority', 'tone' => $priority_tone_map[$priority]]]]); ?>
       </div>
     </div>
-    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-zinc-500"><?= e($rfi_number); ?></p>
-    <h1 class="mt-1 text-2xl font-semibold text-zinc-900 md:text-3xl"><?= e($subject); ?></h1>
+    <p class="mt-4 text-xs font-semibold uppercase tracking-wide text-brand-500"><?= e($rfi_number); ?></p>
+    <h1 class="mt-1 text-2xl font-semibold text-brand-900 md:text-3xl"><?= e($subject); ?></h1>
+    <p class="mt-1 text-sm text-brand-600"><?= e($clarifications_message); ?></p>
   </header>
 
   <section class="grid gap-5 xl:grid-cols-12" aria-label="Clarification detail layout">

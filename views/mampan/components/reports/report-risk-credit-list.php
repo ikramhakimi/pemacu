@@ -32,8 +32,8 @@ foreach ($risk_credits as $risk_credit) {
   ob_start();
   ?>
   <div>
-    <p class="font-medium text-zinc-900"><?= e($credit_code . ' - ' . $credit_title); ?></p>
-    <p class="mt-1 text-xs text-zinc-600"><?= e($criteria_group); ?> | <?= e($points_at_risk); ?></p>
+    <p class="font-medium text-brand-900"><?= e($credit_code . ' - ' . $credit_title); ?></p>
+    <p class="mt-1 text-xs text-brand-600"><?= e($criteria_group); ?> | <?= e($points_at_risk); ?></p>
   </div>
   <?php
   $credit_html = (string) ob_get_clean();
@@ -53,10 +53,10 @@ foreach ($risk_credits as $risk_credit) {
   ];
 }
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="report-risk-credit-list-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="report-risk-credit-list-heading" class="text-lg font-semibold text-zinc-900">Risk Credit List</h2>
-    <p class="mt-1 text-sm text-zinc-600">Credits currently at risk of reducing target rating confidence.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="report-risk-credit-list-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="report-risk-credit-list-heading" class="text-lg font-semibold text-brand-900">Risk Credit List</h2>
+    <p class="mt-1 text-sm text-brand-600">Credits currently at risk of reducing target rating confidence.</p>
   </header>
 
   <div class="mt-4 overflow-x-auto">

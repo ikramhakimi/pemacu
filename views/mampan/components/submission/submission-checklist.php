@@ -51,9 +51,9 @@ foreach ($groups as $group_index => $group) {
     ];
   }
   ?>
-  <section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="submission-checklist-group-<?= e((string) $group_index); ?>">
-    <header class="border-b border-zinc-200 pb-4">
-      <h2 id="submission-checklist-group-<?= e((string) $group_index); ?>" class="text-lg font-semibold text-zinc-900">
+  <section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="submission-checklist-group-<?= e((string) $group_index); ?>">
+    <header class="border-b border-brand-200 pb-4">
+      <h2 id="submission-checklist-group-<?= e((string) $group_index); ?>" class="text-lg font-semibold text-brand-900">
         <?= e($group_title); ?>
       </h2>
     </header>

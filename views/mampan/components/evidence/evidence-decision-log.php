@@ -13,10 +13,10 @@ $action_tone_map = [
   'Rejected'                  => 'negative',
 ];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="evidence-decision-log-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="evidence-decision-log-heading" class="text-lg font-semibold text-zinc-900">Decision Log</h2>
-    <p class="mt-1 text-sm text-zinc-600">Review actions and evidence decision history.</p>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="evidence-decision-log-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="evidence-decision-log-heading" class="text-lg font-semibold text-brand-900">Decision Log</h2>
+    <p class="mt-1 text-sm text-brand-600">Review actions and evidence decision history.</p>
   </header>
 
   <ol class="mt-4 space-y-3">
@@ -28,14 +28,14 @@ $action_tone_map = [
       $note      = isset($log_item['note']) ? trim((string) $log_item['note']) : '';
       $tone      = isset($action_tone_map[$action]) ? $action_tone_map[$action] : 'neutral';
       ?>
-      <li class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
+      <li class="rounded-md border border-brand-200 bg-brand-50 p-3">
         <div class="flex flex-wrap items-center gap-2">
           <?php component('badge', ['items' => [['label' => $action, 'tone' => $tone]]]); ?>
-          <p class="text-sm font-medium text-zinc-900"><?= e($actor); ?></p>
-          <p class="text-xs text-zinc-500"><?= e($timestamp); ?></p>
+          <p class="text-sm font-medium text-brand-900"><?= e($actor); ?></p>
+          <p class="text-xs text-brand-500"><?= e($timestamp); ?></p>
         </div>
         <?php if ($note !== ''): ?>
-          <p class="mt-2 text-sm text-zinc-700"><?= e($note); ?></p>
+          <p class="mt-2 text-sm text-brand-700"><?= e($note); ?></p>
         <?php endif; ?>
       </li>
     <?php endforeach; ?>

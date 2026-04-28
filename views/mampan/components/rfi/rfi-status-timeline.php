@@ -11,9 +11,9 @@ $status_tone_map = [
   'Not Started'  => 'neutral',
 ];
 ?>
-<section class="rounded-lg border border-zinc-200 bg-white p-5" aria-labelledby="clarification-status-timeline-heading">
-  <header class="border-b border-zinc-200 pb-4">
-    <h2 id="clarification-status-timeline-heading" class="text-lg font-semibold text-zinc-900">Status Timeline</h2>
+<section class="rounded-lg border border-brand-200 bg-white p-5" aria-labelledby="clarification-status-timeline-heading">
+  <header class="border-b border-brand-200 pb-4">
+    <h2 id="clarification-status-timeline-heading" class="text-lg font-semibold text-brand-900">Status Timeline</h2>
   </header>
 
   <ol class="mt-4 space-y-3">
@@ -25,14 +25,14 @@ $status_tone_map = [
       $description = isset($item['description']) ? trim((string) $item['description']) : '';
       $tone        = isset($status_tone_map[$status]) ? $status_tone_map[$status] : 'neutral';
       ?>
-      <li class="rounded-md border border-zinc-200 bg-zinc-50 p-3">
+      <li class="rounded-md border border-brand-200 bg-brand-50 p-3">
         <div class="flex flex-wrap items-center gap-2">
-          <p class="font-medium text-zinc-900"><?= e($step_name); ?></p>
+          <p class="font-medium text-brand-900"><?= e($step_name); ?></p>
           <?php component('badge', ['items' => [['label' => $status, 'tone' => $tone]]]); ?>
-          <p class="text-xs text-zinc-500"><?= e($timestamp); ?></p>
+          <p class="text-xs text-brand-500"><?= e($timestamp); ?></p>
         </div>
         <?php if ($description !== ''): ?>
-          <p class="mt-2 text-sm text-zinc-700"><?= e($description); ?></p>
+          <p class="mt-2 text-sm text-brand-700"><?= e($description); ?></p>
         <?php endif; ?>
       </li>
     <?php endforeach; ?>

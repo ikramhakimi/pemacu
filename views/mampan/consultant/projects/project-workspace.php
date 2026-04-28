@@ -3,8 +3,27 @@
 declare(strict_types=1);
 
 $page_title   = 'Project Workspace';
+
+require __DIR__ . '/../_data/phase_data.php';
+$current_phase = resolve_mampan_current_phase($phase_data_map);
+$current_phase_data = $phase_data_map[$current_phase];
 $page_current = 'consultant-projects';
 $project_current = 'project-workspace';
+$workspace_phase_data = isset($current_phase_data['workspace']) && is_array($current_phase_data['workspace'])
+  ? $current_phase_data['workspace']
+  : [];
+$phase_meta = isset($phase_label_map[$current_phase]) && is_array($phase_label_map[$current_phase])
+  ? $phase_label_map[$current_phase]
+  : [];
+$phase_title = isset($phase_meta['title']) ? trim((string) $phase_meta['title']) : 'Phase';
+$phase_subtitle = isset($phase_meta['subtitle']) ? trim((string) $phase_meta['subtitle']) : 'Setup & Planning';
+$workspace_documents = isset($workspace_phase_data['documents']) ? (string) $workspace_phase_data['documents'] : '0';
+$workspace_clarifications = isset($workspace_phase_data['clarifications']) ? (string) $workspace_phase_data['clarifications'] : '0';
+$workspace_evidence_verified = isset($workspace_phase_data['evidence_verified']) ? (string) $workspace_phase_data['evidence_verified'] : '0';
+$workspace_submission_status = isset($workspace_phase_data['submission_status']) ? (string) $workspace_phase_data['submission_status'] : 'Not Ready';
+$workspace_requirement_readiness = isset($workspace_phase_data['requirement_readiness'])
+  ? (string) $workspace_phase_data['requirement_readiness']
+  : '0%';
 
 $project_header = [
   'project_name'     => 'Menara Harmoni Office Retrofit',
@@ -13,7 +32,7 @@ $project_header = [
   'project_location' => 'Jalan Tun Razak, Kuala Lumpur',
   'gbi_tool_type'    => 'GBI NRNC: Existing Building',
   'target_rating'    => 'GBI Gold',
-  'project_status'   => 'Evidence Collection',
+  'project_status'   => $workspace_submission_status,
   'consultant_lead'  => 'Ir. Aisyah Kamaruddin',
   'client_pic'       => 'Faizal Rahman (Head of Projects)',
   'action_items'     => [
@@ -25,12 +44,12 @@ $project_header = [
 ];
 
 $summary_cards = [
-  ['label' => 'Current Stage', 'value' => 'Evidence Collection', 'helper' => 'Stage 6 of 8 in progress', 'tone' => 'neutral'],
-  ['label' => 'Pending Client Actions', 'value' => '4', 'helper' => '2 overdue beyond due date', 'tone' => 'warning'],
-  ['label' => 'Open RFIs', 'value' => '3', 'helper' => '1 high-priority technical clarification', 'tone' => 'warning'],
-  ['label' => 'Documents Submitted', 'value' => '48', 'helper' => 'Latest upload: Lighting Schedule Rev C', 'tone' => 'positive'],
-  ['label' => 'Evidence Verified', 'value' => '31', 'helper' => '64.6% verification completion', 'tone' => 'positive'],
-  ['label' => 'Potential Score', 'value' => '74 / 100', 'helper' => '6 points pending validation', 'tone' => 'neutral'],
+  ['label' => 'Current Stage', 'value' => $phase_title . ' - ' . $phase_subtitle, 'helper' => 'Active project phase', 'tone' => 'neutral'],
+  ['label' => 'Requirement Readiness', 'value' => $workspace_requirement_readiness, 'helper' => 'Readiness in current phase', 'tone' => 'warning'],
+  ['label' => 'Open RFIs', 'value' => $workspace_clarifications, 'helper' => 'Clarification count in current phase', 'tone' => 'warning'],
+  ['label' => 'Documents Submitted', 'value' => $workspace_documents, 'helper' => 'Documents tracked in current phase', 'tone' => 'positive'],
+  ['label' => 'Evidence Verified', 'value' => $workspace_evidence_verified, 'helper' => 'Verified evidence count', 'tone' => 'positive'],
+  ['label' => 'Submission Status', 'value' => $workspace_submission_status, 'helper' => 'Overall package readiness state', 'tone' => 'neutral'],
 ];
 
 $stage_timeline = [
@@ -200,6 +219,9 @@ layout('mampan/dashboard-project', [
   'page_title'      => $page_title,
   'page_current'    => $page_current,
   'project_current'      => $project_current,
+  'current_phase'       => $current_phase,
+  'phase_data_map'      => $phase_data_map,
+  'phase_label_map'     => $phase_label_map,
 ]);
 ?>
 <article class="app-article mx-auto max-w-7xl space-y-3 xl:space-y-5 py-5">

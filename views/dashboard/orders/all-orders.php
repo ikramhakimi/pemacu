@@ -156,13 +156,29 @@ $total_pages  = max(1, (int) ceil($total_items / $per_page));
 $current_page = min($current_page, $total_pages);
 $offset       = ($current_page - 1) * $per_page;
 $page_orders  = array_slice($orders, $offset, $per_page);
+$paid_orders_count = 0;
+$pending_payment_count = 0;
+
+foreach ($orders as $order_item) {
+  if ($order_item['payment_status'] === 'Paid Full') {
+    $paid_orders_count++;
+  }
+
+  if ($order_item['payment_status'] === 'Unpaid') {
+    $pending_payment_count++;
+  }
+}
+
+$payment_completion_rate = $total_items > 0
+  ? (int) round(($paid_orders_count / $total_items) * 100)
+  : 0;
 
 $orders_columns = [
-  ['label' => 'Order', 'key' => 'order', 'class_name' => 'w-[30%]', 'heading_class' => 'bg-brand-100'],
-  ['label' => 'Customer', 'key' => 'customer', 'class_name' => 'w-[35%]', 'heading_class' => 'bg-brand-100'],
-  ['label' => 'Payment', 'key' => 'payment', 'align' => 'rights', 'class_name' => 'w-[15%]', 'heading_class' => 'bg-brand-100'],
-  ['label' => 'Status', 'key' => 'status', 'align' => 'rights', 'class_name' => 'w-[15%]', 'heading_class' => 'bg-brand-100'],
-  ['label' => 'Actions', 'key' => 'actions', 'align' => 'right', 'class_name' => 'w-[64px] text-transparent text-[0]', 'heading_class' => 'bg-brand-100'],
+  ['label' => 'Order', 'key' => 'order', 'class_name' => 'w-[30%]'],
+  ['label' => 'Customer', 'key' => 'customer', 'class_name' => 'w-[35%]'],
+  ['label' => 'Payment', 'key' => 'payment', 'align' => 'rights', 'class_name' => 'w-[15%]'],
+  ['label' => 'Status', 'key' => 'status', 'align' => 'rights', 'class_name' => 'w-[15%]'],
+  ['label' => 'Actions', 'key' => 'actions', 'align' => 'right', 'class_name' => 'w-[64px] text-transparent text-[0]'],
 ];
 
 $orders_rows = [];
@@ -242,7 +258,7 @@ foreach ($page_orders as $order_item) {
         . '<img src="' . e((string) $order_item['product_image']) . '" alt="' . e($order_item['product_name']) . '" class="size-12 rounded-md aspect-square object-cover shrink-0" loading="lazy">'
         . '<div>'
         . '<p class="font-medium text-brand-900 leading-5">' . e($order_item['product_name']) . '</p>'
-        . '<p class="text-[13px] leading-5 text-brand-600">' . e($order_item['order_id']) . '</p>'
+        . '<p class="text-xs leading-5 text-brand-600">' . e($order_item['order_id']) . '</p>'
         . '</div>'
         . '</div>',
       'is_html' => true,
@@ -257,7 +273,7 @@ foreach ($page_orders as $order_item) {
         . '</div>'
         . '<div>'
         . '<p class="font-medium text-brand-900 leading-5">' . e($order_item['customer_name']) . '</p>'
-        . '<p class="text-[13px] leading-5 text-brand-500">' . e($order_item['session_time']) . ' - '
+        . '<p class="text-xs leading-5 text-brand-500">' . e($order_item['session_time']) . ' - '
         . e($customer_phone_display)
         . '</p>'
         . '</div>'
@@ -284,13 +300,10 @@ $dashboard_breadcrumb_items = [
   ['label' => 'Orders', 'href' => path('/dashboard/orders/all-orders')],
   ['label' => 'All Orders', 'current' => true],
 ];
-$dashboard_breadcrumb_description = 'Review and manage every order from one view, including payment progress and order status.';
-
 layout('dashboard/partials/dashboard-start', [
   'page_title'                     => $page_title,
   'page_current'                   => $page_current,
   'dashboard_breadcrumb_items'     => $dashboard_breadcrumb_items,
-  'dashboard_breadcrumb_description' => $dashboard_breadcrumb_description,
 ]);
 ?>
 <header class="app-header py-6 px-4 -mx-4 md:hidden">
@@ -312,12 +325,58 @@ layout('dashboard/partials/dashboard-start', [
   .js-orders-selection-table td:last-child {
     padding-right: 12px;
   }
+
+  .js-orders-frame .frame__header {
+    display: none;
+  }
 </style>
-
-<article class="app-article pb-20 space-y-6 pt-6">
+<header class="md:flexs items-center gap-3 border-b border-brand-200 py-5">
+  <div>
+    <h1 class="text-3xl font-bold text-brand-900">All Orders</h1>
+    <p class="text-base text-brand-500 mt-1">Review and manage every order from one view, including payment progress and order status.</p>
+  </div>
+</header>
+<article class="app-article pb-20 space-y-5 pt-5">
   
+  <section aria-label="All orders metrics">
+    <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <?php component('card', ['card' => [
+        'variant'            => 'metric',
+        'title'              => 'Total Orders',
+        'show_subtitle'      => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'       => (string) number_format($total_items),
+        'metric_compare'     => 'All tracked orders',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'            => 'metric',
+        'title'              => 'Pending Payment',
+        'show_subtitle'      => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'       => (string) number_format($pending_payment_count),
+        'metric_compare'     => 'Status: Unpaid',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'            => 'metric',
+        'title'              => 'Paid Orders',
+        'show_subtitle'      => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'       => (string) number_format($paid_orders_count),
+        'metric_compare'     => 'Status: Paid Full',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'            => 'metric',
+        'title'              => 'Payment Completion Rate',
+        'show_subtitle'      => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'       => (string) $payment_completion_rate . '%',
+        'metric_compare'     => (string) $paid_orders_count . ' of ' . (string) $total_items . ' paid full',
+      ]]); ?>
+    </div>
+  </section>
 
-  <section class="<?= card('bg-brand-50 p-1 overflow-hidden') ?>?>" aria-label="Orders table">
+  <?php ob_start(); ?>
+  <section aria-label="Orders table">
     <header class="flex items-center justify-start">
       <div class="w-[350px] min-w-[350px] p-3">
         <?php component('input-group', [
@@ -329,18 +388,25 @@ layout('dashboard/partials/dashboard-start', [
         ]); ?>
       </div>
     </header>
-    <div class="<?= card('bg-white rounded-md overflow-hidden') ?>?>">
-      <?php component('table', [
-        'columns'    => $orders_columns,
-        'rows'       => $orders_rows,
-        'appearance' => 'basic',
-        'spacing'    => 'comfortable',
-        'attributes' => [
-          'class' => 'overflow-hidden rounded-md js-orders-selection-table',
-        ],
-      ]); ?>
-    </div>
+    <?php component('table', [
+      'columns'    => $orders_columns,
+      'rows'       => $orders_rows,
+      'attributes' => [
+        'class' => 'rounded-md js-orders-selection-table',
+      ],
+    ]); ?>
   </section>
+  <?php
+  $orders_table_panel_html = (string) ob_get_clean();
+  component('frame', [
+    'variant'             => 'dense',
+    'title'               => 'All Orders',
+    'subtitle'            => 'Review and manage every order from one view, including payment progress and order status.',
+    'panel_html_items'    => [$orders_table_panel_html],
+    'render_panel_wrapper' => false,
+    'class_name'          => 'js-orders-frame',
+  ]);
+  ?>
   <?php component('pagination', [
     'pagination' => [
       'current_page' => $current_page,

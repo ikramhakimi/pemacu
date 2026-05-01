@@ -5,16 +5,14 @@ declare(strict_types=1);
  * Component: avatar
  * Purpose: Render avatar lists and overlapping avatar groups from data, with image and initials fallback support.
  * Anatomy:
- * - Wrapper container
- *   - .avatar
- *     - img.avatar__image | div.avatar__initials
- *     - div.avatar__inset-border
+ * - .avatar
+ *   - img.avatar__image | div.avatar__initials
+ *   - div.avatar__inset-border
  * Data Contract:
  * - `items` (array, optional): avatar entries.
  *   - each item supports `image_src`, `image_alt`, `icon_name`, `icon_size`, `initials`, `size`, `status`, `class_name`.
  *   - optional item-level color hooks: `bg_class`, `text_class`, `border_class`, `icon_class`, `status_class`.
  * - `is_group` (bool, optional): render overlapping group layout. Default: false.
- * - `class_name` (string, optional): additional classes for wrapper.
  * - Component-level color hooks (optional): `bg_class`, `text_class`, `border_class`, `icon_class`.
  * - Component-level status hooks (optional): `status_online_class`, `status_offline_class`, `status_ring_class`.
  * - Supported sizes: `24`, `32`, `40`, `48`, `56`, `64`.
@@ -24,7 +22,6 @@ $items        = isset($items) && is_array($items)
   ? array_values($items)
   : [];
 $is_group     = isset($is_group) && $is_group === true;
-$class_name   = isset($class_name) ? trim((string) $class_name) : '';
 $bg_class     = isset($bg_class) ? trim((string) $bg_class) : 'bg-brand-50';
 $text_class   = isset($text_class) ? trim((string) $text_class) : 'text-brand-700';
 $border_class = isset($border_class) ? trim((string) $border_class) : 'ring-brand-900/10';
@@ -78,13 +75,9 @@ $status_size_map = [
   '64' => 'h-4 w-4',
 ];
 
-$wrapper_classes = $is_group
-  ? 'inline-flex items-center'
-  : 'flex flex-wrap items-center gap-3';
 ?>
-<div class="<?= e(trim($wrapper_classes . ' ' . $class_name)); ?>">
-  <?php foreach ($items as $item): ?>
-    <?php
+<?php foreach ($items as $item): ?>
+  <?php
     $item_size_key   = isset($item['size']) ? trim((string) $item['size']) : '48';
     $image_src       = isset($item['image_src']) ? trim((string) $item['image_src']) : '';
     $image_alt       = isset($item['image_alt']) ? trim((string) $item['image_alt']) : 'Avatar';
@@ -129,40 +122,43 @@ $wrapper_classes = $is_group
       $item_status_class,
     ]));
     $group_item = $is_group ? '-m-2 first:ml-0' : '';
-    $avatar_item_class = trim($avatar_box . ' ' . $group_item . ' ' . $item_class);
-    ?>
-    <?php if ($image_src !== ''): ?>
-      <div class="<?= e($avatar_item_class); ?>">
-        <img
-          class="avatar__image h-full w-full rounded-[inherit] object-cover"
-          src="<?= e($image_src); ?>"
-          alt="<?= e($image_alt); ?>"
-          loading="lazy"
-        >
-        <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
-        <?php if ($should_render_status): ?>
-          <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
-        <?php endif; ?>
-      </div>
-    <?php elseif ($icon_name !== ''): ?>
-      <div class="<?= e(trim($avatar_item_class . ' ' . $avatar_color_class)); ?>">
-        <?php icon($icon_name, [
-          'icon_size'  => $icon_size,
-          'icon_class' => $item_icon_class,
-        ]); ?>
-        <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
-        <?php if ($should_render_status): ?>
-          <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
-        <?php endif; ?>
-      </div>
-    <?php else: ?>
-      <div class="<?= e(trim($avatar_item_class . ' ' . $avatar_color_class)); ?>">
-        <div class="avatar__initials font-semibold uppercase tracking-wide"><?= e($initials !== '' ? $initials : 'NA'); ?></div>
-        <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
-        <?php if ($should_render_status): ?>
-          <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
-        <?php endif; ?>
-      </div>
-    <?php endif; ?>
-  <?php endforeach; ?>
-</div>
+    $avatar_item_class = trim(implode(' ', array_filter([
+      $avatar_box,
+      $group_item,
+      $item_class,
+    ])));
+  ?>
+  <?php if ($image_src !== ''): ?>
+    <div class="<?= e($avatar_item_class); ?>">
+      <img
+        class="avatar__image h-full w-full rounded-[inherit] object-cover"
+        src="<?= e($image_src); ?>"
+        alt="<?= e($image_alt); ?>"
+        loading="lazy"
+      >
+      <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
+      <?php if ($should_render_status): ?>
+        <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
+      <?php endif; ?>
+    </div>
+  <?php elseif ($icon_name !== ''): ?>
+    <div class="<?= e(trim($avatar_item_class . ' ' . $avatar_color_class)); ?>">
+      <?php icon($icon_name, [
+        'icon_size'  => $icon_size,
+        'icon_class' => $item_icon_class,
+      ]); ?>
+      <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
+      <?php if ($should_render_status): ?>
+        <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
+      <?php endif; ?>
+    </div>
+  <?php else: ?>
+    <div class="<?= e(trim($avatar_item_class . ' ' . $avatar_color_class)); ?>">
+      <div class="avatar__initials font-semibold uppercase tracking-wide"><?= e($initials !== '' ? $initials : 'NA'); ?></div>
+      <div class="<?= e($avatar_inset_border_class); ?>" aria-hidden="true"></div>
+      <?php if ($should_render_status): ?>
+        <div class="<?= e($avatar_status_class); ?>" aria-hidden="true"></div>
+      <?php endif; ?>
+    </div>
+  <?php endif; ?>
+<?php endforeach; ?>

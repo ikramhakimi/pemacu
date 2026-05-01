@@ -19,9 +19,9 @@ $section_growth_testimonials_classes = trim(
     ]); ?>
 
     <div class="grid gap-4 md:grid-cols-3">
-      <?php component('card-testimonial'); ?>
-      <?php component('card-testimonial'); ?>
-      <?php component('card-testimonial'); ?>
+      <?php component('card', ['card' => ['variant' => 'testimonial']]); ?>
+      <?php component('card', ['card' => ['variant' => 'testimonial']]); ?>
+      <?php component('card', ['card' => ['variant' => 'testimonial']]); ?>
     </div>
   </div>
 </section>

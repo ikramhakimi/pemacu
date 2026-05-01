@@ -15,14 +15,14 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
 <section class="section section--portfolio-grid pb-12">
   <div class="<?php container('w-full') ?>">
     <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-3">
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
-      <?php component('card-portfolio'); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
+      <?php component('card', ['card' => ['variant' => 'overlay']]); ?>
     </div>
   </div>
 </section>

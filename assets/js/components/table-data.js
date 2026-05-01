@@ -190,7 +190,6 @@ const apply_table_data_theme = (mount_node) => {
       'btn',
       'btn--secondary',
       'btn--md',
-      'btn--gradient',
       'inline-flex',
       'h-[var(--ui-h-md)]',
       'items-center',
@@ -200,10 +199,9 @@ const apply_table_data_theme = (mount_node) => {
       'leading-[var(--ui-h-md)]',
       'font-medium',
       'border-brand-300',
-      'bg-gradient-to-b',
-      'from-white',
-      'to-brand-100',
+      'bg-white',
       'text-brand-900',
+      'hover:bg-brand-50',
       'px-[var(--ui-px-md)]',
     ].join(' ');
   });
@@ -213,16 +211,16 @@ const apply_table_data_theme = (mount_node) => {
     current_button.classList.remove(
       'btn--secondary',
       'border-brand-300',
-      'from-white',
-      'to-brand-100',
+      'bg-white',
       'text-brand-900',
+      'hover:bg-brand-50',
     );
     current_button.classList.add(
       'btn--default',
-      'border-brand-900',
-      'from-brand-600',
-      'to-brand-800',
+      'border-brand-700',
+      'bg-brand-700',
       'text-white',
+      'hover:bg-brand-800',
     );
   }
 

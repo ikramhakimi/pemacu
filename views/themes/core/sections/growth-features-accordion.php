@@ -101,8 +101,8 @@ $section_faq_container_classes = trim(
         ]); ?>
       </div>
       <div class="col-span-2 md:grid grid-cols-2 gap-4 space-y-4 md:space-y-0 md:mt-0 mt-4">
-        <?php component('card-testimonial'); ?>
-        <?php component('card-intro-call'); ?>
+        <?php component('card', ['card' => ['variant' => 'testimonial']]); ?>
+        <?php component('card', ['card' => ['variant' => 'intro']]); ?>
       </div>
     </div>
     

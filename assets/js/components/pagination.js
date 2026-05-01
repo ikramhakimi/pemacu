@@ -90,13 +90,8 @@
     const create_page_button = (page_number) => {
       const is_current_page = page_number === current_page;
       const button_node     = document.createElement('button');
-      const base_classes    = 'inline-flex h-[var(--ui-h-md)] min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-semibold transition';
-      const tone_classes    = is_current_page
-        ? 'border-brand-900 bg-brand-900 text-white'
-        : 'border-brand-200 bg-white text-brand-700 hover:border-brand-300 hover:text-brand-900';
 
       button_node.type = 'button';
-      button_node.className = `${base_classes} ${tone_classes}`;
       button_node.dataset.paginationPage = String(page_number);
       button_node.setAttribute('aria-label', `Go to page ${page_number}`);
       button_node.textContent = String(page_number);
@@ -114,7 +109,6 @@
 
     const create_ellipsis = () => {
       const ellipsis_node = document.createElement('span');
-      ellipsis_node.className = 'inline-flex h-[var(--ui-h-md)] min-w-7 items-center justify-center px-1 text-sm text-brand-500';
       ellipsis_node.setAttribute('aria-hidden', 'true');
       ellipsis_node.textContent = '...';
       return ellipsis_node;
@@ -163,4 +157,3 @@
     set_page(current_page);
   });
 })();
-

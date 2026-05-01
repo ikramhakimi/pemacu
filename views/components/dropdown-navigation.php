@@ -34,7 +34,7 @@ $resolved_dropdown_align = isset($dropdown_align) && in_array($dropdown_align, [
 
 $resolved_trigger_class = isset($trigger_class) && is_string($trigger_class) && trim($trigger_class) !== ''
   ? trim($trigger_class)
-  : 'dropdown__trigger inline-flex items-center gap-1.5  font-semibold text-brand-700 hover:text-brand-900';
+  : 'dropdown__trigger inline-flex items-center gap-1.5  font-medium text-brand-700 hover:text-brand-900';
 $resolved_dropdown_menu_class = isset($dropdown_menu_class) && is_string($dropdown_menu_class) && trim($dropdown_menu_class) !== ''
   ? trim($dropdown_menu_class)
   : '';

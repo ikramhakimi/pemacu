@@ -49,12 +49,13 @@ if ($uri === '' || strtolower($uri) === 'index.php') {
   $uri = 'home';
 }
 
-$page         = '';
-$themes_root  = realpath(__DIR__ . '/views/themes');
-$pages_root   = realpath(__DIR__ . '/views/themes/core');
-$canvas_root  = realpath(__DIR__ . '/views/canvas');
+$page           = '';
+$themes_root    = realpath(__DIR__ . '/views/themes');
+$pages_root     = realpath(__DIR__ . '/views/themes/core');
+$canvas_root    = realpath(__DIR__ . '/views/canvas');
 $dashboard_root = realpath(__DIR__ . '/views/dashboard');
-$mampan_root = realpath(__DIR__ . '/views/mampan');
+$kuiz_root      = realpath(__DIR__ . '/views/kuiz');
+$mampan_root    = realpath(__DIR__ . '/views/mampan');
 $is_valid_route = preg_match('/^[a-z0-9\/-]+$/i', $uri) === 1 && strpos($uri, '..') === false;
 
 $active_theme = 'core';
@@ -64,7 +65,7 @@ if ($is_valid_route && $themes_root !== false) {
   $uri_segments = $uri === '' ? [] : explode('/', $uri);
   $theme_slug   = $uri_segments[0] ?? '';
 
-  if ($theme_slug !== '' && $theme_slug !== 'canvas' && $theme_slug !== 'dashboard') {
+  if ($theme_slug !== '' && $theme_slug !== 'canvas' && $theme_slug !== 'dashboard' && $theme_slug !== 'kuiz') {
     $theme_root_candidate = realpath($themes_root . '/' . $theme_slug);
     $is_in_themes_root    = is_string($theme_root_candidate)
       && strpos($theme_root_candidate, $themes_root . DIRECTORY_SEPARATOR) === 0;
@@ -152,6 +153,33 @@ if (
   foreach ($dashboard_candidates as $candidate) {
     $is_in_dashboard_directory = is_string($candidate) && strpos($candidate, $dashboard_root . DIRECTORY_SEPARATOR) === 0;
     if ($is_in_dashboard_directory && is_file($candidate)) {
+      $page = $candidate;
+      break;
+    }
+  }
+}
+
+if (
+  $page === '' &&
+  $is_valid_route &&
+  $kuiz_root !== false &&
+  ($uri === 'kuiz' || strpos($uri, 'kuiz/') === 0)
+) {
+  $kuiz_uri = substr($uri, strlen('kuiz'));
+  $kuiz_uri = trim($kuiz_uri, '/');
+
+  $kuiz_candidates = [];
+
+  if ($kuiz_uri === '') {
+    $kuiz_candidates[] = realpath($kuiz_root . '/index.php');
+  } else {
+    $kuiz_candidates[] = realpath($kuiz_root . '/' . $kuiz_uri . '.php');
+    $kuiz_candidates[] = realpath($kuiz_root . '/' . $kuiz_uri . '/index.php');
+  }
+
+  foreach ($kuiz_candidates as $candidate) {
+    $is_in_kuiz_directory = is_string($candidate) && strpos($candidate, $kuiz_root . DIRECTORY_SEPARATOR) === 0;
+    if ($is_in_kuiz_directory && is_file($candidate)) {
       $page = $candidate;
       break;
     }

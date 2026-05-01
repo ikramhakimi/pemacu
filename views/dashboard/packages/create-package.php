@@ -9,13 +9,10 @@ $dashboard_breadcrumb_items = [
   ['label' => 'Packages', 'href' => path('/dashboard/packages/create-package')],
   ['label' => 'Create Package', 'current' => true],
 ];
-$dashboard_breadcrumb_description = 'Create a package with pricing, session limits, and booking details.';
-
 layout('dashboard/partials/dashboard-start', [
   'page_title'                       => $page_title,
   'page_current'                     => $page_current,
   'dashboard_breadcrumb_items'       => $dashboard_breadcrumb_items,
-  'dashboard_breadcrumb_description' => $dashboard_breadcrumb_description,
 ]);
 ?>
 <header class="app-header py-6 px-4 -mx-4 md:hidden">

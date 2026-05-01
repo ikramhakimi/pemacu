@@ -10,7 +10,7 @@ declare(strict_types=1);
  * - Optional: .btn--icon-only
  * - Optional children: svg.button__icon.opacity-75, .button__label
  * Data Contract:
- * - Flat props: label, href, type, variant, size, class, id, name, target, rel, aria_label
+ * - Flat props: label, href, type, variant, size, surface, class, id, name, target, rel, aria_label
  * - Flat props: icon_name, icon_size, icon_class, icon_only, icon_position, disabled, attributes
  * - Structured API:
  *   - icon: [name, size, class, only, position]
@@ -28,6 +28,7 @@ $label      = isset($props['label']) ? (string) $props['label'] : 'Button';
 $type       = isset($props['type']) ? (string) $props['type'] : 'button';
 $variant    = isset($props['variant']) ? (string) $props['variant'] : 'neutral';
 $size       = isset($props['size']) ? (string) $props['size'] : 'md';
+$surface    = isset($props['surface']) ? (string) $props['surface'] : 'flat';
 $class      = isset($props['class']) ? trim((string) $props['class']) : '';
 $id         = isset($props['id']) ? (string) $props['id'] : '';
 $name       = isset($props['name']) ? (string) $props['name'] : '';
@@ -120,6 +121,7 @@ $size_map = [
 
 $resolved_tone = isset($variant_map[$variant]) ? $variant_map[$variant] : 'default';
 $resolved_size = isset($size_map[$size]) ? $size_map[$size] : 'md';
+$resolved_surface = $surface === 'gradient' ? 'gradient' : 'flat';
 
 $icon_size_map = [
   'sm' => 16,
@@ -140,12 +142,13 @@ $is_link  = $href !== '';
 
 $tone_modifier      = 'btn--' . $resolved_tone;
 $size_modifier      = 'btn--' . $resolved_size;
-$gradient_modifier  = 'btn--gradient';
+$surface_modifier   = $resolved_surface === 'gradient' ? 'btn--gradient' : '';
 $icon_only_modifier = $icon_only ? 'btn--icon-only' : '';
 
 $core_classes = button_class([
   'tone'      => $resolved_tone,
   'size'      => $resolved_size,
+  'surface'   => $resolved_surface,
   'disabled'  => $disabled,
   'icon_only' => $icon_only,
   'extra'     => !$icon_only && $has_icon && !$loading_center ? 'gap-2' : '',
@@ -155,7 +158,7 @@ $class_name = trim(implode(' ', array_filter([
   'btn',
   $tone_modifier,
   $size_modifier,
-  $gradient_modifier,
+  $surface_modifier,
   $icon_only_modifier,
   $loading_center ? 'relative' : '',
   $core_classes,

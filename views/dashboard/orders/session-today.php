@@ -247,7 +247,7 @@ foreach ($page_orders as $order_item) {
         . '<img src="' . e((string) $order_item['product_image']) . '" alt="' . e($order_item['product_name']) . '" class="size-12 rounded-md aspect-square object-cover shrink-0" loading="lazy">'
         . '<div>'
         . '<p class="font-medium text-brand-900 leading-5">' . e($order_item['product_name']) . '</p>'
-        . '<p class="text-[13px] leading-5 text-brand-600">' . e($order_item['order_id']) . '</p>'
+        . '<p class="text-xs leading-5 text-brand-600">' . e($order_item['order_id']) . '</p>'
         . '</div>'
         . '</div>',
       'is_html' => true,
@@ -262,7 +262,7 @@ foreach ($page_orders as $order_item) {
         . '</div>'
         . '<div>'
         . '<p class="font-medium text-brand-900 leading-5">' . e($order_item['customer_name']) . '</p>'
-        . '<p class="text-[13px] leading-5 text-brand-500">' . e($order_item['session_time']) . ' - '
+        . '<p class="text-xs leading-5 text-brand-500">' . e($order_item['session_time']) . ' - '
         . e($customer_phone_display)
         . '</p>'
         . '</div>'
@@ -289,13 +289,10 @@ $dashboard_breadcrumb_items = [
   ['label' => 'Orders', 'href' => path('/dashboard/orders/all-orders')],
   ['label' => 'Session Today', 'current' => true],
 ];
-$dashboard_breadcrumb_description = 'Review and manage all sessions scheduled for today.';
-
 layout('dashboard/partials/dashboard-start', [
   'page_title'                     => $page_title,
   'page_current'                   => $page_current,
   'dashboard_breadcrumb_items'     => $dashboard_breadcrumb_items,
-  'dashboard_breadcrumb_description' => $dashboard_breadcrumb_description,
 ]);
 ?>
 <header class="app-header py-6 px-4 -mx-4 md:hidden">

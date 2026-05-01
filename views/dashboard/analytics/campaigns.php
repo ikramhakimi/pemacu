@@ -27,13 +27,10 @@ $dashboard_breadcrumb_items = [
   ['label' => 'Analytics', 'href' => path('/dashboard/analytics/overview')],
   ['label' => 'Campaigns', 'current' => true],
 ];
-$dashboard_breadcrumb_description = 'Monitor campaign performance across paid, social, referral, and owned channels.';
-
 layout('dashboard/partials/dashboard-start', [
   'page_title'                     => $page_title,
   'page_current'                   => $page_current,
   'dashboard_breadcrumb_items'     => $dashboard_breadcrumb_items,
-  'dashboard_breadcrumb_description' => $dashboard_breadcrumb_description,
 ]);
 ?>
 <header class="app-header border-b border-brand-200 py-6 md:hidden">

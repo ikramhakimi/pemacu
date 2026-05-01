@@ -10,6 +10,7 @@ import './components/pagination.js';
 import './components/carousel.js';
 import './components/modal.js';
 import './components/drawer.js';
+import './components/frame.js';
 import './components/table-data.js';
 import './components/assessment-form-drawer.js';
 import './components/assessment-form-bottom-nav.js';

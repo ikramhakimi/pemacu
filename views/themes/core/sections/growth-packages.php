@@ -147,9 +147,9 @@ $section_packages_content = trim((string) ob_get_clean());
       'header_container_class' => 'w-full',
     ]); ?>
     <div class="section-packages__stack grid grid-cols-3 gap-4">
-      <?php component('card-package'); ?>
-      <?php component('card-package'); ?>
-      <?php component('card-package'); ?>
+      <?php component('card', ['card' => ['variant' => 'package']]); ?>
+      <?php component('card', ['card' => ['variant' => 'package']]); ?>
+      <?php component('card', ['card' => ['variant' => 'package']]); ?>
     </div>
   </div>
   

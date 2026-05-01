@@ -11,8 +11,8 @@ $section_growth_features_classes = trim(
 ?>
 <section class="<?= e($section_growth_features_classes); ?>">
   <div class="<?php container('w-full py-16 grid grid-cols-3 gap-4') ?>">
-    <?php component('card-feature'); ?>
-    <?php component('card-feature'); ?>
-    <?php component('card-feature'); ?>
+    <?php component('card', ['card' => ['variant' => 'package']]); ?>
+    <?php component('card', ['card' => ['variant' => 'package']]); ?>
+    <?php component('card', ['card' => ['variant' => 'package']]); ?>
   </div>
 </section>

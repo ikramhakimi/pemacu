@@ -5,10 +5,10 @@ declare(strict_types=1);
 $page_title   = 'Analytics - Overview';
 $page_current = 'dashboard';
 $trend_comparison_columns = [
-  ['label' => 'Metric', 'key' => 'metric'],
-  ['label' => 'Current 30D', 'key' => 'current', 'align' => 'right', 'class_name' => 'w-[150px]'],
-  ['label' => 'Previous 30D', 'key' => 'previous', 'align' => 'right', 'class_name' => 'w-[150px]'],
-  ['label' => 'Delta', 'key' => 'delta', 'align' => 'right', 'class_name' => 'w-[150px]'],
+  ['label' => 'Metric', 'key' => 'metric', 'class_name' => 'w-[20%]'],
+  ['label' => 'Current 30D', 'key' => 'current', 'align' => 'right', 'class_name' => 'w-[30%]'],
+  ['label' => 'Previous 30D', 'key' => 'previous', 'align' => 'left', 'class_name' => 'w-[30%]'],
+  ['label' => 'Delta', 'key' => 'delta', 'align' => 'right', 'class_name' => 'w-[20%]'],
 ];
 $trend_comparison_rows = [
   ['metric' => 'Sessions', 'current' => '48,920', 'previous' => '45,121', 'delta' => '+8.4%'],
@@ -100,157 +100,174 @@ $dashboard_breadcrumb_items = [
   ['label' => 'Analytics', 'href' => path('/dashboard/analytics/overview')],
   ['label' => 'Overview', 'current' => true],
 ];
-$dashboard_breadcrumb_description = 'A unified snapshot of traffic, engagement, clicks, and campaign outcomes for the last 30 days.';
-
 layout('dashboard/partials/dashboard-start', [
   'page_title'                     => $page_title,
   'page_current'                   => $page_current,
   'dashboard_breadcrumb_items'     => $dashboard_breadcrumb_items,
-  'dashboard_breadcrumb_description' => $dashboard_breadcrumb_description,
 ]);
 ?>
 <header class="app-header border-b border-brand-200 py-6 md:hidden">
   <div>
-    <h1 class="text-3xl font-semibold leading-none text-brand-900">Analytics Overview</h1>
+    <h1 class="text-3xl font-semibold leading-none text-brand-900"></h1>
     <p class="mt-4 max-w-2xl text-brand-600">
-      A unified snapshot of traffic, engagement, clicks, and campaign outcomes for the last 30 days.
+      
     </p>
   </div>
 </header>
-<article class="app-article pb-20 pt-8 space-y-4">
+<header class="md:flexs items-center gap-3 border-b border-brand-200 py-5">
+    <div>
+      <h1 class="text-3xl font-bold text-brand-900">Analytics Overview</h1>
+      <p class="text-base text-brand-500 mt-1">A unified snapshot of traffic, engagement, clicks, and campaign outcomes for the last 30 days.</p>
+    </div>
+  </header>
+<article class="app-article pb-20 space-y-5 pt-5">
   <?php component('dashboard/filter-date', [
-    'section_class'  => 'max-w-lg mb-8',
+    'section_class'  => 'max-w-lg',
     'aria_label'     => 'Date range filter',
     'button_variant' => 'primary',
     'disable_past'   => false,
   ]); ?>
 
-  <section class="<?= card('bg-brand-800 p-1 border-0'); ?>" aria-label="Analytics overview summary metrics cards">
-    <header class="p-4">
-      <h2 class="text-xl font-semibold text-white">Analytics Summary Metrics</h2>
-      <p class="mt-1 text-brand-300">At-a-glance sessions, clicks, leads, and conversion rate for the current 30-day period.</p>
-    </header>
-    <div class="mt-1 grid gap-1 sm:grid-cols-2 md:grid-cols-4">
-      <article class="<?= card('group p-4 bg-white border-0 rounded-md'); ?>">
-        <header class="pb-4">
-          <h3 class="text-xs font-medium uppercase text-brand-500 mb-4">Total Sessions</h3>
-          <p class="text-3xl font-semibold leading-none text-brand-900">48,920</p>
-        </header>
-        <div class="space-y-1">
-          <p class="text-sm font-semibold text-positive-700">+8.4%</p>
-          <p class="text-brand-500">vs previous 30 days</p>
-        </div>
-      </article>
-
-      <article class="<?= card('group p-4 bg-white border-0 rounded-md'); ?>">
-        <header class="pb-4">
-          <h3 class="text-xs font-medium uppercase text-brand-500 mb-4">Total Clicks</h3>
-          <p class="text-3xl font-semibold leading-none text-brand-900">62,480</p>
-        </header>
-        <div class="space-y-1">
-          <p class="text-sm font-semibold text-positive-700">+9.2%</p>
-          <p class="text-brand-500">vs previous 30 days</p>
-        </div>
-      </article>
-
-      <article class="<?= card('group p-4 bg-white border-0 rounded-md'); ?>">
-        <header class="pb-4">
-          <h3 class="text-xs font-medium uppercase text-brand-500 mb-4">Campaign Leads</h3>
-          <p class="text-3xl font-semibold leading-none text-brand-900">1,246</p>
-        </header>
-        <div class="space-y-1">
-          <p class="text-sm font-semibold text-positive-700">+14.2%</p>
-          <p class="text-brand-500">vs previous 30 days</p>
-        </div>
-      </article>
-
-      <article class="<?= card('group p-4 bg-white border-0 rounded-md'); ?>">
-        <header class="pb-4">
-          <h3 class="text-xs font-medium uppercase text-brand-500 mb-4">Lead Conversion Rate</h3>
-          <p class="text-3xl font-semibold leading-none text-brand-900">5.3%</p>
-        </header>
-        <div class="space-y-1">
-          <p class="text-sm font-semibold text-positive-700">+0.7%</p>
-          <p class="text-brand-500">vs previous 30 days</p>
-        </div>
-      </article>
+  <section aria-label="Analytics overview summary metrics cards">
+    <?php ob_start(); ?>
+    <div class="grid gap-1 sm:grid-cols-2 md:grid-cols-4">
+      <?php component('card', ['card' => [
+        'variant'        => 'metric',
+        'title'          => 'Total Sessions',
+        'show_subtitle'  => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'   => '48,920',
+        'metric_compare' => '+8.4% vs previous 30 days',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'        => 'metric',
+        'title'          => 'Total Clicks',
+        'show_subtitle'  => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'   => '62,480',
+        'metric_compare' => '+9.2% vs previous 30 days',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'        => 'metric',
+        'title'          => 'Campaign Leads',
+        'show_subtitle'  => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'   => '1,246',
+        'metric_compare' => '+14.2% vs previous 30 days',
+      ]]); ?>
+      <?php component('card', ['card' => [
+        'variant'        => 'metric',
+        'title'          => 'Lead Conversion Rate',
+        'show_subtitle'  => false,
+        'metric_title_class' => 'text-sm',
+        'metric_value'   => '5.3%',
+        'metric_compare' => '+0.7% vs previous 30 days',
+      ]]); ?>
     </div>
+    <?php
+    $analytics_summary_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'base',
+      'title'            => 'Analytics Summary Metrics',
+      'subtitle'         => 'At-a-glance sessions, clicks, leads, and conversion rate for the current 30-day period.',
+      'panel_html_items' => [$analytics_summary_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => '!ring-0',
+    ]);
+    ?>
   </section>
 
   <section class="grid gap-4 md:grid-cols-2 md:items-start" aria-label="Trend and funnel summary">
-    <div class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Trend Comparison</h2>
-        <p class="mt-1 text-brand-300">Current 30 days versus previous 30 days across core metrics.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $trend_comparison_columns,
-          'rows'       => $trend_comparison_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </div>
-    <div class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Funnel Summary</h2>
-        <p class="mt-1 text-brand-300">Sessions to bookings conversion for this period.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $funnel_summary_columns,
-          'rows'       => $funnel_summary_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </div>
-    <div class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Top 5 Pages</h2>
-        <p class="mt-1 text-brand-300">Most viewed pages and visitors in the last 30 days.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $top_pages_columns,
-          'rows'       => $top_pages_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </div>
-    <div class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Top Click Targets</h2>
-        <p class="mt-1 text-brand-300">Most clicked UI targets and actions in the last 30 days.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $top_click_targets_columns,
-          'rows'       => $top_click_targets_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </div>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $trend_comparison_columns,
+      'rows'       => $trend_comparison_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $trend_comparison_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'base',
+      'title'            => 'Trend Comparison',
+      'subtitle'         => 'Current 30 days versus previous 30 days across core metrics.',
+      'panel_html_items' => [$trend_comparison_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => '!ring-0',
+    ]);
+    ?>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $funnel_summary_columns,
+      'rows'       => $funnel_summary_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $funnel_summary_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'base',
+      'title'            => 'Funnel Summary',
+      'subtitle'         => 'Sessions to bookings conversion for this period.',
+      'panel_html_items' => [$funnel_summary_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => '!ring-0',
+    ]);
+    ?>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $top_pages_columns,
+      'rows'       => $top_pages_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $top_pages_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'base',
+      'title'            => 'Top 5 Pages',
+      'subtitle'         => 'Most viewed pages and visitors in the last 30 days.',
+      'panel_html_items' => [$top_pages_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => '!ring-0',
+    ]);
+    ?>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $top_click_targets_columns,
+      'rows'       => $top_click_targets_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $top_click_targets_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'base',
+      'title'            => 'Top Click Targets',
+      'subtitle'         => 'Most clicked UI targets and actions in the last 30 days.',
+      'panel_html_items' => [$top_click_targets_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => '!ring-0',
+    ]);
+    ?>
   </section>
 
   <div class="mt-4 border-t border-dashed border-brand-300"></div>
 
-  <section class="<?= card('bg-brand-800 p-1 border-0'); ?>" aria-label="Goal tracking">
-    <header class="p-4">
-      <h2 class="text-xl font-semibold text-white">Goal Tracking</h2>
-      <p class="mt-1 text-brand-300">Progress against monthly business targets.</p>
-    </header>
-    <div class="mt-1 grid gap-1 md:grid-cols-3">
+  <section aria-label="Goal tracking">
+    <?php ob_start(); ?>
+    <div class="grid gap-1 md:grid-cols-3">
       <?php foreach ($goal_tracking_rows as $goal_row): ?>
+        <?php
+        $goal_current_display = is_numeric($goal_row['current']) ? number_format((float) $goal_row['current']) : (string) $goal_row['current'];
+        $goal_target_display  = is_numeric($goal_row['target']) ? number_format((float) $goal_row['target']) : (string) $goal_row['target'];
+        ?>
         <article class="<?= card('p-4 bg-white border-0 rounded-md'); ?>">
           <header class="pb-4">
             <h3 class="text-xs font-medium uppercase text-brand-500 mb-4"><?= e($goal_row['label']); ?></h3>
             <p class="text-3xl font-semibold leading-none text-brand-900">
-              <?= e((string) $goal_row['current']); ?>
-              <span class="text-base font-normal text-brand-600">/ <?= e((string) $goal_row['target']); ?></span>
+              <?= e($goal_current_display); ?>
+              <span class="text-base font-normal text-brand-600">/ <?= e($goal_target_display); ?></span>
             </p>
           </header>
           <div class="space-y-3">
@@ -266,6 +283,17 @@ layout('dashboard/partials/dashboard-start', [
         </article>
       <?php endforeach; ?>
     </div>
+    <?php
+    $goal_tracking_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'          => 'ghost-dark',
+      'title'            => 'Goal Tracking',
+      'subtitle'         => 'Progress against monthly business targets.',
+      'panel_html_items' => [$goal_tracking_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'       => 'bg-brand-800',
+    ]);
+    ?>
   </section>
 
   
@@ -323,35 +351,43 @@ layout('dashboard/partials/dashboard-start', [
   </section>
 
   <div class="grid gap-4 md:grid-cols-2 md:items-start">
-    <section class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Top Channels</h2>
-        <p class="mt-1 text-brand-300">Traffic and lead contribution by channel for the last 30 days.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $top_channels_columns,
-          'rows'       => $top_channels_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </section>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $top_channels_columns,
+      'rows'       => $top_channels_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $top_channels_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'              => 'base',
+      'title'                => 'Top Channels',
+      'subtitle'             => 'Traffic and lead contribution by channel for the last 30 days.',
+      'panel_html_items'     => [$top_channels_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'           => '!ring-0',
+    ]);
+    ?>
 
-    <section class="<?= card('bg-brand-600 p-1 border-0'); ?>">
-      <header class="p-4">
-        <h2 class="text-xl font-semibold text-white">Campaign Highlights</h2>
-        <p class="mt-1 text-brand-300">Best-performing campaigns by leads generated in the last 30 days.</p>
-      </header>
-      <article class="mt-1">
-        <?php component('table', [
-          'columns'    => $campaign_highlights_columns,
-          'rows'       => $campaign_highlights_rows,
-          'appearance' => 'default',
-          'spacing'    => 'default',
-        ]); ?>
-      </article>
-    </section>
+    <?php ob_start(); ?>
+    <?php component('table', [
+      'columns'    => $campaign_highlights_columns,
+      'rows'       => $campaign_highlights_rows,
+      'appearance' => 'default',
+      'spacing'    => 'default',
+    ]); ?>
+    <?php
+    $campaign_highlights_panel_html = (string) ob_get_clean();
+    component('frame', [
+      'variant'              => 'base',
+      'title'                => 'Campaign Highlights',
+      'subtitle'             => 'Best-performing campaigns by leads generated in the last 30 days.',
+      'panel_html_items'     => [$campaign_highlights_panel_html],
+      'render_panel_wrapper' => false,
+      'class_name'           => '!ring-0',
+    ]);
+    ?>
   </div>
 </article>
 <?php layout('dashboard/partials/dashboard-end'); ?>

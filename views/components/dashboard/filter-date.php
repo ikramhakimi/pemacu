@@ -42,13 +42,13 @@ $button_wrap_class = isset($props['button_wrap_class']) ? trim((string) $props['
 ?>
 <section class="<?= e($section_class); ?>" aria-label="<?= e($aria_label); ?>">
   <form class="<?= e($form_class); ?>" action="<?= e($form_action); ?>" method="<?= e($form_method); ?>">
-    <?php component('form/pickdate', [
+    <?php component('pickdate', [
       'mode'         => 'single',
       'name'         => $date_from_name,
       'placeholder'  => $date_from_placeholder,
       'disable_past' => $disable_past,
     ]); ?>
-    <?php component('form/pickdate', [
+    <?php component('pickdate', [
       'mode'         => 'single',
       'name'         => $date_to_name,
       'placeholder'  => $date_to_placeholder,

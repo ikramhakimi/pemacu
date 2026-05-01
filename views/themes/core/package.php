@@ -35,7 +35,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
           </div>
         </div>
         <div class="col-span-3 lg:col-span-2">
-          <?php component('form/pickdate-grid-js', [
+          <?php component('pickdate-grid-js', [
             'id'                => 'booking-dynamic-grid',
             'name'              => 'booking_dynamic_date',
             'value'             => '2026-04-10',
@@ -64,7 +64,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
         </div>
         
         <div class="col-span-3 lg:col-span-2">
-          <?php component('form/picktime-grid', [
+          <?php component('picktime-grid', [
             'name'         => 'time_slot',
             'value'        => '03:00 PM',
             'start_time'   => '08:00',
@@ -240,7 +240,7 @@ layout('layout-start', ['page_title' => $page_title, 'page_current' => $page_cur
             'href'          => 'package-confirm',
             'variant'       => 'primary',
             'size'          => 'lg',
-            'gradient'      => true,
+            'surface'       => 'gradient',
             'icon_name'     => 'arrow-right-line',
             'icon_position' => 'right',
             'icon_class'    => 'text-white',

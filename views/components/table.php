@@ -48,12 +48,12 @@ if ($columns === []) {
 
 $appearance_map = [
   'default' => [
-    'wrapper' => 'rounded-md border border-brand-200 bg-white',
-    'head'    => 'border-b-4 border-brand-200 bg-brand-100 text-xs font-medium uppercase text-brand-700',
+    'wrapper' => 'rounded-md ring-1 ring-brand-300 bg-white',
+    'head'    => 'border-b-4 border-brand-200 text-xs uppercase text-brand-500',
   ],
   'basic' => [
     'wrapper' => '',
-    'head'    => 'border-b-4 border-brand-200 text-xs font-medium uppercase text-brand-700',
+    'head'    => 'border-b-4 border-brand-200 text-xs uppercase text-brand-500',
   ],
 ];
 
@@ -175,15 +175,11 @@ $table_attributes['class'] = trim(implode(' ', array_filter([
       <tr>
         <?php foreach ($column_meta as $column_index => $column): ?>
           <?php
-          $is_first_heading = $column_index === 0;
-          $is_last_heading  = $column_index === (count($column_meta) - 1);
           $heading_classes = trim(implode(' ', array_filter([
-            'table__heading px-4',
+            'table__heading px-4 font-semibold',
             $edge_padding_class,
             $spacing_map[$spacing]['heading'],
             $resolve_optional_align((string) $column['align']),
-            $is_first_heading ? 'rounded-tl-sm' : '',
-            $is_last_heading ? 'rounded-tl-sm' : '',
             (string) $column['class_name'],
             (string) $column['heading_class'],
           ])));

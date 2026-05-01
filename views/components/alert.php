@@ -96,7 +96,7 @@ if ($icon_name === '') {
 }
 
 $alert_classes = implode(' ', array_filter([
-  'alert inline-flex w-full items-start gap-3 rounded-lg border px-4 py-3',
+  'alert inline-flex w-full items-start gap-3 rounded-lg border p-4',
   $tone_data['alert'],
   $class_name,
 ]));
@@ -138,21 +138,21 @@ $root_attributes['data-alert-js'] = true;
     </div>
   <?php endif; ?>
 
-  <div class="alert__content min-w-0 flex-1 space-y-1">
+  <div class="alert__content min-w-0 flex-1">
     <?php if ($title !== ''): ?>
-      <p class="alert__title  font-semibold <?= e($tone_data['title']); ?>">
+      <p class="alert__title  font-semibold leading-5 <?= e($tone_data['title']); ?>">
         <?= e($title); ?>
       </p>
     <?php endif; ?>
 
     <?php if ($description !== ''): ?>
-      <p class="alert__description  <?= e($tone_data['copy']); ?>">
+      <p class="alert__description mt-2 <?= e($tone_data['copy']); ?>">
         <?= e($description); ?>
       </p>
     <?php endif; ?>
 
     <?php if ($actions !== []): ?>
-      <div class="alert__actions mt-2 inline-flex flex-wrap items-center gap-2">
+      <div class="alert__actions mt-4 inline-flex flex-wrap items-center gap-2">
         <?php foreach ($actions as $action): ?>
           <?php
           $action_label = is_array($action) && isset($action['label']) ? trim((string) $action['label']) : '';
@@ -173,7 +173,7 @@ $root_attributes['data-alert-js'] = true;
             'href'       => $action_href,
             'type'       => $action_type,
             'variant'    => $action_variant,
-            'size'       => 'sm',
+            'size'       => 'md',
             'attributes' => $action_attrs,
           ]); ?>
         <?php endforeach; ?>
@@ -183,7 +183,7 @@ $root_attributes['data-alert-js'] = true;
 
   <?php if ($dismissible): ?>
     <button
-      class="alert__dismiss inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-current/80 hover:bg-white/50 hover:text-current"
+      class="alert__dismiss inline-flex size-5 shrink-0 items-center justify-center rounded-md text-current/80 hover:bg-white/50 hover:text-current"
       type="button"
       aria-label="Dismiss alert"
       data-alert-dismiss

@@ -122,7 +122,11 @@ $control_component_key = $control_component === 'select'
       ? 'input'
       : ($control_component === 'input-group'
         ? 'input-group'
-        : ($control_component === 'rating' ? 'rating' : 'form/' . $control_component))));
+        : ($control_component === 'rating'
+          ? 'rating'
+          : (in_array($control_component, ['pickdate', 'pickdate-grid-js', 'picktime', 'picktime-grid'], true)
+            ? $control_component
+            : 'form/' . $control_component)))));
 
 $helper_class_map = [
   'default'  => 'field__helper field__helper--default',

@@ -55,7 +55,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['IBM Plex Sans', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {

@@ -1,4 +1,10 @@
 (() => {
+  const can_use_hover_interaction = () =>
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  const is_nav_dropdown = (dropdown_node) =>
+    dropdown_node instanceof HTMLElement && dropdown_node.closest('[data-nav]') instanceof HTMLElement;
+
   const set_menu_placement = (dropdown_node) => {
     if (!(dropdown_node instanceof HTMLElement)) {
       return;
@@ -110,6 +116,56 @@
   };
 
   initialize_dropdowns();
+
+  const hover_timers = new WeakMap();
+  const bind_hover_dropdowns = () => {
+    const dropdown_nodes = Array.from(document.querySelectorAll('[data-dropdown]'));
+
+    dropdown_nodes.forEach((dropdown_node) => {
+      if (!(dropdown_node instanceof HTMLElement)) {
+        return;
+      }
+
+      if (!is_nav_dropdown(dropdown_node)) {
+        return;
+      }
+
+      if (dropdown_node.dataset.dropdownHoverBound === 'true') {
+        return;
+      }
+
+      dropdown_node.dataset.dropdownHoverBound = 'true';
+
+      dropdown_node.addEventListener('mouseenter', () => {
+        if (!can_use_hover_interaction()) {
+          return;
+        }
+
+        const existing_timer = hover_timers.get(dropdown_node);
+        if (existing_timer) {
+          window.clearTimeout(existing_timer);
+        }
+
+        close_all_dropdowns(dropdown_node);
+        open_dropdown(dropdown_node);
+      });
+
+      dropdown_node.addEventListener('mouseleave', () => {
+        if (!can_use_hover_interaction()) {
+          return;
+        }
+
+        const leave_timer = window.setTimeout(() => {
+          close_dropdown(dropdown_node);
+          hover_timers.delete(dropdown_node);
+        }, 120);
+
+        hover_timers.set(dropdown_node, leave_timer);
+      });
+    });
+  };
+
+  bind_hover_dropdowns();
 
   document.addEventListener('click', (event) => {
     const click_target = event.target;

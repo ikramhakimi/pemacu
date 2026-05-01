@@ -66,12 +66,12 @@ $chevron_at_start         = $chevron_position === 'start';
 $is_line_divided          = $variant === 'line_divided';
 $details_default_class    = $is_line_divided
   ? 'accordion__item group'
-  : 'accordion__item group overflow-hidden rounded-lg border border-brand-200 bg-white';
+  : 'accordion__item group overflow-hidden rounded-lg border border-brand-300 bg-white';
 $details_resolved_class   = trim($details_default_class . ' ' . $details_class);
 $summary_base_class       = 'accordion__summary cursor-pointer list-none font-medium';
 $summary_default_class    = $is_line_divided
   ? 'flex items-center gap-3 py-2'
-  : 'flex items-center gap-3 py-3 px-5';
+  : 'flex items-center gap-3 py-3 px-4';
 $summary_resolved_class   = $summary_class !== ''
   ? trim($summary_base_class . ' ' . $summary_class)
   : trim($summary_base_class . ' ' . $summary_default_class);
@@ -82,7 +82,7 @@ $summary_text_resolved_class = $summary_text_class !== ''
   : trim($summary_text_base_class . ' ' . $summary_text_default_class);
 $panel_default_class = $is_line_divided
   ? 'accordion__panel pb-3'
-  : 'accordion__panel px-5 pt-0 pb-4';
+  : 'accordion__panel px-4 pt-0 pb-4';
 $panel_resolved_class = trim($panel_default_class . ' ' . $panel_class);
 
 $default_chevron_background_class = '';

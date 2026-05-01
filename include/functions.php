@@ -89,23 +89,23 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/checkbox', 'label' => 'Checkbox'],
     ['href' => '/canvas/components/input', 'label' => 'Input'],
     ['href' => '/canvas/components/input-group', 'label' => 'Input Group'],
+    ['href' => '/canvas/components/input-stepper', 'label' => 'Input Stepper'],
     ['href' => '/canvas/components/textarea', 'label' => 'Textarea'],
     ['href' => '/canvas/components/radio', 'label' => 'Radio'],
     ['href' => '/canvas/components/rating', 'label' => 'Rating'],
     ['href' => '/canvas/components/select', 'label' => 'Select'],
     ['href' => '/canvas/components/breadcrumb', 'label' => 'Breadcrumb'],
-    ['href' => '/canvas/components/cards', 'label' => 'Cards'],
+    ['href' => '/canvas/components/card', 'label' => 'Card'],
     ['href' => '/canvas/components/dropdown', 'label' => 'Dropdown'],
     ['href' => '/canvas/components/drawer', 'label' => 'Drawer'],
     ['href' => '/canvas/components/empty-state', 'label' => 'Empty State'],
     ['href' => '/canvas/components/field', 'label' => 'Field'],
-    ['href' => '/canvas/components/forms', 'label' => 'Forms'],
+    ['href' => '/canvas/components/frame', 'label' => 'Frame'],
     ['href' => '/canvas/components/switch', 'label' => 'Switch'],
     ['href' => '/canvas/components/pick-date', 'label' => 'Pick Date'],
     ['href' => '/canvas/components/pick-time', 'label' => 'Pick Time'],
     ['href' => '/canvas/components/progressbar', 'label' => 'Progressbar'],
     ['href' => '/canvas/components/pagination', 'label' => 'Pagination'],
-    ['href' => '/canvas/components/stats-card', 'label' => 'Stats Card'],
     ['href' => '/canvas/components/stepper', 'label' => 'Stepper'],
     ['href' => '/canvas/components/table', 'label' => 'Table'],
     ['href' => '/canvas/components/table-data', 'label' => 'Table Data'],
@@ -115,6 +115,7 @@ function canvas_links(string $canvas_primary): array
     ['href' => '/canvas/components/grids', 'label' => 'Grids'],
     ['href' => '/canvas/components/headers', 'label' => 'Headers'],
     ['href' => '/canvas/components/modal', 'label' => 'Modal'],
+    ['href' => '/canvas/components/nav', 'label' => 'Nav'],
   ];
 }
 
@@ -127,7 +128,7 @@ function dashboard_links(): array
       'href'      => '#',
       'icon_name' => 'money-dollar-circle-line',
       'children'  => [
-        ['label' => 'Overview', 'href' => '#'],
+        ['label' => 'Overview', 'href' => path('/dashboard/sales/overview')],
         ['label' => 'Calendar', 'href' => '#'],
       ],
     ],
@@ -385,16 +386,22 @@ function dashboard_breadcrumb_items(array $dashboard_sidebar, string $request_ur
 function button_class(array $options = []): string
 {
   $tone      = isset($options['tone']) ? (string) $options['tone'] : 'default';
+  $surface   = isset($options['surface']) ? (string) $options['surface'] : 'flat';
   $size      = isset($options['size']) ? (string) $options['size'] : 'md';
   $disabled  = isset($options['disabled']) ? (bool) $options['disabled'] : false;
   $icon_only = isset($options['icon_only']) ? (bool) $options['icon_only'] : false;
   $extra     = isset($options['extra']) ? trim((string) $options['extra']) : '';
 
   $allowed_tones = ['default', 'primary', 'secondary', 'positive', 'negative'];
+  $allowed_surfaces = ['flat', 'gradient'];
   $allowed_sizes = ['sm', 'md', 'lg', 'xl'];
 
   if (!in_array($tone, $allowed_tones, true)) {
     $tone = 'default';
+  }
+
+  if (!in_array($surface, $allowed_surfaces, true)) {
+    $surface = 'flat';
   }
 
   if (!in_array($size, $allowed_sizes, true)) {
@@ -435,29 +442,34 @@ function button_class(array $options = []): string
   $tone_tokens = [
     'default' => [
       'disabled' => 'border-transparent bg-brand-400 text-white',
+      'flat'     => 'border-brand-700 bg-brand-700 text-white hover:bg-brand-800',
       'gradient' => 'border-brand-900 bg-gradient-to-b from-brand-600 to-brand-800 text-white',
     ],
     'primary' => [
       'disabled' => 'border-transparent bg-primary-400 text-white',
+      'flat'     => 'border-primary-600 bg-primary-600 text-white hover:bg-primary-700',
       'gradient' => 'border-primary-700 bg-gradient-to-b from-primary-500 to-primary-700 text-white',
     ],
     'secondary' => [
       'disabled' => 'border-transparent bg-brand-200 text-brand-400',
+      'flat'     => 'border-brand-300 bg-white text-brand-900 hover:bg-brand-50',
       'gradient' => 'border-brand-300 bg-gradient-to-b from-white to-brand-100 text-brand-900',
     ],
     'positive' => [
       'disabled' => 'border-transparent bg-positive-300 text-white',
+      'flat'     => 'border-positive-600 bg-positive-600 text-white hover:bg-positive-700',
       'gradient' => 'border-positive-600 bg-gradient-to-b from-positive-500 to-positive-600 text-white',
     ],
     'negative' => [
       'disabled' => 'border-transparent bg-negative-300 text-white',
+      'flat'     => 'border-negative-600 bg-negative-600 text-white hover:bg-negative-700',
       'gradient' => 'border-negative-600 bg-gradient-to-b from-negative-500 to-negative-600 text-white',
     ],
   ];
 
   $tone_state = $disabled
     ? $tone_tokens[$tone]['disabled']
-    : $tone_tokens[$tone]['gradient'];
+    : $tone_tokens[$tone][$surface];
 
   $classes = [
     'inline-flex',
@@ -526,9 +538,10 @@ function button_gradient(string $variant_size = 'md/default', string $extra_clas
   $resolved_options = button_options_from_variant_size($variant_size);
 
   echo e(button_class([
-    'size'  => $resolved_options['size'],
-    'tone'  => $resolved_options['tone'],
-    'extra' => $extra_class,
+    'size'    => $resolved_options['size'],
+    'tone'    => $resolved_options['tone'],
+    'surface' => 'gradient',
+    'extra'   => $extra_class,
   ]));
 }
 

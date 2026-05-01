@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Component: icon
  * Purpose: Render one Remixicon SVG by name with size and Tailwind color support.
  * Anatomy:
- * - svg.icon.icon--{icon_name}.icon--{size}
+ * - svg.icon.icon--{icon_name}.size-*
  * Data Contract:
  * - `icon_name` (string, required): Remixicon file name without `.svg` (e.g. `search-line`).
  * - `icon_size` (string, optional): one of 12, 16, 20, 24, 32, 40. Default: 24.
@@ -22,6 +22,14 @@ if ($resolved_icon_name === '') {
 }
 
 $allowed_sizes = ['12', '16', '20', '24', '32', '40'];
+$size_class_map = [
+  '12' => 'size-3',
+  '16' => 'size-4',
+  '20' => 'size-5',
+  '24' => 'size-6',
+  '32' => 'size-8',
+  '40' => 'size-10',
+];
 
 if (!in_array($resolved_icon_size, $allowed_sizes, true)) {
   $resolved_icon_size = '24';
@@ -72,7 +80,7 @@ if ($svg_content === '') {
 $classes = [
   'icon',
   'icon--' . $icon_name_class,
-  'icon--' . $resolved_icon_size,
+  $size_class_map[$resolved_icon_size],
 ];
 
 if ($resolved_icon_class !== '') {
@@ -80,8 +88,7 @@ if ($resolved_icon_class !== '') {
 }
 
 $icon_class_attribute = implode(' ', array_filter($classes));
-$icon_size_px         = (int) $resolved_icon_size;
 ?>
-<svg class="<?= e($icon_class_attribute); ?>" width="<?= e((string) $icon_size_px); ?>" height="<?= e((string) $icon_size_px); ?>" viewBox="<?= e($svg_view_box); ?>" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<svg class="<?= e($icon_class_attribute); ?>" viewBox="<?= e($svg_view_box); ?>" fill="currentColor" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <?= $svg_content; ?>
 </svg>

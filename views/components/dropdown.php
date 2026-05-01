@@ -21,6 +21,8 @@ declare(strict_types=1);
  *   - `icon_name` (string, optional): Trigger icon name.
  *   - `icon_position` (string, optional): `left` or `right`. Default: `right`.
  *   - `icon_only` (bool, optional): Use icon-only trigger.
+ *   - `content` (string, optional): Raw trigger HTML content.
+ *   - `is_html` (bool, optional): Render `content` as raw HTML. Default: `false`.
  *   - `variant` (string, optional): Button variant. Default: `secondary`.
  *   - `size` (string, optional): Button size. Default: `md`.
  * - `menu` (array, optional):
@@ -29,8 +31,8 @@ declare(strict_types=1);
  * - `items` (array, optional): Menu rows.
  *   - Label row: `['type' => 'label', 'label' => 'Quick Actions']`
  *   - Divider row: `['type' => 'divider']`
- *   - Link row: `['label' => 'Edit', 'href' => '#', 'item_class' => '...']`
- *   - Button row: `['type' => 'button', 'label' => 'Delete', 'item_class' => '...', 'disabled' => true]`
+ *   - Link row: `['label' => 'Edit', 'href' => '#', 'icon_name' => 'edit-line', 'item_class' => '...']`
+ *   - Button row: `['type' => 'button', 'label' => 'Delete', 'icon_name' => 'delete-bin-line', 'item_class' => '...', 'disabled' => true]`
  */
 
 $resolved_dropdown_id = isset($dropdown_id) && is_string($dropdown_id) && trim($dropdown_id) !== ''
@@ -63,6 +65,8 @@ $resolved_trigger_icon_position = isset($trigger['icon_position']) && is_string(
   ? trim($trigger['icon_position'])
   : 'right';
 $resolved_trigger_icon_only = isset($trigger['icon_only']) ? (bool) $trigger['icon_only'] : false;
+$resolved_trigger_content = isset($trigger['content']) ? (string) $trigger['content'] : '';
+$resolved_trigger_is_html = isset($trigger['is_html']) ? (bool) $trigger['is_html'] : false;
 $resolved_trigger_variant = isset($trigger['variant']) && is_string($trigger['variant']) && trim($trigger['variant']) !== ''
   ? trim($trigger['variant'])
   : 'secondary';
@@ -97,16 +101,40 @@ $resolved_items = isset($items) && is_array($items) && $items !== []
 
 $resolved_menu_position_class = $resolved_align === 'right' ? 'right-0' : 'left-0';
 $resolved_menu_classes = trim(implode(' ', array_filter([
-  'dropdown__menu absolute ' . $resolved_menu_position_class . ' z-20 mt-2 hidden list-none rounded-lg border border-brand-200 bg-white p-1 shadow-lg',
+  'dropdown__menu absolute ' . $resolved_menu_position_class . ' z-20 mt-2 hidden list-none rounded-lg border border-brand-300 bg-white p-1 shadow-lg',
   $resolved_menu_min_width_class,
   $resolved_menu_class,
 ])));
 ?>
 <div class="dropdown relative inline-block" data-dropdown data-dropdown-align="<?= e($resolved_align); ?>">
-  <?php if ($resolved_trigger_type === 'link'): ?>
+  <?php if ($resolved_trigger_content !== ''): ?>
+    <?php if ($resolved_trigger_type === 'link'): ?>
+      <a
+        id="dropdown-trigger-<?= e($resolved_dropdown_id); ?>"
+        class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5  font-medium text-brand-700 hover:text-brand-900 hover:underline ' . $resolved_trigger_class)); ?>"
+        href="#"
+        aria-label="<?= e($resolved_trigger_aria_label); ?>"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        aria-controls="dropdown-menu-<?= e($resolved_dropdown_id); ?>"
+        data-dropdown-trigger
+      ><?= $resolved_trigger_is_html ? $resolved_trigger_content : e($resolved_trigger_content); ?></a>
+    <?php else: ?>
+      <button
+        id="dropdown-trigger-<?= e($resolved_dropdown_id); ?>"
+        class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5  font-medium text-brand-700 hover:text-brand-900 ' . $resolved_trigger_class)); ?>"
+        type="button"
+        aria-label="<?= e($resolved_trigger_aria_label); ?>"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        aria-controls="dropdown-menu-<?= e($resolved_dropdown_id); ?>"
+        data-dropdown-trigger
+      ><?= $resolved_trigger_is_html ? $resolved_trigger_content : e($resolved_trigger_content); ?></button>
+    <?php endif; ?>
+  <?php elseif ($resolved_trigger_type === 'link'): ?>
     <a
       id="dropdown-trigger-<?= e($resolved_dropdown_id); ?>"
-      class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5  font-semibold text-brand-700 hover:text-brand-900 hover:underline ' . $resolved_trigger_class)); ?>"
+      class="<?= e(trim('dropdown__trigger inline-flex items-center gap-1.5  font-medium text-brand-700 hover:text-brand-900 hover:underline ' . $resolved_trigger_class)); ?>"
       href="#"
       aria-label="<?= e($resolved_trigger_aria_label); ?>"
       aria-haspopup="menu"
@@ -152,12 +180,15 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
       $item_label = isset($item['label']) ? trim((string) $item['label']) : '';
       $item_href = isset($item['href']) && is_string($item['href']) && trim($item['href']) !== '' ? trim($item['href']) : '#';
       $item_class = isset($item['item_class']) && is_string($item['item_class']) ? trim($item['item_class']) : '';
+      $item_icon_name = isset($item['icon_name']) && is_string($item['icon_name']) ? trim($item['icon_name']) : '';
+      $item_icon_size = isset($item['icon_size']) && is_string($item['icon_size']) && trim($item['icon_size']) !== '' ? trim($item['icon_size']) : '16';
+      $item_icon_class = isset($item['icon_class']) && is_string($item['icon_class']) ? trim($item['icon_class']) : 'text-brand-500';
       $item_disabled = isset($item['disabled']) ? (bool) $item['disabled'] : false;
       $item_li_class = isset($item['li_class']) && is_string($item['li_class']) ? trim($item['li_class']) : '';
       ?>
       <?php if ($item_type === 'divider'): ?>
         <li role="none">
-          <div class="my-1 border-t border-brand-100"></div>
+          <div class="my-2 border-t border-brand-200"></div>
         </li>
         <?php continue; ?>
       <?php endif; ?>
@@ -179,7 +210,10 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
             role="menuitem"
             <?= $item_disabled ? 'disabled' : ''; ?>
           >
-            <?= e($item_label); ?>
+            <?php if ($item_icon_name !== ''): ?>
+              <?php icon($item_icon_name, ['icon_size' => $item_icon_size, 'icon_class' => $item_icon_class]); ?>
+            <?php endif; ?>
+            <span><?= e($item_label); ?></span>
           </button>
         <?php else: ?>
           <?php if ($item_disabled): ?>
@@ -188,7 +222,10 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
               role="menuitem"
               aria-disabled="true"
             >
-              <?= e($item_label); ?>
+              <?php if ($item_icon_name !== ''): ?>
+                <?php icon($item_icon_name, ['icon_size' => $item_icon_size, 'icon_class' => $item_icon_class]); ?>
+              <?php endif; ?>
+              <span><?= e($item_label); ?></span>
             </span>
           <?php else: ?>
             <a
@@ -196,7 +233,10 @@ $resolved_menu_classes = trim(implode(' ', array_filter([
               href="<?= e($item_href); ?>"
               role="menuitem"
             >
-              <?= e($item_label); ?>
+              <?php if ($item_icon_name !== ''): ?>
+                <?php icon($item_icon_name, ['icon_size' => $item_icon_size, 'icon_class' => $item_icon_class]); ?>
+              <?php endif; ?>
+              <span><?= e($item_label); ?></span>
             </a>
           <?php endif; ?>
         <?php endif; ?>

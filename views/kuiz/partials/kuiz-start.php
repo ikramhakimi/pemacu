@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-$resolved_page_title   = isset($page_title) ? (string) $page_title : 'Dashboard';
-$resolved_page_current = isset($page_current) ? (string) $page_current : 'dashboard';
+$resolved_page_title   = isset($page_title) ? (string) $page_title : 'Kuiz';
+$resolved_page_current = isset($page_current) ? (string) $page_current : 'kuiz';
 $dashboard_content_max = isset($dashboard_content_max) ? (string) $dashboard_content_max : 'max-w-7xl md:px-6';
 $dashboard_no_sidebar  = isset($dashboard_no_sidebar) ? (bool) $dashboard_no_sidebar : false;
 $dashboard_sidebar     = isset($dashboard_sidebar) && is_array($dashboard_sidebar)
@@ -18,17 +18,13 @@ $app_css_path          = __DIR__ . '/../../../assets/build/app.css';
 $app_css_href          = path('/assets/build/app.css');
 $app_css_version       = is_file($app_css_path) ? (string) filemtime($app_css_path) : '';
 $app_css_url           = $app_css_version !== '' ? $app_css_href . '?v=' . $app_css_version : $app_css_href;
-$dashboard_css_path    = __DIR__ . '/../../../assets/build/dashboard.css';
-$dashboard_css_href    = path('/assets/build/dashboard.css');
-$dashboard_css_version = is_file($dashboard_css_path) ? (string) filemtime($dashboard_css_path) : '';
-$dashboard_css_url     = $dashboard_css_version !== '' ? $dashboard_css_href . '?v=' . $dashboard_css_version : $dashboard_css_href;
 ?>
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title><?= e($resolved_page_title); ?> | Booking Pro</title>
+  <title><?= e($resolved_page_title); ?> | Kuiz</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
@@ -49,7 +45,7 @@ $dashboard_css_url     = $dashboard_css_version !== '' ? $dashboard_css_href . '
             <ul class="">
               <li class="mx-3 mb-4 pb-4 border-b border-brand-800">
                 <div class="size-16 bg-brand-800 rounded-lg mb-4"></div>
-                <h2 class="font-semibold text-base text-white">Lumera Studio</h2>
+                <h2 class="font-semibold text-base text-white">Kuiz</h2>
               </li>
               <?php foreach ($dashboard_sidebar as $item_index => $item): ?>
                 <?php

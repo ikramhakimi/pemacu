@@ -27,7 +27,7 @@ layout('dashboard/partials/dashboard-start', [
     </p>
   </div>
 </header>
-<article class="app-article pb-20 pt-1 space-y-1 -mx-5">
+<article class="app-article pb-20 pt-1 space-y-5 -mx-5">
   <section aria-labelledby="dashboard-kpi-heading">
     <h2 id="dashboard-kpi-heading" class="sr-only">Key metrics</h2>
     <div class="grid gap-1 sm:grid-cols-2 lg:grid-cols-4">
@@ -114,14 +114,11 @@ layout('dashboard/partials/dashboard-start', [
     </div>
   </section>
 
-  <section class="grid gap-1 grid-cols-2">
-    <div class="<?= card('p-5 bg-brand-50 hover:bg-white transition ease-in-out h-full'); ?>">
-      <header class="pb-5 mb-2 border-b border-color-200">
-        <div>
-          <h2 class="text-xs font-medium text-brand-500 uppercase mb-2">Upcoming Sessions</h2>
-          <p class="mt-1 text-base text-brand-900">Next confirmed appointments for today and tomorrow.</p>
-        </div>
-      </header>
+  <section class="grid gap-4 grid-cols-2">
+    <div class="h-full">
+      <?php
+      ob_start();
+      ?>
       <article class="divide-y divide-brand-200">
         <div class="grid grid-cols-5 py-3">
           <div class="col-span-1">Today</div>
@@ -188,14 +185,22 @@ layout('dashboard/partials/dashboard-start', [
           </ul>
         </div>
       </article>
+      <?php
+      $upcoming_sessions_panel_html = (string) ob_get_clean();
+      component('frame', [
+        'variant'              => 'dense',
+        'title'                => 'Upcoming Sessions',
+        'subtitle'             => 'Next confirmed appointments for today and tomorrow.',
+        'panel_html_items'     => [$upcoming_sessions_panel_html],
+        'panel_count'          => 1,
+        'class_name'           => 'h-full',
+      ]);
+      ?>
     </div>
-    <div class="<?= card('p-5 bg-brand-50 hover:bg-white transition ease-in-out h-full'); ?>">
-      <header class="pb-5 mb-2 border-b border-color-200">
-        <div>
-          <h2 class="text-xs font-medium   text-brand-500 uppercase mb-2">Recent Orders</h2>
-          <p class="mt-1 text-base text-brand-900">Latest package orders and payment status.</p>
-        </div>
-      </header>
+    <div class="h-full">
+      <?php
+      ob_start();
+      ?>
       <article class="divide-y divide-brand-200">
         <div class="grid grid-cols-5 py-3">
           <div class="col-span-1">Today</div>
@@ -285,6 +290,17 @@ layout('dashboard/partials/dashboard-start', [
           </ul>
         </div>
       </article>
+      <?php
+      $recent_orders_panel_html = (string) ob_get_clean();
+      component('frame', [
+        'variant'              => 'dense',
+        'title'                => 'Recent Orders',
+        'subtitle'             => 'Latest package orders and payment status.',
+        'panel_html_items'     => [$recent_orders_panel_html],
+        'panel_count'          => 1,
+        'class_name'           => 'h-full',
+      ]);
+      ?>
     </div>
   </section>
 

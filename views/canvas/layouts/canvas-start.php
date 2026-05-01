@@ -68,7 +68,7 @@ if ($resource_label !== '') {
   </style>
   <link rel="stylesheet" href="<?= e($app_css_url); ?>">
 </head>
-<body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed" style="letter-spacing: -1%;">
+<body class="bg-brand-100 text-[14px] text-brand-700 font-sans leading-relaxed tracking-[-2%]">
   <main id="root">
     <div class="canvas-side fixed inset-y-0 left-0 z-30 w-[280px] overflow-y-auto border-r border-brand-200 bg-brand-100" aria-label="Canvas navigation">
       <?php component('canvas/sidebar', [

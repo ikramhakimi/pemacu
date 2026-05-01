@@ -25,115 +25,107 @@ layout('canvas/layouts/canvas-start', [
 ?>
 </section>
 
-<section class="space-y-8">
-  <section class="space-y-3">
-    <h2 class="text-xl font-bold text-brand-900">Usage Rules</h2>
-    <ul class="list-disc space-y-1 pl-5 text-base text-brand-700">
-      <li>Use 12-hour mode for consumer-facing appointment booking.</li>
-      <li>Use 24-hour mode for operational and logistics schedules.</li>
-      <li>Set minute step based on service slot precision.</li>
-      <li>Keep helper text explicit about timezone and slot policy.</li>
-    </ul>
-  </section>
-
-  <section class="space-y-8">
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">12-Hour (AM/PM)</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Best for booking journeys where users expect AM/PM labels.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('fields', [
-          'label'           => 'Call time',
-          'helper_text'     => 'Choose a preferred call slot in AM/PM format.',
-          'control' => [
-            'component' => 'picktime',
-            'props' => [
-            'name'        => 'call_time',
-            'format'      => '12h',
-            'value'       => '09:30 AM',
-            'minute_step' => 15,
-            'placeholder' => 'Pick AM/PM time',
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-brand-200">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pick Time 12h
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('fields', [
+            'label'       => 'Call time',
+            'helper_text' => 'Choose a preferred call slot in AM/PM format.',
+            'control'     => [
+              'component' => 'picktime',
+              'props'     => [
+                'name'        => 'call_time',
+                'format'      => '12h',
+                'value'       => '09:30 AM',
+                'minute_step' => 15,
+                'placeholder' => 'Pick AM/PM time',
+              ],
             ],
-          ],
-          'class'           => 'space-y-2',
-        ]); ?>
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">24-Hour</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Recommended for operations and technical workflows.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('fields', [
-          'label'           => 'Dispatch time',
-          'helper_text'     => 'Use 24-hour clock for team scheduling consistency.',
-          'control' => [
-            'component' => 'picktime',
-            'props' => [
-            'name'        => 'dispatch_time',
-            'format'      => '24h',
-            'value'       => '18:45',
-            'minute_step' => 5,
-            'placeholder' => 'Pick 24-hour time',
+  <div class="canvas-demo first:border-r border-b border-brand-200">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pick Time 24h
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('fields', [
+            'label'       => 'Dispatch time',
+            'helper_text' => 'Use 24-hour clock for team scheduling consistency.',
+            'control'     => [
+              'component' => 'picktime',
+              'props'     => [
+                'name'        => 'dispatch_time',
+                'format'      => '24h',
+                'value'       => '18:45',
+                'minute_step' => 5,
+                'placeholder' => 'Pick 24-hour time',
+              ],
             ],
-          ],
-          'class'           => 'space-y-2',
-        ]); ?>
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Compact 30-Minute Step</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Use larger steps for simplified slot selection in high-volume flows.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('fields', [
-          'label'           => 'Consultation slot',
-          'helper_text'     => 'Only half-hour slots are available for this service.',
-          'control' => [
-            'component' => 'picktime',
-            'props' => [
-            'name'        => 'consult_slot',
-            'format'      => '12h',
-            'minute_step' => 30,
-            'placeholder' => 'Pick 30-minute slot',
+<section class="canvas-showcase grid md:grid-cols-2">
+  <div class="canvas-demo first:border-r border-b border-brand-200">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pick Time Range
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('fields', [
+            'label'       => 'Session window',
+            'helper_text' => 'Pick a valid time window. End time cannot be earlier than start time.',
+            'control'     => [
+              'component' => 'picktime',
+              'props'     => [
+                'mode'        => 'range',
+                'format'      => '12h',
+                'name_start'  => 'session_start_time',
+                'name_end'    => 'session_end_time',
+                'start_value' => '10:00 AM',
+                'end_value'   => '11:30 AM',
+                'minute_step' => 15,
+                'placeholder' => 'Pick start and end time',
+              ],
             ],
-          ],
-          'class'           => 'space-y-2',
-        ]); ?>
+          ]); ?>
+        </div>
       </div>
     </div>
+  </div>
 
-    <div>
-      <h3 class="text-xl font-bold text-brand-900">Time Range</h3>
-      <p class="mt-2 max-w-3xl text-brand-600">
-        Select start and end time in one control. End time options before start are muted automatically.
-      </p>
-      <div class="mt-4 rounded-md border border-dashed border-brand-300 bg-white p-5">
-        <?php component('fields', [
-          'label'           => 'Session window',
-          'helper_text'     => 'Pick a valid time window. End time cannot be earlier than start time.',
-          'control' => [
-            'component' => 'picktime',
-            'props' => [
-            'mode'        => 'range',
-            'format'      => '12h',
-            'name_start'  => 'session_start_time',
-            'name_end'    => 'session_end_time',
-            'start_value' => '10:00 AM',
-            'end_value'   => '11:30 AM',
-            'minute_step' => 15,
-            'placeholder' => 'Pick start and end time',
-            ],
-          ],
-          'class'           => 'space-y-2',
-        ]); ?>
+  <div class="canvas-demo first:border-r border-b border-brand-200">
+    <div class="flex h-full flex-col p-6">
+      <div class="flex items-center justify-between border-b border-brand-200 pb-4 font-medium text-brand-900">
+        Pick Time Grid
+      </div>
+      <div class="relative flex min-h-[320px] items-center justify-center overflow-hidden bg-background px-6 py-8">
+        <div class="w-full max-w-2xl">
+          <?php component('picktime-grid', [
+            'name'         => 'time_slot',
+            'value'        => '8:00 PM',
+            'start_time'   => '08:00',
+            'end_time'     => '23:30',
+            'step_minutes' => 30,
+          ]); ?>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 </section>
 <?php layout('canvas/layouts/canvas-end'); ?>

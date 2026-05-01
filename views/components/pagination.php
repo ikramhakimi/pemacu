@@ -263,10 +263,40 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
         ],
       ]); ?>
 
-      <div class="pagination__pages inline-flex items-center gap-2" data-pagination-pages>
+      <div
+        class="pagination__pages inline-flex items-center gap-2
+          [&>[data-pagination-page]]:inline-flex
+          [&>[data-pagination-page]]:h-[var(--ui-h-md)]
+          [&>[data-pagination-page]]:min-w-10
+          [&>[data-pagination-page]]:items-center
+          [&>[data-pagination-page]]:justify-center
+          [&>[data-pagination-page]]:rounded-lg
+          [&>[data-pagination-page]]:border
+          [&>[data-pagination-page]]:border-brand-200
+          [&>[data-pagination-page]]:bg-white
+          [&>[data-pagination-page]]:px-3
+          [&>[data-pagination-page]]:text-sm
+          [&>[data-pagination-page]]:font-semibold
+          [&>[data-pagination-page]]:text-brand-700
+          [&>[data-pagination-page]]:transition
+          [&>[data-pagination-page]:not([aria-current=page])]:hover:border-brand-300
+          [&>[data-pagination-page]:not([aria-current=page])]:hover:text-brand-900
+          [&>[data-pagination-page][aria-current=page]]:border-brand-900
+          [&>[data-pagination-page][aria-current=page]]:bg-brand-900
+          [&>[data-pagination-page][aria-current=page]]:text-white
+          [&>span[aria-hidden=true]]:inline-flex
+          [&>span[aria-hidden=true]]:h-[var(--ui-h-md)]
+          [&>span[aria-hidden=true]]:min-w-7
+          [&>span[aria-hidden=true]]:items-center
+          [&>span[aria-hidden=true]]:justify-center
+          [&>span[aria-hidden=true]]:px-1
+          [&>span[aria-hidden=true]]:text-sm
+          [&>span[aria-hidden=true]]:text-brand-500"
+        data-pagination-pages
+      >
         <?php foreach ($resolved_pages as $page_item): ?>
           <?php if ($page_item['type'] === 'ellipsis'): ?>
-            <span class="inline-flex h-[var(--ui-h-md)] min-w-7 items-center justify-center px-1  text-brand-500" aria-hidden="true">...</span>
+            <span aria-hidden="true">...</span>
             <?php continue; ?>
           <?php endif; ?>
           <?php
@@ -274,15 +304,10 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
           $page_label       = (string) $page_item['label'];
           $page_url         = (string) $page_item['url'];
           $is_current_page  = !empty($page_item['is_current']);
-          $page_button_base = 'inline-flex h-[var(--ui-h-md)] min-w-10 items-center justify-center rounded-lg border px-3  font-semibold transition';
-          $page_button_tone = $is_current_page
-            ? 'border-brand-900 bg-brand-900 text-white'
-            : 'border-brand-200 bg-white text-brand-700 hover:border-brand-300 hover:text-brand-900';
           ?>
           <?php if ($page_url !== ''): ?>
             <a
               href="<?= e($page_url); ?>"
-              class="<?= e($page_button_base . ' ' . $page_button_tone); ?>"
               data-pagination-page="<?= e((string) $page_number); ?>"
               <?= $is_current_page ? 'aria-current="page"' : ''; ?>
               aria-label="Go to page <?= e((string) $page_number); ?>"
@@ -292,7 +317,6 @@ $nav_attributes['data-pagination-per-page']     = (string) $per_page;
           <?php else: ?>
             <button
               type="button"
-              class="<?= e($page_button_base . ' ' . $page_button_tone); ?>"
               data-pagination-page="<?= e((string) $page_number); ?>"
               <?= $is_current_page ? 'aria-current="page"' : ''; ?>
               aria-label="Go to page <?= e((string) $page_number); ?>"

@@ -50,7 +50,7 @@ layout('canvas/layouts/canvas-start', [
         Pagination A
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
-        <div class="w-full max-w-2xl">
+        <div class="w-full max-w-6xl">
           <?php component('pagination', [
             'pagination' => [
               'current_page' => 5,
@@ -72,7 +72,7 @@ layout('canvas/layouts/canvas-start', [
         Pagination B
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
-        <div class="w-full max-w-2xl">
+        <div class="w-full max-w-6xl">
           <?php component('pagination', [
             'pagination' => [
               'current_page' => 9,
@@ -92,7 +92,7 @@ layout('canvas/layouts/canvas-start', [
         Pagination C
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
-        <div class="w-full max-w-2xl">
+        <div class="w-full max-w-6xl">
           <?php component('pagination', [
             'pagination' => [
               'current_page' => 1,
@@ -114,7 +114,7 @@ layout('canvas/layouts/canvas-start', [
         Pagination D
       </div>
       <div class="relative flex min-h-[220px] items-center justify-center overflow-hidden bg-background px-6 py-8">
-        <div class="w-full max-w-2xl">
+        <div class="w-full max-w-6xl">
           <?php component('pagination', [
             'pagination' => [
               'current_page' => 4,

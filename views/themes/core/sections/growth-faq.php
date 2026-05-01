@@ -95,7 +95,7 @@ $section_faq_classes    = trim(
     ]); ?>
       </div>
       <div class="col-span-3 mt-10 md:mt-0">
-        <?php component('card-intro-call'); ?>
+        <?php component('card', ['card' => ['variant' => 'intro']]); ?>
       </div>
     </div>
     

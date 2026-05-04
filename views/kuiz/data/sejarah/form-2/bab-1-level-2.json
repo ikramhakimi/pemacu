@@ -1,0 +1,1028 @@
+{
+  "meta": {
+    "subject": "sejarah",
+    "level": "tingkatan-2",
+    "chapter": "bab-1",
+    "title": "Kerajaan Alam Melayu",
+    "difficulty": "sederhana"
+  },
+  "questions": [
+    {
+      "id": "b1m001",
+      "subtopic": "bab-1-1",
+      "question": "Mengapakah bahasa menjadi aspek penting dalam konsep Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Membezakan negara",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Menunjukkan persamaan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menghalang perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menghapuskan identiti",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Bahasa menunjukkan persamaan budaya antara masyarakat Alam Melayu.",
+      "tags": [
+        "konsep",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m002",
+      "subtopic": "bab-1-2",
+      "question": "Mengapakah lokasi strategik penting kepada kerajaan awal?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mengurangkan penduduk",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Memudahkan perdagangan antarabangsa",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menutup hubungan luar",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menghalang ekonomi",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Lokasi strategik memudahkan perdagangan dan hubungan antarabangsa.",
+      "tags": [
+        "geografi",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m003",
+      "subtopic": "bab-1-3",
+      "question": "Apakah peranan utama kerajaan Srivijaya dalam Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pertanian sahaja",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pusat perdagangan maritim",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pusat peperangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada peranan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Srivijaya memainkan peranan sebagai pusat perdagangan maritim.",
+      "tags": [
+        "kerajaan",
+        "analisis"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m004",
+      "subtopic": "bab-1-3",
+      "question": "Mengapakah kerajaan Angkor maju dalam pertanian?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sistem pengairan",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "Perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "Gunung tinggi",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Cuaca sejuk",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Angkor mempunyai sistem pengairan yang maju.",
+      "tags": [
+        "kerajaan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m005",
+      "subtopic": "bab-1-4",
+      "question": "Apakah kesan hubungan diplomatik antara kerajaan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peperangan meningkat",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Hubungan baik terjalin",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Perdagangan terhenti",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Budaya hilang",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Hubungan diplomatik membantu menjalin hubungan baik.",
+      "tags": [
+        "hubungan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1m006",
+      "subtopic": "bab-1-1",
+      "question": "Apakah maksud konsep Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kawasan tanpa budaya",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kawasan berkongsi bahasa dan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Negara moden sahaja",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Kawasan perindustrian",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Konsep Alam Melayu merujuk kepada kawasan yang berkongsi bahasa dan budaya.",
+      "tags": [
+        "konsep"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m007",
+      "subtopic": "bab-1-1",
+      "question": "Mengapakah budaya penting dalam Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Menghapuskan identiti",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Menunjukkan persamaan masyarakat",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menghalang hubungan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Mengurangkan komunikasi",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Budaya menunjukkan persamaan masyarakat.",
+      "tags": [
+        "konsep",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m008",
+      "subtopic": "bab-1-3",
+      "question": "Kerajaan manakah terkenal sebagai pusat perdagangan maritim?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Majapahit",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Srivijaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Funan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Angkor",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Srivijaya terkenal sebagai pusat perdagangan maritim.",
+      "tags": [
+        "fakta",
+        "kerajaan"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m009",
+      "subtopic": "bab-1-3",
+      "question": "Apakah keistimewaan Angkor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Sistem pengairan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Perindustrian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Perbankan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Angkor terkenal dengan sistem pengairan.",
+      "tags": [
+        "fakta"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m010",
+      "subtopic": "bab-1-3",
+      "question": "Di manakah kerajaan Champa terletak?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Vietnam",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "India",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "China",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Malaysia",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Champa terletak di Vietnam.",
+      "tags": [
+        "fakta"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m011",
+      "subtopic": "bab-1-2",
+      "question": "Mengapakah lokasi strategik penting kepada kerajaan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Mengurangkan ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Memudahkan perdagangan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menghalang hubungan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menghapuskan penduduk",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Lokasi strategik memudahkan perdagangan.",
+      "tags": [
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m012",
+      "subtopic": "bab-1-4",
+      "question": "Apakah kesan hubungan perdagangan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ekonomi berkembang",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "Perang berlaku",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "Penduduk berkurang",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Budaya hilang",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan membantu ekonomi berkembang.",
+      "tags": [
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1m013",
+      "subtopic": "bab-1-4",
+      "question": "Apakah tujuan hubungan diplomatik?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peperangan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Hubungan baik",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penjajahan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengasingan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Diplomatik bertujuan menjalin hubungan baik.",
+      "tags": [
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1m014",
+      "subtopic": "bab-1-2",
+      "question": "Mengapakah petempatan berkembang menjadi kerajaan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiada ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pertumbuhan ekonomi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Tiada penduduk",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada perdagangan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Ekonomi yang berkembang membawa kepada pembentukan kerajaan.",
+      "tags": [
+        "KBAT"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m015",
+      "subtopic": "bab-1-3",
+      "question": "Apakah perbezaan utama Srivijaya dan Majapahit?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiada perbezaan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Srivijaya perdagangan, Majapahit empayar",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Majapahit kecil",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Srivijaya tiada peranan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Srivijaya fokus perdagangan, Majapahit empayar luas.",
+      "tags": [
+        "KBAT"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m016",
+      "subtopic": "bab-1-1",
+      "question": "Mengapakah aspek geografi penting dalam konsep Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Menghapuskan budaya",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Mempengaruhi hubungan perdagangan dan komunikasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Mengurangkan populasi",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menghalang bahasa serumpun",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Geografi mempengaruhi interaksi, perdagangan dan hubungan antara kawasan Alam Melayu.",
+      "tags": [
+        "konsep",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m017",
+      "subtopic": "bab-1-1",
+      "question": "Apakah kesan persamaan bahasa dalam Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Menghalang komunikasi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Memudahkan interaksi antara masyarakat",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menghapuskan identiti",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Mengurangkan perdagangan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Bahasa serumpun memudahkan komunikasi dan interaksi antara masyarakat.",
+      "tags": [
+        "bahasa",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m018",
+      "subtopic": "bab-1-2",
+      "question": "Mengapakah petempatan awal berkembang menjadi kerajaan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiada aktiviti ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pertumbuhan ekonomi dan populasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Kawasan terpencil",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada hubungan luar",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Pertumbuhan ekonomi dan populasi menyebabkan petempatan berkembang menjadi kerajaan.",
+      "tags": [
+        "kerajaan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m019",
+      "subtopic": "bab-1-2",
+      "question": "Apakah faktor utama yang menarik pedagang ke Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kawasan gurun",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Lokasi strategik laluan perdagangan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Cuaca sejuk",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Kawasan terpencil",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Lokasi strategik menjadikan Alam Melayu laluan penting perdagangan antarabangsa.",
+      "tags": [
+        "perdagangan",
+        "fakta"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1m020",
+      "subtopic": "bab-1-3",
+      "question": "Apakah peranan utama kerajaan Srivijaya dalam Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pertanian sahaja",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pusat perdagangan maritim",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Kawasan terpencil",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada pengaruh",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Srivijaya berperanan sebagai pusat perdagangan maritim yang penting.",
+      "tags": [
+        "kerajaan",
+        "fakta"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m021",
+      "subtopic": "bab-1-3",
+      "question": "Mengapakah Angkor berjaya dalam bidang pertanian?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Sistem pengairan yang maju",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Kawasan gurun",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Cuaca sejuk",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Sistem pengairan yang baik membantu meningkatkan hasil pertanian Angkor.",
+      "tags": [
+        "kerajaan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m022",
+      "subtopic": "bab-1-4",
+      "question": "Apakah kesan hubungan perdagangan terhadap Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ekonomi merosot",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Ekonomi dan budaya berkembang",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penduduk berkurang",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Hubungan luar terhenti",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan membantu perkembangan ekonomi dan pertukaran budaya.",
+      "tags": [
+        "perdagangan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1m023",
+      "subtopic": "bab-1-4",
+      "question": "Apakah tujuan utama hubungan diplomatik?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Memulakan peperangan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Menjalin hubungan baik antara kerajaan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menghapuskan budaya",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Mengurangkan perdagangan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Hubungan diplomatik bertujuan menjalin kerjasama dan hubungan baik.",
+      "tags": [
+        "hubungan",
+        "definisi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1m024",
+      "subtopic": "bab-1-3",
+      "question": "Apakah perbezaan utama antara Srivijaya dan Angkor?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Tiada perbezaan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Srivijaya perdagangan, Angkor pertanian",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Angkor perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Srivijaya pertanian sahaja",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Srivijaya terkenal dalam perdagangan, manakala Angkor dalam pertanian.",
+      "tags": [
+        "kerajaan",
+        "perbandingan"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1m025",
+      "subtopic": "bab-1-2",
+      "question": "Bagaimanakah perdagangan membantu perkembangan kerajaan Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Menghapuskan ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Menjana pendapatan dan kemakmuran",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Mengurangkan populasi",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menghalang hubungan luar",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan menjana pendapatan dan meningkatkan kemakmuran kerajaan.",
+      "tags": [
+        "perdagangan",
+        "aplikasi"
+      ],
+      "difficulty": "sederhana",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    }
+  ]
+}

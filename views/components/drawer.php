@@ -33,8 +33,9 @@ declare(strict_types=1);
  *   - `variant` (string, optional): button variant. Default: `secondary`.
  *   - `size` (string, optional): button size. Default: `sm`.
  *   - `icon_name` (string, optional): close icon. Default: `close-line`.
+ *   - `class` (string, optional): extra class for close button.
  * - `classes` (array, optional):
- *   - `overlay`, `panel`, `header`, `body`, `footer` (string, optional): extra class hooks.
+ *   - `overlay`, `panel`, `header`, `title`, `body`, `footer` (string, optional): extra class hooks.
  */
 
 $resolved_id = isset($id) && is_string($id) ? trim($id) : '';
@@ -97,10 +98,12 @@ $resolved_close_size = isset($close_button['size']) && is_string($close_button['
 $resolved_close_icon_name = isset($close_button['icon_name']) && is_string($close_button['icon_name']) && trim($close_button['icon_name']) !== ''
   ? trim($close_button['icon_name'])
   : 'close-line';
+$resolved_close_class = isset($close_button['class']) && is_string($close_button['class']) ? trim($close_button['class']) : '';
 
 $resolved_overlay_class = isset($classes['overlay']) && is_string($classes['overlay']) ? trim($classes['overlay']) : '';
 $resolved_panel_class = isset($classes['panel']) && is_string($classes['panel']) ? trim($classes['panel']) : '';
 $resolved_header_class = isset($classes['header']) && is_string($classes['header']) ? trim($classes['header']) : '';
+$resolved_title_class = isset($classes['title']) && is_string($classes['title']) ? trim($classes['title']) : '';
 $resolved_body_class = isset($classes['body']) && is_string($classes['body']) ? trim($classes['body']) : '';
 $resolved_footer_class = isset($classes['footer']) && is_string($classes['footer']) ? trim($classes['footer']) : '';
 
@@ -171,6 +174,7 @@ $drawer_panel_resolved_class = trim(
   $panel_layout_class . ' ' . $panel_from_class . ' ' . $resolved_panel_class,
 );
 $drawer_header_class = trim('drawer__header flex items-center justify-between border-b border-brand-200 px-5 py-4 ' . $resolved_header_class);
+$drawer_title_class = trim('text-lg font-semibold text-brand-900 ' . $resolved_title_class);
 $drawer_body_class = trim('drawer__body min-h-0 flex-1 overflow-y-auto p-5 text-brand-700 ' . $resolved_body_class);
 $drawer_footer_class = trim('drawer__footer flex items-center justify-end gap-2 border-t border-brand-200 px-5 py-4 ' . $resolved_footer_class);
 
@@ -211,7 +215,7 @@ $trigger_attributes = array_merge([
     data-drawer-panel-to="<?= e($panel_to_class); ?>"
   >
     <header class="<?= e($drawer_header_class); ?>">
-      <h5 id="<?= e($resolved_id); ?>-title" class="text-lg font-semibold text-brand-900"><?= e($resolved_title); ?></h5>
+      <h5 id="<?= e($resolved_id); ?>-title" class="<?= e($drawer_title_class); ?>"><?= e($resolved_title); ?></h5>
       <?php component('button', [
         'label'      => $resolved_close_aria_label,
         'variant'    => $resolved_close_variant,
@@ -219,6 +223,7 @@ $trigger_attributes = array_merge([
         'icon_only'  => true,
         'icon_name'  => $resolved_close_icon_name,
         'aria_label' => $resolved_close_aria_label,
+        'class'      => $resolved_close_class,
         'attributes' => [
           'data-drawer-close' => true,
         ],

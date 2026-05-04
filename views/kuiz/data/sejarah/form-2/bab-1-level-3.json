@@ -1,0 +1,2047 @@
+{
+  "meta": {
+    "subject": "sejarah",
+    "level": "tingkatan-2",
+    "chapter": "bab-1",
+    "title": "Kerajaan Alam Melayu",
+    "difficulty": "sukar"
+  },
+  "questions": [
+    {
+      "id": "b1h001",
+      "subtopic": "bab-1-1",
+      "question": "Seorang pengkaji mendapati masyarakat di Alam Melayu mempunyai bahasa dan budaya yang hampir sama walaupun dipisahkan oleh lautan. Apakah kesimpulan PALING tepat?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Masyarakat berkembang secara terasing tanpa interaksi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Wujud interaksi dan hubungan antara masyarakat serantau",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Semua masyarakat berasal daripada satu kerajaan tunggal",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Geografi menghalang penyebaran budaya sepenuhnya",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Persamaan bahasa dan budaya menunjukkan adanya interaksi antara masyarakat.",
+      "tags": [
+        "konsep",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h002",
+      "subtopic": "bab-1-2",
+      "question": "Sebuah petempatan berkembang pesat selepas menjadi pusat perdagangan. Apakah perubahan seterusnya yang PALING mungkin berlaku?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Pengurangan populasi akibat persaingan ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pembentukan sistem pentadbiran yang lebih teratur",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penutupan hubungan dengan kawasan luar",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Peralihan kepada ekonomi sara diri sepenuhnya",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan membawa pertumbuhan ekonomi yang memerlukan sistem pentadbiran.",
+      "tags": [
+        "perdagangan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h003",
+      "subtopic": "bab-1-3",
+      "question": "Dua kerajaan mempunyai kekuatan berbeza: satu menguasai laluan perdagangan, satu lagi wilayah daratan luas. Apakah perbezaan strategi utama kedua-duanya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kedua-duanya fokus kepada pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Satu fokus perdagangan maritim, satu fokus penguasaan daratan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Kedua-duanya mengelakkan hubungan luar",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada perbezaan strategi pembangunan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Kerajaan maritim dan daratan mempunyai strategi berbeza berdasarkan kekuatan.",
+      "tags": [
+        "kerajaan",
+        "perbandingan",
+        "KBAT"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h004",
+      "subtopic": "bab-1-4",
+      "question": "Sebuah kerajaan menerima pengaruh agama dan seni bina dari India. Apakah kesan jangka panjang PALING signifikan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Penghapusan budaya tempatan sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pembentukan budaya gabungan tempatan dan luar",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penutupan hubungan antarabangsa",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengurangan aktiviti ekonomi",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Budaya tempatan biasanya menggabungkan pengaruh luar.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h005",
+      "subtopic": "bab-1-2",
+      "question": "Mengapakah tidak semua petempatan berkembang menjadi kerajaan walaupun terlibat dalam perdagangan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Semua petempatan mempunyai peluang sama",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Faktor kepimpinan dan organisasi sosial memainkan peranan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Perdagangan tidak memberi kesan kepada perkembangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Lokasi tidak mempengaruhi perkembangan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Faktor dalaman seperti kepimpinan penting selain perdagangan.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h006",
+      "subtopic": "bab-1-1",
+      "question": "Walaupun dipisahkan oleh lautan, masyarakat Alam Melayu berkongsi banyak persamaan budaya. Apakah faktor PALING munasabah yang menjelaskan keadaan ini?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ketiadaan halangan geografi antara wilayah",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Wujudnya interaksi berterusan melalui perdagangan dan migrasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Semua kawasan berada di bawah satu pemerintahan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Persamaan berlaku secara kebetulan tanpa sebab",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Interaksi melalui perdagangan dan migrasi menyebabkan penyebaran budaya dan bahasa.",
+      "tags": [
+        "konsep",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h007",
+      "subtopic": "bab-1-2",
+      "question": "Sebuah petempatan terletak jauh dari laluan perdagangan utama. Apakah kesan PALING mungkin terhadap perkembangannya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perkembangan pesat sebagai pusat perdagangan antarabangsa",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Perkembangan lebih perlahan berbanding petempatan strategik",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menjadi pusat diplomatik utama",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menguasai laluan perdagangan serantau",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Petempatan yang tidak strategik kurang menarik pedagang, menyebabkan perkembangan lebih perlahan.",
+      "tags": [
+        "geografi",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h008",
+      "subtopic": "bab-1-3",
+      "question": "Jika sebuah kerajaan kehilangan kawalan ke atas laluan perdagangan utama, apakah kesan PALING signifikan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan kuasa ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kemerosotan pengaruh ekonomi dan politik",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Peningkatan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengurangan interaksi dengan masyarakat tempatan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Kawalan perdagangan adalah sumber kekuatan ekonomi dan politik kerajaan maritim.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h009",
+      "subtopic": "bab-1-3",
+      "question": "Kerajaan Angkor memberi tumpuan kepada sistem pengairan. Apakah implikasi jangka panjang terhadap masyarakatnya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kebergantungan kepada perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kestabilan bekalan makanan dan pertumbuhan populasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pengurangan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Kelemahan sistem pentadbiran",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Sistem pengairan meningkatkan hasil pertanian dan menyokong pertumbuhan masyarakat.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h010",
+      "subtopic": "bab-1-4",
+      "question": "Hubungan perdagangan antara Alam Melayu dan China meningkat. Apakah kesan tidak langsung terhadap masyarakat tempatan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Penghapusan budaya tempatan sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pertukaran idea, teknologi dan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penurunan aktiviti ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengasingan daripada dunia luar",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan membawa pertukaran budaya dan teknologi.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h011",
+      "subtopic": "bab-1-2",
+      "question": "Dua petempatan mempunyai lokasi strategik, tetapi hanya satu berkembang menjadi kerajaan besar. Apakah faktor pembeza PALING penting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cuaca semata-mata",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kepimpinan dan sistem pentadbiran yang berkesan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Ketiadaan perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Saiz kawasan sahaja",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Selain lokasi, kepimpinan dan organisasi menentukan kejayaan kerajaan.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "perbandingan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h012",
+      "subtopic": "bab-1-4",
+      "question": "Sebuah kerajaan memilih untuk mengasingkan diri daripada hubungan luar. Apakah kesan jangka panjang PALING mungkin?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan pengaruh antarabangsa",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kemerosotan ekonomi dan perkembangan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pertambahan hubungan diplomatik",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Penguasaan perdagangan global",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Pengasingan mengurangkan peluang perdagangan dan pertukaran budaya.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h013",
+      "subtopic": "bab-1-3",
+      "question": "Apakah kesan apabila kerajaan maritim gagal melindungi pelabuhan utamanya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kehilangan pedagang kepada pelabuhan lain",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pertambahan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Peningkatan kestabilan politik",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Keselamatan pelabuhan penting untuk menarik pedagang.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h014",
+      "subtopic": "bab-1-1",
+      "question": "Mengapakah konsep Alam Melayu tidak boleh ditentukan hanya berdasarkan sempadan politik moden?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sempadan politik tidak berubah",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Konsep ini berdasarkan budaya, bahasa dan sejarah yang merentasi sempadan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Semua negara moden mempunyai budaya berbeza sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada hubungan antara wilayah",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Alam Melayu ditentukan oleh persamaan budaya dan sejarah, bukan sempadan moden.",
+      "tags": [
+        "konsep",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h015",
+      "subtopic": "bab-1-4",
+      "question": "Apakah hubungan antara perdagangan dan penyebaran agama di Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perdagangan tidak mempengaruhi agama",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pedagang membawa bersama kepercayaan dan amalan mereka",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Agama hanya tersebar melalui peperangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Agama berkembang tanpa interaksi manusia",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan menjadi medium penting penyebaran agama melalui interaksi pedagang.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h016",
+      "subtopic": "bab-1-1",
+      "question": "Walaupun dipisahkan oleh lautan, masyarakat Alam Melayu berkongsi banyak persamaan budaya. Apakah faktor PALING munasabah yang menjelaskan keadaan ini?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Ketiadaan halangan geografi antara wilayah",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Wujudnya interaksi berterusan melalui perdagangan dan migrasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Semua kawasan berada di bawah satu pemerintahan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Persamaan berlaku secara kebetulan tanpa sebab",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Interaksi melalui perdagangan dan migrasi menyebabkan penyebaran budaya dan bahasa.",
+      "tags": [
+        "konsep",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h017",
+      "subtopic": "bab-1-2",
+      "question": "Sebuah petempatan terletak jauh dari laluan perdagangan utama. Apakah kesan PALING mungkin terhadap perkembangannya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perkembangan pesat sebagai pusat perdagangan antarabangsa",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Perkembangan lebih perlahan berbanding petempatan strategik",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Menjadi pusat diplomatik utama",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Menguasai laluan perdagangan serantau",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Petempatan yang tidak strategik kurang menarik pedagang, menyebabkan perkembangan lebih perlahan.",
+      "tags": [
+        "geografi",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h018",
+      "subtopic": "bab-1-3",
+      "question": "Jika sebuah kerajaan kehilangan kawalan ke atas laluan perdagangan utama, apakah kesan PALING signifikan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan kuasa ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kemerosotan pengaruh ekonomi dan politik",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Peningkatan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengurangan interaksi dengan masyarakat tempatan",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Kawalan perdagangan adalah sumber kekuatan ekonomi dan politik kerajaan maritim.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h019",
+      "subtopic": "bab-1-3",
+      "question": "Kerajaan Angkor memberi tumpuan kepada sistem pengairan. Apakah implikasi jangka panjang terhadap masyarakatnya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Kebergantungan kepada perdagangan laut",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kestabilan bekalan makanan dan pertumbuhan populasi",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pengurangan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Kelemahan sistem pentadbiran",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Sistem pengairan meningkatkan hasil pertanian dan menyokong pertumbuhan masyarakat.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h020",
+      "subtopic": "bab-1-4",
+      "question": "Hubungan perdagangan antara Alam Melayu dan China meningkat. Apakah kesan tidak langsung terhadap masyarakat tempatan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Penghapusan budaya tempatan sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pertukaran idea, teknologi dan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Penurunan aktiviti ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Pengasingan daripada dunia luar",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan membawa pertukaran budaya dan teknologi.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h021",
+      "subtopic": "bab-1-2",
+      "question": "Dua petempatan mempunyai lokasi strategik, tetapi hanya satu berkembang menjadi kerajaan besar. Apakah faktor pembeza PALING penting?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Cuaca semata-mata",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kepimpinan dan sistem pentadbiran yang berkesan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Ketiadaan perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Saiz kawasan sahaja",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Selain lokasi, kepimpinan dan organisasi menentukan kejayaan kerajaan.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "perbandingan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h022",
+      "subtopic": "bab-1-4",
+      "question": "Sebuah kerajaan memilih untuk mengasingkan diri daripada hubungan luar. Apakah kesan jangka panjang PALING mungkin?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan pengaruh antarabangsa",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kemerosotan ekonomi dan perkembangan budaya",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pertambahan hubungan diplomatik",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Penguasaan perdagangan global",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Pengasingan mengurangkan peluang perdagangan dan pertukaran budaya.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h023",
+      "subtopic": "bab-1-3",
+      "question": "Apakah kesan apabila kerajaan maritim gagal melindungi pelabuhan utamanya?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Peningkatan perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Kehilangan pedagang kepada pelabuhan lain",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Pertambahan hasil pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Peningkatan kestabilan politik",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Keselamatan pelabuhan penting untuk menarik pedagang.",
+      "tags": [
+        "kerajaan",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h024",
+      "subtopic": "bab-1-1",
+      "question": "Mengapakah konsep Alam Melayu tidak boleh ditentukan hanya berdasarkan sempadan politik moden?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Sempadan politik tidak berubah",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Konsep ini berdasarkan budaya, bahasa dan sejarah yang merentasi sempadan",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Semua negara moden mempunyai budaya berbeza sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Tiada hubungan antara wilayah",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Alam Melayu ditentukan oleh persamaan budaya dan sejarah, bukan sempadan moden.",
+      "tags": [
+        "konsep",
+        "KBAT",
+        "analisis"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h025",
+      "subtopic": "bab-1-4",
+      "question": "Apakah hubungan antara perdagangan dan penyebaran agama di Alam Melayu?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Perdagangan tidak mempengaruhi agama",
+          "is_correct": false
+        },
+        {
+          "id": "b",
+          "text": "Pedagang membawa bersama kepercayaan dan amalan mereka",
+          "is_correct": true
+        },
+        {
+          "id": "c",
+          "text": "Agama hanya tersebar melalui peperangan",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "Agama berkembang tanpa interaksi manusia",
+          "is_correct": false
+        }
+      ],
+      "explanation": "Perdagangan menjadi medium penting penyebaran agama melalui interaksi pedagang.",
+      "tags": [
+        "hubungan",
+        "KBAT",
+        "sebab-akibat"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h026",
+      "question_type": "combination",
+      "question": "Sebuah kerajaan Alam Melayu mempunyai hubungan perdagangan aktif dengan kerajaan luar. Apakah kesan yang PALING mungkin berlaku?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Penyebaran budaya luar",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Peningkatan ekonomi tempatan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Pengasingan masyarakat",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengurangan interaksi antarabangsa",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "perdagangan",
+        "hubungan",
+        "konsep",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h027",
+      "question_type": "combination",
+      "question": "Mengapakah lokasi strategik penting kepada perkembangan kerajaan Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Menarik pedagang luar",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Menggalakkan pertukaran budaya",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Menghalang hubungan luar",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Mengurangkan kegiatan ekonomi",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-1",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "konsep",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h028",
+      "question_type": "combination",
+      "question": "Sebuah kerajaan kehilangan kawalan pelabuhan utamanya. Apakah kesan yang PALING signifikan?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Kemerosotan ekonomi",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Kehilangan pedagang",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Peningkatan pengaruh politik",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pertambahan hasil pertanian",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-2",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h029",
+      "question_type": "combination",
+      "question": "Apakah faktor yang menyumbang kepada perkembangan petempatan menjadi kerajaan?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Pertumbuhan ekonomi",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Organisasi sosial",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Ketiadaan hubungan luar",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengasingan geografi sepenuhnya",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-2",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.2 Kewujudan Kerajaan Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h030",
+      "question_type": "combination",
+      "question": "Bagaimanakah hubungan dengan India mempengaruhi Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Penyebaran agama",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Perkembangan seni bina",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Penghapusan budaya tempatan sepenuhnya",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengurangan perdagangan",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "hubungan",
+        "konsep"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h031",
+      "question_type": "combination",
+      "question": "Mengapakah konsep Alam Melayu tidak bergantung kepada sempadan moden?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Persamaan budaya merentasi sempadan",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Bahasa serumpun digunakan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Semua kawasan berada di bawah satu kerajaan",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Tiada interaksi antara wilayah",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-1",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "konsep"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h032",
+      "question_type": "combination",
+      "question": "Apakah kesan perdagangan terhadap masyarakat Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Pertukaran budaya",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Peningkatan ekonomi",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Pengasingan masyarakat",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengurangan interaksi luar",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-1",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "perdagangan",
+        "konsep"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h033",
+      "question_type": "combination",
+      "question": "Apakah ciri utama kerajaan maritim berbanding kerajaan daratan?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Bergantung kepada perdagangan laut",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Menguasai pelabuhan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Fokus sepenuhnya kepada pertanian",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Tiada hubungan luar",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-3",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h034",
+      "question_type": "combination",
+      "question": "Apakah kesan hubungan diplomatik terhadap kerajaan?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Mengukuhkan kerjasama",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Meningkatkan kestabilan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Menghapuskan perdagangan",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Mewujudkan konflik berterusan",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "hubungan",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h035",
+      "question_type": "combination",
+      "question": "Apakah faktor kejayaan kerajaan Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Lokasi strategik",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Kepimpinan berkesan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Pengasingan daripada dunia luar",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Ketiadaan ekonomi",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-1",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "konsep",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h036",
+      "question_type": "combination",
+      "question": "Apakah kesan sistem pengairan terhadap Angkor?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Peningkatan hasil pertanian",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Kestabilan bekalan makanan",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Kemerosotan ekonomi",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengurangan populasi",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-3",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.3 Kerajaan Alam Melayu yang Masyhur"
+        }
+      ]
+    },
+    {
+      "id": "b1h037",
+      "question_type": "combination",
+      "question": "Apakah kesan kehilangan hubungan perdagangan luar?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Kemerosotan ekonomi",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Pengurangan pertukaran budaya",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Peningkatan pengaruh global",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pertambahan hubungan diplomatik",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "perdagangan",
+        "hubungan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h038",
+      "question_type": "combination",
+      "question": "Apakah faktor penyebaran agama di Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Perdagangan",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Interaksi antara pedagang",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Pengasingan wilayah",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Ketiadaan hubungan luar",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "konsep"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    },
+    {
+      "id": "b1h039",
+      "question_type": "combination",
+      "question": "Apakah ciri persamaan masyarakat Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Bahasa serumpun",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Budaya yang hampir sama",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Sempadan politik sama",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Tiada hubungan antara wilayah",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan III",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-1",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "konsep"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.1 Konsep Alam Melayu"
+        }
+      ]
+    },
+    {
+      "id": "b1h040",
+      "question_type": "combination",
+      "question": "Apakah kesan utama interaksi antara kerajaan Alam Melayu?",
+      "statements": [
+        {
+          "id": "I",
+          "text": "Perkongsian budaya",
+          "is_correct": true
+        },
+        {
+          "id": "II",
+          "text": "Peningkatan hubungan diplomatik",
+          "is_correct": true
+        },
+        {
+          "id": "III",
+          "text": "Pengasingan masyarakat",
+          "is_correct": false
+        },
+        {
+          "id": "IV",
+          "text": "Pengurangan perdagangan",
+          "is_correct": false
+        }
+      ],
+      "options": [
+        {
+          "id": "a",
+          "text": "I dan II",
+          "is_correct": true
+        },
+        {
+          "id": "b",
+          "text": "I dan III",
+          "is_correct": false
+        },
+        {
+          "id": "c",
+          "text": "II dan IV",
+          "is_correct": false
+        },
+        {
+          "id": "d",
+          "text": "III dan IV",
+          "is_correct": false
+        }
+      ],
+      "correct_answer": "I dan II",
+      "subtopic": "bab-1-4",
+      "explanation": "Jawapan yang tepat ialah I dan II.",
+      "tags": [
+        "KBAT",
+        "hubungan",
+        "konsep",
+        "kerajaan"
+      ],
+      "difficulty": "sukar",
+      "references": [
+        {
+          "type": "textbook",
+          "source": "Buku Teks Sejarah Tingkatan 2",
+          "chapter": "Bab 1",
+          "section": "1.4 Hubungan Kerajaan Alam Melayu dengan Kerajaan Luar"
+        }
+      ]
+    }
+  ]
+}

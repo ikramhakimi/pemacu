@@ -1,0 +1,302 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: transparent; font-family: var(--font-sans); }
+.quiz-wrap { max-width: 640px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+.quiz-progress { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+.quiz-progress-bar { flex: 1; height: 4px; background: var(--color-border-tertiary); border-radius: 99px; margin: 0 12px; overflow: hidden; }
+.quiz-progress-fill { height: 100%; background: var(--color-text-info); border-radius: 99px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+.quiz-progress-label { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); min-width: 36px; }
+.quiz-streak { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 4px 10px; }
+.quiz-streak-icon { font-size: 15px; }
+.quiz-streak.active .quiz-streak-icon { animation: pulse 0.4s ease; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
+
+.quiz-subject-tag { display: inline-block; font-size: 12px; font-weight: 500; color: var(--color-text-info); background: var(--color-background-info); border-radius: var(--border-radius-md); padding: 3px 10px; margin-bottom: 0.75rem; }
+
+.quiz-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.5rem; margin-bottom: 1rem; }
+
+.quiz-question { font-size: 17px; font-weight: 500; line-height: 1.55; color: var(--color-text-primary); margin-bottom: 1.25rem; }
+
+.quiz-options { display: flex; flex-direction: column; gap: 10px; }
+.quiz-option { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); cursor: pointer; transition: background 0.15s, border-color 0.15s; text-align: left; width: 100%; font-family: var(--font-sans); }
+.quiz-option:hover:not(:disabled) { background: var(--color-background-secondary); border-color: var(--color-border-primary); }
+.quiz-option:disabled { cursor: default; }
+.option-key { width: 26px; height: 26px; min-width: 26px; border-radius: 6px; border: 0.5px solid var(--color-border-secondary); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; color: var(--color-text-secondary); background: var(--color-background-secondary); transition: all 0.15s; }
+.option-text { font-size: 15px; color: var(--color-text-primary); line-height: 1.45; }
+
+.quiz-option.state-correct { background: var(--color-background-success); border-color: var(--color-border-success); }
+.quiz-option.state-correct .option-key { background: var(--color-text-success); border-color: var(--color-text-success); color: #fff; }
+.quiz-option.state-incorrect { background: var(--color-background-danger); border-color: var(--color-border-danger); }
+.quiz-option.state-incorrect .option-key { background: var(--color-text-danger); border-color: var(--color-text-danger); color: #fff; }
+.quiz-option.state-dim { opacity: 0.4; }
+
+.quiz-feedback { margin-top: 1rem; padding: 1rem 1.125rem; border-radius: var(--border-radius-md); border-left: 3px solid var(--color-border-tertiary); background: var(--color-background-secondary); font-size: 14px; line-height: 1.6; color: var(--color-text-secondary); display: none; }
+.quiz-feedback.visible { display: block; animation: fadeUp 0.2s ease; }
+.quiz-feedback.correct { border-left-color: var(--color-border-success); background: var(--color-background-success); color: var(--color-text-success); }
+.quiz-feedback.incorrect { border-left-color: var(--color-border-danger); background: var(--color-background-danger); color: var(--color-text-danger); }
+.feedback-label { font-weight: 500; font-size: 13px; margin-bottom: 4px; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+.quiz-next-bar { display: flex; align-items: center; justify-content: space-between; margin-top: 0.75rem; min-height: 28px; }
+.quiz-auto-label { font-size: 12px; color: var(--color-text-tertiary); display: none; }
+.quiz-auto-label.visible { display: block; }
+.quiz-dot-timer { display: flex; gap: 4px; }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-border-secondary); }
+.dot.lit { background: var(--color-text-info); }
+
+.quiz-result { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 2rem 1.5rem; text-align: center; display: none; }
+.quiz-result.visible { display: block; animation: fadeUp 0.3s ease; }
+.result-score-ring { width: 96px; height: 96px; margin: 0 auto 1.25rem; position: relative; }
+.result-score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.result-score-ring text { font-size: 22px; font-weight: 500; fill: var(--color-text-primary); }
+.result-msg { font-size: 18px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.5rem; }
+.result-sub { font-size: 14px; color: var(--color-text-secondary); margin-bottom: 1.75rem; }
+.result-actions { display: flex; gap: 10px; flex-direction: column; }
+.btn { padding: 12px 20px; border-radius: var(--border-radius-md); font-size: 14px; font-weight: 500; font-family: var(--font-sans); cursor: pointer; border: 0.5px solid var(--color-border-secondary); background: var(--color-background-primary); color: var(--color-text-primary); transition: background 0.15s; width: 100%; }
+.btn:hover { background: var(--color-background-secondary); }
+.btn.primary { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); }
+.btn.primary:hover { opacity: 0.85; }
+
+.quiz-main { transition: opacity 0.2s; }
+.quiz-main.fading { opacity: 0; }
+</style>
+
+<div class="quiz-wrap">
+  <h2 class="sr-only">Interactive quiz — select the correct answer for each question</h2>
+
+  <div id="quiz-main" class="quiz-main">
+    <div class="quiz-progress">
+      <span class="quiz-progress-label" id="progress-label">1 / 5</span>
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progress-fill" style="width:20%"></div>
+      </div>
+      <div class="quiz-streak" id="streak-box">
+        <span class="quiz-streak-icon">🔥</span>
+        <span id="streak-count">0</span>
+      </div>
+    </div>
+
+    <div class="quiz-card">
+      <div class="quiz-subject-tag" id="subject-tag">Science</div>
+      <p class="quiz-question" id="question-text">What is the powerhouse of the cell?</p>
+
+      <div class="quiz-options" id="options-list"></div>
+
+      <div class="quiz-feedback" id="feedback-box">
+        <div class="feedback-label" id="feedback-label">Correct</div>
+        <div id="feedback-text"></div>
+      </div>
+
+      <div class="quiz-next-bar">
+        <span class="quiz-auto-label" id="auto-label">Next question…</span>
+        <div class="quiz-dot-timer" id="dot-timer"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quiz-result" id="quiz-result">
+    <div class="result-score-ring">
+      <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="var(--color-border-tertiary)" stroke-width="8"/>
+        <circle cx="48" cy="48" r="40" fill="none" stroke="var(--color-text-info)" stroke-width="8" stroke-linecap="round" id="score-arc" stroke-dasharray="251" stroke-dashoffset="251"/>
+        <text x="48" y="52" text-anchor="middle" transform="rotate(90 48 48)" id="score-text" fill="var(--color-text-primary)" font-size="18" font-weight="500" font-family="var(--font-sans)">0/5</text>
+      </svg>
+    </div>
+    <p class="result-msg" id="result-msg">Great job!</p>
+    <p class="result-sub" id="result-sub">You answered 5 out of 5 correctly.</p>
+    <div class="result-actions">
+      <button class="btn primary" onclick="retryAll()">Retry all questions</button>
+      <button class="btn" id="retry-wrong-btn" onclick="retryWrong()">Retry wrong answers</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QUESTIONS = [
+  {
+    subject: "Science",
+    q: "What is the powerhouse of the cell?",
+    options: ["Nucleus", "Mitochondria", "Ribosome", "Golgi apparatus"],
+    answer: 1,
+    explanation: "Mitochondria produce ATP through cellular respiration, supplying most of the cell's energy needs."
+  },
+  {
+    subject: "History",
+    q: "In which year did World War II end?",
+    options: ["1943", "1944", "1945", "1946"],
+    answer: 2,
+    explanation: "WWII ended in 1945 — Germany surrendered in May and Japan in September after the atomic bombings."
+  },
+  {
+    subject: "Maths",
+    q: "What is the value of π (pi) to two decimal places?",
+    options: ["3.12", "3.14", "3.16", "3.18"],
+    answer: 1,
+    explanation: "Pi ≈ 3.14159… and is the ratio of a circle's circumference to its diameter."
+  },
+  {
+    subject: "Geography",
+    q: "Which is the longest river in the world?",
+    options: ["Amazon", "Congo", "Yangtze", "Nile"],
+    answer: 3,
+    explanation: "The Nile stretches ~6,650 km through northeastern Africa, traditionally considered the world's longest river."
+  },
+  {
+    subject: "Language",
+    q: "What literary device involves a word that imitates a sound?",
+    options: ["Metaphor", "Onomatopoeia", "Alliteration", "Hyperbole"],
+    answer: 1,
+    explanation: "Onomatopoeia — words like 'buzz', 'crash', or 'sizzle' phonetically mimic the sounds they describe."
+  }
+];
+
+let current = 0;
+let streak = 0;
+let score = 0;
+let wrong = [];
+let activeSet = [];
+let dotTimer = null;
+
+function init(set) {
+  activeSet = set;
+  current = 0;
+  streak = 0;
+  score = 0;
+  wrong = [];
+  document.getElementById('quiz-result').classList.remove('visible');
+  document.getElementById('quiz-main').style.display = '';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = activeSet[current];
+  const total = activeSet.length;
+  const idx = current + 1;
+
+  document.getElementById('progress-label').textContent = idx + ' / ' + total;
+  document.getElementById('progress-fill').style.width = (idx / total * 100) + '%';
+  document.getElementById('streak-count').textContent = streak;
+  document.getElementById('subject-tag').textContent = q.subject;
+  document.getElementById('question-text').textContent = q.q;
+
+  const list = document.getElementById('options-list');
+  list.innerHTML = '';
+  const keys = ['A','B','C','D'];
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.innerHTML = '<span class="option-key">' + keys[i] + '</span><span class="option-text">' + opt + '</span>';
+    btn.onclick = () => handleAnswer(i);
+    list.appendChild(btn);
+  });
+
+  const fb = document.getElementById('feedback-box');
+  fb.className = 'quiz-feedback';
+  document.getElementById('auto-label').classList.remove('visible');
+  document.getElementById('dot-timer').innerHTML = '';
+  clearTimeout(dotTimer);
+}
+
+function handleAnswer(selected) {
+  const q = activeSet[current];
+  const isCorrect = selected === q.answer;
+  const options = document.querySelectorAll('.quiz-option');
+
+  options.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.answer) {
+      btn.classList.add('state-correct');
+    } else if (i === selected && !isCorrect) {
+      btn.classList.add('state-incorrect');
+    } else {
+      btn.classList.add('state-dim');
+    }
+  });
+
+  if (isCorrect) {
+    streak++;
+    score++;
+    const sb = document.getElementById('streak-box');
+    sb.classList.add('active');
+    setTimeout(() => sb.classList.remove('active'), 500);
+  } else {
+    streak = 0;
+    wrong.push(current);
+  }
+
+  document.getElementById('streak-count').textContent = streak;
+
+  const fb = document.getElementById('feedback-box');
+  fb.className = 'quiz-feedback visible ' + (isCorrect ? 'correct' : 'incorrect');
+  document.getElementById('feedback-label').textContent = isCorrect ? 'Correct' : 'Incorrect';
+  document.getElementById('feedback-text').textContent = q.explanation;
+
+  document.getElementById('auto-label').classList.add('visible');
+  startDotTimer();
+}
+
+function startDotTimer() {
+  const DOTS = 6;
+  const DELAY = 1800;
+  const INTERVAL = DELAY / DOTS;
+  const container = document.getElementById('dot-timer');
+  container.innerHTML = '';
+  const dots = [];
+  for (let i = 0; i < DOTS; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot';
+    container.appendChild(d);
+    dots.push(d);
+  }
+  let lit = 0;
+  const iv = setInterval(() => {
+    if (lit < DOTS) { dots[lit].classList.add('lit'); lit++; }
+    else { clearInterval(iv); advance(); }
+  }, INTERVAL);
+}
+
+function advance() {
+  const main = document.getElementById('quiz-main');
+  main.classList.add('fading');
+  setTimeout(() => {
+    main.classList.remove('fading');
+    current++;
+    if (current >= activeSet.length) {
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  }, 200);
+}
+
+function showResult() {
+  document.getElementById('quiz-main').style.display = 'none';
+  const result = document.getElementById('quiz-result');
+  result.classList.add('visible');
+  const total = activeSet.length;
+  const pct = score / total;
+  const arc = 2 * Math.PI * 40;
+  document.getElementById('score-arc').style.strokeDashoffset = arc * (1 - pct);
+  document.getElementById('score-text').textContent = score + '/' + total;
+
+  const msgs = [
+    [1.0, "Perfect score!", "You got every question right. Outstanding!"],
+    [0.8, "Great job!", "You answered " + score + " of " + total + " correctly."],
+    [0.6, "Good effort.", "You answered " + score + " of " + total + " correctly."],
+    [0.0, "Keep practising.", "You answered " + score + " of " + total + " correctly."]
+  ];
+  const m = msgs.find(([threshold]) => pct >= threshold);
+  document.getElementById('result-msg').textContent = m[1];
+  document.getElementById('result-sub').textContent = m[2];
+
+  const wrongBtn = document.getElementById('retry-wrong-btn');
+  wrongBtn.style.display = wrong.length ? '' : 'none';
+}
+
+function retryAll() { init(QUESTIONS); }
+function retryWrong() { init(wrong.map(i => QUESTIONS[i])); }
+
+init(QUESTIONS);
+</script>

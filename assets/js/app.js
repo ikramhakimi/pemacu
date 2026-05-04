@@ -8,6 +8,7 @@ import './components/stepper.js';
 import './components/dropdown.js';
 import './components/pagination.js';
 import './components/carousel.js';
+import './components/confetti.js';
 import './components/modal.js';
 import './components/drawer.js';
 import './components/frame.js';

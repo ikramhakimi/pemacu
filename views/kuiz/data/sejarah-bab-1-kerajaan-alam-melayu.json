@@ -1,0 +1,127 @@
+{
+  "subject": "Sejarah",
+  "chapter": "1",
+  "topic": "Kerajaan Alam Melayu",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Apakah maksud Alam Melayu dalam konteks sejarah?",
+      "options": {
+        "A": "Kawasan yang hanya meliputi Tanah Melayu",
+        "B": "Kawasan yang mempunyai persamaan bahasa, budaya dan sejarah masyarakat Melayu",
+        "C": "Kawasan jajahan kuasa Barat di Asia Tenggara",
+        "D": "Kawasan perdagangan yang dikuasai oleh China"
+      },
+      "answer": "B",
+      "explanation": "Alam Melayu merujuk kawasan yang mempunyai persamaan dari segi bahasa, budaya dan sejarah. Kawasan ini berkembang sebagai tamadun maritim di Asia Tenggara."
+    },
+    {
+      "id": 2,
+      "question": "Antara berikut, kerajaan manakah tergolong sebagai kerajaan Alam Melayu?",
+      "options": {
+        "A": "Srivijaya",
+        "B": "Rom",
+        "C": "Mesir Purba",
+        "D": "Parsi"
+      },
+      "answer": "A",
+      "explanation": "Srivijaya ialah salah satu kerajaan Alam Melayu yang terkenal. Kerajaan ini berkembang melalui perdagangan maritim."
+    },
+    {
+      "id": 3,
+      "question": "Mengapakah kebanyakan kerajaan Alam Melayu muncul berhampiran sungai atau laut?",
+      "options": {
+        "A": "Untuk memudahkan kegiatan pertanian dan perdagangan",
+        "B": "Untuk mengelakkan hubungan dengan kerajaan luar",
+        "C": "Untuk membina kota yang jauh daripada penduduk",
+        "D": "Untuk mendapatkan kawasan yang sentiasa bersalji"
+      },
+      "answer": "A",
+      "explanation": "Sungai dan laut memudahkan pengangkutan, perdagangan dan pertanian. Faktor ini membantu kerajaan Alam Melayu berkembang."
+    },
+    {
+      "id": 4,
+      "question": "Seorang pedagang asing singgah di pelabuhan kerajaan Alam Melayu untuk bertukar barang. Apakah faktor yang paling membantu kegiatan tersebut?",
+      "options": {
+        "A": "Kedudukan strategik di laluan perdagangan",
+        "B": "Kawasan yang tertutup daripada dunia luar",
+        "C": "Larangan terhadap kapal asing",
+        "D": "Ketiadaan hasil tempatan"
+      },
+      "answer": "A",
+      "explanation": "Kedudukan strategik menjadikan pelabuhan Alam Melayu mudah dikunjungi pedagang. Hal ini menggalakkan kegiatan perdagangan antarabangsa."
+    },
+    {
+      "id": 5,
+      "question": "Apakah persamaan utama antara kerajaan Srivijaya dan Kedah Tua?",
+      "options": {
+        "A": "Kedua-duanya terkenal sebagai pusat perdagangan",
+        "B": "Kedua-duanya terletak di benua Eropah",
+        "C": "Kedua-duanya tidak mempunyai hubungan luar",
+        "D": "Kedua-duanya bergantung sepenuhnya pada perlombongan emas"
+      },
+      "answer": "A",
+      "explanation": "Srivijaya dan Kedah Tua berkembang sebagai pusat perdagangan penting. Kedudukannya membantu hubungan dengan pedagang dari luar."
+    },
+    {
+      "id": 6,
+      "question": "Apakah kesan penggunaan laluan laut terhadap kerajaan Alam Melayu?",
+      "options": {
+        "A": "Hubungan perdagangan dengan kerajaan luar semakin berkembang",
+        "B": "Penduduk berhenti menjalankan kegiatan ekonomi",
+        "C": "Kerajaan menjadi terasing sepenuhnya",
+        "D": "Bahasa tempatan tidak lagi digunakan"
+      },
+      "answer": "A",
+      "explanation": "Laluan laut menghubungkan kerajaan Alam Melayu dengan pedagang luar. Ini meningkatkan perdagangan dan pertukaran budaya."
+    },
+    {
+      "id": 7,
+      "question": "Kerajaan Angkor terkenal dengan kemajuan dalam bidang apakah?",
+      "options": {
+        "A": "Sistem pengairan dan pertanian",
+        "B": "Penerokaan angkasa lepas",
+        "C": "Perindustrian moden",
+        "D": "Percetakan surat khabar"
+      },
+      "answer": "A",
+      "explanation": "Angkor terkenal dengan sistem pengairan yang membantu kegiatan pertanian. Kemajuan ini menyokong perkembangan kerajaan tersebut."
+    },
+    {
+      "id": 8,
+      "question": "Apakah peranan pemerintah dalam kerajaan Alam Melayu?",
+      "options": {
+        "A": "Menjaga pentadbiran dan keselamatan kerajaan",
+        "B": "Menghapuskan semua kegiatan perdagangan",
+        "C": "Menghalang rakyat daripada bertani",
+        "D": "Menutup semua pelabuhan"
+      },
+      "answer": "A",
+      "explanation": "Pemerintah bertanggungjawab mengurus pentadbiran dan menjaga keselamatan. Peranan ini penting untuk kestabilan kerajaan."
+    },
+    {
+      "id": 9,
+      "question": "Apakah perbezaan mudah antara kerajaan maritim dengan kerajaan agraria?",
+      "options": {
+        "A": "Kerajaan maritim berasaskan laut, manakala kerajaan agraria berasaskan pertanian",
+        "B": "Kerajaan maritim tidak berdagang, manakala kerajaan agraria hanya berdagang",
+        "C": "Kerajaan maritim wujud di gurun, manakala kerajaan agraria wujud di laut",
+        "D": "Kerajaan maritim tiada pemerintah, manakala kerajaan agraria tiada rakyat"
+      },
+      "answer": "A",
+      "explanation": "Kerajaan maritim banyak bergantung pada laut dan perdagangan. Kerajaan agraria pula banyak bergantung pada pertanian."
+    },
+    {
+      "id": 10,
+      "question": "Mengapakah pedagang luar tertarik datang ke Alam Melayu?",
+      "options": {
+        "A": "Alam Melayu mempunyai hasil tempatan dan pelabuhan yang sesuai",
+        "B": "Alam Melayu tidak mempunyai kegiatan ekonomi",
+        "C": "Alam Melayu melarang pertukaran barang",
+        "D": "Alam Melayu hanya menerima penduduk tempatan"
+      },
+      "answer": "A",
+      "explanation": "Hasil tempatan seperti rempah dan kedudukan pelabuhan menarik pedagang luar. Keadaan ini menjadikan Alam Melayu penting dalam perdagangan."
+    }
+  ]
+}

@@ -86,10 +86,10 @@ $label_text_classes = trim(implode(' ', array_filter([
 $box_classes = trim(implode(' ', array_filter([
   'checkbox__box inline-flex h-5 w-5 items-center justify-center rounded-sm border transition-colors',
   $resolved_disabled && $resolved_checked
-    ? 'border-blue-500/60 bg-blue-500/60 text-white/80'
+    ? 'border-primary-500/60 bg-primary-500/60 text-white/80'
     : ($resolved_disabled
       ? 'border-brand-200 bg-brand-100 text-brand-300'
-      : 'border-brand-300 bg-white text-transparent peer-checked:border-blue-500 peer-checked:bg-blue-500 peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500'),
+      : 'border-brand-300 bg-white text-transparent peer-checked:border-primary-500 peer-checked:bg-primary-500 peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-brand-500'),
   $resolved_box_class,
 ])));
 
